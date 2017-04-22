@@ -1,0 +1,22 @@
+reservasBundle\Entity\Listanegra:
+    type: entity
+    table: ListaNegra
+    id:
+        idlistanegra:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idListaNegra
+            generator:
+                strategy: IDENTITY
+    fields:
+        correo:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: Correo
+    lifecycleCallbacks: {  }

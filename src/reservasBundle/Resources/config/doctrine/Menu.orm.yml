@@ -1,0 +1,29 @@
+reservasBundle\Entity\Menu:
+    type: entity
+    table: Menu
+    id:
+        idmenu:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idMenu
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripción:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Descripción
+        imagen:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Imagen
+    lifecycleCallbacks: {  }

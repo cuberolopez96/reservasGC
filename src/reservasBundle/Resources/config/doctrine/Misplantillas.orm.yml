@@ -1,0 +1,21 @@
+reservasBundle\Entity\Misplantillas:
+    type: entity
+    table: MisPlantillas
+    id:
+        idmisplantillas:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idMisPlantillas
+            generator:
+                strategy: IDENTITY
+    fields:
+        texto:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

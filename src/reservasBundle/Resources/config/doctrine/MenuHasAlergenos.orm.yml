@@ -1,0 +1,42 @@
+reservasBundle\Entity\MenuHasAlergenos:
+    type: entity
+    table: Menu_has_Alergenos
+    indexes:
+        fk_Menu_has_Alergenos_Alergenos1_idx:
+            columns:
+                - Alergenos_idAlergenos
+        fk_Menu_has_Alergenos_Menu1_idx:
+            columns:
+                - Menu_idMenu
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        alergenosalergenos:
+            targetEntity: Alergenos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Alergenos_idAlergenos:
+                    referencedColumnName: idAlergenos
+            orphanRemoval: false
+        menumenu:
+            targetEntity: Menu
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Menu_idMenu:
+                    referencedColumnName: idMenu
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
