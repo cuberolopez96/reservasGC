@@ -80,4 +80,12 @@ class Menu
     {
         return $this->imagen;
     }
+
+    public function toArray(){
+      $array = array(
+        'Descripcion'=>$this->getDescripción(),
+        'Imagen'=>$this->getImagen()
+      );
+      return $array;
+    }
 }

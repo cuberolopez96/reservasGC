@@ -51,4 +51,33 @@ class Misplantillas
     {
         return $this->texto;
     }
+    /**
+     * @var string
+     */
+    private $asunto;
+
+
+    /**
+     * Set asunto
+     *
+     * @param string $asunto
+     *
+     * @return Misplantillas
+     */
+    public function setAsunto($asunto)
+    {
+        $this->asunto = $asunto;
+
+        return $this;
+    }
+
+    /**
+     * Get asunto
+     *
+     * @return string
+     */
+    public function getAsunto()
+    {
+        return $this->asunto;
+    }
 }

@@ -311,4 +311,33 @@ class Reservas
       );
       return $array;
     }
+    /**
+     * @var integer
+     */
+    private $npersonas;
+
+
+    /**
+     * Set npersonas
+     *
+     * @param integer $npersonas
+     *
+     * @return Reservas
+     */
+    public function setNpersonas($npersonas)
+    {
+        $this->npersonas = $npersonas;
+
+        return $this;
+    }
+
+    /**
+     * Get npersonas
+     *
+     * @return integer
+     */
+    public function getNpersonas()
+    {
+        return $this->npersonas;
+    }
 }
