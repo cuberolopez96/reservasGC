@@ -26,35 +26,35 @@ reservasBundle\Entity\Reservas:
         nombre:
             type: string
             nullable: true
-            length: 45
+            length: 255
             options:
                 fixed: false
             column: Nombre
         apellidos:
             type: string
             nullable: true
-            length: 45
+            length: 255
             options:
                 fixed: false
             column: Apellidos
         correo:
             type: string
             nullable: true
-            length: 45
+            length: 255
             options:
                 fixed: false
             column: Correo
         telefono:
             type: string
             nullable: true
-            length: 45
+            length: 255
             options:
                 fixed: false
             column: Telefono
         observaciones:
             type: string
             nullable: true
-            length: 45
+            length: 255
             options:
                 fixed: false
             column: Observaciones
@@ -65,6 +65,12 @@ reservasBundle\Entity\Reservas:
             options:
                 fixed: false
             column: CodReserva
+        npersonas:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: NPersonas
     manyToOne:
         estadoreservaestadoreserva:
             targetEntity: Estadoreserva

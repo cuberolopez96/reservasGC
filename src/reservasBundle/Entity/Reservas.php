@@ -300,5 +300,44 @@ class Reservas
     {
         return $this->alergenosalergenos;
     }
-}
+    public function toArray(){
+      $array=array(
+        'Id'=>$this->getIdreservas(),
+        'Fecha'=>$this->getFecha(),
+        'Nombre'=>$this->getNombre(),
+        'Apellidos'=>$this->getApellidos(),
+        'Correo'=>$this->getCorreo(),
+        'Telefono'=>$this->getTelefono()
+      );
+      return $array;
+    }
+    /**
+     * @var integer
+     */
+    private $npersonas;
 
+
+    /**
+     * Set npersonas
+     *
+     * @param integer $npersonas
+     *
+     * @return Reservas
+     */
+    public function setNpersonas($npersonas)
+    {
+        $this->npersonas = $npersonas;
+
+        return $this;
+    }
+
+    /**
+     * Get npersonas
+     *
+     * @return integer
+     */
+    public function getNpersonas()
+    {
+        return $this->npersonas;
+    }
+}

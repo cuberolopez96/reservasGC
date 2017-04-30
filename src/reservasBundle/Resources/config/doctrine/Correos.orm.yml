@@ -18,4 +18,18 @@ reservasBundle\Entity\Correos:
             length: 255
             options:
                 fixed: false
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nombre
+        apellidos:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Apellidos
     lifecycleCallbacks: {  }

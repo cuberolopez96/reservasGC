@@ -1,3 +1,12 @@
 reservas_homepage:
     path:     /
     defaults: { _controller: reservasBundle:Default:index }
+reservas_api:
+    path: /api
+    defaults: {_controller: reservasBundle:Api:index}
+reservas_api_reservas:
+    path: /api/reservas
+    defaults: {_controller: reservasBundle:Api:reservas}
+reservas_api_servicios:
+    path: /api/servicios
+    defaults: {_controller: reservasBundle:Api:servicios}

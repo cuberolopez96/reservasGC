@@ -18,4 +18,11 @@ reservasBundle\Entity\Misplantillas:
             length: 65535
             options:
                 fixed: false
+        asunto:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: Asunto
     lifecycleCallbacks: {  }
