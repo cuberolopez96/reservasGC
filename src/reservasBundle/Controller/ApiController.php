@@ -13,7 +13,6 @@ class ApiController extends Controller
       $response = new JsonResponse($array);
       return $response;
     }
-
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();

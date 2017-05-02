@@ -1,6 +1,6 @@
 reservas_homepage:
     path:     /
-    defaults: { _controller: reservasBundle:Default:index }
+    defaults: { _controller: reservasBundle:Client:index }
 reservas_api:
     path: /api
     defaults: {_controller: reservasBundle:Api:index}
