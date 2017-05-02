@@ -1,6 +1,31 @@
 reservas_homepage:
     path:     /
     defaults: { _controller: reservasBundle:Client:index }
+reservas_client_reservas:
+    path: /reservas
+    defaults: {_controller: reservasBundle:Client:reservas }
+reservas_admin:
+    path: /admin
+    defaults: {_controller: reservasBundle:Admin:index }
+reservas_admin_reservas:
+    path: /admin/reservas
+    defaults: {_controller: reservasBundle:Admin:reservas }
+reservas_admin_add_reservas:
+    path: /admin/reservas/add
+    defaults: {_controller: reservasBundle:Admin:addreservas }
+reservas_admin_edit_reservas:
+    path: /admin/reservas/edit
+    defaults: {_controller: reservasBundle:Admin:editreservas }
+reservas_admin_reservas_profile:
+    path: /admin/reservas/{id}
+    defaults: {_controller: reservasBundle:Admin:reserva}
+reservas_admin_servicios:
+    path: /admin/servicios
+    defaults: {_controller: reservasBundle:Admin:servicios}
+reservas_admin_servicio:
+    path: /admin/servicios/{id}
+    defaults: {_controller: reservasBundle:Admin:servicio}
+
 reservas_api:
     path: /api
     defaults: {_controller: reservasBundle:Api:index}
