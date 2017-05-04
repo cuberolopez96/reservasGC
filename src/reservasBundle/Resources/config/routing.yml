@@ -35,12 +35,19 @@ reservas_api_reservas:
 reservas_api_servicios:
     path: /api/servicios
     defaults: {_controller: reservasBundle:Api:servicios}
+reservas_api_servicios_add:
+    path: /api/servicios/add
+    defaults: {_controller: reservasBundle:Api:addservicios}
+    methods: POST
 reservas_api_lista_negra:
     path: /api/listanegra
     defaults: {_controller: reservasBundle:Api:listaNegra}
 reservas_api_menu:
     path: /api/menu
     defaults: {_controller: reservasBundle:Api:menu}
+reservas_api_menu_add:
+    path: /api/menu/add
+    defaults: {_controller: reservasBundle:Api:addmenu}
 reservas_api_alergenos:
     path: /api/alergenos
     defaults: {_controller: reservasBundle:Api:alergenos}

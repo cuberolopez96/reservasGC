@@ -4,6 +4,9 @@ namespace reservasBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use reservasBundle\Entity\Servicios;
+use reservasBundle\Entity\Menu;
 
 class ApiController extends Controller
 {
@@ -15,7 +18,7 @@ class ApiController extends Controller
     }
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
-      $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
+      $reservas = $em->getRepository('rJsonResponseeservasBundle:Reservas')->findAll();
       $auxreservas = array();
       foreach ($reservas as $key => $reserva) {
         $auxreservas[]= $reserva->toArray();
@@ -32,6 +35,25 @@ class ApiController extends Controller
       }
       $response = new JsonResponse($auxservicios);
       return $response;
+    }
+    public function addserviciosAction(Request $request){
+
+      $servicio = new Servicios();
+
+      try {
+        $servicio->setFechaservicio(new \DateTime($request->get('FechaServicio')));
+        $servicio->setPlazas(intval($request->get('Plazas')));
+        $em=$this->getDoctrine()->getEntityManager();
+        $em->persist($servicio);
+        $em->flush();
+        $response = new JsonResponse(array());
+        return $response;
+      } catch (Exception $e) {
+          $response = new JsonResponse(array('error'=>$e->getMessage()));
+      }
+
+
+
     }
     public function listaNegraAction(){
       $em = $this->getDoctrine()->getEntityManager();
@@ -52,6 +74,20 @@ class ApiController extends Controller
       }
       $response = new JsonResponse($auxMenu);
       return $response;
+    }
+    public function addmenuAction(Request $request){
+      $menu = new Menu();
+      try {
+        $menu->setDescripción($request->get('Descripcion'));
+        $menu->setImagen($request->get('Imagen'));
+        $em=$this->getDoctrine()->getEntityManager();
+        $em->persist($menu);
+        $em->flush();
+        $response = new JsonResponse(array());
+        return $response;
+      } catch (Exception $e) {
+          $response = new JsonResponse(array('error'=>$e->getMessage()));
+      }
     }
     public function alergenosAction(){
       $em = $this->getDoctrine()->getEntityManager();
