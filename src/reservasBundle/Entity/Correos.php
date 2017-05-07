@@ -95,7 +95,7 @@ class Correos
      */
     public function setApellidos($apellidos)
     {
-        $tdatahis->apellidos = $apellidos;
+        $this->apellidos = $apellidos;
 
         return $this;
     }

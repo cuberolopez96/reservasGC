@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use reservasBundle\Entity\Servicios;
 use reservasBundle\Entity\Menu;
+use reservasBundle\Entity\Correos;
+use reservasBundle\Entity\Misplantillas;
+
 
 class ApiController extends Controller
 {
@@ -18,7 +21,7 @@ class ApiController extends Controller
     }
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
-      $reservas = $em->getRepository('rJsonResponseeservasBundle:Reservas')->findAll();
+      $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
       $auxreservas = array();
       foreach ($reservas as $key => $reserva) {
         $auxreservas[]= $reserva->toArray();
@@ -34,6 +37,16 @@ class ApiController extends Controller
         $auxservicios[]=$servicio->toArray();
       }
       $response = new JsonResponse($auxservicios);
+      return $response;
+    }
+    public function editserviciosAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $servicio = $em->getRepository("reservasBundle:Servicios")->findByIdservicios($request->get('id'))[0];
+      $servicio->setFechaservicio(new \Datetime($request->get('fecha')));
+      $servicio->setPlazas($request->get('plazas'));
+      $em->persist($servicio);
+      $em->flush();
+      $response = new JsonResponse(true);
       return $response;
     }
     public function addserviciosAction(Request $request){
@@ -89,6 +102,17 @@ class ApiController extends Controller
           $response = new JsonResponse(array('error'=>$e->getMessage()));
       }
     }
+    public function editmenuAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $menu = $em->getRepository('reservasBundle:Menu')
+      ->findByIdmenu($request->get('id'))[0];
+      $menu->setDescripción($request->get('descripcion'));
+      $menu->setImagen($request->get('imagen'));
+      $em->persist($menu);
+      $em->flush();
+      $response = new JsonResponse(true);
+      return $response;
+    }
     public function alergenosAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $alergenos = $em->getRepository("reservasBundle:Alergenos")->findAll();
@@ -100,6 +124,29 @@ class ApiController extends Controller
       $response = new JsonResponse($auxAlergenos);
       return $response;
     }
+    public function addcorreosAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $correo  = new Correos();
+      $correo->setNombre($request->get('nombre'));
+      $correo->setApellidos($request->get('apellidos'));
+      $correo->setEmail($request->get('correos'));
+      $em->persist($correo);
+      $em->flush();
+      $response = new JsonResponse(array('true'=>true));
+      return $response;
+    }
+    public function editcorreosAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $correo = $em->getRepository('reservasBundle:Correos')
+      ->findByIdcorreos($request->get('id'))[0];
+      $correo->setNombre($request->get('nombre'));
+      $correo->setApellidos($request->get('apellidos'));
+      $correo->setEmail($request->get('correo'));
+      $em->persist($correo);
+      $em->flush();
+      $response = new JsonResponse(true);
+      return $response;
+    }
     public function correosAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $correos = $em->getRepository("reservasBundle:Correos")->findAll();
@@ -109,6 +156,28 @@ class ApiController extends Controller
       }
       $response = new JsonResponse($auxCorreos);
       return $response;
+    }
+    public function addplantillasAction(Request $request){
+      $em= $this->getDoctrine()->getEntityManager();
+      $plantilla = new Misplantillas();
+      $plantilla->setAsunto($request->get('asunto'));
+      $plantilla->setTexto($request->get('texto'));
+      $em->persist($plantilla);
+      $em->flush();
+      $response = new JsonResponse(array('estado'=>true));
+      return $response;
+    }
+    public function editplantillasAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $plantilla = $em->getRepository('reservasBundle:Misplantillas')
+      ->findByIdmisplantillas($request->get('id'))[0];
+      $plantilla->setAsunto($request->get('asunto'));
+      $plantilla->setTexto($request->get('texto'));
+      $em->persist($plantilla);
+      $em->flush();
+      $response = new JsonResponse(true);
+      return $response;
+
     }
     public function misPlantillasAction(){
       $em = $this->getDoctrine()->getEntityManager();

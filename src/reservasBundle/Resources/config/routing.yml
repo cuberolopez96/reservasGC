@@ -39,6 +39,10 @@ reservas_api_servicios_add:
     path: /api/servicios/add
     defaults: {_controller: reservasBundle:Api:addservicios}
     methods: POST
+reservas_api_servicios_edit:
+    path: /api/servicios/edit
+    defaults: {_controller: reservasBundle:Api:editservicios}
+    methods: POST
 reservas_api_lista_negra:
     path: /api/listanegra
     defaults: {_controller: reservasBundle:Api:listaNegra}
@@ -48,12 +52,27 @@ reservas_api_menu:
 reservas_api_menu_add:
     path: /api/menu/add
     defaults: {_controller: reservasBundle:Api:addmenu}
+reservas_api_menu_edit:
+    path: /api/menu/edit
+    defaults: {_controller: reservasBundle:Api:editmenu}
 reservas_api_alergenos:
     path: /api/alergenos
     defaults: {_controller: reservasBundle:Api:alergenos}
 reservas_api_correos:
     path: /api/correos
     defaults: {_controller: reservasBundle:Api:correos}
+reservas_api_correos_add:
+    path: /api/correos/add
+    defaults: {_controller: reservasBundle:Api:addcorreos}
+reservas_api_correos_edit:
+    path: /api/correos/edit
+    defaults: {_controller: reservasBundle:Api:editcorreos}
 reservas_api_plantillas:
     path: /api/plantillas
     defaults: {_controller: reservasBundle:Api:misPlantillas}
+reservas_api_plantillas_add:
+    path: /api/plantillas/add
+    defaults: {_controller: reservasBundle:Api:addplantillas}
+reservas_api_plantillas_edit:
+    path: /api/plantillas/edit
+    defaults: {_controller: reservasBundle:Api:editplantillas}
