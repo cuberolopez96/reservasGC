@@ -2,15 +2,38 @@
   let Utils;
 
 
+   Plantillas: {
+     add: function(asunto,texto){
+       Utils.postAjax('/api/plantillas/add',{
+         asunto:asunto,
+         texto: texto
+       })
+     },
+     edit: function(id,asunto,texto){
+       Utils.postAjax('/api/plantillas/edit',{
+         id: id,
+         asunto: asunto,
+         descripcion: descripcion
+       });
+
+     }
+   };
    Menu = {
      add: function(descripcion,imagen){
        Utils.postAjax('/api/menu/add',{
          Descripcion:descripcion,
+         Imagen: imagen
+       });
+     },
+     edit: function(id,descripcion,imagen){
+       Utils.postAjax('/api/menu/edit',{
+         id: id,
+         descripcion: descripcion,
          imagen: imagen
        })
      }
-     
-   }
+
+   };
    Servicios= {
      add: function(fechaServicio,plazas){
        Utils.postAjax('/api/servicios/add',{
@@ -25,7 +48,7 @@
          Plazas: plazas
        })
      }
-   }
+   };
    Utils = {
 
     getAjax: function(url,success=false) {
@@ -47,7 +70,7 @@
        console.log(data);
      });
    }
-  }
+ };
   Utils.postAjax('/api/menu/edit',{
     id: 1,
     descripcion: 'edicion',
