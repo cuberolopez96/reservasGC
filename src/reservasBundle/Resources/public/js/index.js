@@ -2,6 +2,27 @@
   let Utils;
 
 
+
+
+   Correos: {
+     add: function(nombre,apellidos,correo){
+       Utils.postAjax('/api/correos/add',{
+         nombre:nombre,
+         apellidos:apellidos,
+         correos: correo
+       }){
+
+       },
+       edit: function(id,nombre,apellidos,correos){
+         Utils.postAjax('/api/correos/edit',{
+           id: id,
+           nombre: nombre,
+           apellidos: apellidos,
+           correo: correo
+         });
+       }
+     }
+   }
    Plantillas: {
      add: function(asunto,texto){
        Utils.postAjax('/api/plantillas/add',{
