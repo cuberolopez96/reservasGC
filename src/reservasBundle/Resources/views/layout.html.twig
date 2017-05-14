@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>ReservasGC</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css">
-    <script src="{{asset('bundles/reservas/node_modules/jquery/dist/jquery.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('bundles/reservas/js/index.js')}}" charset="utf-8"></script>
+    <meta charset="UTF-8">
+    <title>Restaurante IES Gran Capitán</title>
+    <!-- Iconos de FONTAWESOME -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Iconos de MATERIALIZE -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- FUENTE Roboto y Lonster-->
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Condensed" rel="stylesheet">
+    <!-- MATERIALIZE CSS Framework -->
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/reservas/css/materialize.css')}}">
+    <!-- NUESTRO ESTILO -->
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/reservas/css/estilo.css')}}">
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="{{asset('bundles/reservas/js/jquery-3-2-1.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/reservas/js/materialize.min.js')}}"></script>
+    <!-- NUESTRO CÓDIGO -->
+    <script type="text/javascript" src="{{asset('bundles/reservas/js/codigo.js')}}"></script>
   </head>
   <body>
     {% block content %}

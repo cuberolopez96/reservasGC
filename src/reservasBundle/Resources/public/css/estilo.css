@@ -1,0 +1,215 @@
+a, .select-dropdown span, #realizado .card-title{
+	color: #439bb4 !important;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+}
+
+.botones{
+	display: block;
+	margin: 0 auto;
+}
+
+#botones1{	
+	margin-top: 3em;
+}
+
+#botones1 p{
+	text-align: center;
+}
+
+.button{
+	background-color: #D9D2C0;
+	color: #624A4D !important;
+	padding: 0.3em 0.7em;
+	font-size: 2.3em;
+	border: 3px solid #624A4D;
+	border-radius: 0.1em;
+	margin: 0 2.5em;
+	margin-bottom: 0.5em;	
+	box-shadow: 1px 2px 4px grey;	
+	transition: 0.5s all !important;
+}
+
+.button:hover{
+	background-color: #624A4D;
+	border-color: #c3cd77;
+	color: #c3cd77 !important;	
+	box-shadow: 1px 2px 10px black;
+}
+
+.card{
+	margin-top: 2em;	
+	background-color: #D4CDC5;
+	box-shadow: 1px 2px 4px grey;
+	padding: 0 !important;	
+}
+
+.card label, #confirmar .card-title{
+	color: #624A4D !important;	
+}
+
+#check{
+	margin-bottom: 2em;	
+	margin-top: 0;
+}
+
+#check h3, .comoH3, .card label, #realizado .card-title, #confirmar .card-title{
+	font-weight: bold;
+}
+
+#check label{	
+	min-width: 8.5em;
+	font-weight: normal;
+}
+
+.data{
+	margin-top: 1.8em;
+}
+
+.especial{
+	background-color: #624A4D;
+	color: #c3cd77;
+	background-color: #c3cd77;
+	color: #624A4D;
+}
+
+.especial2{
+	background-color: #624A4D;
+	color: #c3cd77 !important;
+}
+
+.especial, .especial2{	
+	font-size: 1em;
+	sho
+}
+
+.especial:hover{
+	border-color: #c3cd77;
+}
+
+footer, nav{
+	background-color: #D9D2C0 !important;
+	font-size: 1.3em;
+}
+
+footer .container, main, nav{
+	color: #4a4a4a;
+}
+
+form h2{
+	font-size: 1em;
+}
+
+h1{
+	font-size: 2.5rem;
+	color: #624A4D;
+	font-weight: bold;
+}
+
+h1, .button, nav{
+    font-family: 'Lobster', cursive;
+}
+
+h2{
+	font-size: 1.5rem;		
+}
+
+h3, .comoH3{
+	font-size: 1.2rem !important;
+}
+
+input:focus, textarea:focus{
+	border-color: #439bb4 !important;
+	box-shadow: 0 1px 0 0 #439bb4 !important;
+}
+
+.letraNav{
+	margin-left: 6em;
+	font-size: 0.7em;
+}
+
+.logo{
+	width: 1.5em;
+}
+
+main{
+	flex: 1 0 auto;
+	min-height: 100vh;
+	background-image: url("../img/plate-1486363.jpg");
+	background-position: fixed;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+} 
+
+.misBotones{
+	margin-top: 0;
+}
+
+.picker__weekday-display{
+	display: none !important;
+}
+
+.picker__frame{
+	margin-top: 2em;
+}
+
+.select-wrapper{
+	margin-top: 0.8em;
+}
+
+.separar{
+	margin: 0.7em;
+}
+
+/* Apartados PROCESO reserva  */
+#ubicaciones{
+	background-color: #4a4a4a;
+	padding: 0;
+	color: grey;
+}
+
+#ubicaciones h2{
+	margin: 0.5em;
+	padding: 0.5em 0 0.5em 0;
+	font-size: 0.7em;	
+}
+
+.ubicacion{
+	border-bottom: 2px solid white;
+	color: white;	
+}
+
+@media screen and (min-width:601px){
+	.letraNav{
+		margin-left: 5em;
+		font-size: 1em;
+	}
+
+	.logo{
+		width: 1.8em;
+		margin-left: 0.5em;
+	}
+
+	#ubicaciones h2{
+		font-size: 1.3em;
+	}
+
+	.ubicacion{
+		border-width: 3px;
+	}
+}
+
+@media screen and (min-width:666px){
+	.button{
+		margin-bottom: 0;
+	}
+}
+
+@media screen and (min-width:1201px){
+	.logo{
+		width: 1.7em;
+	}
+}
