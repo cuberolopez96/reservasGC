@@ -16,15 +16,15 @@
 			<div class="card col s10 l8 offset-s1 offset-l2">			
 				<div id="ubicaciones" class="row">
 					<div class="col s4">
-						<h2 class="ubicacion">Datos</h2>
+						<h2  id="parte1" class="ubicacion">Datos</h2>
 					</div>
 
 					<div class="col s4">
-						<h2>Confirmar</h2>
+						<h2 id="parte2" >Confirmar</h2>
 					</div>
 
 					<div class="col s4">
-						<h2>Realizado</h2>
+						<h2 id="parte3" >Realizado</h2>
 					</div>		
 				</div>	
 				
@@ -56,8 +56,8 @@
 
 							<div class="input-field col s12 misBotones">
 								<div id="botones1" class="row">									
-									<div class="col s12 m6"><button class="button especial2">Cancelar</button></div>
-									<div class="col s12 m6"><button class="button especial">Siguiente</button>	</div>
+									<div class="col s12 m6"><button id="cancelar" class="button especial2">Cancelar</button></div>
+									<div class="col s12 m6"><button id="siguiente" class="button especial">Siguiente</button>	</div>
 								</div>			
 							</div>
 						</div>
@@ -190,15 +190,15 @@
 							</div>
 							<div class="input-field col s12 misBotones">
 								<div id="botones1" class="row">									
-									<div class="col s12 m6"><button class="button especial2">Cancelar</button></div>
-									<div class="col s12 m6"><button class="button especial">Reservar</button>	</div>
+									<div class="col s12 m6"><button id="atras1" class="button especial2">Atrás</button></div>
+									<div class="col s12 m6"><button id="reservar" class="button especial">Reservar</button>	</div>
 								</div>			
 							</div>
 						</div>
 					</form>							
 				</div> <!-- DATOS 3 - card content -->
 
-				<div id="confirmar" class="card-content">				
+				<div id="confirmacion" class="card-content">				
 						<div class="row">
 							<span class="card-title activator grey-text text-darken-4">¿Sus datos son correctos?</span>
       						<p class="col s2">dato 1</p>
@@ -207,8 +207,8 @@
 						</div>
 						<div class="input-field col s12 misBotones">
 							<div id="botones1" class="row">									
-								<div class="col s12 m6"><button class="button especial2">Cancelar</button></div>
-								<div class="col s12 m6"><button class="button especial">Confirmar</button>	</div>
+								<div class="col s12 m6"><button id="atras2" class="button especial2">Atrás</button></div>
+								<div class="col s12 m6"><button id="confirmar" class="button especial">Confirmar</button>	</div>
 							</div>			
 						</div>				
 				</div> <!-- CONFIRMAR - card-content --> 
@@ -218,8 +218,8 @@
 							<span class="card-title">¡Su reserva se ha realizado con éxito!</span>
 							<p class="center-align">Puede descargarse la información de su reserva si así lo desea</p>
 																				
-							<p class="col s12 center-align"><button class="button especial separar">Descargar</button>	</p>
-							<p class="col s12 center-align"><button class="button especial2 separar">Salir</button></p>
+							<p class="col s12 center-align"><button id="descargar" class="button especial separar">Descargar</button>	</p>
+							<p class="col s12 center-align"><button id="salir" class="button especial2 separar">Salir</button></p>
 						</div>					
 				</div> <!-- REALIZADO - card-content --> 
 			</div>

@@ -69,6 +69,10 @@ body{
 	margin-top: 1.8em;
 }
 
+#datos3, #confirmar, #realizado{
+	display: none;
+}
+
 .especial{
 	background-color: #624A4D;
 	color: #c3cd77;
@@ -83,7 +87,6 @@ body{
 
 .especial, .especial2{	
 	font-size: 1em;
-	sho
 }
 
 .especial:hover{
@@ -153,7 +156,7 @@ main{
 }
 
 .picker__frame{
-	margin-top: 2em;
+	margin-top: 0;
 }
 
 .select-wrapper{
