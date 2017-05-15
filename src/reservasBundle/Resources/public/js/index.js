@@ -1,75 +1,78 @@
 (function(){
   let Utils;
 
+  $(document).ready(function(){
+    if (window.location.pathname === '/reservas') {
+        let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
+
+        $('#siguiente').click(function(){
+          $('#datos2').css('display','none');
+          fecha = $('#fecha').val();
+          hora = $('#hora').val();
+          plazas = $('#plazas').val();
+          $('#checkbox').children('input');
+          $('#datos3').css('display','block');
+
+        });
+        $('#atras1').click(function(){
+          $('#datos3').css('display','none');
+
+          $('#datos2').css('display','block');
+
+        });
+        $('#reservar').click(function(){
+          $('#datos3').css('display','none');
+          $('#parte1').removeClass('ubicacion');
+          nombre = $('#name').val();
+          apellidos = $('#ap').val();
+          correo = $('#email').val();
+          telefono = $('#tlfn').val();
+          observaciones = $('#observaciones').val();
+          checkbox = [];
+          $.each($('#check input'),function(index,value){
+            console.log(value);
+            if(value.checked  == true){
+              checkbox.push(value.id);
+            }
+          });
+          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ nombre +'</p>')
+          .append('<p class="col s12">Apellidos: '+ apellidos + '</p>')
+          .append('<p class="col s12">Correo: '+ correo + '</p>')
+          .append('<p class="col s12">Telefono: '+ telefono + '</p>')
+          .append('<p class="col s12">Observaciones: '+ observaciones + '</p>');
+
+          
+
+
+          $('#parte2').addClass('ubicacion');
+          $('#confirmacion').css('display','block');
+
+        });
+        $('#atras2').click(function(){
+          $('#confirmacion').css('display','none');
+          $('#parte2').removeClass('ubicacion');
+          $('#parte1').addClass('ubicacion');
+          $('#datos3').css('display','block');
+
+        });
+        $('#confirmar').click(function(){
+          $('#confirmacion').css('display','none');
+          $('#parte2').removeClass('ubicacion');
+          $('#parte3').addClass('ubicacion');
+          $('#realizado').css('display','block');
 
 
 
-   Correos: {
-     add: function(nombre,apellidos,correo){
-       Utils.postAjax('/api/correos/add',{
-         nombre:nombre,
-         apellidos:apellidos,
-         correos: correo
-       }){
 
-       },
-       edit: function(id,nombre,apellidos,correos){
-         Utils.postAjax('/api/correos/edit',{
-           id: id,
-           nombre: nombre,
-           apellidos: apellidos,
-           correo: correo
-         });
-       }
-     }
-   }
-   Plantillas: {
-     add: function(asunto,texto){
-       Utils.postAjax('/api/plantillas/add',{
-         asunto:asunto,
-         texto: texto
-       })
-     },
-     edit: function(id,asunto,texto){
-       Utils.postAjax('/api/plantillas/edit',{
-         id: id,
-         asunto: asunto,
-         descripcion: descripcion
-       });
+        });
+        $('#salir').click(function(){
+          window.location.pathname= '/';
+        })
+    }
+  })
 
-     }
-   };
-   Menu = {
-     add: function(descripcion,imagen){
-       Utils.postAjax('/api/menu/add',{
-         Descripcion:descripcion,
-         Imagen: imagen
-       });
-     },
-     edit: function(id,descripcion,imagen){
-       Utils.postAjax('/api/menu/edit',{
-         id: id,
-         descripcion: descripcion,
-         imagen: imagen
-       })
-     }
 
-   };
-   Servicios= {
-     add: function(fechaServicio,plazas){
-       Utils.postAjax('/api/servicios/add',{
-         FechaServicio: fechaServicio,
-         Plazas: plazas
-       });
-     },
-     edit: function(id,fechaServicio,plazas){
-       Utils.postAjax('/api/servicios/edit',{
-         id:id,
-         fecha: fechaServicio,
-         Plazas: plazas
-       })
-     }
-   };
+
    Utils = {
 
     getAjax: function(url,success=false) {
@@ -92,16 +95,5 @@
      });
    }
  };
-  Utils.postAjax('/api/menu/edit',{
-    id: 1,
-    descripcion: 'edicion',
-    imagen: ' imagen editada',
 
-  });
-  Utils.getAjax('/api/menu',function(data){
-    data.forEach(function(row){
-      console.log(row);
-    })
-  });
-}
-)()
+})()

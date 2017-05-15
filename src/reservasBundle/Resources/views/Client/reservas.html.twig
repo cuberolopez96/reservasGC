@@ -1,19 +1,19 @@
 {% extends 'reservasBundle::layout.html.twig' %}
 {% block content %}
-  
+
 	<!-- NAV -->
 	 <nav>
 	    <div class="nav-wrapper">
 	      <a href="#" class="brand-logo left"><img class="logo" src="{{asset('bundles/reservas/img/image948-e1447362808491.png')}}"></a>
 	    	<span class="letraNav">Reservas Restaurante IES Gran Capitán</span>
 	    </div>
-	  </nav>	  
+	  </nav>
 
 	<!-- MAIN -->
 	<main class="valign-wrapper center-align">
 
 		<div class="row">
-			<div class="card col s10 l8 offset-s1 offset-l2">			
+			<div class="card col s10 l8 offset-s1 offset-l2">
 				<div id="ubicaciones" class="row">
 					<div class="col s4">
 						<h2  id="parte1" class="ubicacion">Datos</h2>
@@ -25,19 +25,19 @@
 
 					<div class="col s4">
 						<h2 id="parte3" >Realizado</h2>
-					</div>		
-				</div>	
-				
+					</div>
+				</div>
+
 				<div id="datos2" class="card-content">
-					<form>
+
 						<div class="row">
 							<div class="input-field col s12 m4 data">
-								<input type="date" class="datepicker">
+								<input type="date" id="fecha" class="datepicker">
     							<label class="comoH3">Fecha</label>
 							</div>
 
 							<div class="input-field col s12 m4">
-								<select>
+								<select id="hora">
 									<option value="13:00">13:00</option>
 									<option value="14:00">14:00</option>
 									<option value="15:00">15:00</option>
@@ -46,7 +46,7 @@
 							</div>
 
 							<div class="input-field col s12 m4">
-								<select>
+								<select id="plazas">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -55,18 +55,18 @@
 							</div>
 
 							<div class="input-field col s12 misBotones">
-								<div id="botones1" class="row">									
+								<div id="botones1" class="row">
 									<div class="col s12 m6"><button id="cancelar" class="button especial2">Cancelar</button></div>
 									<div class="col s12 m6"><button id="siguiente" class="button especial">Siguiente</button>	</div>
-								</div>			
+								</div>
 							</div>
 						</div>
-					</form>
+
 				</div>
 
 
 				<div  id="datos3" class="card-content">
-					<form>
+
 						<div class="row">
 							<div class="input-field col s12 m6 l3">
 								<input id="name" type="text" name="">
@@ -80,18 +80,18 @@
 
 							<div class="input-field col s12 m6 l3">
 								<input id="tlfn" type="text" name="">
-								<label for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Correo</label>
+								<label for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<input id="email" type="text" name="">
-								<label for="email">Teléfono</label>
-							</div>							
+								<label for="email">Correo</label>
+							</div>
 
 							<div id="check" class="input-field col s12">
 								<div class="row">
 									<div class="col s12">
-										<h3>Alérgenos</h3>										
+										<h3>Alérgenos</h3>
 									</div>
 
 									<div class="col">
@@ -106,9 +106,9 @@
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="pescado">
 											<label for="pescado">Pescado</label>
-										</p>										
+										</p>
 									</div>
-									
+
 									<div class="col">
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="cacahuete">
@@ -117,7 +117,7 @@
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="soja">
 											<label for="soja">Soja</label>
-										</p>										
+										</p>
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="lacteos">
 											<label for="lacteos">Lácteos</label>
@@ -132,7 +132,7 @@
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="mostaza">
 											<label for="mostaza">Mostaza</label>
-										</p>										
+										</p>
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="sesamo">
 											<label for="sesamo">Sésamo</label>
@@ -143,7 +143,7 @@
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="sulfitos">
 											<label for="sulfitos">Sulfitos</label>
-										</p>										
+										</p>
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="moluscos">
 											<label for="moluscos">Moluscos</label>
@@ -151,7 +151,7 @@
 										<p>
 											<input type="checkbox" class="filled-in" name="" id="crus">
 											<label for="crus">Crustáceos</label>
-										</p>										
+										</p>
 									</div>
 
 									<div class="col">
@@ -165,13 +165,13 @@
 										</p>
 									</div>
 
-									
-								</div>					
+
+								</div>
 							</div>
 
 							<div class="input-field col s12 l6 obs">
-								<textarea id="observaciones" class="materialize-textarea">	
-								</textarea>				
+								<textarea id="observaciones" class="materialize-textarea">
+								</textarea>
 								<label class="comoH3" for="observaciones">Observaciones</label>
 							</div>
 
@@ -179,49 +179,51 @@
 								<p>
 									<input id="boletin" class="filled-in" type="checkbox" name="" checked>
 									<label for="boletin">¿Desea subscribirse a nuestro boletín informativo?</label>
-								</p>						
+								</p>
 							</div>
 
 							<div class="input-field col s12 l6">
 								<p id="captcha">
 									<input id="robot" class="filled-in" type="checkbox" name="">
 									<label for="robot">No soy un robot</label>
-								</p>						
+								</p>
 							</div>
 							<div class="input-field col s12 misBotones">
-								<div id="botones1" class="row">									
+								<div id="botones1" class="row">
 									<div class="col s12 m6"><button id="atras1" class="button especial2">Atrás</button></div>
 									<div class="col s12 m6"><button id="reservar" class="button especial">Reservar</button>	</div>
-								</div>			
+								</div>
 							</div>
 						</div>
-					</form>							
+
 				</div> <!-- DATOS 3 - card content -->
 
-				<div id="confirmacion" class="card-content">				
+				<div id="confirmacion" class="card-content">
 						<div class="row">
 							<span class="card-title activator grey-text text-darken-4">¿Sus datos son correctos?</span>
-      						<p class="col s2">dato 1</p>
-      						<p class="col s2">dato 3</p>
-      						<p class="col s2">dato 4</p>
+      						<div id="datosparaconfirmar" class="col s12">
+										<p class="col s2">dato 1</p>
+										<p class="col s2">dato 3</p>
+										<p class="col s2">dato 4</p>
+      						</div>
 						</div>
 						<div class="input-field col s12 misBotones">
-							<div id="botones1" class="row">									
+							<div id="botones1" class="row">
 								<div class="col s12 m6"><button id="atras2" class="button especial2">Atrás</button></div>
 								<div class="col s12 m6"><button id="confirmar" class="button especial">Confirmar</button>	</div>
-							</div>			
-						</div>				
-				</div> <!-- CONFIRMAR - card-content --> 
+							</div>
+						</div>
+				</div> <!-- CONFIRMAR - card-content -->
 
-				<div id="realizado" class="card-content">					
+				<div id="realizado" class="card-content">
 						<div class="row">
 							<span class="card-title">¡Su reserva se ha realizado con éxito!</span>
 							<p class="center-align">Puede descargarse la información de su reserva si así lo desea</p>
-																				
+
 							<p class="col s12 center-align"><button id="descargar" class="button especial separar">Descargar</button>	</p>
 							<p class="col s12 center-align"><button id="salir" class="button especial2 separar">Salir</button></p>
-						</div>					
-				</div> <!-- REALIZADO - card-content --> 
+						</div>
+				</div> <!-- REALIZADO - card-content -->
 			</div>
 		</div>
 	</main>
@@ -231,13 +233,13 @@
             <div class="row">
               <div class="col s12">
                 <p class="center-align">
-					<strong>Reservas Restaurante IES Gran Capitán</strong> por <a href="#">Juan Antonio Cubero López</a> y <a href="#">Estela Muñoz Cordón</a> 
+					<strong>Reservas Restaurante IES Gran Capitán</strong> por <a href="#">Juan Antonio Cubero López</a> y <a href="#">Estela Muñoz Cordón</a>
 				</p>
 				<p class="center-align">
 					<a class="btn btn-floating pulse" href="https://github.com/cuberolopez96/reservasGC">
 				  		<i class="fa fa-github fa-5x"></i>
-					</a>					
-				</p>	
+					</a>
+				</p>
               </div>
             </div>
           </div>
@@ -246,6 +248,6 @@
 				Licencia <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
 			</div>
           </div>
-        </footer>	
+        </footer>
 
 {% endblock %}
