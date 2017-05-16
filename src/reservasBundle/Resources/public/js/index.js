@@ -1,5 +1,5 @@
-(function(){
-  let Utils;
+//(function(){
+  let Utils,Calendar;
 
   $(document).ready(function(){
     if (window.location.pathname === '/reservas') {
@@ -41,7 +41,7 @@
           .append('<p class="col s12">Telefono: '+ telefono + '</p>')
           .append('<p class="col s12">Observaciones: '+ observaciones + '</p>');
 
-          
+
 
 
           $('#parte2').addClass('ubicacion');
@@ -72,7 +72,57 @@
   })
 
 
+   Calendar = {
+     mes: null,
+     año: null,
 
+     renderCalendar: function(){
+        let max,fecha,fechas, semana;
+        fecha = new Date();
+        fecha.setDate(1);
+        fecha.setMonth(Calendar.mes - 1);
+        fecha.setFullYear(Calendar.año);
+        semana = 0;
+        switch(Calendar.mes){
+          case 0:
+          case 2:
+          case 4:
+          case 6:
+          case 7:
+          case 9:
+          case 11:
+              max = 31;
+              break;
+          case 1:
+              max = 28;
+              break;
+          default:
+              max = 30;
+              break;
+
+        }
+        fechas = [];
+        auxfechas = [];
+        console.log(max);
+        for (var i = 0; i < max; i++) {
+          console.log(fecha);
+          auxfechas[fecha.getDay()] = fecha.getDate();
+          console.log(fecha.getDay());
+          fecha = new Date(fecha.getTime() + (60 * 60 * 24 * 1000))
+          if (fecha.getDay()==1) {
+
+            fechas[semana]=auxfechas;
+            auxfechas = [];
+            semana++;
+          }
+        }
+        console.log(fechas);
+
+
+
+
+     }
+   }
    Utils = {
 
     getAjax: function(url,success=false) {
@@ -96,4 +146,4 @@
    }
  };
 
-})()
+//})()

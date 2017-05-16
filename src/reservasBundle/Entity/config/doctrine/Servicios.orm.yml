@@ -1,0 +1,40 @@
+reservasBundle\Entity\Servicios:
+    type: entity
+    table: Servicios
+    indexes:
+        fk_Servicios_Menu1_idx:
+            columns:
+                - Menu_idMenu
+    id:
+        idservicios:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idServicios
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaservicio:
+            type: datetime
+            nullable: true
+            column: FechaServicio
+        plazas:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: Plazas
+    manyToOne:
+        menumenu:
+            targetEntity: Menu
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Menu_idMenu:
+                    referencedColumnName: idMenu
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

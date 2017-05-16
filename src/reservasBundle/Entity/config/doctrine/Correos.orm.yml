@@ -1,0 +1,35 @@
+reservasBundle\Entity\Correos:
+    type: entity
+    table: Correos
+    id:
+        idcorreos:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idCorreos
+            generator:
+                strategy: IDENTITY
+    fields:
+        email:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nombre
+        apellidos:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Apellidos
+    lifecycleCallbacks: {  }

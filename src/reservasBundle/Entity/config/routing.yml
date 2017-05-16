@@ -1,0 +1,78 @@
+reservas_homepage:
+    path:     /
+    defaults: { _controller: reservasBundle:Client:index }
+reservas_client_reservas:
+    path: /reservas
+    defaults: {_controller: reservasBundle:Client:reservas }
+reservas_admin:
+    path: /admin
+    defaults: {_controller: reservasBundle:Admin:index }
+reservas_admin_reservas:
+    path: /admin/reservas
+    defaults: {_controller: reservasBundle:Admin:reservas }
+reservas_admin_add_reservas:
+    path: /admin/reservas/add
+    defaults: {_controller: reservasBundle:Admin:addreservas }
+reservas_admin_edit_reservas:
+    path: /admin/reservas/edit
+    defaults: {_controller: reservasBundle:Admin:editreservas }
+reservas_admin_reservas_profile:
+    path: /admin/reservas/{id}
+    defaults: {_controller: reservasBundle:Admin:reserva}
+reservas_admin_servicios:
+    path: /admin/servicios
+    defaults: {_controller: reservasBundle:Admin:servicios}
+reservas_admin_servicio:
+    path: /admin/servicios/{id}
+    defaults: {_controller: reservasBundle:Admin:servicio}
+
+reservas_api:
+    path: /api
+    defaults: {_controller: reservasBundle:Api:index}
+reservas_api_reservas:
+    path: /api/reservas
+    defaults: {_controller: reservasBundle:Api:reservas}
+reservas_api_servicios:
+    path: /api/servicios
+    defaults: {_controller: reservasBundle:Api:servicios}
+reservas_api_servicios_add:
+    path: /api/servicios/add
+    defaults: {_controller: reservasBundle:Api:addservicios}
+    methods: POST
+reservas_api_servicios_edit:
+    path: /api/servicios/edit
+    defaults: {_controller: reservasBundle:Api:editservicios}
+    methods: POST
+reservas_api_lista_negra:
+    path: /api/listanegra
+    defaults: {_controller: reservasBundle:Api:listaNegra}
+reservas_api_menu:
+    path: /api/menu
+    defaults: {_controller: reservasBundle:Api:menu}
+reservas_api_menu_add:
+    path: /api/menu/add
+    defaults: {_controller: reservasBundle:Api:addmenu}
+reservas_api_menu_edit:
+    path: /api/menu/edit
+    defaults: {_controller: reservasBundle:Api:editmenu}
+reservas_api_alergenos:
+    path: /api/alergenos
+    defaults: {_controller: reservasBundle:Api:alergenos}
+reservas_api_correos:
+    path: /api/correos
+    defaults: {_controller: reservasBundle:Api:correos}
+reservas_api_correos_add:
+    path: /api/correos/add
+    defaults: {_controller: reservasBundle:Api:addcorreos}
+reservas_api_correos_edit:
+    path: /api/correos/edit
+    defaults: {_controller: reservasBundle:Api:editcorreos}
+reservas_api_plantillas:
+    path: /api/plantillas
+    defaults: {_controller: reservasBundle:Api:misPlantillas}
+reservas_api_plantillas_add:
+    path: /api/plantillas/add
+    defaults: {_controller: reservasBundle:Api:addplantillas}
+reservas_api_plantillas_edit:
+    path: /api/plantillas/edit
+    defaults: {_controller: reservasBundle:Api:editplantillas}

@@ -1,0 +1,31 @@
+reservasBundle\Entity\Alergenos:
+    type: entity
+    table: Alergenos
+    id:
+        idalergenos:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idAlergenos
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: Nombre
+    manyToMany:
+        reservasreservas:
+            targetEntity: Reservas
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: alergenosalergenos
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

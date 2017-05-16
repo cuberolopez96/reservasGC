@@ -1,0 +1,22 @@
+reservasBundle\Entity\Estadoreserva:
+    type: entity
+    table: EstadoReserva
+    id:
+        idestadoreserva:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idEstadoReserva
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+            column: Nombre
+    lifecycleCallbacks: {  }

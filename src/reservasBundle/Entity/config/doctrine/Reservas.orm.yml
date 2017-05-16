@@ -1,0 +1,113 @@
+reservasBundle\Entity\Reservas:
+    type: entity
+    table: Reservas
+    indexes:
+        fk_Reservas_Servicios1_idx:
+            columns:
+                - Servicios_idServicios
+        fk_Reservas_EstadoReserva1_idx:
+            columns:
+                - EstadoReserva_idEstadoReserva
+    uniqueConstraints:
+        CodReserva_UNIQUE:
+            columns:
+                - CodReserva
+    id:
+        idreservas:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idReservas
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nombre
+        apellidos:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Apellidos
+        correo:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Correo
+        telefono:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Telefono
+        observaciones:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Observaciones
+        codreserva:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: CodReserva
+        npersonas:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: NPersonas
+    manyToOne:
+        estadoreservaestadoreserva:
+            targetEntity: Estadoreserva
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                EstadoReserva_idEstadoReserva:
+                    referencedColumnName: idEstadoReserva
+            orphanRemoval: false
+        serviciosservicios:
+            targetEntity: Servicios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                Servicios_idServicios:
+                    referencedColumnName: idServicios
+            orphanRemoval: false
+    manyToMany:
+        alergenosalergenos:
+            targetEntity: Alergenos
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: reservasreservas
+            joinTable:
+                name: reservas_has_alergenos1
+                joinColumns:
+                    -
+                        name: Reservas_idReservas
+                        referencedColumnName: idReservas
+                inverseJoinColumns:
+                    -
+                        name: Alergenos_idAlergenos
+                        referencedColumnName: idAlergenos
+            orderBy: null
+    lifecycleCallbacks: {  }
