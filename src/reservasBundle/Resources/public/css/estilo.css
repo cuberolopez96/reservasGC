@@ -1,3 +1,8 @@
+@font-face{
+  font-family: 'Lobster';
+  src: url('../fonts/Lobster-Regular.ttf');
+}
+
 a, .select-dropdown span, #realizado .card-title{
 	color: #439bb4 !important;
 }
@@ -12,7 +17,7 @@ body{
 	margin: 0 auto;
 }
 
-#botones1{	
+#botones1{
 	margin-top: 3em;
 }
 
@@ -28,31 +33,35 @@ body{
 	border: 3px solid #624A4D;
 	border-radius: 0.1em;
 	margin: 0 2.5em;
-	margin-bottom: 0.5em;	
-	box-shadow: 1px 2px 4px grey;	
+	margin-bottom: 0.5em;
+	box-shadow: 1px 2px 4px grey;
 	transition: 0.5s all !important;
 }
 
 .button:hover{
 	background-color: #624A4D;
 	border-color: #c3cd77;
-	color: #c3cd77 !important;	
+	color: #c3cd77 !important;
 	box-shadow: 1px 2px 10px black;
 }
 
+.button:focus{
+  background-color: #D9D2C0 !important;
+}
+
 .card{
-	margin-top: 2em;	
+	margin-top: 2em;
 	background-color: #D4CDC5;
 	box-shadow: 1px 2px 4px grey;
-	padding: 0 !important;	
+	padding: 0 !important;
 }
 
 .card label, #confirmar .card-title{
-	color: #624A4D !important;	
+	color: #624A4D !important;
 }
 
 #check{
-	margin-bottom: 2em;	
+	margin-bottom: 2em;
 	margin-top: 0;
 }
 
@@ -60,7 +69,7 @@ body{
 	font-weight: bold;
 }
 
-#check label{	
+#check label{
 	min-width: 8.5em;
 	font-weight: normal;
 }
@@ -69,15 +78,17 @@ body{
 	margin-top: 1.8em;
 }
 
-#datos3, #confirmacion, #realizado{
+#datos2, #datos3, #confirmacion, #realizado{
 	display: none;
 }
 
 .especial{
-	background-color: #624A4D;
-	color: #c3cd77;
 	background-color: #c3cd77;
 	color: #624A4D;
+}
+
+.especial:focus{
+  background-color: #c3cd77 !important;
 }
 
 .especial2{
@@ -85,7 +96,7 @@ body{
 	color: #c3cd77 !important;
 }
 
-.especial, .especial2{	
+.especial, .especial2{
 	font-size: 1em;
 }
 
@@ -117,7 +128,7 @@ h1, .button, nav{
 }
 
 h2{
-	font-size: 1.5rem;		
+	font-size: 1.5rem;
 }
 
 h3, .comoH3{
@@ -145,7 +156,7 @@ main{
 	background-position: fixed;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-} 
+}
 
 .misBotones{
 	margin-top: 0;
@@ -177,12 +188,12 @@ main{
 #ubicaciones h2{
 	margin: 0.5em;
 	padding: 0.5em 0 0.5em 0;
-	font-size: 0.7em;	
+	font-size: 0.7em;
 }
 
 .ubicacion{
 	border-bottom: 2px solid white;
-	color: white;	
+	color: white;
 }
 
 @media screen and (min-width:601px){
