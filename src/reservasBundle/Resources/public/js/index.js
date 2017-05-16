@@ -1,12 +1,14 @@
 //(function(){
-  let Utils,Calendar;
+  let Utils,Calendar,Servicio;
 
   $(document).ready(function(){
     if (window.location.pathname === '/reservas') {
         let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
-        Calendar.mes = new Date().getMonth() + 1;
-        Calendar.año = new Date().getFullYear();
-        Calendar.renderCalendar();
+      //  Calendar.mes = new Date().getMonth() + 1;
+        //Calendar.año = new Date().getFullYear();
+        //Calendar.renderCalendar();
+        //Servicios.Get();
+
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
           fecha = $('#fecha').val();
@@ -73,7 +75,29 @@
     }
   })
 
+   Servicios = {
+     ServiciosCache: null,
+     FechasCache: null,
+     Get: function(){
+       Utils.getAjax('/api/servicios',function(data){
+         console.log(data);
+         Servicios.ServiciosCache = data;
+         Servicios.GetFechas();
+       });
+     },
+     GetFechas: function(){
+       let datos = Servicios.ServiciosCache;
+       let fechas = [];
+       let fecha;
+       //console.log(Servicios.ServiciosCache);
+       $.each(datos,function(value){
+         console.log(value);
+         fecha = Utils.converToDate(value.FechaServicio);
+         console.log('hola');
+       })
+     }
 
+   };
    Calendar = {
      mes: null,
      año: null,
@@ -124,9 +148,30 @@
 
 
      }
-   }
+   };
    Utils = {
-
+    converToDate: function(fecha){
+      let tiempo,day,month,year;
+      let date = new Date();
+      fecha  = fecha.split(' ');
+      tiempo = fecha[1];
+      fecha = fecha[0];
+      fecha = fecha.split('/');
+      day = fecha[2];
+      month = fecha[1];
+      year = fecha[0];
+      tiempo = tiempo.split(':');
+      hour = tiempo[0];
+      minutes = tiempo[1];
+      seconds = tiempo[2];
+      date.setDate(day);
+      date.setMonth(mes);
+      date.setFullYear(year);
+      date.setHours(hour);
+      date.setMinutes(minutes);
+      date.setSeconds(seconds);
+      return date;
+    },
     getAjax: function(url,success=false) {
      let ajax;
      ajax = $.ajax({
