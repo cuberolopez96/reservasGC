@@ -4,7 +4,9 @@
   $(document).ready(function(){
     if (window.location.pathname === '/reservas') {
         let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
-
+        Calendar.mes = new Date().getMonth() + 1;
+        Calendar.año = new Date().getFullYear();
+        Calendar.renderCalendar();
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
           fecha = $('#fecha').val();
@@ -84,16 +86,16 @@
         fecha.setFullYear(Calendar.año);
         semana = 0;
         switch(Calendar.mes){
-          case 0:
-          case 2:
-          case 4:
-          case 6:
+          case 1:
+          case 3:
+          case 5:
           case 7:
-          case 9:
-          case 11:
+          case 8:
+          case 10:
+          case 12:
               max = 31;
               break;
-          case 1:
+          case 2:
               max = 28;
               break;
           default:
