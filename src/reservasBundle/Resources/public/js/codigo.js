@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     var picker2 = $('.datepicker'),
     	$input = $('.datepicker').pickadate(),
-    	picker = $input.pickadate('picker'); 
+    	picker = $input.pickadate('picker');
 
    	picker2.pickadate({
 	    selectMonths: true,
@@ -21,7 +21,7 @@ $(document).ready(function() {
 		format: 'dd/mm/yyyy',
 	  });
 
-    /*picker.set('disable', [    	
+    /*picker.set('disable', [
 	  // Using a collection of arrays formatted as [YEAR,MONTH,DATE]
 	  //[2017,4,9], [2017,4,13], [2017,4,20],
 	]);
