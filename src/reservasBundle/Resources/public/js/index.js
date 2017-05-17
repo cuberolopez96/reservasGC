@@ -1,13 +1,13 @@
 //(function(){
   let Utils,Calendar,Servicio;
 
-  $(document).ready(function(){
-    if (window.location.pathname === '/reservas') {
-        let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
-      //  Calendar.mes = new Date().getMonth() + 1;
-        //Calendar.año = new Date().getFullYear();
-        //Calendar.renderCalendar();
-        //Servicios.Get();
+  $(document).ready(function(){ if (window.location.pathname === '/reservas') {
+  let
+  fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
+  Calendar.mes = new Date().getMonth() ;
+  Calendar.año = new Date().getFullYear();
+  Calendar.renderCalendar();
+  //Servicios.Get();
 
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
@@ -129,11 +129,8 @@
         }
         fechas = [];
         auxfechas = [];
-        console.log(max);
         for (var i = 0; i < max; i++) {
-          console.log(fecha);
           auxfechas[fecha.getDay()] = fecha.getDate();
-          console.log(fecha.getDay());
           fecha = new Date(fecha.getTime() + (60 * 60 * 24 * 1000))
           if (fecha.getDay()==1) {
 
@@ -142,7 +139,28 @@
             semana++;
           }
         }
+        console.log(auxfechas.length);
+        if (auxfechas.length <= 7) {
+          fechas[semana] = auxfechas;
+          console.log('hola');
+        }
         console.log(fechas);
+
+        fechas.forEach(function(value,index){
+          let domingo= null
+          tr = $('<tr id = "'+ index +'"></tr>');
+          for (var i = 1; i < 7; i++) {
+            if (value[i]) {
+              tr.append('<td id="'+i+'" >'+value[i]+'</td>')
+            }else{
+              tr.append('<td></td>');
+            }
+          }
+          if (value[0]) {
+            tr.append('<td id="0">'+value[0]+'</td>');
+          }
+          $('#calendar').append(tr);
+        });
 
 
 
