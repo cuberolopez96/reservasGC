@@ -4,6 +4,9 @@ reservas_homepage:
 reservas_client_reservas:
     path: /reservas
     defaults: {_controller: reservasBundle:Client:reservas }
+reservas_client_consultar:
+    path: /consultar
+    defaults: {_controller: reservasBundle:Client:consultar }
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }

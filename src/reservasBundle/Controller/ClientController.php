@@ -15,6 +15,10 @@ class ClientController extends Controller
         return $this->render('reservasBundle:Client:reservas.html.twig');
     }
 
+    public function consultarAction()
+    {
+        return $this->render('reservasBundle:Client:consultar.html.twig');
+    }
 }
 
  ?>
