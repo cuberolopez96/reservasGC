@@ -1,9 +1,13 @@
 //(function(){
-  let Utils,Calendar;
+  let Utils,Calendar,Servicio;
 
-  $(document).ready(function(){
-    if (window.location.pathname === '/reservas') {
-        let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
+  $(document).ready(function(){ if (window.location.pathname === '/reservas') {
+  let
+  fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
+  Calendar.mes = new Date().getMonth() ;
+  Calendar.año = new Date().getFullYear();
+  Calendar.renderCalendar();
+  //Servicios.Get();
 
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
@@ -71,7 +75,29 @@
     }
   })
 
+   Servicios = {
+     ServiciosCache: null,
+     FechasCache: null,
+     Get: function(){
+       Utils.getAjax('/api/servicios',function(data){
+         console.log(data);
+         Servicios.ServiciosCache = data;
+         Servicios.GetFechas();
+       });
+     },
+     GetFechas: function(){
+       let datos = Servicios.ServiciosCache;
+       let fechas = [];
+       let fecha;
+       //console.log(Servicios.ServiciosCache);
+       $.each(datos,function(value){
+         console.log(value);
+         fecha = Utils.converToDate(value.FechaServicio);
+         console.log('hola');
+       })
+     }
 
+   };
    Calendar = {
      mes: null,
      año: null,
@@ -84,16 +110,16 @@
         fecha.setFullYear(Calendar.año);
         semana = 0;
         switch(Calendar.mes){
-          case 0:
-          case 2:
-          case 4:
-          case 6:
+          case 1:
+          case 3:
+          case 5:
           case 7:
-          case 9:
-          case 11:
+          case 8:
+          case 10:
+          case 12:
               max = 31;
               break;
-          case 1:
+          case 2:
               max = 28;
               break;
           default:
@@ -103,11 +129,8 @@
         }
         fechas = [];
         auxfechas = [];
-        console.log(max);
         for (var i = 0; i < max; i++) {
-          console.log(fecha);
           auxfechas[fecha.getDay()] = fecha.getDate();
-          console.log(fecha.getDay());
           fecha = new Date(fecha.getTime() + (60 * 60 * 24 * 1000))
           if (fecha.getDay()==1) {
 
@@ -116,15 +139,57 @@
             semana++;
           }
         }
+        console.log(auxfechas.length);
+        if (auxfechas.length <= 7) {
+          fechas[semana] = auxfechas;
+          console.log('hola');
+        }
         console.log(fechas);
+
+        fechas.forEach(function(value,index){
+          let domingo= null
+          tr = $('<tr id = "'+ index +'"></tr>');
+          for (var i = 1; i < 7; i++) {
+            if (value[i]) {
+              tr.append('<td id="'+i+'" >'+value[i]+'</td>')
+            }else{
+              tr.append('<td></td>');
+            }
+          }
+          if (value[0]) {
+            tr.append('<td id="0">'+value[0]+'</td>');
+          }
+          $('#calendar').append(tr);
+        });
 
 
 
 
      }
-   }
+   };
    Utils = {
-
+    converToDate: function(fecha){
+      let tiempo,day,month,year;
+      let date = new Date();
+      fecha  = fecha.split(' ');
+      tiempo = fecha[1];
+      fecha = fecha[0];
+      fecha = fecha.split('/');
+      day = fecha[2];
+      month = fecha[1];
+      year = fecha[0];
+      tiempo = tiempo.split(':');
+      hour = tiempo[0];
+      minutes = tiempo[1];
+      seconds = tiempo[2];
+      date.setDate(day);
+      date.setMonth(mes);
+      date.setFullYear(year);
+      date.setHours(hour);
+      date.setMinutes(minutes);
+      date.setSeconds(seconds);
+      return date;
+    },
     getAjax: function(url,success=false) {
      let ajax;
      ajax = $.ajax({

@@ -3,7 +3,7 @@
   src: url('../fonts/Lobster-Regular.ttf');
 }
 
-a, .select-dropdown span, #realizado .card-title{
+a, .select-dropdown span, #realizado .card-title, .input-field .active{
 	color: #439bb4 !important;
 }
 
@@ -160,6 +160,11 @@ main{
 
 .misBotones{
 	margin-top: 0;
+}
+
+.no-button{
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .picker__weekday-display{
