@@ -35,6 +35,9 @@ reservas_api:
 reservas_api_reservas:
     path: /api/reservas
     defaults: {_controller: reservasBundle:Api:reservas}
+reservas_api_reservas_plazas:
+    path: /api/reservas/{timestamp}/plazas
+    defaults: {_controller: reservasBundle:Api:plazasrestantes}
 reservas_api_servicios:
     path: /api/servicios
     defaults: {_controller: reservasBundle:Api:servicios}

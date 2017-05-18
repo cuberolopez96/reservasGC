@@ -1,13 +1,13 @@
 //(function(){
-  let Utils,Calendar,Servicio;
+  let Utils,Calendar,Servicios,serviciosdata;
 
   $(document).ready(function(){ if (window.location.pathname === '/reservas') {
   let
   fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
-  Calendar.mes = new Date().getMonth() + 7;
+
+  Calendar.mes = new Date().getMonth();
   Calendar.año = new Date().getFullYear();
-  Calendar.renderCalendar();
-  //Servicios.Get();
+  Servicios.Get();
 
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
@@ -75,16 +75,25 @@
     }
   })
 //crear el objeto reservas
+  Reservas = {
+    Get:function(){
+      Utils.getAjax('/api/reservas',function(data){
+        console.log(data);
+      });
+    },
+
+
+  }
    Servicios = {
      ServiciosCache: null,
-     FechasCache: null,
      Get: function(){
        Utils.getAjax('/api/servicios',function(data){
-         console.log(data);
          Servicios.ServiciosCache = data;
-         Servicios.GetFechas();
+         console.log(Servicios.ServiciosCache);
+         Calendar.renderCalendar(data);
        });
      },
+
      GetFechas: function(){
        let datos = Servicios.ServiciosCache;
        let fechas = [];
@@ -100,15 +109,44 @@
    };
    Calendar = {
      mes: null,
-     año: null,
-     //crear el metodo selectDate;
+     //habilitar dias
+     EnableDate: function(dia,servicios){
+       //Declaramos variables que vayamos a usar
+       let paramDate, dateServicio, flag;
+       flag = false;
+       //Convertimos ese dia en un date
+       paramDate=new Date();
+       console.log(Calendar.mes);
+       paramDate.setMonth(Calendar.mes);
+       paramDate.setDate(dia);
+       console.log(servicios);
+       //Recorremos los servicios
+      $.each(servicios,function(index,value){
+         // la fecha del Servicio en un date;
+         dateServicio = Utils.converToDate(value.FechaServicio);
+         // Comparamos date y devolvemos true si es igual
+        console.log(Utils.dateStringFormat(paramDate)+ 'P');
+        console.log(Utils.dateStringFormat(dateServicio) + 'S');
+         if (Utils.dateStringFormat(paramDate) === Utils.dateStringFormat(dateServicio)) {
 
-     renderCalendar: function(){
+           flag =  true;
+         }
+       });
+       //false si no lo son
+       return flag;
+
+
+     },
+     //crear el metodo selectDate;
+     SelectDate: function(dia){
+
+     },
+     renderCalendar: function(servicios){
         let max,fecha,fechas, semana;
         fecha = new Date();
         fecha.setDate(1);
         fecha.setMonth(Calendar.mes - 1);
-        fecha.setFullYear(Calendar.año);
+
         semana = 0;
         switch(Calendar.mes){
           case 1:
@@ -122,6 +160,7 @@
               break;
           case 2:
               max = 28;
+              //algoritmo año bisiesto
               break;
           default:
               max = 30;
@@ -152,13 +191,24 @@
           tr = $('<tr id = "'+ index +'"></tr>');
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
-              tr.append('<td id="'+i+'" >'+value[i]+'</td>')
+              console.log(Calendar.EnableDate(value[i],servicios));
+              if (Calendar.EnableDate(value[i],servicios)===true) {
+                tr.append('<td id="'+i+'"><button class="bcalendario">'+value[i]+'</button></td>');
+              }else{
+                tr.append('<td id="'+i+'">'+value[i]+'</td>')
+
+              }
             }else{
               tr.append('<td></td>');
             }
           }
           if (value[0]) {
-            tr.append('<td id="0">'+value[0]+'</td>');
+            if (Calendar.EnableDate(value[0],servicios)===true) {
+              tr.append('<td id="'+i+'"><button class="bcalendario">'+value[0]+'</button></td>');
+            }else{
+              tr.append('<td id="'+i+'">'+value[0]+'</td>')
+
+            }
           }
           $('#calendar').append(tr);
         });
@@ -169,6 +219,9 @@
      }
    };
    Utils = {
+    dateStringFormat:function(date){
+      return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    },
     converToDate: function(fecha){
       let tiempo,day,month,year;
       let date = new Date();
@@ -184,7 +237,7 @@
       minutes = tiempo[1];
       seconds = tiempo[2];
       date.setDate(day);
-      date.setMonth(mes);
+      date.setMonth(month - 1);
       date.setFullYear(year);
       date.setHours(hour);
       date.setMinutes(minutes);
