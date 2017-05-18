@@ -4,7 +4,7 @@
   $(document).ready(function(){ if (window.location.pathname === '/reservas') {
   let
   fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
-  Calendar.mes = new Date().getMonth() ;
+  Calendar.mes = new Date().getMonth() + 7;
   Calendar.año = new Date().getFullYear();
   Calendar.renderCalendar();
   //Servicios.Get();
@@ -74,7 +74,7 @@
         })
     }
   })
-
+//crear el objeto reservas
    Servicios = {
      ServiciosCache: null,
      FechasCache: null,
@@ -101,6 +101,7 @@
    Calendar = {
      mes: null,
      año: null,
+     //crear el metodo selectDate;
 
      renderCalendar: function(){
         let max,fecha,fechas, semana;
@@ -140,7 +141,7 @@
           }
         }
         console.log(auxfechas.length);
-        if (auxfechas.length <= 7) {
+        if (auxfechas.length != 7 && auxfechas.length > 0 ) {
           fechas[semana] = auxfechas;
           console.log('hola');
         }
