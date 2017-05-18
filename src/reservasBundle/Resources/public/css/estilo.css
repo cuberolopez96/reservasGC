@@ -49,6 +49,10 @@ body{
   background-color: #D9D2C0 !important;
 }
 
+#cancelar{
+  margin-top: 1em;
+}
+
 .card{
 	margin-top: 2em;
 	background-color: #D4CDC5;
@@ -76,6 +80,10 @@ body{
 
 .data{
 	margin-top: 1.8em;
+}
+
+#datos1{
+  padding: 0.5em;
 }
 
 #datos2, #datos3, #confirmacion, #realizado{
@@ -183,6 +191,11 @@ main{
 	margin: 0.7em;
 }
 
+td, th{
+  padding: 1em;
+  font-size: 0.6em;
+}
+
 /* Apartados PROCESO reserva  */
 #ubicaciones{
 	background-color: #4a4a4a;
@@ -201,6 +214,28 @@ main{
 	color: white;
 }
 
+/* LEYENDA CALENDARIO */
+#disp, #pDisp, #ocup{
+  display: inline-block;
+  min-height: 1em;
+  min-width: 1em;
+  margin-right: 0.7em;
+  outline-color: lightgreen;
+  outline-style: solid;
+  outline-offset:0.12em;
+}
+#disp{
+  background-color: lightgreen;
+}
+#pDisp{
+  background-color: orange;
+  outline-color: orange;
+}
+#ocup{
+  background-color: red;
+  outline-color: red;
+}
+
 @media screen and (min-width:601px){
 	.letraNav{
 		margin-left: 5em;
@@ -212,8 +247,12 @@ main{
 		margin-left: 0.5em;
 	}
 
+  td, th{
+    font-size: 1em;
+  }
+
 	#ubicaciones h2{
-		font-size: 1.3em;
+		font-size: 1em;
 	}
 
 	.ubicacion{

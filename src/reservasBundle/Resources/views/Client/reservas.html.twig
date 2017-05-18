@@ -30,24 +30,31 @@
 
 				<div id="datos1" class="card-content">
 					<!-- CALENDARIO -->
-					<table>
-						<thead>
-							<tr>
-								<th>Lunes</th>
-								<th>Martes</th>
-								<th>Miercoles</th>
-								<th>Jueves</th>
-								<th>Viernes</th>
-								<th>Sabado</th>
-								<th>Domingo</th>
-							</tr>
-						</thead>
-						<tbody id="calendar">
+					<div class="row">
+						<table class="bordered centered highlight col s12">
+							<thead>
+								<tr>
+									<th>L</th>
+									<th>M</th>
+									<th>X</th>
+									<th>J</th>
+									<th>V</th>
+									<th>S</th>
+									<th>D</th>
+								</tr>
+							</thead>
+							<tbody id="calendar">
 
-						</tbody>
-					</table>
-					<!-- Cancelar -->
-					<div class="col s12"><button id="cancelar" class="button especial2">Cancelar</button></div>
+							</tbody>
+						</table>
+
+						<p class="col s4"><span id="disp"></span>Disponible</p>
+						<p class="col s4"><span id="pDisp"></span>Poca Disponibilidad</p>
+						<p class="col s4"><span id="ocup"></span>Ocupado</p>
+
+						<!-- Cancelar -->
+						<div class="col s12"><button id="cancelar" class="button especial2">Cancelar</button></div>
+					</div>
 				</div>
 
 				<div id="datos2" class="card-content">
