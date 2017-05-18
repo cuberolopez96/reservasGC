@@ -1,0 +1,108 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "jquery-form-validator",
+        "scope": null,
+        "escapedName": "jquery-form-validator",
+        "name": "jquery-form-validator",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\xampp\\htdocs\\reservasGC\\reservasGC"
+    ]
+  ],
+  "_from": "jquery-form-validator@latest",
+  "_id": "jquery-form-validator@2.3.60",
+  "_inCache": true,
+  "_location": "/jquery-form-validator",
+  "_nodeVersion": "4.2.4",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/jquery-form-validator-2.3.60.tgz_1489700710417_0.3168945899233222"
+  },
+  "_npmUser": {
+    "name": "victorjonsson",
+    "email": "kontakt@victorjonsson.se"
+  },
+  "_npmVersion": "3.10.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "jquery-form-validator",
+    "scope": null,
+    "escapedName": "jquery-form-validator",
+    "name": "jquery-form-validator",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-form-validator/-/jquery-form-validator-2.3.60.tgz",
+  "_shasum": "8f6111c775248f42f3e040b6a1dcda03d04ca952",
+  "_shrinkwrap": null,
+  "_spec": "jquery-form-validator",
+  "_where": "C:\\xampp\\htdocs\\reservasGC\\reservasGC",
+  "author": {
+    "name": "Victor Jonsson",
+    "email": "kontakt@victorjonsson.se",
+    "url": "http://victorjonsson.se"
+  },
+  "bugs": {
+    "url": "https://github.com/victorjonsson/jQuery-Form-Validator/issues"
+  },
+  "dependencies": {
+    "jquery": ">1.8.0"
+  },
+  "description": "With this feature rich jQuery plugin it becomes easy to validate user input while keeping your HTML markup clean from javascript code. Even though this plugin has a wide range of validation functions it's designed to require as little bandwidth as possibl",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-clean": "~1.0.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-cssmin": "~0.14.0",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-qunit": "^0.7.0",
+    "grunt-contrib-uglify": "~0.11.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-umd": "~2.4.0",
+    "numeral": "~1.5.3",
+    "qunitjs": "^1.20.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "8f6111c775248f42f3e040b6a1dcda03d04ca952",
+    "tarball": "https://registry.npmjs.org/jquery-form-validator/-/jquery-form-validator-2.3.60.tgz"
+  },
+  "gitHead": "a2d9fdcab1c3e75b5c871cb547e656aca3ff0f07",
+  "homepage": "http://formvalidator.net/",
+  "keywords": [
+    "form",
+    "validator",
+    "jquery"
+  ],
+  "license": "MIT",
+  "main": "./form-validator/jquery.form-validator.min.js",
+  "maintainers": [
+    {
+      "name": "victorjonsson",
+      "email": "kontakt@victorjonsson.se"
+    }
+  ],
+  "name": "jquery-form-validator",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorjonsson/jQuery-Form-Validator.git"
+  },
+  "scripts": {
+    "prepublish": "grunt prepublish",
+    "test": "grunt test"
+  },
+  "version": "2.3.60"
+}
