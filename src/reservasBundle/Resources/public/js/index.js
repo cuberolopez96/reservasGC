@@ -74,7 +74,7 @@
         })
     }
   })
-
+//crear el objeto reservas
    Servicios = {
      ServiciosCache: null,
      FechasCache: null,
@@ -101,6 +101,7 @@
    Calendar = {
      mes: null,
      año: null,
+     //crear el metodo selectDate;
 
      renderCalendar: function(){
         let max,fecha,fechas, semana;
