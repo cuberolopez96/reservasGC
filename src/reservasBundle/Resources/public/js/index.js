@@ -15,6 +15,10 @@
   Reservas.add('Ambrosio','Atapuerca','alcachofa@alcachofa','393220340284','soy de albacete',2);
 
 
+        $('#atras0').click(function(){
+          $('#datos2').css('display','none');
+          $('#datos1').css('display','block');
+        });
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
           fecha = $('#fecha').val();
@@ -193,13 +197,28 @@
           console.log('he entrado 2');
           data.forEach(function(row){
             console.log(row);
-            $('#datos1 .row').append("<div class='card white col s3'>"+
+            $('#datos1 .row').append("<div class='card white'>"+
             "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
             "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
             "<div class='card-footer'>"+
             "<button  id='"+row.id+"' class='button especial next'>Elegir</button>"+
             "</div>");
           });
+          switch(data.length){
+          case 1:
+              $('#datos1 .row .card').addClass('col s12');
+              break;
+          case 2:
+              $('#datos1 .row .card').addClass('col s6');
+              break;
+          case 3:
+              $('#datos1 .row .card').addClass('col s4');
+              break;
+          default:
+              $('#datos1 .row .card').addClass('col s3');
+              break;
+
+          }
           $('.next').click(function(){
             let id = $(this).attr('id');
             $('#datos1').css('display','none');
