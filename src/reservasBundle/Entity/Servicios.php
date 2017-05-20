@@ -111,6 +111,7 @@ class Servicios
     }
     public function toArray(){
       $array= array(
+        'id' => $this->getIdservicios(),
         'FechaServicio'=>$this->getFechaservicio()->format('Y/m/d h:i:s'),
         'Plazas'=>$this->getPlazas(),
       );

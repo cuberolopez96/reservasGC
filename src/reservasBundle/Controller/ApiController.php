@@ -9,6 +9,7 @@ use reservasBundle\Entity\Servicios;
 use reservasBundle\Entity\Menu;
 use reservasBundle\Entity\Correos;
 use reservasBundle\Entity\Misplantillas;
+use reservasBundle\Entity\Reservas;
 
 
 class ApiController extends Controller
@@ -28,6 +29,23 @@ class ApiController extends Controller
       }
       $response = new JsonResponse($auxreservas);
       return $response;
+    }
+    public function addreservasAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($request->get('servicio'))[0];
+      $reservas = new Reservas();
+      $reservas->setNombre($request->get('nombre'));
+      $reservas->setApellidos($request->get('apellidos'));
+      $reservas->setCorreo($request->get('correo'));
+      $reservas->setTelefono($request->get('telefono'));
+      $reservas->setObservaciones($request->get('telefono'));
+      $reservas->setNpersonas($request->get('npersonas'));
+      $reservas->setServiciosservicios($servicio);
+      $em->persist($reservas);
+      $em->flush();
+      $response = new JsonResponse(true);
+      return $response;
+
     }
     public function plazasrestantesAction(Request $request){
 

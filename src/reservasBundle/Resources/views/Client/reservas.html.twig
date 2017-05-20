@@ -95,22 +95,22 @@
 
 						<div class="row">
 							<div class="input-field col s12 m6 l3">
-								<input id="name" type="text" name="">
+								<input data-validation="length alphanumeric" id="name" type="text" name="">
 								<label for="name">Nombre</label>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
-								<input id="ap" type="text" name="">
+								<input data-validation="custom" data-validation-regexp="^([a-z]+)$" id="ap" type="text" name="">
 								<label for="ap">Apellidos</label>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
-								<input id="tlfn" type="text" name="">
+								<input data-validation="custom" data-validation-regexp="^([0-9]+)$" id="tlfn" type="text" name="">
 								<label for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
-								<input id="email" type="text" name="">
+								<input data-validation="email" id="email" type="text" name="">
 								<label for="email">Correo</label>
 							</div>
 
