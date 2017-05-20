@@ -33,7 +33,7 @@
         $('#reservar').click(function(){
           $('#datos3').css('display','none');
           $('#parte1').removeClass('ubicacion');
-          nombre = $('#name').val();
+          Reservas.nombre = $('#name').val();
           apellidos = $('#ap').val();
           correo = $('#email').val();
           telefono = $('#tlfn').val();
@@ -87,8 +87,11 @@
     idServicio:null,
     Nombre: null,
     Apellidos:null,
-
     Correo: null,
+    telefono: null,
+    observaciones: null,
+
+
 
 
     Get:function(){
