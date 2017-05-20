@@ -39,6 +39,10 @@ reservas_api_reservas_plazas:
     path: /api/reservas/plazas
     defaults: {_controller: reservasBundle:Api:plazasrestantes}
     methods: POST
+reservas_api_reservar_add:
+    path: /api/reservas/add
+    defaults: {_controller: reservasBundle:Api:addreservas}
+    methods: POST
 reservas_api_servicios:
     path: /api/servicios
     defaults: {_controller: reservasBundle:Api:servicios}
