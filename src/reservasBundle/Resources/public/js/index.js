@@ -41,10 +41,10 @@
           $('#datos3').css('display','none');
           $('#parte1').removeClass('ubicacion');
           Reservas.nombre = $('#name').val();
-          apellidos = $('#ap').val();
-          correo = $('#email').val();
-          telefono = $('#tlfn').val();
-          observaciones = $('#observaciones').val();
+          Reservas.apellidos = $('#ap').val();
+          Reservas.correo = $('#email').val();
+          Reservas.telefono = $('#tlfn').val();
+          Reservas.observaciones = $('#observaciones').val();
           checkbox = [];
           $.each($('#check input'),function(index,value){
             console.log(value);
@@ -52,11 +52,11 @@
               checkbox.push(value.id);
             }
           });
-          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ nombre +'</p>')
-          .append('<p class="col s12">Apellidos: '+ apellidos + '</p>')
-          .append('<p class="col s12">Correo: '+ correo + '</p>')
-          .append('<p class="col s12">Telefono: '+ telefono + '</p>')
-          .append('<p class="col s12">Observaciones: '+ observaciones + '</p>');
+          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Rrservas.nombre +'</p>')
+          .append('<p class="col s12">Apellidos: '+ Reservas.apellidos + '</p>')
+          .append('<p class="col s12">Correo: '+ Reservas.correo + '</p>')
+          .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
+          .append('<p class="col s12">Observaciones: '+ Reservas.observaciones + '</p>');
 
 
 
