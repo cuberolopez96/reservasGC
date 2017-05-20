@@ -11,7 +11,6 @@
   Servicios.Get();
   Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
 
-
   //Servicios.add(new Date(),25);
   Reservas.add('Ambrosio','Atapuerca','alcachofa@alcachofa','393220340284','soy de albacete',2);
 
@@ -76,14 +75,7 @@
 
 
         });
-        $(".bcalendario").click(function(){
-          console.log('cllock');
-          let dia;
-          dia = $(this).text();
-          Calendar.SelectDate(dia);
-          $('#datos0').css('display','none');
-          $('#datos1').css('display','block');
-        });
+
 
         $('#salir').click(function(){
           window.location.pathname= '/';
@@ -178,6 +170,7 @@
      },
      //crear el metodo selectDate;
      SelectDate: function(dia){
+       console.log('he entrado');
         let date;
         date = new Date();
         date.setMonth(Calendar.mes);
@@ -186,14 +179,17 @@
         Utils.postAjax('api/servicios/fecha',{
           fecha: Utils.dateStringFormat(date)
         },function(data){
+          console.log('he entrado 2');
           data.forEach(function(row){
-            $('#datos1 row').append("<div class='card'>"+
-            "<div class='card-content'>Fecha:"+ row.Fecha +"</div>" +
+            console.log(row);
+            $('#datos1 .row').append("<div class='card'>"+
+            "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
             "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
             "<div class='card-footer'>"+
-            "<button class='button especial'>Reservar</button>"+
+            "<button id = 'siguiente' class='button especial'>Elegir</button>"+
             "</div>");
-          })
+          });
+          return true;
         });
      },
      renderCalendar: function(servicios){
@@ -266,7 +262,15 @@
 
 
 
-
+        $(".bcalendario").click(function(){
+          let dia;
+          dia = $(this).text();
+          console.log(dia);
+          console.log(Calendar);
+          Calendar.SelectDate(dia);
+          $('#datos0').css('display','none');
+          $('#datos1').css('display','block');
+        });
      }
    };
    Utils = {
@@ -315,9 +319,7 @@
        url:url,
        data:data,
        method: 'POST'
-     }).done(function(data){
-       console.log(data);
-     });
+     }).done(success);
    }
  };
 
