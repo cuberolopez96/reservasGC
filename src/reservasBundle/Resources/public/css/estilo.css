@@ -82,11 +82,11 @@ body{
 	margin-top: 1.8em;
 }
 
-#datos1{
+#datos0{
   padding: 0.5em;
 }
 
-#datos2, #datos3, #confirmacion, #realizado{
+#datos1, #datos2, #datos3, #confirmacion, #realizado{
 	display: none;
 }
 
