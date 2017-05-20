@@ -14,8 +14,11 @@
   //Servicios.add(new Date(),25);
   Reservas.add('Ambrosio','Atapuerca','alcachofa@alcachofa','393220340284','soy de albacete',2);
 
-
         $('#atras0').click(function(){
+          $('#datos1').css('display','none');
+          $('#datos0').css('display','block');
+        });
+        $('#atras1').click(function(){
           $('#datos2').css('display','none');
           $('#datos1').css('display','block');
         });
@@ -28,7 +31,7 @@
           $('#datos3').css('display','block');
 
         });
-        $('#atras1').click(function(){
+        $('#atras2').click(function(){
           $('#datos3').css('display','none');
 
           $('#datos2').css('display','block');
@@ -62,7 +65,7 @@
           $('#confirmacion').css('display','block');
 
         });
-        $('#atras2').click(function(){
+        $('#atras3').click(function(){
           $('#confirmacion').css('display','none');
           $('#parte2').removeClass('ubicacion');
           $('#parte1').addClass('ubicacion');
@@ -195,9 +198,10 @@
           fecha: Utils.dateStringFormat(date)
         },function(data){
           console.log('he entrado 2');
+          $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
             console.log(row);
-            $('#datos1 .row').append("<div class='card white'>"+
+            $('#datos1 .row #servicios').append("<div class='card white'>"+
             "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
             "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
             "<div class='card-footer'>"+
@@ -206,16 +210,16 @@
           });
           switch(data.length){
           case 1:
-              $('#datos1 .row .card').addClass('col s12');
+              $('#datos1 .row #servicios .card').addClass('col s12');
               break;
           case 2:
-              $('#datos1 .row .card').addClass('col s6');
+              $('#datos1 .row #servicios .card').addClass('col s6');
               break;
           case 3:
-              $('#datos1 .row .card').addClass('col s4');
+              $('#datos1 .row #servicios .card').addClass('col s4');
               break;
           default:
-              $('#datos1 .row .card').addClass('col s3');
+              $('#datos1 .row #servicios .card').addClass('col s3');
               break;
 
           }
