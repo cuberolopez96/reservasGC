@@ -84,6 +84,13 @@
   })
 //crear el objeto reservas
   Reservas = {
+    idServicio:null,
+    Nombre: null,
+    Apellidos:null,
+
+    Correo: null,
+
+
     Get:function(){
       Utils.getAjax('/api/reservas',function(data){
         console.log(data);
@@ -144,6 +151,7 @@
    };
    Calendar = {
      mes: null,
+
      //habilitar dias
      EnableDate: function(dia,servicios){
        //Declaramos variables que vayamos a usar
@@ -182,12 +190,17 @@
           console.log('he entrado 2');
           data.forEach(function(row){
             console.log(row);
-            $('#datos1 .row').append("<div class='card'>"+
+            $('#datos1 .row').append("<div class='card white col s3'>"+
             "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
             "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
             "<div class='card-footer'>"+
-            "<button id = 'siguiente' class='button especial'>Elegir</button>"+
+            "<button  id='"+row.id+"' class='button especial next'>Elegir</button>"+
             "</div>");
+          });
+          $('.next').click(function(){
+            let id = $(this).attr('id');
+            $('#datos1').css('display','none');
+            $('#datos2').css('display','block');
           });
           return true;
         });
