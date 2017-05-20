@@ -46,6 +46,10 @@ reservas_api_reservar_add:
 reservas_api_servicios:
     path: /api/servicios
     defaults: {_controller: reservasBundle:Api:servicios}
+reservas_api_servicios_fecha:
+  path: /api/servicios/fecha
+  defaults: {_controller: reservasBundle:Api:serviciosbyfecha}
+  methods: POST
 reservas_api_servicios_add:
     path: /api/servicios/add
     defaults: {_controller: reservasBundle:Api:addservicios}

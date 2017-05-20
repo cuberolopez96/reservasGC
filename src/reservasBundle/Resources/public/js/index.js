@@ -1,7 +1,8 @@
 //(function(){
   let Utils,Calendar,Servicios,serviciosdata;
 
-  $(document).ready(function(){ if (window.location.pathname === '/reservas') {
+  $(document).ready(function(){
+  if (window.location.pathname === '/reservas') {
   let
   fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
 
@@ -9,6 +10,8 @@
   Calendar.año = new Date().getFullYear();
   Servicios.Get();
   Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
+
+
   //Servicios.add(new Date(),25);
   Reservas.add('Ambrosio','Atapuerca','alcachofa@alcachofa','393220340284','soy de albacete',2);
 
@@ -73,6 +76,15 @@
 
 
         });
+        $(".bcalendario").click(function(){
+          console.log('cllock');
+          let dia;
+          dia = $(this).text();
+          Calendar.SelectDate(dia);
+          $('#datos0').css('display','none');
+          $('#datos1').css('display','block');
+        });
+
         $('#salir').click(function(){
           window.location.pathname= '/';
         })
@@ -92,7 +104,7 @@
         apellidos: apellidos,
         telefono: telefono,
         correo: correo,
-        observaciones:observaciones,
+        observaciones: observaciones,
         servicio: servicio,
         npersonas: 25
       },function(){
@@ -166,7 +178,23 @@
      },
      //crear el metodo selectDate;
      SelectDate: function(dia){
-
+        let date;
+        date = new Date();
+        date.setMonth(Calendar.mes);
+        date.setDate(dia);
+        date.setFullYear(2017);
+        Utils.postAjax('api/servicios/fecha',{
+          fecha: Utils.dateStringFormat(date)
+        },function(data){
+          data.forEach(function(row){
+            $('#datos1 row').append("<div class='card'>"+
+            "<div class='card-content'>Fecha:"+ row.Fecha +"</div>" +
+            "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
+            "<div class='card-footer'>"+
+            "<button class='button especial'>Reservar</button>"+
+            "</div>");
+          })
+        });
      },
      renderCalendar: function(servicios){
         let max,fecha,fechas, semana;

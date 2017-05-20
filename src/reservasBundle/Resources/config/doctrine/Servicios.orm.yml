@@ -1,6 +1,7 @@
 reservasBundle\Entity\Servicios:
     type: entity
     table: Servicios
+    repositoryClass: reservasBundle\Entity\ServiciosRepository
     indexes:
         fk_Servicios_Menu1_idx:
             columns:

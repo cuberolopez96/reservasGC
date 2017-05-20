@@ -47,6 +47,7 @@ class ApiController extends Controller
       return $response;
 
     }
+
     public function plazasrestantesAction(Request $request){
 
         $date = new \Datetime($request->get('fecha'));
@@ -64,6 +65,15 @@ class ApiController extends Controller
         $auxservicios[]=$servicio->toArray();
       }
       $response = new JsonResponse($auxservicios);
+      return $response;
+    }
+    public function serviciosbyfechaAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $date =  new \Datetime($request->get('fecha'));
+
+      $servicios = $em->getRepository('reservasBundle:Servicios')->findLikeFechaservicio($date);
+
+      $response = new JsonResponse($servicios);
       return $response;
     }
     public function editserviciosAction(Request $request){
