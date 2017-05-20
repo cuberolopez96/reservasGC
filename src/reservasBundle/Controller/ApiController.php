@@ -29,8 +29,10 @@ class ApiController extends Controller
       $response = new JsonResponse($auxreservas);
       return $response;
     }
-    public function plazasrestantesAction($timestamp){
-        $date = new \Datetime($timestamp);
+    public function plazasrestantesAction(Request $request){
+
+        $date = new \Datetime($request->get('fecha'));
+
         $em = $this->getDoctrine()->getEntityManager();
         $plazas = $em->getRepository('reservasBundle:Reservas')->getPlazasOcupadas($date);
         $response = new JsonResponse($plazas);

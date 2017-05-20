@@ -8,6 +8,8 @@
   Calendar.mes = new Date().getMonth();
   Calendar.año = new Date().getFullYear();
   Servicios.Get();
+  Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
+
 
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
@@ -103,6 +105,13 @@
          console.log(value);
          fecha = Utils.converToDate(value.FechaServicio);
          console.log('hola');
+       })
+     },
+     getPlazasOcupadas: function(date){
+       Utils.postAjax('api/reservas/plazas',{
+         fecha: Utils.datePostformat(date)
+       },function(data){
+         console.log(data);
        })
      }
 
@@ -221,6 +230,11 @@
    Utils = {
     dateStringFormat:function(date){
       return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    },
+    datePostformat(date){
+      return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear() + ' ' +
+       date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
     },
     converToDate: function(fecha){
       let tiempo,day,month,year;

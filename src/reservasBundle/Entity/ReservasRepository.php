@@ -8,12 +8,15 @@ class ReservasRepository extends EntityRepository
 {
     public function getPlazasOcupadas($date)
     {
+        $dia = $date->format('Y-m-d');
+        $sql = "SELECT sum(r.npersonas) as POcupadas, s.idservicios, max(s.fechaservicio) as Fecha, max(s.plazas) as Plazas from reservasBundle:Reservas as r
+inner join reservasBundle:Servicios as s with r.serviciosservicios = s.idservicios
+where CAST(s.fechaservicio as date) = '$dia'
+group by s.idservicios";
+//print_r($sql);
         return $this->getEntityManager()
             ->createQuery(
-              "SELECT sum(r.NPersonas) as POcupadas, s.idServicios, max(s.FechaServicio) as Fecha from reservasgc.reservas as r
-inner join reservasgc.servicios as s on r.Servicios_idServicios = s.idServicios
-where cast(s.FechaServicio as date) = '$date'
-group by s.idServicios;"
+                $sql
             )
             ->getResult();
     }
