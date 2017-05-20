@@ -52,7 +52,7 @@
               checkbox.push(value.id);
             }
           });
-          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Rrservas.nombre +'</p>')
+          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Reservas.nombre +'</p>')
           .append('<p class="col s12">Apellidos: '+ Reservas.apellidos + '</p>')
           .append('<p class="col s12">Correo: '+ Reservas.correo + '</p>')
           .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
