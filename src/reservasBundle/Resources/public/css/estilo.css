@@ -12,6 +12,10 @@ body{
 	flex-direction: column;
 }
 
+.bcalendario{
+  background-color: #c3cd77;
+}
+
 .botones{
 	display: block;
 	margin: 0 auto;
