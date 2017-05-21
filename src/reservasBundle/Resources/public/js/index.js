@@ -297,7 +297,7 @@
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
               if (Calendar.EnableDate(value[i],servicios)===true) {
-                tr.append('<td id="'+i+'"><button class="bcalendario">'+value[i]+'</button></td>');
+                tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[i]+'</button></td>');
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>')
 
