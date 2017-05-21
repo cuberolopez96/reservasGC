@@ -212,14 +212,7 @@
           $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
             console.log(row);
-<<<<<<< HEAD
-            $('#datos1 .row #servicios').append("<div class='card white'>"+
-            "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
-            "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
-            "<div class='card-footer'>"+
-            "<button  id='"+row.Id+"' class='button especial next'>Elegir</button>"+
-            "</div>");
-=======
+
             $('#datos1 .row #servicios').append("<div class='cards'><div class='card white horizontal'>"+
               "<div class='card-image'>"+
                 "<img src='bundles/reservas/img/cardImageVerde.jpg'>"+
@@ -235,7 +228,7 @@
                 "</div>"+
               "</div>"+
             "</div></div>");
->>>>>>> estela
+
           });
           switch(data.length){
           case 1:
