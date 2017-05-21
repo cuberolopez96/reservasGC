@@ -2,21 +2,21 @@
   let Utils,Calendar,Servicios,serviciosdata;
 
   $(document).ready(function(){
-  if (window.location.pathname === '/reservas') {
-  let
-  fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones; //
+    // Si estamos en reservas
+    if (window.location.pathname === '/reservas') {
+      let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
 
-  Calendar.mes = new Date().getMonth();
-  Calendar.año = new Date().getFullYear();
-  Servicios.Get();
-  Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
+      Calendar.mes = new Date().getMonth();
+      Calendar.año = new Date().getFullYear();
+      Servicios.Get();
+      Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
 
-  //Servicios.add(new Date(),25);
+      //Servicios.add(new Date(),25);
 
-        $('#atras0').click(function(){
-          $('#datos1').css('display','none');
-          $('#datos0').css('display','block');
-        });
+      $('#atras0').click(function(){
+        $('#datos1').css('display','none');
+        $('#datos0').css('display','block');
+      });
         $('#atras1').click(function(){
           $('#datos2').css('display','none');
           $('#datos1').css('display','block');
@@ -96,8 +96,8 @@
         $('#salir').click(function(){
           window.location.pathname= '/';
         })
-    }
-  })
+    } //si reservas
+  }); //ready
 //crear el objeto reservas
   Reservas = {
     idServicio:null,
@@ -210,25 +210,34 @@
           $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
             console.log(row);
-            $('#datos1 .row #servicios').append("<div class='card white'>"+
-            "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
-            "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
-            "<div class='card-footer'>"+
-            "<button  id='"+row.id+"' class='button especial next'>Elegir</button>"+
-            "</div>");
+            $('#datos1 .row #servicios').append("<div class='cards'><div class='card white horizontal'>"+
+              "<div class='card-image'>"+
+                "<img src='bundles/reservas/img/cardImageVerde.jpg'>"+
+              "</div>"+
+              "<div class='card-stacked'>"+
+                "<div class='card-content'>"+
+                  "<p><strong>Disponible</strong></p>"+
+                  "<p>"+ row.Fecha.date +"</p>"+
+                  "<p>"+ row.Plazas +" plazas</p>"+
+                "</div>"+
+                "<div class='card-action'>"+
+                  "<button id='"+row.id+"' class='button especial next'>Elegir</button>"+
+                "</div>"+
+              "</div>"+
+            "</div></div>");
           });
           switch(data.length){
           case 1:
-              $('#datos1 .row #servicios .card').addClass('col s12');
+              $('#datos1 .row #servicios .cards').addClass('col s12');
               break;
           case 2:
-              $('#datos1 .row #servicios .card').addClass('col s6');
+              $('#datos1 .row #servicios .cards').addClass('col s6');
               break;
           case 3:
-              $('#datos1 .row #servicios .card').addClass('col s4');
+              $('#datos1 .row #servicios .cards').addClass('col s4');
               break;
           default:
-              $('#datos1 .row #servicios .card').addClass('col s3');
+              $('#datos1 .row #servicios .cards').addClass('col s3');
               break;
 
           }

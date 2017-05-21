@@ -64,6 +64,10 @@ body{
 	color: #624A4D !important;
 }
 
+.cards img{
+  height: 100%;
+}
+
 #check{
 	margin-bottom: 2em;
 	margin-top: 0;
