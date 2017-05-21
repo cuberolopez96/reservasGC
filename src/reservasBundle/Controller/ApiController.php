@@ -39,7 +39,7 @@ class ApiController extends Controller
       $reservas->setApellidos($request->get('apellidos'));
       $reservas->setCorreo($request->get('correo'));
       $reservas->setTelefono($request->get('telefono'));
-      $reservas->setObservaciones($request->get('telefono'));
+      $reservas->setObservaciones($request->get('observaciones'));
       $reservas->setNpersonas($request->get('npersonas'));
       $reservas->setServiciosservicios($servicio);
       $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
@@ -47,7 +47,7 @@ class ApiController extends Controller
       $em->persist($reservas);
       $em->flush();
       $alergenos = [];
-      if(count($request->get('alergenos'))==0||empty($request->get('alergenos'))){
+      if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
         $alergenos = $request->get('alergenos');
       }
       foreach ($alergenos as $key => $ralergeno) {

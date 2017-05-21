@@ -37,8 +37,15 @@
 
         });
         $('#reservar').click(function(){
+
+          if(Reservas.validateInput() == false){
+            console.log('error');
+            return
+
+          }
           $('#datos3').css('display','none');
           $('#parte1').removeClass('ubicacion');
+
           Reservas.nombre = $('#name').val();
           Reservas.apellidos = $('#ap').val();
           Reservas.correo = $('#email').val();
@@ -110,7 +117,40 @@
     alergenos: null,
 
 
+    validateInput: function(){
+      let correcto = true;
+      $('input').removeClass('tooltipped');
+      if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#name').val())===false){
+        correcto = false;
+        console.log("nombre");
+        
+      }
+      if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#ap').val())===false){
+        correcto = false;
+        console.log("apellidos");
 
+
+        }
+      if(/^.+@.+\..+/.test($('#email').val())===false){
+        correcto = false;
+        console.log("correo");
+
+      }
+      if(/^\d\d\d\d\d\d\d\d\d$/.test($('#tlfn').val())===false){
+        correcto = false;
+        console.log("telefono");
+
+      }
+      if($('#robot')[0].checked===false){
+        correcto = false;
+        console.log("robot");
+
+
+      }
+      console.log();
+      return correcto;
+
+    },
     Get:function(){
       Utils.getAjax('/api/reservas',function(data){
         console.log(data);
@@ -308,7 +348,7 @@
           }
           if (value[0]) {
             if (Calendar.EnableDate(value[0],servicios)===true) {
-              tr.append('<td id="'+i+'"><button class="bcalendario">'+value[0]+'</button></td>');
+              tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[0]+'</button></td>');
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
 
@@ -339,6 +379,7 @@
        date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
     },
+
     converToDate: function(fecha){
       let tiempo,day,month,year;
       let date = new Date();
