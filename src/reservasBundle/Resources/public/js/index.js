@@ -224,7 +224,7 @@
                   "<p>"+ row.Plazas +" plazas</p>"+
                 "</div>"+
                 "<div class='card-action'>"+
-                  "<button id='"+row.id+"' class='button especial next'>Elegir</button>"+
+                  "<button id='"+row.Id+"' class='button especial next'>Elegir</button>"+
                 "</div>"+
               "</div>"+
             "</div></div>");

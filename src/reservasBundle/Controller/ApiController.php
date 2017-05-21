@@ -42,9 +42,15 @@ class ApiController extends Controller
       $reservas->setObservaciones($request->get('telefono'));
       $reservas->setNpersonas($request->get('npersonas'));
       $reservas->setServiciosservicios($servicio);
+      $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
+      $reservas->setCodreserva($codReserva);
       $em->persist($reservas);
       $em->flush();
-      foreach ($request->get('alergenos') as $key => $ralergeno) {
+      $alergenos = [];
+      if(count($request->get('alergenos'))==0||empty($request->get('alergenos'))){
+        $alergenos = $request->get('alergenos');
+      }
+      foreach ($alergenos as $key => $ralergeno) {
         $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($ralergeno);
 
         $reservashasalergenos = new ReservasHasAlergenos();
