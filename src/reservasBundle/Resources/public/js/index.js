@@ -60,12 +60,12 @@
           .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
           .append('<p class="col s12">Observaciones: '+ Reservas.observaciones + '</p>');
           p = $('<p class="col s12">Alergenos: </p>');
-          console.log(checkbox);
+
           Reservas.alergenos.forEach(function(value){
             p.text(p.text() +  value + ',');
           });
           $('#datosparaconfirmar').append(p);
-
+          console.log(Reservas + ' Confirmacion');
 
 
 
@@ -82,8 +82,9 @@
         });
         $('#confirmar').click(function(){
           $('#confirmacion').css('display','none');
+
+          Reservas.add(Reservas.nombre,Reservas.apellidos,Reservas.correo, Reservas.telefono, Reservas.observaciones, Reservas.alergenos ,Reservas.idServicio,Reservas.plazas);
           $('#parte2').removeClass('ubicacion');
-          Reservas.add(Reservas.nombre,Reservas.apellidos,Reservas.correo, Reservas.telefono, Reservas.observaciones, Reservas.plazas);
           $('#parte3').addClass('ubicacion');
           $('#realizado').css('display','block');
 
@@ -116,7 +117,7 @@
       });
 
     },
-    add:function(nombre,apellidos,correo,telefono,observaciones,servicio,npersonas){
+    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
         apellidos: apellidos,
@@ -124,6 +125,7 @@
         correo: correo,
         observaciones: observaciones,
         servicio: servicio,
+        alergenos: alergenos,
         npersonas: 25
       },function(){
         return true
@@ -214,7 +216,7 @@
             "<div class='card-content'>Fecha:"+ row.Fecha.date +"</div>" +
             "<div class='card-content'>Plazas:"+ row.Plazas +"</div>"+
             "<div class='card-footer'>"+
-            "<button  id='"+row.id+"' class='button especial next'>Elegir</button>"+
+            "<button  id='"+row.Id+"' class='button especial next'>Elegir</button>"+
             "</div>");
           });
           switch(data.length){
@@ -233,7 +235,8 @@
 
           }
           $('.next').click(function(){
-            let id = $(this).attr('id');
+            Reservas.idServicio = $(this).attr('id');
+            console.log($(this).attr('id') + 'id de el servicio');
             $('#datos1').css('display','none');
             $('#datos2').css('display','block');
           });

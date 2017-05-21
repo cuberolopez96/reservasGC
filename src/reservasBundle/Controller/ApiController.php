@@ -10,6 +10,7 @@ use reservasBundle\Entity\Menu;
 use reservasBundle\Entity\Correos;
 use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Entity\Reservas;
+use reservasBundle\Entity\ReservasHasAlergenos;
 
 
 class ApiController extends Controller
@@ -43,6 +44,15 @@ class ApiController extends Controller
       $reservas->setServiciosservicios($servicio);
       $em->persist($reservas);
       $em->flush();
+      foreach ($request->get('alergenos') as $key => $ralergeno) {
+        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($ralergeno);
+
+        $reservashasalergenos = new ReservasHasAlergenos();
+        $reservashasalergenos->setAlergenosalergenos($alergeno[0]);
+        $reservashasalergenos->setReservasreservas($reservas);
+        $em->persist($reservashasalergenos);
+        $em->flush();
+      }
 
       $response = new JsonResponse(true);
       return $response;
