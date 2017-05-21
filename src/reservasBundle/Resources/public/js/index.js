@@ -234,15 +234,10 @@
           case 1:
               $('#datos1 .row #servicios .cards').addClass('col s12');
               break;
-          case 2:
+          default:
               $('#datos1 .row #servicios .cards').addClass('col s6');
               break;
-          case 3:
-              $('#datos1 .row #servicios .cards').addClass('col s4');
-              break;
-          default:
-              $('#datos1 .row #servicios .cards').addClass('col s3');
-              break;
+
 
           }
           $('.next').click(function(){
