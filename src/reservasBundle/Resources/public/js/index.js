@@ -12,7 +12,6 @@
   Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
 
   //Servicios.add(new Date(),25);
-  Reservas.add('Ambrosio','Atapuerca','alcachofa@alcachofa','393220340284','soy de albacete',2);
 
         $('#atras0').click(function(){
           $('#datos1').css('display','none');
@@ -45,18 +44,27 @@
           Reservas.correo = $('#email').val();
           Reservas.telefono = $('#tlfn').val();
           Reservas.observaciones = $('#observaciones').val();
+          Reservas.plazas = $('#plazas').val();
           checkbox = [];
           $.each($('#check input'),function(index,value){
-            console.log(value);
+
             if(value.checked  == true){
               checkbox.push(value.id);
             }
           });
+          console.log(checkbox);
+          Reservas.alergenos = checkbox;
           $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Reservas.nombre +'</p>')
           .append('<p class="col s12">Apellidos: '+ Reservas.apellidos + '</p>')
           .append('<p class="col s12">Correo: '+ Reservas.correo + '</p>')
           .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
           .append('<p class="col s12">Observaciones: '+ Reservas.observaciones + '</p>');
+          p = $('<p class="col s12">Alergenos: </p>');
+          console.log(checkbox);
+          Reservas.alergenos.forEach(function(value){
+            p.text(p.text() +  value + ',');
+          });
+          $('#datosparaconfirmar').append(p);
 
 
 
@@ -75,6 +83,7 @@
         $('#confirmar').click(function(){
           $('#confirmacion').css('display','none');
           $('#parte2').removeClass('ubicacion');
+          Reservas.add(Reservas.nombre,Reservas.apellidos,Reservas.correo, Reservas.telefono, Reservas.observaciones, Reservas.plazas);
           $('#parte3').addClass('ubicacion');
           $('#realizado').css('display','block');
 
@@ -97,7 +106,7 @@
     Correo: null,
     telefono: null,
     observaciones: null,
-
+    alergenos: null,
 
 
 
