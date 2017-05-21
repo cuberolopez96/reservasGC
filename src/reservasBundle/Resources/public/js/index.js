@@ -1,18 +1,65 @@
 //(function(){
-  let Utils,Calendar,Servicios,serviciosdata;
+  let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
     // Si estamos en reservas
     if (window.location.pathname === '/reservas') {
       let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
-
+      fechaActual = new Date();
       Calendar.mes = new Date().getMonth();
       Calendar.año = new Date().getFullYear();
       Servicios.Get();
       Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
+      if(Calendar.mes <= fechaActual.getMonth()){
+        $('#diaAnterior').attr('disabled','disabled');
 
+      }
+      if(Calendar.mes >= 11){
+        $('#diaSiguiente').attr('disabled','disabled');
+
+      }
       //Servicios.add(new Date(),25);
+      $('#diaAnterior').click(function(event){
+        let date;
+        event.preventDefault();
+        Calendar.mes = Calendar.mes - 1;
 
+
+        Calendar.renderCalendar(Servicios.ServiciosCache);
+        if(Calendar.mes <= fechaActual.getMonth()){
+          $('#diaAnterior').attr('disabled','disabled');
+
+        }else{
+          $('#diaAnterior').removeAttr('disabled');
+
+        }
+        if(Calendar.mes >= 11){
+          $('#diaSiguiente').attr('disabled','disabled');
+
+        }else{
+          $('#diaSiguiente').removeAttr('disabled');
+
+        }
+      });
+      $('#diaSiguiente').click(function(event){
+        event.preventDefault();
+        Calendar.mes = Calendar.mes+ 1;
+        Calendar.renderCalendar(Servicios.ServiciosCache);
+        if(Calendar.mes <= fechaActual.getMonth()){
+          $('#diaAnterior').attr('disabled','disabled');
+
+        }else{
+          $('#diaAnterior').removeAttr('disabled');
+
+        }
+        if(Calendar.mes >= 11){
+          $('#diaSiguiente').attr('disabled','disabled');
+
+        }else{
+          $('#diaSiguiente').removeAttr('disabled');
+
+        }
+      })
       $('#atras0').click(function(){
         $('#datos1').css('display','none');
         $('#datos0').css('display','block');
@@ -123,7 +170,7 @@
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#name').val())===false){
         correcto = false;
         console.log("nombre");
-        
+
       }
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#ap').val())===false){
         correcto = false;
@@ -212,7 +259,7 @@
    };
    Calendar = {
      mes: null,
-
+     meses: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
      //habilitar dias
      EnableDate: function(dia,servicios){
        //Declaramos variables que vayamos a usar
@@ -293,20 +340,21 @@
         let max,fecha,fechas, semana;
         fecha = new Date();
         fecha.setDate(1);
-        fecha.setMonth(Calendar.mes - 1);
-
+        fecha.setMonth(Calendar.mes);
+        $('#mesActual').empty().text(Calendar.meses[Calendar.mes]);
+        $('#calendar').empty();
         semana = 0;
         switch(Calendar.mes){
-          case 1:
-          case 3:
-          case 5:
+          case 0:
+          case 2:
+          case 4:
+          case 6:
           case 7:
-          case 8:
-          case 10:
-          case 12:
+          case 9:
+          case 11:
               max = 31;
               break;
-          case 2:
+          case 1:
               max = 28;
               //algoritmo año bisiesto
               break;
@@ -319,7 +367,8 @@
         auxfechas = [];
         for (var i = 0; i < max; i++) {
           auxfechas[fecha.getDay()] = fecha.getDate();
-          fecha = new Date(fecha.getTime() + (60 * 60 * 24 * 1000))
+          console.log(fecha.getDate()+'/'+(fecha.getMonth()+1)+' '+fecha.getDay());
+          fecha = new Date(fecha.getTime() + (60 * 60 * 24 * 1000));
           if (fecha.getDay()==1) {
 
             fechas[semana]=auxfechas;
@@ -327,19 +376,20 @@
             semana++;
           }
         }
-        if (auxfechas.length != 7 && auxfechas.length > 0 ) {
+        if ($.inArray(auxfechas,fechas) == -1 ) {
           fechas[semana] = auxfechas;
         }
-
+        console.log(max);
+        console.log(fechas);
         fechas.forEach(function(value,index){
-          let domingo= null
+          let domingo= null;
           tr = $('<tr id = "'+ index +'"></tr>');
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
               if (Calendar.EnableDate(value[i],servicios)===true) {
                 tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[i]+'</button></td>');
               }else{
-                tr.append('<td id="'+i+'">'+value[i]+'</td>')
+                tr.append('<td id="'+i+'">'+value[i]+'</td>');
 
               }
             }else{
