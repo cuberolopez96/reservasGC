@@ -64,6 +64,14 @@ body{
 	color: #624A4D !important;
 }
 
+.card>.card-content{
+  padding-top: 0;
+}
+
+.cards>.card{
+  margin-top: 0;
+}
+
 .cards img{
   height: 100%;
 }
