@@ -8,57 +8,25 @@
       fechaActual = new Date();
       Calendar.mes = new Date().getMonth();
       Calendar.año = new Date().getFullYear();
-      Servicios.Get();
+      Servicios.Get(function(){
+        Calendar.renderCalendar(Servicios.ServiciosCache);
+      })
+      Calendar.ToggleButtons();
       Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
-      if(Calendar.mes <= fechaActual.getMonth()){
-        $('#diaAnterior').attr('disabled','disabled');
-
-      }
-      if(Calendar.mes >= 11){
-        $('#diaSiguiente').attr('disabled','disabled');
-
-      }
       //Servicios.add(new Date(),25);
       $('#diaAnterior').click(function(event){
         let date;
         event.preventDefault();
         Calendar.mes = Calendar.mes - 1;
-
-
+        Calendar.ToggleButtons();
         Calendar.renderCalendar(Servicios.ServiciosCache);
-        if(Calendar.mes <= fechaActual.getMonth()){
-          $('#diaAnterior').attr('disabled','disabled');
 
-        }else{
-          $('#diaAnterior').removeAttr('disabled');
-
-        }
-        if(Calendar.mes >= 11){
-          $('#diaSiguiente').attr('disabled','disabled');
-
-        }else{
-          $('#diaSiguiente').removeAttr('disabled');
-
-        }
       });
       $('#diaSiguiente').click(function(event){
         event.preventDefault();
         Calendar.mes = Calendar.mes+ 1;
+        Calendar.ToggleButtons();
         Calendar.renderCalendar(Servicios.ServiciosCache);
-        if(Calendar.mes <= fechaActual.getMonth()){
-          $('#diaAnterior').attr('disabled','disabled');
-
-        }else{
-          $('#diaAnterior').removeAttr('disabled');
-
-        }
-        if(Calendar.mes >= 11){
-          $('#diaSiguiente').attr('disabled','disabled');
-
-        }else{
-          $('#diaSiguiente').removeAttr('disabled');
-
-        }
       })
       $('#atras0').click(function(){
         $('#datos1').css('display','none');
@@ -79,20 +47,16 @@
         });
         $('#atras2').click(function(){
           $('#datos3').css('display','none');
-
           $('#datos2').css('display','block');
-
         });
         $('#reservar').click(function(){
 
           if(Reservas.validateInput() == false){
             console.log('error');
             return
-
           }
           $('#datos3').css('display','none');
           $('#parte1').removeClass('ubicacion');
-
           Reservas.nombre = $('#name').val();
           Reservas.apellidos = $('#ap').val();
           Reservas.correo = $('#email').val();
@@ -101,7 +65,6 @@
           Reservas.plazas = $('#plazas').val();
           checkbox = [];
           $.each($('#check input'),function(index,value){
-
             if(value.checked  == true){
               checkbox.push(value.id);
             }
@@ -114,44 +77,31 @@
           .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
           .append('<p class="col s12">Observaciones: '+ Reservas.observaciones + '</p>');
           p = $('<p class="col s12">Alergenos: </p>');
-
           Reservas.alergenos.forEach(function(value){
             p.text(p.text() +  value + ',');
           });
           $('#datosparaconfirmar').append(p);
           console.log(Reservas + ' Confirmacion');
-
-
-
           $('#parte2').addClass('ubicacion');
           $('#confirmacion').css('display','block');
-
         });
         $('#atras3').click(function(){
           $('#confirmacion').css('display','none');
           $('#parte2').removeClass('ubicacion');
           $('#parte1').addClass('ubicacion');
           $('#datos3').css('display','block');
-
         });
         $('#confirmar').click(function(){
           $('#confirmacion').css('display','none');
-
           Reservas.add(Reservas.nombre,Reservas.apellidos,Reservas.correo, Reservas.telefono, Reservas.observaciones, Reservas.alergenos ,Reservas.idServicio,Reservas.plazas);
           $('#parte2').removeClass('ubicacion');
           $('#parte3').addClass('ubicacion');
           $('#realizado').css('display','block');
-
-
-
-
         });
-
-
         $('#salir').click(function(){
           window.location.pathname= '/';
         })
-    } //si reservas
+    }
   }); //ready
 //crear el objeto reservas
   Reservas = {
@@ -162,11 +112,10 @@
     telefono: null,
     observaciones: null,
     alergenos: null,
-
-
+    ReservasCache: null,
+// valida los campos del formulario de reservas
     validateInput: function(){
       let correcto = true;
-      $('input').removeClass('tooltipped');
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#name').val())===false){
         correcto = false;
         console.log("nombre");
@@ -198,12 +147,14 @@
       return correcto;
 
     },
+    //se trae las reservas de el servidor
     Get:function(){
       Utils.getAjax('/api/reservas',function(data){
-        console.log(data);
+        Reservas.ReservasCache = data;
       });
 
     },
+    // añade reservas
     add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
@@ -221,20 +172,20 @@
 
 
   }
+  // Objeto que controla la gestion de los servicios
    Servicios = {
-     ServiciosCache: null,
-     Get: function(){
+     ServiciosCache: null,//datos de los servicios guardados en cache;
+     Get: function(success = null){
        Utils.getAjax('/api/servicios',function(data){
          Servicios.ServiciosCache = data;
-         Calendar.renderCalendar(data);
+         success();
+         
        });
      },
-
      GetFechas: function(){
        let datos = Servicios.ServiciosCache;
        let fechas = [];
        let fecha;
-       //console.log(Servicios.ServiciosCache);
        $.each(datos,function(value){
          fecha = Utils.converToDate(value.FechaServicio);
        })
@@ -243,7 +194,6 @@
        Utils.postAjax('api/servicios/add',{
          Plazas:plazas,
          FechaServicio: Utils.datePostformat(date)
-
        },function(){
          return true
        })
@@ -255,11 +205,23 @@
          console.log(data);
        })
      }
-
    };
    Calendar = {
      mes: null,
      meses: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+     //habilita o deshabilita los botones del calendario en función del mes
+     ToggleButtons: function(){
+       if(Calendar.mes <= fechaActual.getMonth()){
+         $('#diaAnterior').attr('disabled','disabled');
+       }else{
+         $('#diaAnterior').removeAttr('disabled');
+       }
+       if(Calendar.mes >= 11){
+         $('#diaSiguiente').attr('disabled','disabled');
+       }else{
+         $('#diaSiguiente').removeAttr('disabled');
+       }
+     },
      //habilitar dias
      EnableDate: function(dia,servicios){
        //Declaramos variables que vayamos a usar
@@ -275,14 +237,11 @@
          dateServicio = Utils.converToDate(value.FechaServicio);
          // Comparamos date y devolvemos true si es igual
          if (Utils.dateStringFormat(paramDate) === Utils.dateStringFormat(dateServicio)) {
-
            flag =  true;
          }
        });
        //false si no lo son
        return flag;
-
-
      },
      //crear el metodo selectDate;
      SelectDate: function(dia){
@@ -299,7 +258,6 @@
           $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
             console.log(row);
-
             $('#datos1 .row #servicios').append("<div class='cards'><div class='card white horizontal'>"+
               "<div class='card-image'>"+
                 "<img src='bundles/reservas/img/cardImageVerde.jpg'>"+
@@ -315,7 +273,6 @@
                 "</div>"+
               "</div>"+
             "</div></div>");
-
           });
           switch(data.length){
           case 1:
@@ -324,8 +281,6 @@
           default:
               $('#datos1 .row #servicios .cards').addClass('col s6');
               break;
-
-
           }
           $('.next').click(function(){
             Reservas.idServicio = $(this).attr('id');
@@ -337,6 +292,7 @@
         });
      },
      renderCalendar: function(servicios){
+
         let max,fecha,fechas, semana;
         fecha = new Date();
         fecha.setDate(1);
@@ -361,7 +317,6 @@
           default:
               max = 30;
               break;
-
         }
         fechas = [];
         auxfechas = [];
@@ -390,7 +345,6 @@
                 tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[i]+'</button></td>');
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>');
-
               }
             }else{
               tr.append('<td></td>');
@@ -401,14 +355,10 @@
               tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[0]+'</button></td>');
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
-
             }
           }
           $('#calendar').append(tr);
         });
-
-
-
         $(".bcalendario").click(function(){
           let dia;
           dia = $(this).text();
@@ -427,9 +377,7 @@
     datePostformat(date){
       return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear() + ' ' +
        date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
     },
-
     converToDate: function(fecha){
       let tiempo,day,month,year;
       let date = new Date();
@@ -456,9 +404,6 @@
      let ajax;
      ajax = $.ajax({
        url:url,
-
-
-
      }).done(success);
    },
    postAjax: function(url,data,success=false){
@@ -470,5 +415,4 @@
      }).done(success);
    }
  };
-
 //})()
