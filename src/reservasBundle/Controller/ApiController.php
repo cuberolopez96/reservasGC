@@ -84,6 +84,12 @@ class ApiController extends Controller
       $response = new JsonResponse($auxservicios);
       return $response;
     }
+    public function reservabycodreservaAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $reserva = $em->getRepository('reservasBundle:Reservas')->findByCodreserva($request->get('codigo'))[0];
+      $response = new JsonResponse($reserva->toArray());
+      return $response;
+    }
     public function serviciosbyfechaAction(Request $request){
       $em = $this->getDoctrine()->getEntityManager();
       $date =  new \Datetime($request->get('fecha'));

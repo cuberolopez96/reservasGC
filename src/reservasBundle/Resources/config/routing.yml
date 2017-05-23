@@ -7,6 +7,7 @@ reservas_client_reservas:
 reservas_client_consultar:
     path: /consultar
     defaults: {_controller: reservasBundle:Client:consultar }
+
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }
@@ -38,6 +39,10 @@ reservas_api_reservas:
 reservas_api_reservas_plazas:
     path: /api/reservas/plazas
     defaults: {_controller: reservasBundle:Api:plazasrestantes}
+    methods: POST
+reservas_api_reservas_codreserva:
+    path: /api/reservas/codreserva
+    defaults: {_controller: reservasBundle:Api:reservabycodreserva}
     methods: POST
 reservas_api_reservar_add:
     path: /api/reservas/add

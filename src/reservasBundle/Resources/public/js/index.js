@@ -2,6 +2,25 @@
   let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
+    // Si estamos en consultar
+    if (window.location.pathname === '/consultar') {
+      $('#buscar').click(function(){
+        let busqueda = $('#entrada').val();
+        Reservas.getReservasByCodReservas(busqueda,function(data){
+          $('#resultadoConsulta').append('<div class="card">'+
+            '<div class="card-content">'+
+            '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+            '<p class="col s6">Fecha Servicio: '+ data.Servicio.FechaServicio +'</p> '+
+            '<p class="col s6">Correo: '+ data.Correo + '</p>'+
+            '</div>'+
+            '<div class="card-action">'+
+            '<a href="#">Editar</a>'+
+            '<a href="#">Anular</a>'+
+            '</div>'+
+          '</div>');
+        });
+      })
+    }
     // Si estamos en reservas
     if (window.location.pathname === '/reservas') {
       let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
@@ -113,6 +132,15 @@
     observaciones: null,
     alergenos: null,
     ReservasCache: null,
+    consultaCache:null,
+    getReservasByCodReservas(codigo,success=null){
+      Utils.postAjax('api/reservas/codreserva',{
+        codigo:codigo
+      },function(data){
+        consultaCache = data;
+        success(data);
+      });
+    },
 // valida los campos del formulario de reservas
     validateInput: function(){
       let correcto = true;
