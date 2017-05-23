@@ -179,7 +179,6 @@
        Utils.getAjax('/api/servicios',function(data){
          Servicios.ServiciosCache = data;
          success();
-         
        });
      },
      GetFechas: function(){
@@ -292,7 +291,6 @@
         });
      },
      renderCalendar: function(servicios){
-
         let max,fecha,fechas, semana;
         fecha = new Date();
         fecha.setDate(1);

@@ -113,21 +113,25 @@
 							<div class="input-field col s12 m6 l3">
 								<input data-validation="length alphanumeric" class="" id="name" data-tooltip="El nombre no es correcto" type="text" name="" required="required">
 								<label for="name">Nombre</label>
+								<span class="errores" id="errorname">El nombre no es Correcto</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<input data-validation="custom" class="" data-tooltip="El apellido no es correcto" data-validation-regexp="^([a-z]+)$" id="ap" type="text" name="" required="required">
 								<label for="ap">Apellidos</label>
+								<span class="errores" id="errorap">El apellido no es correcto</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<input data-validation="custom" class="" data-tooltip="El telefono no es correcto" data-validation-regexp="^([0-9]+)$" id="tlfn" type="text" name="">
 								<label for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
+								<span class="errores" id="errortlfn">El telefono no es correcto</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<input data-validation="email" class="" data-tooltip="el email no es correcto" id="email" type="text" name="">
 								<label for="email">Correo</label>
+								<span class="errores" id="erroremail">el email no es correcto</span>
 							</div>
 
 							<div id="check" class="input-field col s12">
@@ -228,6 +232,7 @@
 								<p id="captcha">
 									<input id="robot" data-tooltip="pulsa aquí" class="filled-in " type="checkbox" name="">
 									<label for="robot">No soy un robot</label>
+									<span>Indique que no es un robot</span>
 								</p>
 							</div>
 							<div class="input-field col s12 misBotones">
