@@ -116,31 +116,34 @@
 // valida los campos del formulario de reservas
     validateInput: function(){
       let correcto = true;
+      $('.errores').css('display','none');
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#name').val())===false){
         correcto = false;
         console.log("nombre");
+        $('#errorname').fadeIn("slow");
 
       }
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#ap').val())===false){
         correcto = false;
         console.log("apellidos");
-
+        $('#errorap').fadeIn("slow");
 
         }
       if(/^.+@.+\..+/.test($('#email').val())===false){
         correcto = false;
         console.log("correo");
-
+        $('#erroremail').fadeIn("slow");
       }
       if(/^\d\d\d\d\d\d\d\d\d$/.test($('#tlfn').val())===false){
         correcto = false;
         console.log("telefono");
+        $('#errortlfn').fadeIn("slow");
 
       }
       if($('#robot')[0].checked===false){
         correcto = false;
         console.log("robot");
-
+        $('#errorrobot').fadeIn("slow");
 
       }
       console.log();
