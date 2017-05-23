@@ -340,7 +340,7 @@
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
               if (Calendar.EnableDate(value[i],servicios)===true) {
-                tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[i]+'</button></td>');
+                tr.append('<td id="'+i+'"><button data-target="modal" class="btn-floating btn-tiny bcalendario" data-activates="slide-out">'+value[i]+'</button></td>');
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>');
               }
@@ -350,13 +350,18 @@
           }
           if (value[0]) {
             if (Calendar.EnableDate(value[0],servicios)===true) {
-              tr.append('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario">'+value[0]+'</button></td>');
+              tr.append('<td id="'+i+'"><button data-target="modal" class="btn-floating btn-tiny bcalendario">'+value[0]+'</button></td>');
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
           }
           $('#calendar').append(tr);
         });
+        /*$(".bcalendario").mouseenter(function(){
+          $('.modal').modal();
+          $('#modal').modal('open');
+        });*/
+
         $(".bcalendario").click(function(){
           let dia;
           dia = $(this).text();
