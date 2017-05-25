@@ -145,6 +145,10 @@ form h2{
 	font-size: 1em;
 }
 
+#formularioConsulta{
+  display: none;
+}
+
 h1{
 	font-size: 2.5rem;
 	color: #624A4D;

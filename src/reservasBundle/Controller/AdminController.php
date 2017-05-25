@@ -1,36 +1,37 @@
 <?php
 
 namespace reservasBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use reservasBundle\Form\ConfigType;
+use reservasBundle\Entity\Config;
 class AdminController extends Controller
 {
     public function indexAction()
     {
       return $this->render('reservasBundle:Admin:index.html.twig');
     }
-    public function reservasAction()
-    {
-      return $this->render('reservasBundle:Admin:reservas.html.twig');
+    public function configAction(Request $request){
+      $em=$this->getDoctrine()->getEntityManager();
+      $configs = $em->getRepository('reservasBundle:Config')->findAll();
+      $config = $configs[0];
+      $form = $this->createForm(ConfigType::class,$config);
+      if ($request->isMethod('POST')) {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($config);
+            $em->flush();
+
+
+        }
     }
-    public function reservaAction( $id )
-    {
-      return $this->render('reservasBundle:Admin:reserva.html.twig');
+      return $this->render('reservasBundle:Admin:config.html.twig',array(
+        'form'=>$form->createView()
+      ));
+
     }
-    public function addreservasAction()
-    {
-      return $this->render('reservasBundle:Admin:addreservas.html.twig');
-    }
-    public function editreservasAction()
-    {
-      return $this->render('reservasBundle:Admin:editreservas.html.twig');
-    }
-    public function serviciosAction(){
-      return $this->render('reservasBundle:Admin:servicios.html.twig');
-    }
-    public function servicioAction($id){
-      return $this->render('reservasBundle:Admin:servicio.html.twig');
-    }
+
 
 }
 

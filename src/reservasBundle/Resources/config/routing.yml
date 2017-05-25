@@ -7,29 +7,16 @@ reservas_client_reservas:
 reservas_client_consultar:
     path: /consultar
     defaults: {_controller: reservasBundle:Client:consultar }
+reservas_client_pdf:
+    path: /pdf
+    defaults: {_controller: reservasBundle:Client:pdfreservas }
 
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }
-reservas_admin_reservas:
-    path: /admin/reservas
-    defaults: {_controller: reservasBundle:Admin:reservas }
-reservas_admin_add_reservas:
-    path: /admin/reservas/add
-    defaults: {_controller: reservasBundle:Admin:addreservas }
-reservas_admin_edit_reservas:
-    path: /admin/reservas/edit
-    defaults: {_controller: reservasBundle:Admin:editreservas }
-reservas_admin_reservas_profile:
-    path: /admin/reservas/{id}
-    defaults: {_controller: reservasBundle:Admin:reserva}
-reservas_admin_servicios:
-    path: /admin/servicios
-    defaults: {_controller: reservasBundle:Admin:servicios}
-reservas_admin_servicio:
-    path: /admin/servicios/{id}
-    defaults: {_controller: reservasBundle:Admin:servicio}
-
+reservas_admin_config:
+    path: /admin/config
+    defaults: {_controller: reservasBundle:Admin:config }
 reservas_api:
     path: /api
     defaults: {_controller: reservasBundle:Api:index}
@@ -40,6 +27,10 @@ reservas_api_reservas_plazas:
     path: /api/reservas/plazas
     defaults: {_controller: reservasBundle:Api:plazasrestantes}
     methods: POST
+reservas_api_reservas_alergenos:
+    path: /api/reservas/alergenos
+    defaults: {_controller: reservasBundle:Api:alergenosbyreserva}
+    methods: POST
 reservas_api_reservas_codreserva:
     path: /api/reservas/codreserva
     defaults: {_controller: reservasBundle:Api:reservabycodreserva}
@@ -48,6 +39,14 @@ reservas_api_reservar_add:
     path: /api/reservas/add
     defaults: {_controller: reservasBundle:Api:addreservas}
     methods: POST
+reservas_api_reservar_edit:
+    path: /api/reservas/edit
+    defaults: {_controller: reservasBundle:Api:editreservas}
+    methods: POST
+reservas_api_reservar_delete:
+    path: /api/reservas/delete
+    defaults: {_controller: reservasBundle:Api:deletereservas}
+    methods: POST
 reservas_api_servicios:
     path: /api/servicios
     defaults: {_controller: reservasBundle:Api:servicios}
@@ -55,6 +54,10 @@ reservas_api_servicios_fecha:
   path: /api/servicios/fecha
   defaults: {_controller: reservasBundle:Api:serviciosbyfecha}
   methods: POST
+reservas_api_servicios_id:
+    path: /api/servicios/id
+    defaults: {_controller: reservasBundle:Api:serviciosbyid}
+    methods: POST
 reservas_api_servicios_add:
     path: /api/servicios/add
     defaults: {_controller: reservasBundle:Api:addservicios}

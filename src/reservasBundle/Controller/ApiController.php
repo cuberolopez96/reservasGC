@@ -21,6 +21,30 @@ class ApiController extends Controller
       $response = new JsonResponse($array);
       return $response;
     }
+    //importante metodo interno no enrutar
+    public function deleteAlergenosByReserva($reserva){
+        $em=$this->getDoctrine()->getEntityManager();
+        $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
+        foreach( $alergenos as $alergeno){
+          $em->remove($alergeno);
+          $em->flush();
+        }
+        return true;
+    }
+    public function pdfreservasAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $reserva = $this->getRepository('reservasBundle:Reservas')->findByIdreservas($request->get('id'))[0];
+
+      $pdf = new \FPDF();
+
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10,'Nombre');
+        $pdf->Cell(40,10,$reserva->getNombre());
+        $pdf->ln();
+        return new Response($pdf->Output(), 200, array(
+            'Content-Type' => 'application/pdf'));
+    }
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
@@ -29,6 +53,43 @@ class ApiController extends Controller
         $auxreservas[]= $reserva->toArray();
       }
       $response = new JsonResponse($auxreservas);
+      return $response;
+    }
+    public function deletereservasAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($request->get('id'))[0];
+      $em->remove($reserva);
+      $em->flush();
+      $response = new JsonResponse(true);
+      return $response;
+
+    }
+    public function editreservasAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($request->get('id'))[0];
+      self::deleteAlergenosByReserva($reserva);
+      $reserva->setNombre($request->get('nombre'));
+      $reserva->setApellidos($request->get('apellidos'));
+      $reserva->setCorreo($request->get('correo'));
+      $reserva->setTelefono($request->get('telefono'));
+      $reserva->setObservaciones($request->get('observaciones'));
+
+      $em->persist($reserva);
+      $em->flush();
+      $alergenos = [];
+      if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
+        $alergenos = $request->get('alergenos');
+      }
+      foreach ($alergenos as $key => $ralergeno) {
+        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($ralergeno);
+
+        $reservashasalergenos = new ReservasHasAlergenos();
+        $reservashasalergenos->setAlergenosalergenos($alergeno[0]);
+        $reservashasalergenos->setReservasreservas($reserva);
+        $em->persist($reservashasalergenos);
+        $em->flush();
+      }
+      $response =  new JsonResponse(true);
       return $response;
     }
     public function addreservasAction(Request $request){
@@ -82,6 +143,12 @@ class ApiController extends Controller
         $auxservicios[]=$servicio->toArray();
       }
       $response = new JsonResponse($auxservicios);
+      return $response;
+    }
+    public function serviciosbyidAction(Request $request){
+      $em = $this->getDoctrine()->getEntityManager();
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findByFechaservicio(new \DateTime($request->get('fecha')))[0];
+      $response = new JsonResponse($servicio->toArray());
       return $response;
     }
     public function reservabycodreservaAction(Request $request){
@@ -181,6 +248,19 @@ class ApiController extends Controller
         $auxAlergenos[]= $alergeno->toArray();
 
       }
+      $response = new JsonResponse($auxAlergenos);
+      return $response;
+    }
+    public function alergenosbyreservaAction(Request $request){
+      $em  = $this->getDoctrine()->getEntityManager();
+      $reserva = $em->getRepository("reservasBundle:Reservas")->findByIdreservas($request->get("id"))[0];
+      $alergenos = $em->getRepository("reservasBundle:ReservasHasAlergenos")->findByReservasreservas($reserva);
+      $auxAlergenos = array();
+      foreach($alergenos as $alergeno){
+        $auxAlergenos[] = $alergeno->toArray();
+
+      }
+
       $response = new JsonResponse($auxAlergenos);
       return $response;
     }

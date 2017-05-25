@@ -27,6 +27,187 @@
 
 			</div>
 
+			<div id="formularioConsulta" class="card">
+
+					<div class="input-field col s12 m6">
+						<select id="hora">
+							<option value="13:00">13:00</option>
+							<option value="14:00">14:00</option>
+							<option value="15:00">15:00</option>
+							</select>
+							<label class="comoH3">Hora</label>
+					</div>
+
+					<div class="input-field col s12 m6">
+						<select id="plazas">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							</select>
+							<label class="comoH3">Personas</label>
+					</div>
+
+						<div class="row">
+							<div class="input-field col s12 m6 l3">
+								<input data-validation="length alphanumeric" class="" id="name" data-tooltip="El nombre no es correcto" type="text" name="" required="required">
+								<label for="name">Nombre</label>
+								<span class="errores" id="errorname">El nombre no es Correcto</span>
+							</div>
+
+							<div class="input-field col s12 m6 l3">
+								<input data-validation="custom" class="" data-tooltip="El apellido no es correcto" data-validation-regexp="^([a-z]+)$" id="ap" type="text" name="" required="required">
+								<label for="ap">Apellidos</label>
+								<span class="errores" id="errorap">El apellido no es correcto</span>
+							</div>
+
+							<div class="input-field col s12 m6 l3">
+								<input data-validation="custom" class="" data-tooltip="El telefono no es correcto" data-validation-regexp="^([0-9]+)$" id="tlfn" type="text" name="">
+								<label for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
+								<span class="errores" id="errortlfn">El telefono no es correcto</span>
+							</div>
+
+							<div class="input-field col s12 m6 l3">
+								<input data-validation="email" class="" data-tooltip="el email no es correcto" id="email" type="text" name="">
+								<label for="email">Correo</label>
+								<span class="errores" id="erroremail">el email no es correcto</span>
+							</div>
+
+							<div id="check" class="input-field col s12">
+								<div class="row">
+									<div class="col s12">
+										<h3>Alérgenos</h3>
+									</div>
+
+									<div class="col">
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="gluten">
+											<label for="gluten">Gluten</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="huevos">
+											<label for="huevos">Huevos</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="pescado">
+											<label for="pescado">Pescado</label>
+										</p>
+									</div>
+
+									<div class="col">
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="cacahuetes">
+											<label for="cacahuetes">Cacahuetes</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="soja">
+											<label for="soja">Soja</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="lacteos">
+											<label for="lacteos">Lácteos</label>
+										</p>
+									</div>
+
+									<div class="col">
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="apio">
+											<label for="apio">Apio</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="mostaza">
+											<label for="mostaza">Mostaza</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="sesamo">
+											<label for="sesamo">Sésamo</label>
+										</p>
+									</div>
+
+									<div class="col">
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="sulfitos">
+											<label for="sulfitos">Sulfitos</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="moluscos">
+											<label for="moluscos">Moluscos</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="crustaceos">
+											<label for="crustaceos">Crustáceos</label>
+										</p>
+									</div>
+
+									<div class="col">
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="altramuces">
+											<label for="altramuces">Altramuces</label>
+										</p>
+										<p>
+											<input type="checkbox" class="filled-in" name="" id="frutos_secos">
+											<label for="frutos_secos">Frutos secos</label>
+										</p>
+									</div>
+
+
+								</div>
+							</div>
+
+							<div class="input-field col s12 l6 obs">
+								<textarea id="observaciones" class="materialize-textarea">
+								</textarea>
+								<label class="comoH3" for="observaciones">Observaciones</label>
+							</div>
+
+							<div class="input-field col s12 l6">
+								<p>
+									<input id="boletin" class="filled-in" type="checkbox" name="" checked>
+									<label for="boletin">¿Desea subscribirse a nuestro boletín informativo?</label>
+								</p>
+							</div>
+
+							<div class="input-field col s12 l6">
+								<p id="captcha">
+									<p>
+										<input id="robot" data-tooltip="pulsa aquí" class="filled-in " type="checkbox" name="">
+
+										<label for="robot">No soy un robot</label>
+									</p>
+									<br>
+									<span class="errores" id="errorrobot">Indique que no es un robot</span>
+								</p>
+							</div>
+							<div class="input-field col s12 misBotones">
+								<div id="botones1" class="row">
+									<div class="col s12 m6"><a id="salir" class="button especial2">Salir</a></div>
+									<div class="col s12 m6"><a id="guardar" href="#modal1" class="button especial">Guardar</a>	</div>
+								</div>
+							</div>
+						</div>
+
+
+			</div> <!-- fORMULARIO CONSULTA -->
+			<!--MODALS -->
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+
+					<p>Cambios realizados con exito</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/consultar" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+				</div>
+			</div>
+			<div id="modal2" class="modal">
+				<div class="modal-content">
+
+					<p>Se ha eliminado su reserva</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/consultar" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+				</div>
+			</div>
+
+
 		</div>
 
 	</main>

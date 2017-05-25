@@ -303,11 +303,12 @@ class Reservas
     public function toArray(){
       $array=array(
         'Id'=>$this->getIdreservas(),
-        'Fecha'=>$this->getFecha(),
+        'Servicio'=>$this->getServiciosservicios()->toArray(),
         'Nombre'=>$this->getNombre(),
         'Apellidos'=>$this->getApellidos(),
         'Correo'=>$this->getCorreo(),
-        'Telefono'=>$this->getTelefono()
+        'Telefono'=>$this->getTelefono(),
+        'NPersonas'=>$this->getNpersonas(),
       );
       return $array;
     }

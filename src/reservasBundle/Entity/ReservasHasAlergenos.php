@@ -70,7 +70,13 @@ class ReservasHasAlergenos
 
         return $this;
     }
+    public function toArray(){
+      return array(
+        'alergeno' => $this->getAlergenosalergenos()->toArray(),
+        'reserva' => $this->getReservasreservas()->toArray()
 
+      );
+    }
     /**
      * Get reservasreservas
      *

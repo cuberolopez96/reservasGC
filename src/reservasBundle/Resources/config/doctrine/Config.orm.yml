@@ -1,0 +1,18 @@
+reservasBundle\Entity\Config:
+    type: entity
+    table: null
+    repositoryClass: reservasBundle\Repository\ConfigRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        confirmacion:
+            type: text
+        recordatorio:
+            type: text
+        listanegra:
+            type: text
+    lifecycleCallbacks: {  }

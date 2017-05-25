@@ -80,4 +80,10 @@ class Misplantillas
     {
         return $this->asunto;
     }
+    public function toArray(){
+      $array = array('Asunto' => $this->getAsunto(),
+    'Texto'=>$this->getTexto());
+    return $array;
+
+    }
 }

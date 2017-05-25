@@ -4,22 +4,90 @@
   $(document).ready(function(){
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
+
       $('#buscar').click(function(){
         let busqueda = $('#entrada').val();
         Reservas.getReservasByCodReservas(busqueda,function(data){
-          $('#resultadoConsulta').append('<div class="card">'+
+          $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
             '<div class="card-content">'+
             '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
             '<p class="col s6">Fecha Servicio: '+ data.Servicio.FechaServicio +'</p> '+
             '<p class="col s6">Correo: '+ data.Correo + '</p>'+
             '</div>'+
             '<div class="card-action">'+
-            '<a href="#">Editar</a>'+
-            '<a href="#">Anular</a>'+
+            '<a id="editarReserva" href="#">Editar</a>'+
+            '<a id="anular" href="#modal2">Anular</a>'+
             '</div>'+
           '</div>');
+
+          $("#editarReserva").click(function(){
+            let checkbox = $('#check input'),alergenos = "";
+            $("#busqueda").css("display", "none");
+            $('#name').val(Reservas.consultaCache.Nombre);
+            $('#ap').val(Reservas.consultaCache.Apellidos);
+            $('#email').val(Reservas.consultaCache.Correo);
+            $('#tlfn').val(Reservas.consultaCache.Telefono);
+            $('#observaciones').val(Reservas.consultaCache.Observaciones);
+            Reservas.getAlergenos(Reservas.consultaCache.Id,function(data){
+              alergenos = data;
+              $.each(checkbox,function(index,value){
+                $.each(alergenos,function(index,row){
+                    if (row.alergeno.Nombre === value.getAttribute('id')) {
+                        value.checked  = true;
+                    }
+                });
+              });
+            });
+            console.log(alergenos);
+
+
+
+            $("#formularioConsulta").css("display", "block");
+          }); //getReservasByCodReservas
+
+          $('#salir').click(function(event){
+            event.preventDefault();
+            $('#formularioConsulta').css('display','none');
+            $('#busqueda').css('display','block');
+          });
+          $('#anular').click(function(event){
+            //event.preventDefault();
+            let id=Reservas.consultaCache.Id;
+            Reservas.delete(id);
+            $('.modal').modal();
+            $('#modal2').modal('open');
+          })
+        }); //buscar
+
+        $("#guardar").click(function(event){
+          //event.preventDefault();
+          let id = Reservas.consultaCache.Id,
+            nombre = $("#name").val(),
+            apellidos = $("#ap").val(),
+            correo = $("#email").val(),
+            telefono = $("#tlfn").val(),
+            observaciones = $("#boservaciones").val(),
+            checkbox = $("#check input"),
+            servicio = Reservas.consultaCache.Servicio.id;
+            alergenos = [];
+
+            $.each(checkbox, function(indice, v){
+              console.log(v);
+              if (v.checked) {
+                alergenos.push(v.getAttribute('id'));
+              }
+            });
+            //validar
+            if(Reservas.validateInput()){
+              Reservas.edit(id,nombre,apellidos,correo,telefono,observaciones,alergenos,servicio);
+            }
+            //$('.modal').modal();
+            //$('#modal1').modal('open');
+
+
         });
-      })
+      }); //si en consultar
+
     }
     // Si estamos en reservas
     if (window.location.pathname === '/reservas') {
@@ -133,11 +201,35 @@
     alergenos: null,
     ReservasCache: null,
     consultaCache:null,
+    delete: function(id){
+      Utils.postAjax('api/reservas/delete',{
+        id:id
+      },function(data){
+        return data;
+      });
+
+
+    },
+    edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,idservicio){
+        Utils.postAjax('api/reservas/edit',{
+          id:id,
+          nombre:nombre,
+          apellidos:apellidos,
+          correo:correo,
+          telefono:telefono,
+          alergenos:alergenos,
+          observaciones: observaciones,
+          idservicio:idservicio
+
+        },function(data){
+          return data;
+        })
+    },
     getReservasByCodReservas(codigo,success=null){
       Utils.postAjax('api/reservas/codreserva',{
         codigo:codigo
       },function(data){
-        consultaCache = data;
+        Reservas.consultaCache = data;
         success(data);
       });
     },
@@ -199,6 +291,15 @@
       },function(){
         return true
       })
+    },
+    getAlergenos: function(id,success){
+      Utils.postAjax('api/reservas/alergenos',{
+        id:id
+      },function(data){
+        Reservas.alergenos = data;
+          success(data);
+      })
+
     }
 
 
@@ -210,6 +311,13 @@
        Utils.getAjax('/api/servicios',function(data){
          Servicios.ServiciosCache = data;
          success();
+       });
+     },
+     GetByFecha: function(fecha){
+       Utils.postAjax('/api/servicios/fecha',{
+         fecha:fecha
+       },function(data){
+         return data;
        });
      },
      GetFechas: function(){

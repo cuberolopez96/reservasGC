@@ -109,4 +109,13 @@ class Correos
     {
         return $this->apellidos;
     }
+
+    public function toArray(){
+      $array = array(
+        'Nombre'=> $this->getNombre(),
+        'Apellidos'=>$this->getApellidos(),
+        'Correo'=> $this->getEmail()
+      );
+      return $array;
+    }
 }
