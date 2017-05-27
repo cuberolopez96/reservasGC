@@ -180,11 +180,22 @@
         });
         $('#confirmar').click(function(){
           $('#confirmacion').css('display','none');
-          Reservas.add(Reservas.nombre,Reservas.apellidos,Reservas.correo, Reservas.telefono, Reservas.observaciones, Reservas.alergenos ,Reservas.idServicio,Reservas.plazas);
+          Reservas.add(Reservas.nombre,
+            Reservas.apellidos,
+            Reservas.correo, Reservas.telefono,
+            Reservas.observaciones, Reservas.alergenos
+            ,Reservas.idServicio,
+            Reservas.plazas, function(data){
+              $('#descargar').click(function(){
+                window.location.pathname = 'pdf/'+data.Id;
+              });
+            });
+
           $('#parte2').removeClass('ubicacion');
           $('#parte3').addClass('ubicacion');
           $('#realizado').css('display','block');
         });
+
         $('#salir').click(function(){
           window.location.pathname= '/';
         })
@@ -201,6 +212,7 @@
     alergenos: null,
     ReservasCache: null,
     consultaCache:null,
+    reservaCache: null,
     delete: function(id){
       Utils.postAjax('api/reservas/delete',{
         id:id
@@ -222,6 +234,7 @@
           idservicio:idservicio
 
         },function(data){
+
           return data;
         })
     },
@@ -278,7 +291,7 @@
 
     },
     // añade reservas
-    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas){
+    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas,success = null){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
         apellidos: apellidos,
@@ -288,8 +301,9 @@
         servicio: servicio,
         alergenos: alergenos,
         npersonas: 25
-      },function(){
-        return true
+      },function(data){
+          success(data);
+          return data;
       })
     },
     getAlergenos: function(id,success){

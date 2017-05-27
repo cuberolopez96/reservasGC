@@ -31,20 +31,7 @@ class ApiController extends Controller
         }
         return true;
     }
-    public function pdfreservasAction(Request $request){
-      $em = $this->getDoctrine()->getEntityManager();
-      $reserva = $this->getRepository('reservasBundle:Reservas')->findByIdreservas($request->get('id'))[0];
-
-      $pdf = new \FPDF();
-
-        $pdf->AddPage();
-        $pdf->SetFont('Arial','B',16);
-        $pdf->Cell(40,10,'Nombre');
-        $pdf->Cell(40,10,$reserva->getNombre());
-        $pdf->ln();
-        return new Response($pdf->Output(), 200, array(
-            'Content-Type' => 'application/pdf'));
-    }
+    
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
@@ -121,7 +108,7 @@ class ApiController extends Controller
         $em->flush();
       }
 
-      $response = new JsonResponse(true);
+      $response = new JsonResponse($reservas->toArray());
       return $response;
 
     }
