@@ -110,4 +110,3 @@ class Config
         return $this->listanegra;
     }
 }
-

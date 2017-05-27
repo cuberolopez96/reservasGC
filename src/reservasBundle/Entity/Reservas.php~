@@ -308,6 +308,7 @@ class Reservas
         'Apellidos'=>$this->getApellidos(),
         'Correo'=>$this->getCorreo(),
         'Telefono'=>$this->getTelefono(),
+        'Observaciones'=>$this->getObservaciones(),
         'NPersonas'=>$this->getNpersonas(),
       );
       return $array;
@@ -341,4 +342,5 @@ class Reservas
     {
         return $this->npersonas;
     }
+     
 }

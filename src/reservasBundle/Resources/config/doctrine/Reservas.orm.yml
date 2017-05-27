@@ -72,6 +72,9 @@ reservasBundle\Entity\Reservas:
             options:
                 unsigned: false
             column: NPersonas
+        horallegada:
+            type: time
+            nullable: true
     manyToOne:
         estadoreservaestadoreserva:
             targetEntity: Estadoreserva

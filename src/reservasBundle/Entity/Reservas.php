@@ -308,6 +308,7 @@ class Reservas
         'Apellidos'=>$this->getApellidos(),
         'Correo'=>$this->getCorreo(),
         'Telefono'=>$this->getTelefono(),
+        'Observaciones'=>$this->getObservaciones(),
         'NPersonas'=>$this->getNpersonas(),
       );
       return $array;
@@ -340,5 +341,35 @@ class Reservas
     public function getNpersonas()
     {
         return $this->npersonas;
+    }
+     
+    /**
+     * @var \DateTime
+     */
+    private $horallegada;
+
+
+    /**
+     * Set horallegada
+     *
+     * @param \DateTime $horallegada
+     *
+     * @return Reservas
+     */
+    public function setHorallegada($horallegada)
+    {
+        $this->horallegada = $horallegada;
+
+        return $this;
+    }
+
+    /**
+     * Get horallegada
+     *
+     * @return \DateTime
+     */
+    public function getHorallegada()
+    {
+        return $this->horallegada;
     }
 }

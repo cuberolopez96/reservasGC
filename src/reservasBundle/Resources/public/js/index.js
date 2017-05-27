@@ -8,55 +8,73 @@
       $('#buscar').click(function(){
         let busqueda = $('#entrada').val();
         Reservas.getReservasByCodReservas(busqueda,function(data){
-          $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
-            '<div class="card-content">'+
-            '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
-            '<p class="col s6">Fecha Servicio: '+ data.Servicio.FechaServicio +'</p> '+
-            '<p class="col s6">Correo: '+ data.Correo + '</p>'+
-            '</div>'+
-            '<div class="card-action">'+
-            '<a id="editarReserva" href="#">Editar</a>'+
-            '<a id="anular" href="#modal2">Anular</a>'+
-            '</div>'+
-          '</div>');
+          let stralergenos = [];
+          Reservas.getAlergenos(data.Id,function(alergenos){
+              $.each(alergenos,function(index, row){
+                stralergenos.push(row.alergeno.Nombre);
 
-          $("#editarReserva").click(function(){
-            let checkbox = $('#check input'),alergenos = "";
-            $("#busqueda").css("display", "none");
-            $('#name').val(Reservas.consultaCache.Nombre);
-            $('#ap').val(Reservas.consultaCache.Apellidos);
-            $('#email').val(Reservas.consultaCache.Correo);
-            $('#tlfn').val(Reservas.consultaCache.Telefono);
-            $('#observaciones').val(Reservas.consultaCache.Observaciones);
-            Reservas.getAlergenos(Reservas.consultaCache.Id,function(data){
-              alergenos = data;
-              $.each(checkbox,function(index,value){
-                $.each(alergenos,function(index,row){
-                    if (row.alergeno.Nombre === value.getAttribute('id')) {
-                        value.checked  = true;
-                    }
-                });
               });
-            });
-            console.log(alergenos);
+              stralergenos.join(',');
+              $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
+                '<div class="card-content">'+
+                '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+                '<div class ="row">'+
+                '<p class="col s6">Fecha Servicio: '+ data.Servicio.FechaServicio +'</p> '+
+                '<p class="col s6">Correo: '+ data.Correo + '</p>'+
+                '</div>'+
+                '<div class="row">'+
+                '<p class="col s6">Telefono: '+ data.Telefono + '</p>'+
+                '<p class="col s6">Alergenos: '+ stralergenos + '</p>'+
+                '</div>'+
+                '<div>'+
+                '<p class="col s12">Observaciones: ' + data.Observaciones + '</p>'+
+                '</div>'+
+                '</div>'+
+                '<div class="card-action">'+
+                '<a id="editarReserva" href="#">Editar</a>'+
+                '<a id="anular" href="#modal2">Anular</a>'+
+                '</div>'+
+              '</div>');
+
+              $("#editarReserva").click(function(){
+                let checkbox = $('#check input'),alergenos = "";
+                $("#busqueda").css("display", "none");
+                $('#name').val(Reservas.consultaCache.Nombre);
+                $('#ap').val(Reservas.consultaCache.Apellidos);
+                $('#email').val(Reservas.consultaCache.Correo);
+                $('#tlfn').val(Reservas.consultaCache.Telefono);
+                $('#observaciones').val(Reservas.consultaCache.Observaciones);
+                Reservas.getAlergenos(Reservas.consultaCache.Id,function(data){
+                  alergenos = data;
+                  $.each(checkbox,function(index,value){
+                    $.each(alergenos,function(index,row){
+                        if (row.alergeno.Nombre === value.getAttribute('id')) {
+                            value.checked  = true;
+                        }
+                    });
+                  });
+                });
+                console.log(alergenos);
 
 
 
-            $("#formularioConsulta").css("display", "block");
-          }); //getReservasByCodReservas
+                $("#formularioConsulta").css("display", "block");
+              }); //getReservasByCodReservas
 
-          $('#salir').click(function(event){
-            event.preventDefault();
-            $('#formularioConsulta').css('display','none');
-            $('#busqueda').css('display','block');
+              $('#salir').click(function(event){
+                event.preventDefault();
+                $('#formularioConsulta').css('display','none');
+                $('#busqueda').css('display','block');
+              });
+              $('#anular').click(function(event){
+                //event.preventDefault();
+                let id=Reservas.consultaCache.Id;
+                Reservas.delete(id);
+                $('.modal').modal();
+                $('#modal2').modal('open');
+              });
           });
-          $('#anular').click(function(event){
-            //event.preventDefault();
-            let id=Reservas.consultaCache.Id;
-            Reservas.delete(id);
-            $('.modal').modal();
-            $('#modal2').modal('open');
-          })
+
         }); //buscar
 
         $("#guardar").click(function(event){
@@ -86,9 +104,9 @@
 
 
         });
-      }); //si en consultar
+      });
 
-    }
+    }//si en consultar
     // Si estamos en reservas
     if (window.location.pathname === '/reservas') {
       let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
