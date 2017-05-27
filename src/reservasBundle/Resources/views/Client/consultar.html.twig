@@ -7,13 +7,13 @@
 	      <a href="/" class="brand-logo left"><img class="logo" src="{{asset('bundles/reservas/img/image948-e1447362808491.png')}}"></a>
 	    	<span class="letraNav">Reservas Restaurante IES Gran Capitán</span>
 	    </div>
-	  </nav>
+	 </nav>
 
 	<!-- MAIN -->
 	<main class="valign-wrapper center-align">
 		<div class="row">
-
-			<div class="col s12">
+			<!-- Buscador -->
+			<div id="buscadorConsulta" class="col s12">
 				<div class="row">
 					<p class="col s12">Introduzca su código de reserva para consultar sus datos</p>
 					<div class="input-field col s12">
@@ -21,13 +21,14 @@
 						<input type="text" id="entrada">
 					</div>
 				</div>
+			</div> <!--  -->
+			<!-- Reserva Buscada -->
+			<div id="resultadoConsulta" class="col s12 m8 offset-m2">
+
 			</div>
-
-			<div id="resultadoConsulta" class="col s12">
-
-			</div>
-
-			<div id="formularioConsulta" class="card">
+			<!-- Editar Formulario -->
+			<div id="formularioConsulta" class="card col s12 m10 offset-m1">
+				<div class="row">
 
 					<div class="input-field col s12 m6">
 						<select id="hora">
@@ -149,7 +150,6 @@
 										</p>
 									</div>
 
-
 								</div>
 							</div>
 
@@ -185,8 +185,9 @@
 							</div>
 						</div>
 
-
+				</div>
 			</div> <!-- fORMULARIO CONSULTA -->
+
 			<!--MODALS -->
 			<div id="modal1" class="modal">
 				<div class="modal-content">

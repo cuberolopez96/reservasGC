@@ -147,6 +147,7 @@ form h2{
 
 #formularioConsulta{
   display: none;
+  padding: 1.5em 1em 0 !important;
 }
 
 h1{
