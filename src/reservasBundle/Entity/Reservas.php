@@ -1,7 +1,7 @@
 <?php
 
 namespace reservasBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Reservas
  */
@@ -373,4 +373,5 @@ class Reservas
     {
         return $this->horallegada;
     }
+  
 }

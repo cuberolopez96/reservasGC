@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Iconos de FONTAWESOME -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Iconos de MATERIALIZE -->
+    <!-- MATERIALIZE CSS Framework -->
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/reservas/css/materialize.css')}}">
+    <!-- NUESTRO ESTILO -->
+    <link rel="stylesheet" type="text/css" href="{{asset('bundles/reservas/css/estilo.css')}}">
+    <!-- SCRIPTS -->
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo left"><img class="logo" src="{{asset('bundles/reservas/img/image948-e1447362808491.png')}}"></a>
+        <span class="letraNav">Reservas Restaurante IES Gran Capitán</span>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/admin/servicios">Servicios</a></li>
+          <li><a href="#">Menú</a></li>
+          <li><a href="/admin/reservas">Reservas</a></li>
+          <li><a href="#">Listados</a></li>
+          <li><a href="#">Boletín</a></li>
+          <li><a href="#">Configuración</a></li>
+        </ul>
+      </div>
+    </nav>
+      {% block content %}
+    {% endblock %}
+  </body>
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/jquery-3.2.1.js')}}"></script>
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/materialize.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/jquery-form-validator/form-validator/jquery.form-validator.min.js')}}"></script>
+  <!-- NUESTRO CÓDIGO -->
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/codigo.js')}}"></script>
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/validar.js')}}"></script>
+  <script type="text/javascript" src="{{asset('bundles/reservas/js/index.js')}}"></script>
+
+</html>

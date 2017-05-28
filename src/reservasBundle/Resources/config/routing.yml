@@ -17,6 +17,24 @@ reservas_admin:
 reservas_admin_config:
     path: /admin/config
     defaults: {_controller: reservasBundle:Admin:config }
+reservas_admin_servicios:
+    path: /admin/servicios
+    defaults: {_controller: reservasBundle:Admin:servicios }
+reservas_admin_servicios_edit:
+    path: /admin/servicios/editar/{id}
+    defaults: {_controller: reservasBundle:Admin:editservicios }
+reservas_admin_servicios_delete:
+    path: /admin/servicios/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deleteservicios }
+reservas_admin_reservas:
+    path: /admin/reservas
+    defaults: {_controller: reservasBundle:Admin:reservas }
+reservas_admin_reservas_delete:
+    path: /admin/reservas/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deletereservas }
+reservas_admin_reservas_edit:
+    path: /admin/reservas/editar/{id}
+    defaults: {_controller: reservasBundle:Admin:editreservas }
 reservas_api:
     path: /api
     defaults: {_controller: reservasBundle:Api:index}

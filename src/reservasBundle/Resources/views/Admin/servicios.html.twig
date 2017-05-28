@@ -1,0 +1,43 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+  <div class="row ">
+      <header class="col s12">
+          <h1>Servicios <span class="material-icons">library_add</span></h1>
+      </header>
+  </div>
+  <div class="row">
+
+  </div>
+  <div class="row">
+      <div class="card col s12">
+        <div class="card-content">
+          <table class="bordered centered  highlight ">
+              <thead>
+                <tr>
+                  <th>Fecha Servicio</th>
+                  <th>Plazas</th>
+                </tr>
+                {#<tr>
+                  <td><input type="text" name="" value=""></td>
+                  <td><input type="text" name="" value=""></td>
+                </tr>#}
+
+              </thead>
+              <tbody>
+                  {% for index,servicio in servicios %}
+                      <tr>
+                          <td>{{servicio.fechaservicio | date()}}</td>
+                          <td>{{servicio.plazas}}</td>
+                          <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons">edit</i></a></td>
+                          {#<td><a href="/admin/servicios/delete/{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>#}
+                          <td><a href="/admin/servicios/show/{{servicio.idservicios}}"><i class="material-icons">assignment</i></a></td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+        </div>
+
+      </div>
+  </div>
+{% endblock %}
