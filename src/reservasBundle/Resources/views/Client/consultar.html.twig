@@ -31,20 +31,13 @@
 				<div class="row">
 
 					<div class="input-field col s12 m6">
-						<select id="hora">
-							<option value="13:00">13:00</option>
-							<option value="14:00">14:00</option>
-							<option value="15:00">15:00</option>
-							</select>
 							<label class="comoH3">Hora</label>
+							<input type="text" id="horallegada" placeholder="hh:mm"name="" value="">
+							<span id="errorhora" class="errores">Que el formato de hora no es el correcto</span>
 					</div>
 
 					<div class="input-field col s12 m6">
-						<select id="plazas">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							</select>
+							<input type="number" min="0" max="25" id="plazas" name="" value="">
 							<label class="comoH3">Personas</label>
 					</div>
 

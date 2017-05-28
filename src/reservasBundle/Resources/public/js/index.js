@@ -37,8 +37,14 @@
               '</div>');
 
               $("#editarReserva").click(function(){
-                let checkbox = $('#check input'),alergenos = "";
+
+                let checkbox = $('#check input'),
+                alergenos = "",
+                hora = Utils.converToDate(Reservas.consultaCache.HoraLlegada.date);
+                console.log(hora);
                 $("#busqueda").css("display", "none");
+                $('#plazas').val(Reservas.consultaCache.NPersonas);
+                $('#horallegada').val(Utils.timeStringFormat(hora));
                 $('#name').val(Reservas.consultaCache.Nombre);
                 $('#ap').val(Reservas.consultaCache.Apellidos);
                 $('#email').val(Reservas.consultaCache.Correo);
@@ -80,14 +86,25 @@
         $("#guardar").click(function(event){
           //event.preventDefault();
           let id = Reservas.consultaCache.Id,
+            hora = $('#horallegada').val(),
+            npersonas = ''+$('#plazas').val(),
             nombre = $("#name").val(),
             apellidos = $("#ap").val(),
             correo = $("#email").val(),
             telefono = $("#tlfn").val(),
-            observaciones = $("#boservaciones").val(),
+            observaciones = $("#observaciones").val(),
             checkbox = $("#check input"),
             servicio = Reservas.consultaCache.Servicio.id;
+            console.log(npersonas);
+            console.log(hora);
+            console.log(nombre);
+            console.log(apellidos);
+            console.log(correo);
+            console.log(telefono);
+            console.log(observaciones);
             alergenos = [];
+
+
 
             $.each(checkbox, function(indice, v){
               console.log(v);
@@ -96,8 +113,8 @@
               }
             });
             //validar
-            if(Reservas.validateInput()){
-              Reservas.edit(id,nombre,apellidos,correo,telefono,observaciones,alergenos,servicio);
+            if(Reservas.validateInput() && Utils.timeValidate(hora)){
+              Reservas.edit(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,hora,servicio);
             }
             //$('.modal').modal();
             //$('#modal1').modal('open');
@@ -144,10 +161,14 @@
         $('#siguiente').click(function(){
           $('#datos2').css('display','none');
           fecha = $('#fecha').val();
-          hora = $('#hora').val();
-          plazas = $('#plazas').val();
-          $('#checkbox').children('input');
-          $('#datos3').css('display','block');
+          Reservas.horallegada = $('#horallegada').val();
+
+          if (Utils.timeValidate(Reservas.horallegada)==false) {
+            $('#errorhora').fadeIn('slow');
+          }else{
+            $('#checkbox').children('input');
+            $('#datos3').css('display','block');
+          }
 
         });
         $('#atras2').click(function(){
@@ -203,7 +224,7 @@
             Reservas.correo, Reservas.telefono,
             Reservas.observaciones, Reservas.alergenos
             ,Reservas.idServicio,
-            Reservas.plazas, function(data){
+            Reservas.plazas, Reservas.horallegada ,function(data){
               $('#descargar').click(function(){
                 window.location.pathname = 'pdf/'+data.Id;
               });
@@ -228,6 +249,8 @@
     telefono: null,
     observaciones: null,
     alergenos: null,
+    horallegada: null,
+    npersonas: null,
     ReservasCache: null,
     consultaCache:null,
     reservaCache: null,
@@ -240,7 +263,7 @@
 
 
     },
-    edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,idservicio){
+    edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,horallegada,idservicio){
         Utils.postAjax('api/reservas/edit',{
           id:id,
           nombre:nombre,
@@ -248,7 +271,9 @@
           correo:correo,
           telefono:telefono,
           alergenos:alergenos,
-          observaciones: observaciones,
+          observaciones:observaciones,
+          npersonas:npersonas,
+          horallegada:horallegada,
           idservicio:idservicio
 
         },function(data){
@@ -309,7 +334,7 @@
 
     },
     // añade reservas
-    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas,success = null){
+    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas,horallegada,success = null){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
         apellidos: apellidos,
@@ -318,7 +343,8 @@
         observaciones: observaciones,
         servicio: servicio,
         alergenos: alergenos,
-        npersonas: 25
+        npersonas: npersonas,
+        horallegada: horallegada,
       },function(data){
           success(data);
           return data;
@@ -545,6 +571,21 @@
      }
    };
    Utils = {
+    timeValidate: function(str){
+      return /^\d\d:\d\d$/.test(str)
+    },
+    timeStringFormat: function(date){
+      let hora = ''+date.getHours(),
+      minutes = ''+date.getMinutes();
+      if(hora.length === 1){
+        hora = '0'+hora;
+      }
+      if (minutes.length === 1) {
+        minutes = '0'+minutes;
+      }
+
+      return hora +':' + minutes;
+    },
     dateStringFormat:function(date){
       return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
     },
@@ -558,7 +599,7 @@
       fecha  = fecha.split(' ');
       tiempo = fecha[1];
       fecha = fecha[0];
-      fecha = fecha.split('/');
+      fecha = fecha.split(/[\/-]/);
       day = fecha[2];
       month = fecha[1];
       year = fecha[0];

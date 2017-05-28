@@ -31,7 +31,7 @@ class ApiController extends Controller
         }
         return true;
     }
-    
+
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
       $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
@@ -60,6 +60,8 @@ class ApiController extends Controller
       $reserva->setCorreo($request->get('correo'));
       $reserva->setTelefono($request->get('telefono'));
       $reserva->setObservaciones($request->get('observaciones'));
+      $reserva->setHorallegada(new \DateTime($request->get('horallegada')));
+      $reserva->setNpersonas($request->get('npersonas'));
 
       $em->persist($reserva);
       $em->flush();
@@ -89,6 +91,7 @@ class ApiController extends Controller
       $reservas->setTelefono($request->get('telefono'));
       $reservas->setObservaciones($request->get('observaciones'));
       $reservas->setNpersonas($request->get('npersonas'));
+      $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
       $reservas->setServiciosservicios($servicio);
       $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
       $reservas->setCodreserva($codReserva);

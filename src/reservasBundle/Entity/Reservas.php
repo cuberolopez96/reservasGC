@@ -310,6 +310,7 @@ class Reservas
         'Telefono'=>$this->getTelefono(),
         'Observaciones'=>$this->getObservaciones(),
         'NPersonas'=>$this->getNpersonas(),
+        'HoraLlegada'=>$this->getHorallegada()
       );
       return $array;
     }
@@ -342,7 +343,7 @@ class Reservas
     {
         return $this->npersonas;
     }
-     
+
     /**
      * @var \DateTime
      */
