@@ -159,13 +159,13 @@
           $('#datos1').css('display','block');
         });
         $('#siguiente').click(function(){
-          $('#datos2').css('display','none');
           fecha = $('#fecha').val();
           Reservas.horallegada = $('#horallegada').val();
 
           if (Utils.timeValidate(Reservas.horallegada)==false) {
             $('#errorhora').fadeIn('slow');
           }else{
+            $('#datos2').css('display','none');
             $('#checkbox').children('input');
             $('#datos3').css('display','block');
           }
