@@ -115,9 +115,9 @@
             //validar
             if(Reservas.validateInput() && Utils.timeValidate(hora)){
               Reservas.edit(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,hora,servicio);
+              $('.modal').modal();
+              $('#modal1').modal('open');
             }
-            //$('.modal').modal();
-            //$('#modal1').modal('open');
 
 
         });
