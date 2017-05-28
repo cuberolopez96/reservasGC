@@ -208,6 +208,23 @@ main{
 	margin-top: 0;
 }
 
+#resultadoConsulta .card-content{
+  padding: 0;
+}
+
+#resultadoConsulta .card-title{
+  font-weight: bold;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  background-color: #439bb4;
+  background-color:  #624A4D;
+  color: white;
+}
+
+#resultadoConsulta .button{
+  text-transform: capitalize;
+}
+
 .select-wrapper{
 	margin-top: 0.8em;
 }
@@ -230,13 +247,16 @@ td, th{
 	background-color: #4a4a4a;
 	padding: 0;
 	color: grey;
-  border-radius: 2px 2px 0 0;
 }
 
 #ubicaciones h2{
 	margin: 0.5em;
 	padding: 0.5em 0 0.5em 0;
 	font-size: 0.7em;
+}
+
+#ubicaciones, #resultadoConsulta .card-title{
+  border-radius: 2px 2px 0 0;
 }
 
 .ubicacion{
