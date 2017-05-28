@@ -121,7 +121,8 @@ class ApiController extends Controller
         $date = new \Datetime($request->get('fecha'));
 
         $em = $this->getDoctrine()->getEntityManager();
-        $plazas = $em->getRepository('reservasBundle:Reservas')->getPlazasOcupadas($date);
+        $plazas = $em->getRepository('reservasBundle:Reservas')->getPlazasOcupadas($request->get('id'));
+        
         $response = new JsonResponse($plazas);
         return $response;
     }

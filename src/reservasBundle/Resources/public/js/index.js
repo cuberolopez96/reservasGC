@@ -134,7 +134,7 @@
         Calendar.renderCalendar(Servicios.ServiciosCache);
       })
       Calendar.ToggleButtons();
-      Servicios.getPlazasOcupadas(new Date(2017,04,16,12,0,0));
+
       //Servicios.add(new Date(),25);
       $('#diaAnterior').click(function(event){
         let date;
@@ -394,10 +394,11 @@
          return true
        })
      },
-     getPlazasOcupadas: function(date){
+     getPlazasOcupadas: function(id, success = null){
        Utils.postAjax('api/reservas/plazas',{
-         fecha: Utils.datePostformat(date)
+         id: id
        },function(data){
+         success(data);
          console.log(data);
        })
      }
@@ -454,35 +455,43 @@
           $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
             console.log(row);
-            $('#datos1 .row #servicios').append("<div class='cards'><div class='card white horizontal'>"+
-              "<div class='card-image'>"+
-                "<img src='bundles/reservas/img/cardImageVerde.jpg'>"+
-              "</div>"+
-              "<div class='card-stacked'>"+
-                "<div class='card-content'>"+
-                  "<p><strong>Disponible</strong></p>"+
-                  "<p>"+ row.Fecha.date +"</p>"+
-                  "<p>"+ row.Plazas +" plazas</p>"+
+            Servicios.getPlazasOcupadas(row.Id, function(fila){
+              let img = 'cardImageVerde.jpg';
+              if (fila.length > 0) {
+                  if (parseInt(fila[0].Plazas)-parseInt(fila[0].POcupadas) <= 0) {
+                      img = 'cardImageRojo.jpg'
+                  }
+              }
+              $('#datos1 .row #servicios').append("<div class='cards'><div class='card white horizontal'>"+
+                "<div class='card-image'>"+
+                  "<img src='bundles/reservas/img/"+img+"'>"+
                 "</div>"+
-                "<div class='card-action'>"+
-                  "<button id='"+row.Id+"' class='button especial next'>Elegir</button>"+
+                "<div class='card-stacked'>"+
+                  "<div class='card-content'>"+
+                    "<p><strong>Disponible</strong></p>"+
+                    "<p>"+ row.Fecha.date +"</p>"+
+                    "<p>"+ row.Plazas +" plazas</p>"+
+                  "</div>"+
+                  "<div class='card-action'>"+
+                    "<button id='"+row.Id+"' class='button especial next'>Elegir</button>"+
+                  "</div>"+
                 "</div>"+
-              "</div>"+
-            "</div></div>");
-          });
-          switch(data.length){
-          case 1:
-              $('#datos1 .row #servicios .cards').addClass('col s12');
-              break;
-          default:
-              $('#datos1 .row #servicios .cards').addClass('col s6');
-              break;
-          }
-          $('.next').click(function(){
-            Reservas.idServicio = $(this).attr('id');
-            console.log($(this).attr('id') + 'id de el servicio');
-            $('#datos1').css('display','none');
-            $('#datos2').css('display','block');
+              "</div></div>");
+              switch(data.length){
+                case 1:
+                $('#datos1 .row #servicios .cards').addClass('col s12');
+                break;
+                default:
+                $('#datos1 .row #servicios .cards').addClass('col s6');
+                break;
+              }
+              $('.next').click(function(){
+                Reservas.idServicio = $(this).attr('id');
+                console.log($(this).attr('id') + 'id de el servicio');
+                $('#datos1').css('display','none');
+                $('#datos2').css('display','block');
+              })
+            });
           });
           return true;
         });
@@ -599,7 +608,8 @@
       fecha  = fecha.split(' ');
       tiempo = fecha[1];
       fecha = fecha[0];
-      fecha = fecha.split(/[\/-]/);
+      fecha = fecha.replace('-','/')
+      fecha = fecha.split('/');
       day = fecha[2];
       month = fecha[1];
       year = fecha[0];
