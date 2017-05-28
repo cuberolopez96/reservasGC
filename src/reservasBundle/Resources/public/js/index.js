@@ -19,20 +19,20 @@
                 '<div class="card-content">'+
                 '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
                 '<div class ="row">'+
-                '<p class="col s6">Fecha Servicio: '+ data.Servicio.FechaServicio +'</p> '+
-                '<p class="col s6">Correo: '+ data.Correo + '</p>'+
+                '<p class="col s5 offset-s1 left-align"><strong>Fecha Servicio:</strong> '+ data.Servicio.FechaServicio +'</p> '+
+                '<p class="col s5 left-align"><strong>Correo:</strong> '+ data.Correo + '</p>'+
                 '</div>'+
                 '<div class="row">'+
-                '<p class="col s6">Telefono: '+ data.Telefono + '</p>'+
-                '<p class="col s6">Alergenos: '+ stralergenos + '</p>'+
+                '<p class="col s5 left-align offset-s1"><strong>Telefono:</strong> '+ data.Telefono + '</p>'+
+                '<p class="col s5 left-align"><strong>Alergenos:</strong> '+ stralergenos + '</p>'+
                 '</div>'+
-                '<div>'+
-                '<p class="col s12">Observaciones: ' + data.Observaciones + '</p>'+
+                '<div class="row">'+
+                '<p class="col s12"><strong>Observaciones:</strong> ' + data.Observaciones + '</p>'+
                 '</div>'+
                 '</div>'+
                 '<div class="card-action">'+
-                '<a id="editarReserva" href="#">Editar</a>'+
-                '<a id="anular" href="#modal2">Anular</a>'+
+                '<a id="anular" class="button especial2" href="#modal2">Anular</a>'+
+                '<a id="editarReserva" class="button especial" href="#">Editar</a>'+
                 '</div>'+
               '</div>');
 
