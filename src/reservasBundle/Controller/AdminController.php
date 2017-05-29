@@ -16,19 +16,26 @@ class AdminController extends Controller
     public function editreservasAction($id, Request $request){
       $em = $this->getDoctrine()->getEntityManager();
       $reserva = $em->getRepository("reservasBundle:Reservas")->findByIdreservas($id)[0];
+      $estadosreserva = $em->getRepository("reservasBundle:Estadoreserva")->findAll();
       $form= $this->createForm(ReservasType::class,$reserva);
       if ($request->isMethod('POST')) {
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+          if($request->get('guardar')){
+            $reserva->setNombre($request->get('nombre'));
+            $reserva->setApellidos($request->get('apellidos'));
+            $reserva->setCorreo($request->get('correo'));
+            $reserva->setTelefono($request->get('telefono'));
+            $reserva->setObservaciones($request->get('observaciones'));
+            $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')
+            ->findByIdestadoreserva($request->get("estado"))[0];
+            $reserva->setEstadoreservaestadoreserva($estadoreserva);
             $em->persist($reserva);
             $em->flush();
-
-
-        }
+          }
       }
-      return $this->render('reservasBundle:Admin:editreserva.html.twig',
-      array('form'=>$form->createView()));
+      return $this->render('reservasBundle:Admin:editreserva.html.twig',array(
+        'reserva'=>$reserva,
+        'estadosreserva'=>$estadosreserva
+      ));
     }
     public function deletereservasAction($id){
       $em = $this->getDoctrine()->getEntityManager();

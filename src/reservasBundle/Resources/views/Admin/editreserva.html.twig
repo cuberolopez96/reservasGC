@@ -1,9 +1,47 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
 <div class="row">
-  <form class="col s12" action="" method="post">
-      {{form_widget(form)}}
-      <input type="submit" class="button especial" name="" value="guardar">
-  </form>
+    <div class="card">
+      <div class="card-content">
+              <form class="" action="/admin/reservas/editar/{{reserva.idreservas}}" method="post">
+                <div class="row">
+                  <div class="col s12 l3">
+                      <label for="">Nombre</label>
+                      <input type="text" name="nombre" value="{{reserva.nombre}}" required>
+                  </div>
+
+                  <div class="col s12 l3">
+                      <label for="">Apellidos</label>
+                      <input type="text" name="apellidos" value="{{reserva.apellidos}}" required>
+                  </div>
+                  <div class="col s12 l3">
+                      <label for="">Correo</label>
+                      <input type="text" name="correo" value="{{reserva.correo}}" required>
+                  </div>
+                  <div class="col s12 l3">
+                      <label for="">Telefono</label>
+                      <input type="text" name="telefono" value="{{reserva.telefono}}" required>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col s12 l6">
+                    <label for="">Observaciones</label>
+                    <textarea name="observaciones" rows="8" cols="80">{{reserva.observaciones}}</textarea>
+                </div>
+                <div class="col s12 l6">
+                    <label for="">Estado de la reserva</label>
+                    <select class="" name="estado">
+                      {% for estado in estadosreserva %}
+                          <option value="{{estado.idestadoreserva}}">{{estado.nombre}}</option>
+                      {% endfor %}
+
+                    </select>
+                </div>
+              </div>
+              <input type="submit" class="button especial" name="guardar" value="guardar">
+              </form>
+      </div>
+
+    </div>
 </div>
 {% endblock %}
