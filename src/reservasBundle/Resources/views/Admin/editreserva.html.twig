@@ -38,6 +38,20 @@
                     </select>
                 </div>
               </div>
+              <div class="row">
+                {% for alergeno in alergenos %}
+                      {% set checked = "" %}
+                      {% for malergeno in myalergenos %}
+                          {% if alergeno.nombre == malergeno.alergenosalergenos.nombre %}
+                            {% set checked = "checked" %}
+                          {% endif %}
+                      {% endfor %}
+                      <div class="col s12 l2">
+                        <input type="checkbox" class="filled-in" name="alergenos[]" id="{{alergeno.nombre}}" value="{{alergeno.nombre}}" {{checked}}>
+                        <label for="{{alergeno.nombre}}">{{alergeno.nombre}}</label>
+                      </div>
+                {% endfor %}
+              </div>
               <input type="submit" class="button especial" name="guardar" value="guardar">
               </form>
       </div>

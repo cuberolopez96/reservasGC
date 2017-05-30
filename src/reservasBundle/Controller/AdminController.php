@@ -5,10 +5,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use reservasBundle\Form\ConfigType;
 use reservasBundle\Entity\Config;
+use reservasBundle\Entity\ReservasHasAlergenos;
 use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 class AdminController extends Controller
 {
+  //importante metodo interno no enrutar
+  public function deleteAlergenosByReserva($reserva){
+      $em=$this->getDoctrine()->getEntityManager();
+      $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
+      foreach( $alergenos as $alergeno){
+        $em->remove($alergeno);
+        $em->flush();
+      }
+      return true;
+  }
     public function indexAction()
     {
       return $this->render('reservasBundle:Admin:index.html.twig');
@@ -18,6 +29,7 @@ class AdminController extends Controller
       $reserva = $em->getRepository("reservasBundle:Reservas")->findByIdreservas($id)[0];
       $estadosreserva = $em->getRepository("reservasBundle:Estadoreserva")->findAll();
       $form= $this->createForm(ReservasType::class,$reserva);
+
       if ($request->isMethod('POST')) {
           if($request->get('guardar')){
             $reserva->setNombre($request->get('nombre'));
@@ -27,14 +39,30 @@ class AdminController extends Controller
             $reserva->setObservaciones($request->get('observaciones'));
             $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')
             ->findByIdestadoreserva($request->get("estado"))[0];
+            self::deleteAlergenosByReserva($reserva);
+            if($request->get('alergenos')){
+              foreach ($request->get('alergenos') as $key => $alergeno){
+                $alergeno = $em->getRepository('reservasBundle:Alergenos')
+                ->findByNombre($alergeno)[0];
+                $ralergeno = new ReservasHasAlergenos();
+                $ralergeno->setAlergenosalergenos($alergeno);
+                $ralergeno->setReservasreservas($reserva);
+                $em->persist($ralergeno);
+                $em->flush();
+              }
+            }
             $reserva->setEstadoreservaestadoreserva($estadoreserva);
             $em->persist($reserva);
             $em->flush();
           }
       }
+      $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
+      $myalergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
       return $this->render('reservasBundle:Admin:editreserva.html.twig',array(
         'reserva'=>$reserva,
-        'estadosreserva'=>$estadosreserva
+        'estadosreserva'=>$estadosreserva,
+        'alergenos'=> $alergenos,
+        'myalergenos'=>$myalergenos
       ));
     }
     public function deletereservasAction($id){

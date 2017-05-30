@@ -122,7 +122,7 @@ class ApiController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $plazas = $em->getRepository('reservasBundle:Reservas')->getPlazasOcupadas($request->get('id'));
-        
+
         $response = new JsonResponse($plazas);
         return $response;
     }
