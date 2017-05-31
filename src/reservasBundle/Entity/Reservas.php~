@@ -1,7 +1,7 @@
 <?php
 
 namespace reservasBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Reservas
  */
@@ -310,6 +310,7 @@ class Reservas
         'Telefono'=>$this->getTelefono(),
         'Observaciones'=>$this->getObservaciones(),
         'NPersonas'=>$this->getNpersonas(),
+        'HoraLlegada'=>$this->getHorallegada()
       );
       return $array;
     }
@@ -342,5 +343,35 @@ class Reservas
     {
         return $this->npersonas;
     }
-     
+
+    /**
+     * @var \DateTime
+     */
+    private $horallegada;
+
+
+    /**
+     * Set horallegada
+     *
+     * @param \DateTime $horallegada
+     *
+     * @return Reservas
+     */
+    public function setHorallegada($horallegada)
+    {
+        $this->horallegada = $horallegada;
+
+        return $this;
+    }
+
+    /**
+     * Get horallegada
+     *
+     * @return \DateTime
+     */
+    public function getHorallegada()
+    {
+        return $this->horallegada;
+    }
+  
 }

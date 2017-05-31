@@ -2,6 +2,7 @@
   let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
+    
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
 

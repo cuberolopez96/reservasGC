@@ -26,4 +26,8 @@ reservasBundle\Entity\Menu:
             options:
                 fixed: false
             column: Imagen
+        precio:
+            type: decimal
+            nullable: true
+
     lifecycleCallbacks: {  }

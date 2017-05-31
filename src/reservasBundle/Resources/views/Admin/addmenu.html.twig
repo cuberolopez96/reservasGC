@@ -1,0 +1,30 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card content">
+          <form class="" action="/admin/menus/add" method="post">
+            <div class="row">
+              <div class="col s12">
+                  <input type="number" step="any" name="precio" min="0" value="">
+              </div>
+            </div>
+              <div class="row">
+                <div class="col s12">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" name="descripcion" rows="8" cols="80">
+                    Texto por defecto
+                  </textarea>
+                </div>
+
+              </div>
+              <input type="submit" class="button especial" name="add" value="add">
+          </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

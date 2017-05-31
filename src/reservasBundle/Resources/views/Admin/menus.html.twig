@@ -1,0 +1,32 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <header class="row">
+          <h2 class="col s12 center-align">Menus <a href="/admin/menus/add" class="material-icons">library_add</a></h2>
+        </header>
+        <table class="bordered">
+          <thead>
+              <tr>
+                <th>Descripción</th>
+
+              </tr>
+
+          </thead>
+          <tbody>
+            {% for menu in menus %}
+                <tr>
+                  <td>{{menu.descripción}}</td>
+                  <td><a href="/admin/menus/editar/{{menu.idmenu}}" class="material-icons">edit</a></td>
+                  <td><a href="/admin/menus/delete/{{menu.idmenu}}" class="material-icons">delete</a></td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
