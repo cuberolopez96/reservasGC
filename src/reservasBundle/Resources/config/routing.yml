@@ -14,6 +14,12 @@ reservas_client_reservas_pdf:
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }
+reservas_admin_listados:
+    path: /admin/listados
+    defaults: {_controller: reservasBundle:Admin:listados }
+reservas_admin_listanegra_add:
+    path: /admin/listanegra/add
+    defaults: {_controller: reservasBundle:Admin:addlistanegra }
 reservas_admin_menus:
     path: /admin/menus
     defaults: {_controller: reservasBundle:Admin:menus }

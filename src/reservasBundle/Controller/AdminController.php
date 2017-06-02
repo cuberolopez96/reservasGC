@@ -6,12 +6,35 @@ use Symfony\Component\HttpFoundation\Request;
 use reservasBundle\Form\ConfigType;
 use reservasBundle\Entity\Config;
 use reservasBundle\Entity\ReservasHasAlergenos;
+use reservasBundle\Entity\MenuHasAlergenos;
 use reservasBundle\Entity\Servicios;
 use reservasBundle\Entity\Menu;
+use reservasBundle\Entity\Listanegra;
 use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 class AdminController extends Controller
 {
+  public function addlistanegraAction(Request $request){
+    $em = $this->getDoctrine()->getEntityManager();
+    if ($request->isMethod('POST')) {
+      if ($request->get('add')) {
+        $listanegra = new Listanegra();
+        $listanegra->setCorreo($request->get('correo'));
+        $em->persist($listanegra);
+        $em->flush();
+
+        $this->redirect('/admin/listados');
+      }
+    }
+    return $this->render('reservasBundle:Admin:addlistanegra.html.twig');
+  }
+  public function listadosAction(){
+    $em = $this->getDoctrine()->getEntityManager();
+    $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
+    return $this->render('reservasBundle:Admin:listados.html.twig', array(
+      'listanegra'=>$listanegra
+    ));
+  }
   //importante metodo interno no enrutar
   public function deleteAlergenosByReserva($reserva){
       $em=$this->getDoctrine()->getEntityManager();
@@ -21,6 +44,15 @@ class AdminController extends Controller
         $em->flush();
       }
       return true;
+  }
+  public function deleteAlergenosByMenu($menu){
+    $em=$this->getDoctrine()->getEntityManager();
+    $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+    foreach ($alergenos as $key => $alergeno) {
+      $em->remove($alergeno);
+      $em->flush();
+    }
+    return true;
   }
     public function indexAction()
     {
@@ -103,29 +135,63 @@ class AdminController extends Controller
     public function editmenuAction(Request $request, $id){
       $em = $this->getDoctrine()->getEntityManager();
       $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
+      $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
+
       if ($request->isMethod('POST')) {
         if ($request->get('guardar')) {
           $menu->setDescripción($request->get('descripcion'));
           $menu->setPrecio($request->get('precio'));
           $em->persist($menu);
           $em->flush();
+          if ($request->get('alergenos')) {
+            self::deleteAlergenosByMenu($menu);
+            foreach ($request->get('alergenos') as $key => $nalergeno) {
+              $alergeno = $em->getRepository('reservasBundle:Alergenos')
+              ->findByNombre($nalergeno)[0];
+              $malergeno = new MenuHasAlergenos();
+              $malergeno->setAlergenosalergenos($alergeno);
+              $malergeno->setMenumenu($menu);
+              $em->persist($malergeno);
+              $em->flush();
+
+            }
+          }
 
         }
       }
-      return $this->render('reservasBundle:Admin:editmenu.html.twig',array('menu'=>$menu));
+      $myalergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+      return $this->render('reservasBundle:Admin:editmenu.html.twig',array(
+        'menu'=>$menu,
+        'alergenos'=>$alergenos,
+        'myalergenos'=>$myalergenos
+      ));
 
     }
     public function addmenuAction(Request $request){
       $em = $this->getDoctrine()->getEntityManager();
       $menu = new Menu();
+      $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
+
       if ($request->isMethod('POST')) {
         $menu->setDescripción($request->get('descripcion'));
         $menu->setPrecio($request->get('precio'));
         $em->persist($menu);
         $em->flush();
+        if ($request->get('alergenos')) {
+          foreach ($request->get('alergenos') as $key => $nalergeno) {
+            $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($nalergeno)[0];
+            $malergeno = new MenuHasAlergenos();
+            $malergeno->setAlergenosalergenos($alergeno);
+            $malergeno->setMenumenu($menu);
+            $em->persist($malergeno);
+            $em->flush();
+          }
+        }
+
         return $this->redirect('/admin/menus');
       }
-      return $this->render('reservasBundle:Admin:addmenu.html.twig');
+      return $this->render('reservasBundle:Admin:addmenu.html.twig',
+      array('alergenos'=>$alergenos));
     }
     public  function menusAction(){
       $em = $this->getDoctrine()->getEntityManager();
@@ -168,7 +234,8 @@ class AdminController extends Controller
 
       }
     return $this->render('reservasBundle:Admin:editservicio.html.twig',array(
-      'servicio'=> $servicio
+      'servicio'=> $servicio,
+
     ));
     }
     public function serviciosAction(){
