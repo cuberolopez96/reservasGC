@@ -241,8 +241,8 @@
         })
     }
   }); //ready
-//crear el objeto reservas
-  Reservas = {
+   //crear el objeto reservas
+   Reservas = {
     idServicio:null,
     Nombre: null,
     Apellidos:null,
@@ -290,7 +290,7 @@
         success(data);
       });
     },
-// valida los campos del formulario de reservas
+    // valida los campos del formulario de reservas
     validateInput: function(){
       let correcto = true;
       $('.errores').css('display','none');
@@ -363,15 +363,17 @@
 
 
   }
-  // Objeto que controla la gestion de los servicios
+   // Objeto que controla la gestion de los servicios
    Servicios = {
      ServiciosCache: null,//datos de los servicios guardados en cache;
+     //devuelve los servicios
      Get: function(success = null){
        Utils.getAjax('/api/servicios',function(data){
          Servicios.ServiciosCache = data;
          success();
        });
      },
+     //servicios segun una fecha
      GetByFecha: function(fecha){
        Utils.postAjax('/api/servicios/fecha',{
          fecha:fecha
@@ -379,6 +381,7 @@
          return data;
        });
      },
+     //devuelve las fechas de los servicios
      GetFechas: function(){
        let datos = Servicios.ServiciosCache;
        let fechas = [];
@@ -387,6 +390,7 @@
          fecha = Utils.converToDate(value.FechaServicio);
        })
      },
+     //añade un servicio
      add: function(date,plazas){
        Utils.postAjax('api/servicios/add',{
          Plazas:plazas,
@@ -395,6 +399,7 @@
          return true
        })
      },
+     //devuelve las plazas ocupadas de un servicio
      getPlazasOcupadas: function(id, success = null){
        Utils.postAjax('api/reservas/plazas',{
          id: id
