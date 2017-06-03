@@ -1,6 +1,6 @@
 @font-face{
   font-family: 'Lobster';
-  src: url('../fonts/Lobst-Regular.ttf');
+  src: url('../fonts/Lobster-Regular.ttf');
 }
 
 a, .select-dropdown span, #realizado .card-title, .input-field .active{
@@ -127,7 +127,7 @@ td:hover > .bservicios{
 
 #mesActual{
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 1.5em;
 }
 
 .especial{
@@ -180,7 +180,7 @@ h1{
 	font-weight: bold;
 }
 
-h1, .button, nav{
+h1, .button, nav, #mesActual{
     font-family: 'Lobster', cursive;
 }
 
@@ -271,6 +271,7 @@ td, th{
 	background-color: #4a4a4a;
 	padding: 0;
 	color: grey;
+  margin-bottom: 0 !important;
 }
 
 #ubicaciones h2{
