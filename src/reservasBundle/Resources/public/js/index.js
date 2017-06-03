@@ -509,16 +509,34 @@
            porcentage = parseInt(data[0].Plazas) * 0.8;
            if (diferencia<0) {
              bservicio.addClass("red");
+             console.log(bservicio.parent().children('bservicio').length);
+             if (bservicio.parent().children('.bservicio').length === 1) {
+               bservicio.parent().parent().children('.bcalendario').addClass('red');
+
+             }
              console.log("deberia de haber cambiado al color rojo");
            }else{
               if (parseInt(data[0].POcupadas) > porcentage) {
                   bservicio.addClass('orange');
+                  if (bservicio.parent().children('.bservicio').length === 1) {
+                    bservicio.parent().parent().children('.bcalendario').addClass('orange');
+
+                  }
               }else{
                   bservicio.addClass('green');
+                  if (bservicio.parent().children('.bservicio').length === 1) {
+                      bservicio.parent().parent().children('.bcalendario').addClass('green');
+
+                  }
               }
            }
          }else{
            bservicio.addClass("green");
+           if (bservicio.parent().children('.bservicio').length === 1) {
+               bservicio.parent().parent().children('.bcalendario').addClass('green');
+
+           }
+
          }
        })
      },
