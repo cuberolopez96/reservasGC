@@ -225,6 +225,7 @@
             Reservas.correo, Reservas.telefono,
             Reservas.observaciones, Reservas.alergenos
             ,Reservas.idServicio,
+            Reservas.EstadoReserva,
             Reservas.plazas, Reservas.horallegada ,function(data){
               $('#descargar').click(function(){
                 window.location.pathname = 'pdf/'+data.Id;
@@ -251,6 +252,7 @@
     observaciones: null,
     alergenos: null,
     horallegada: null,
+    EstadoReserva:null,
     npersonas: null,
     ReservasCache: null,
     consultaCache:null,
@@ -335,7 +337,7 @@
 
     },
     // añade reservas
-    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,npersonas,horallegada,success = null){
+    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,estado,npersonas,horallegada,success = null){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
         apellidos: apellidos,
@@ -343,6 +345,7 @@
         correo: correo,
         observaciones: observaciones,
         servicio: servicio,
+        estado: estado,
         alergenos: alergenos,
         npersonas: npersonas,
         horallegada: horallegada,
@@ -361,8 +364,7 @@
 
     }
 
-
-  }
+   }
    // Objeto que controla la gestion de los servicios
    Servicios = {
      ServiciosCache: null,//datos de los servicios guardados en cache;
@@ -507,31 +509,32 @@
          if (data.length > 0) {
            let diferencia= (parseInt(data[0].Plazas)-parseInt(data[0].POcupadas)),
            porcentage = parseInt(data[0].Plazas) * 0.8;
-           if (diferencia<0) {
+           if (diferencia < 0) {
              bservicio.addClass("red");
+             bservicio.attr('estado','1');
              console.log(bservicio.parent().children('bservicio').length);
              if (bservicio.parent().children('.bservicio').length === 1) {
                bservicio.parent().parent().children('.bcalendario').addClass('red');
-
              }
              console.log("deberia de haber cambiado al color rojo");
            }else{
               if (parseInt(data[0].POcupadas) > porcentage) {
                   bservicio.addClass('orange');
+                  bservicio.attr('estado','1');
                   if (bservicio.parent().children('.bservicio').length === 1) {
                     bservicio.parent().parent().children('.bcalendario').addClass('orange');
-
                   }
               }else{
                   bservicio.addClass('green');
+                  bservicio.attr('estado','2');
                   if (bservicio.parent().children('.bservicio').length === 1) {
                       bservicio.parent().parent().children('.bcalendario').addClass('green');
-
                   }
               }
            }
          }else{
            bservicio.addClass("green");
+           bservicio.attr('estado','2');
            if (bservicio.parent().children('.bservicio').length === 1) {
                bservicio.parent().parent().children('.bcalendario').addClass('green');
 
@@ -604,12 +607,6 @@
                       bservicios = $('<button id ="'+ row.id +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                       Calendar.colorearServicios(row.id, bservicios);
                       divservicios.append(bservicios);
-                      $('.bservicio').click(function(){
-                        Reservas.idServicio = $(this).attr('id');
-                        console.log($(this).attr('id') + 'id de el servicio');
-                        $('#datos0').css('display','none');
-                        $('#datos2').css('display','block');
-                      })
                    }
                     td.append(divservicios);
                 });
@@ -648,6 +645,12 @@
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
           }
+          $('.bservicio').click(function(){
+            Reservas.idServicio = $(this).attr('id');
+            Reservas.EstadoReserva = $(this).attr('estado');
+            $('#datos0').css('display','none');
+            $('#datos2').css('display','block');
+          })
           $('#calendar').append(tr);
         });
         /*$(".bcalendario").mouseenter(function(){

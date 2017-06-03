@@ -83,6 +83,7 @@ class ApiController extends Controller
     }
     public function addreservasAction(Request $request){
       $em = $this->getDoctrine()->getEntityManager();
+      $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findByIdestadoreserva($request->get('estado'))[0];
       $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($request->get('servicio'))[0];
       $reservas = new Reservas();
       $reservas->setNombre($request->get('nombre'));
@@ -93,6 +94,7 @@ class ApiController extends Controller
       $reservas->setNpersonas($request->get('npersonas'));
       $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
       $reservas->setServiciosservicios($servicio);
+      $reservas->setEstadoreservaestadoreserva($estadoreserva);
       $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
       $reservas->setCodreserva($codReserva);
       $em->persist($reservas);
