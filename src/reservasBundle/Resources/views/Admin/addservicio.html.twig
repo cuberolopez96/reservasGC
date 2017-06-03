@@ -6,21 +6,21 @@
         <header class="row">
           <h2 class="title col s12 center-align">Editar servicio</h2>
         </header>
-        <form class="" action="/admin/servicios/editar/{{servicio.idservicios}}" method="post">
+        <form class="" action="/admin/servicios/add" method="post">
             <div class="row">
               <div class="col s12 l4">
                 <label for="">Fecha del Servicio</label>
-                <input type="text" disabled name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{servicio.fechaservicio | date('d/m/Y')}}">
+                <input type="text"  name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{"now" | date('d/m/Y')}}">
               </div>
               <div class="col s12 l4">
                 <label for="">Hora</label>
-                <input type="text" name="hora" placehoder = "HH:ii" pattern="^[0-2][0-3]:[0-5][0-9]$" value="{{servicio.fechaservicio | date('H:i')}}">
+                <input type="text" name="hora" placehoder = "HH:ii" pattern="^[0-2][0-3]:[0-5][0-9]$" value="{{"now" | date('H:i')}}">
 
 
               </div>
               <div class="col s12 l4">
                 <label for="">Plazas</label>
-                <input type="number" min="0" name="plazas" value="{{servicio.plazas}}">
+                <input type="number" min="0" name="plazas" value="1">
               </div>
               <div class="row">
                 <input type="submit" class="button especial" name="guardar" value="Guardar">

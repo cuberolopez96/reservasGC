@@ -15,6 +15,14 @@ body{
 .bcalendario{
   background-color: #c3cd77;
 }
+.bservicios{
+  display: none;
+  position: absolute;
+  transition: 1s;
+}
+td:hover > .bservicios{
+  display: block
+}
 
 .botones{
 	display: block;

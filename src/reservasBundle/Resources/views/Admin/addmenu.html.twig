@@ -1,0 +1,42 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card content">
+          <header class="row">
+            <h2 class="col s12 center-align">Añadir menú</h2>
+          </header>
+          <form class="" action="/admin/menus/add" method="post">
+            <div class="row">
+              <div class="col s12">
+                  <label for="">Precio</label>
+                  <input  type="number" step="any" name="precio" min="0" value="">
+              </div>
+            </div>
+              <div class="row">
+                <div class="col s12">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" name="descripcion" rows="8" cols="80">
+                    Texto por defecto
+                  </textarea>
+                </div>
+
+              </div>
+              <div class="row">
+                {% for alergeno in alergenos %}
+                  <div class="col s12 l2">
+                      <input type="checkbox" id="{{alergeno.nombre}}" class="filled_in" name="alergenos[]" value="{{alergeno.nombre}}">
+                      <label for="{{alergeno.nombre}}">{{alergeno.nombre}}</label>
+                  </div>
+                {% endfor %}
+              </div>
+              <input type="submit" class="button especial" name="add" value="Add">
+          </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

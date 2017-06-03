@@ -1,0 +1,49 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card content">
+          <header class="row">
+              <h4 class="col s12 center-align">Editar Menu</h4>
+          </header>
+          <form class="" action="/admin/menus/editar/{{menu.idmenu}}" method="post">
+            <div class="row">
+              <div class="col s12">
+                  <label for="">Precio</label>
+                  <input type="number" step="any" name="precio" min="0" value="{{menu.precio}}">
+              </div>
+            </div>
+              <div class="row">
+                <div class="col s12">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" name="descripcion" rows="8" cols="80">
+                    {{menu.descripción}}
+                  </textarea>
+                </div>
+
+              </div>
+              <div class="row">
+                {% for alergeno in alergenos %}
+                {% set checked = "" %}
+                {% for malergeno in myalergenos %}
+                      {% if alergeno.nombre == malergeno.alergenosalergenos.nombre %}
+                          {% set checked = "checked" %}
+                      {% endif %}
+                {% endfor %}
+                <div class="col s12  l2">
+                  <input type="checkbox" id="{{alergeno.nombre}}" {{checked}} name="alergenos[]" value="{{alergeno.nombre}}">
+                  <label for="{{alergeno.nombre}}">{{alergeno.nombre}}</label>
+                </div>
+
+                {% endfor %}
+              </div>
+              <input type="submit" class="button especial" name="guardar" value="Guardar">
+          </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

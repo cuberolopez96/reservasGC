@@ -1,0 +1,21 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <form class="" action="/admin/listanegra/add" method="post">
+            <div class="row">
+              <div class="col s12">
+                  <label for="">Correo</label>
+                  <input type="email" placeholder="email@email.es" name="correo" value="">
+
+              </div>
+              <input type="submit" class="button especial" name="add" value="Add">
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

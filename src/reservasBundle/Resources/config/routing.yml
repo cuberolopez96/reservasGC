@@ -14,12 +14,33 @@ reservas_client_reservas_pdf:
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }
+reservas_admin_listados:
+    path: /admin/listados
+    defaults: {_controller: reservasBundle:Admin:listados }
+reservas_admin_listanegra_add:
+    path: /admin/listanegra/add
+    defaults: {_controller: reservasBundle:Admin:addlistanegra }
+reservas_admin_menus:
+    path: /admin/menus
+    defaults: {_controller: reservasBundle:Admin:menus }
+reservas_admin_menus_add:
+    path: /admin/menus/add
+    defaults: {_controller: reservasBundle:Admin:addmenu }
+reservas_admin_menus_edit:
+    path: /admin/menus/editar/{id}
+    defaults: {_controller: reservasBundle:Admin:editmenu }
+reservas_admin_menus_delete:
+    path: /admin/menus/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deletemenu }
 reservas_admin_config:
     path: /admin/config
     defaults: {_controller: reservasBundle:Admin:config }
 reservas_admin_servicios:
     path: /admin/servicios
     defaults: {_controller: reservasBundle:Admin:servicios }
+reservas_admin_servicios_add:
+    path: /admin/servicios/add
+    defaults: {_controller: reservasBundle:Admin:addservicios }
 reservas_admin_servicios_edit:
     path: /admin/servicios/editar/{id}
     defaults: {_controller: reservasBundle:Admin:editservicios }
