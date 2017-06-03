@@ -1,6 +1,6 @@
 @font-face{
   font-family: 'Lobster';
-  src: url('../fonts/Lobster-Regular.ttf');
+  src: url('../fonts/Lobst-Regular.ttf');
 }
 
 a, .select-dropdown span, #realizado .card-title, .input-field .active{
@@ -301,6 +301,40 @@ td, th{
   background-color: lightcoral; /*#F08080*/
   outline-color: lightcoral;
 }
+
+/* FORMULARIOS CAMBIOS RADICALES */
+
+#datos2 .input-field, #datos3{
+	text-align: left;
+}
+
+.misBotones, #botones1{
+  text-align: center;
+}
+
+.inputEst, .textareaEst{
+	background-color: white !important;
+	background: rgba(255,255,255,0.8) !important;
+	border-radius: 0.2em !important;
+	margin-top: 0.5em !important;
+	padding-left: 1em !important;
+}
+
+.textareaEst{
+  border: none;
+}
+
+.labelEst{
+	position: static !important;
+}
+
+.errores{
+  background-color: lightcoral !important;
+  border-radius: 0.2em !important;
+}
+
+
+/* RESPONSIVE */
 
 @media screen and (min-width:601px){
 	.letraNav{
