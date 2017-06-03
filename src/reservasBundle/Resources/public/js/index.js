@@ -663,7 +663,7 @@
    };
    Utils = {
     timeValidate: function(str){
-      return /^\d\d:\d\d$/.test(str)
+      return /^[0-2][0-3]:[0-5][0-9]$/.test(str)
     },
     timeStringFormat: function(date){
       let hora = ''+date.getHours(),
