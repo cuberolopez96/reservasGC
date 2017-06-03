@@ -2,7 +2,7 @@
   let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
-    
+
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
 
@@ -497,6 +497,26 @@
           return true;
         });
      },
+     colorearServicios: function(id,bservicio){
+       Servicios.getPlazasOcupadas(id,function(data){
+         if (data.length > 0) {
+           let diferencia= (parseInt(data[0].Plazas)-parseInt(data[0].POcupadas)),
+           porcentage = parseInt(data[0].Plazas) * 0.8;
+           if (diferencia<0) {
+             bservicio.addClass("red");
+             console.log("deberia de haber cambiado al color rojo");
+           }else{
+              if (parseInt(data[0].POcupadas) > porcentage) {
+                  bservicio.addClass('orange');
+              }else{
+                  bservicio.addClass('green');
+              }
+           }
+         }else{
+           bservicio.addClass("green");
+         }
+       })
+     },
      renderCalendar: function(servicios){
         let max,fecha,fechas, semana;
         fecha = new Date();
@@ -542,12 +562,35 @@
         console.log(max);
         console.log(fechas);
         fechas.forEach(function(value,index){
-          let domingo= null;
+          let domingo= null,colorestado = "green";
+
           tr = $('<tr id = "'+ index +'"></tr>');
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
               if (Calendar.EnableDate(value[i],servicios)===true) {
-                tr.append('<td id="'+i+'"><button data-target="modal" class="btn-floating btn-tiny bcalendario" data-activates="slide-out">'+value[i]+'</button></td>');
+                td = $('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario" >'+value[i]+'</button></td>')
+                bservicios = "";
+                divservicios = $('<div class="bservicios "></div>');
+                servicios.forEach(function(row){
+
+                    let fecha= Utils.converToDate(row.FechaServicio),
+                    hora=Utils.timeStringFormat(fecha);
+                    if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
+                      console.log(fecha);
+
+                      bservicios = $('<button id ="'+ row.id +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
+                      Calendar.colorearServicios(row.id, bservicios);
+                      divservicios.append(bservicios);
+                      $('.bservicio').click(function(){
+                        Reservas.idServicio = $(this).attr('id');
+                        console.log($(this).attr('id') + 'id de el servicio');
+                        $('#datos0').css('display','none');
+                        $('#datos2').css('display','block');
+                      })
+                   }
+                    td.append(divservicios);
+                });
+                tr.append(td);
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>');
               }
@@ -557,7 +600,27 @@
           }
           if (value[0]) {
             if (Calendar.EnableDate(value[0],servicios)===true) {
-              tr.append('<td id="'+i+'"><button data-target="modal" class="btn-floating btn-tiny bcalendario">'+value[0]+'</button></td>');
+              td = $('<td id="0"><button class="btn-floating btn-tiny bcalendario" >'+value[0]+'</button></td>')
+              bservicios = "";
+              divservicios = $('<div class="bservicios"></div>');
+              servicios.forEach(function(row){
+
+                  if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
+                    let fecha= Utils.converToDate(row.FechaServicio),
+                    hora=Utils.timeStringFormat(fecha);
+
+                    bservicios += '<button id="'+row.id+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>';
+                    divservicios.append(bservicios);
+                    $('.bservicio').click(function(){
+                      Reservas.idServicio = $(this).attr('id');
+                      console.log($(this).attr('id') + 'id de el servicio');
+                      $('#datos0').css('display','none');
+                      $('#datos2').css('display','block');
+                    })
+                  }
+                  td.append(divservicios);
+              });
+              tr.append(td);
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
@@ -569,15 +632,7 @@
           $('#modal').modal('open');
         });*/
 
-        $(".bcalendario").click(function(){
-          let dia;
-          dia = $(this).text();
-          console.log(dia);
-          console.log(Calendar);
-          Calendar.SelectDate(dia);
-          $('#datos0').css('display','none');
-          $('#datos1').css('display','block');
-        });
+
      }
    };
    Utils = {
