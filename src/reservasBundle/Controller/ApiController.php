@@ -11,7 +11,7 @@ use reservasBundle\Entity\Correos;
 use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Entity\Reservas;
 use reservasBundle\Entity\ReservasHasAlergenos;
-
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class ApiController extends Controller
 {
@@ -82,39 +82,53 @@ class ApiController extends Controller
       return $response;
     }
     public function addreservasAction(Request $request){
-      $em = $this->getDoctrine()->getEntityManager();
-      $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findByIdestadoreserva($request->get('estado'))[0];
-      $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($request->get('servicio'))[0];
-      $reservas = new Reservas();
-      $reservas->setNombre($request->get('nombre'));
-      $reservas->setApellidos($request->get('apellidos'));
-      $reservas->setCorreo($request->get('correo'));
-      $reservas->setTelefono($request->get('telefono'));
-      $reservas->setObservaciones($request->get('observaciones'));
-      $reservas->setNpersonas($request->get('npersonas'));
-      $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
-      $reservas->setServiciosservicios($servicio);
-      $reservas->setEstadoreservaestadoreserva($estadoreserva);
-      $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
-      $reservas->setCodreserva($codReserva);
-      $em->persist($reservas);
-      $em->flush();
-      $alergenos = [];
-      if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
-        $alergenos = $request->get('alergenos');
-      }
-      foreach ($alergenos as $key => $ralergeno) {
-        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($ralergeno);
+      try {
+        $em = $this->getDoctrine()->getEntityManager();
 
-        $reservashasalergenos = new ReservasHasAlergenos();
-        $reservashasalergenos->setAlergenosalergenos($alergeno[0]);
-        $reservashasalergenos->setReservasreservas($reservas);
-        $em->persist($reservashasalergenos);
+        $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findByIdestadoreserva($request->get('estado'))[0];
+        $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($request->get('servicio'))[0];
+        $reservas = new Reservas();
+        $reservas->setNombre($request->get('nombre'));
+        $reservas->setApellidos($request->get('apellidos'));
+        $reservas->setCorreo($request->get('correo'));
+        $reservas->setTelefono($request->get('telefono'));
+        $reservas->setObservaciones($request->get('observaciones'));
+        $reservas->setNpersonas($request->get('npersonas'));
+        $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
+        $reservas->setServiciosservicios($servicio);
+        $reservas->setEstadoreservaestadoreserva($estadoreserva);
+        $codReserva = $servicio->getFechaServicio()->format('Ymdhis').$request->get('correo');
+        $valcodreservas = $em->getRepository("reservasBundle:Reservas")->findByCodreserva($codReserva);
+        if (count($valcodreservas)>0) {
+          throw new Exception("Usted ya ha reservado  a este servicio");
+        }
+        $reservas->setCodreserva($codReserva);
+        $em->persist($reservas);
         $em->flush();
+        $alergenos = [];
+        if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
+          $alergenos = $request->get('alergenos');
+        }
+        foreach ($alergenos as $key => $ralergeno) {
+          $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($ralergeno);
+
+          $reservashasalergenos = new ReservasHasAlergenos();
+          $reservashasalergenos->setAlergenosalergenos($alergeno[0]);
+          $reservashasalergenos->setReservasreservas($reservas);
+          $em->persist($reservashasalergenos);
+          $em->flush();
+        }
+
+        $response = new JsonResponse($reservas->toArray());
+        return $response;
+      } catch (Exception $e) {
+          $response = new JsonResponse(array(
+            'error'=>$e->getMessage(),
+          ));
+          return $response;
       }
 
-      $response = new JsonResponse($reservas->toArray());
-      return $response;
+
 
     }
 
