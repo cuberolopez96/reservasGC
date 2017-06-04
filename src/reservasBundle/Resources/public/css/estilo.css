@@ -13,7 +13,8 @@ body{
 }
 
 .bcalendario{
-  background-color: #c3cd77;
+  background-color: #4a4a4a;
+  color: white;
 }
 .bservicios{
   display: none;
@@ -314,7 +315,7 @@ td, th{
 }
 
 /* LEYENDA CALENDARIO */
-#disp, #pDisp, #ocup{
+#disp, #pDisp, #ocup, #servicioDuo{
   display: inline-block;
   min-height: 1em;
   min-width: 1em;
@@ -333,6 +334,11 @@ td, th{
 #ocup{
   background-color: lightcoral; /*#F08080*/
   outline-color: lightcoral;
+}
+
+#servicioDuo{
+  background-color: #4a4a4a;
+  outline-color: #4a4a4a;
 }
 
 /* FORMULARIOS CAMBIOS RADICALES */

@@ -510,33 +510,33 @@
            let diferencia= (parseInt(data[0].Plazas)-parseInt(data[0].POcupadas)),
            porcentage = parseInt(data[0].Plazas) * 0.8;
            if (diferencia < 0) {
-             bservicio.addClass("red");
+             bservicio.addClass("colorOcupado");
              bservicio.attr('estado','1');
              console.log(bservicio.parent().children('bservicio').length);
              if (bservicio.parent().children('.bservicio').length === 1) {
-               bservicio.parent().parent().children('.bcalendario').addClass('red');
+               bservicio.parent().parent().children('.bcalendario').addClass('colorOcupado');
              }
              console.log("deberia de haber cambiado al color rojo");
            }else{
               if (parseInt(data[0].POcupadas) > porcentage) {
-                  bservicio.addClass('orange');
+                  bservicio.addClass('colorPocoDisp');
                   bservicio.attr('estado','1');
                   if (bservicio.parent().children('.bservicio').length === 1) {
-                    bservicio.parent().parent().children('.bcalendario').addClass('orange');
+                    bservicio.parent().parent().children('.bcalendario').addClass('colorPocoDisp');
                   }
               }else{
-                  bservicio.addClass('green');
+                  bservicio.addClass('colorDisponible');
                   bservicio.attr('estado','2');
                   if (bservicio.parent().children('.bservicio').length === 1) {
-                      bservicio.parent().parent().children('.bcalendario').addClass('green');
+                      bservicio.parent().parent().children('.bcalendario').addClass('colorDisponible');
                   }
               }
            }
          }else{
-           bservicio.addClass("green");
+           bservicio.addClass("colorDisponible");
            bservicio.attr('estado','2');
            if (bservicio.parent().children('.bservicio').length === 1) {
-               bservicio.parent().parent().children('.bcalendario').addClass('green');
+               bservicio.parent().parent().children('.bcalendario').addClass('colorDisponible');
 
            }
 
