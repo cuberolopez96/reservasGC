@@ -33,37 +33,38 @@
 					<div class="input-field col s12 m6">
 							<label class="comoH3 labelEst">Hora</label>
 							<input class="inputEst" type="text" id="horallegada" placeholder="hh:mm"name="" value="">
-							<span id="errorhora" class="errores">Que el formato de hora no es el correcto</span>
+							<span id="errorhora" class="errores">El formato de hora debe ser hh:mm</span>
 					</div>
 
 					<div class="input-field col s12 m6">
 						<label class="comoH3 labelEst">Personas</label>
 							<input class="inputEst" type="number" min="0" max="25" id="plazas" name="" value="">
+							<span id="errorpersonas" class="errores">Debe ser uno como mínimo y como máximo las plazas del servicio</span>
 					</div>
 
 						<div class="row">
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="name">Nombre</label>
 								<input class="inputEst" data-validation="length alphanumeric" id="name" data-tooltip="El nombre no es correcto" type="text" name="" required="required">
-								<span class="errores" id="errorname">El nombre no es Correcto</span>
+								<span class="errores" id="errorname">Debe ser una cadena con dos caracteres como mínimo</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="ap">Apellidos</label>
 								<input data-validation="custom" class="inputEst" data-tooltip="El apellido no es correcto" data-validation-regexp="^([a-z]+)$" id="ap" type="text" name="" required="required">
-								<span class="errores" id="errorap">El apellido no es correcto</span>
+								<span class="errores" id="errorap">Debe ser una cadena con dos caracteres como mínimo</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
 								<input data-validation="custom" class="inputEst" data-tooltip="El telefono no es correcto" data-validation-regexp="^([0-9]+)$" id="tlfn" type="text" name="">
-								<span class="errores" id="errortlfn">El telefono no es correcto</span>
+								<span class="errores" id="errortlfn">Debe ser un número de 9 dígitos</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="email">Correo</label>
 								<input data-validation="email" class="inputEst" data-tooltip="el email no es correcto" id="email" type="text" name="">
-								<span class="errores" id="erroremail">el email no es correcto</span>
+								<span class="errores" id="erroremail">Debe ser de formato tucorreo@correo.algo</span>
 							</div>
 
 							<div id="check" class="input-field col s12">

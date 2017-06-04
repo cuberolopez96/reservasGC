@@ -153,10 +153,12 @@
       })
       $('#atras0').click(function(){
         $('#datos1').css('display','none');
+        Utils.arriba();
         $('#datos0').css('display','block');
       });
         $('#atras1').click(function(){
           $('#datos2').css('display','none');
+          Utils.arriba();
           $('#datos0').css('display','block');
         });
         $('#siguiente').click(function(){
@@ -168,12 +170,14 @@
           }else{
             $('#datos2').css('display','none');
             $('#checkbox').children('input');
+            Utils.arriba();
             $('#datos3').css('display','block');
           }
 
         });
         $('#atras2').click(function(){
           $('#datos3').css('display','none');
+          Utils.arriba();
           $('#datos2').css('display','block');
         });
         $('#reservar').click(function(){
@@ -210,12 +214,14 @@
           $('#datosparaconfirmar').append(p);
           console.log(Reservas + ' Confirmacion');
           $('#parte2').addClass('ubicacion');
+          Utils.arriba();
           $('#confirmacion').css('display','block');
         });
         $('#atras3').click(function(){
           $('#confirmacion').css('display','none');
           $('#parte2').removeClass('ubicacion');
           $('#parte1').addClass('ubicacion');
+          Utils.arriba();
           $('#datos3').css('display','block');
         });
         $('#confirmar').click(function(){
@@ -234,6 +240,7 @@
                   $('#confirmacion').css('display','none');
                   $('#parte2').removeClass('ubicacion');
                   $('#parte3').addClass('ubicacion');
+                  Utils.arriba();
                   $('#realizado').css('display','block')
                 }else{
                   $('#erroradd').text(data.error).fadeIn(1000);
@@ -668,6 +675,9 @@
      }
    };
    Utils = {
+    arriba: function(){
+      $('html, body').stop().animate({scrollTop:0},"slow");
+    },
     timeValidate: function(str){
       $patron = new RegExp("^[0-2][0-3]:[0-5][0-9]$");
       return $patron.test(str)
