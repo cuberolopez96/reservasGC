@@ -18,11 +18,16 @@
               stralergenos.join(',');
               $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
                 '<div class="card-content">'+
-                '<span class="card-title">'+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+                '<span class="card-title">Reserva de '+ data.Nombre + ' ' + data.Apellidos +'</span>'+
                 '<div class ="row">'+
                 '<p class="col s5 offset-s1 left-align"><strong>Fecha Servicio:</strong> '+ data.Servicio.FechaServicio +'</p> '+
                 '<p class="col s5 left-align"><strong>Correo:</strong> '+ data.Correo + '</p>'+
                 '</div>'+
+                '<div class="row">'+
+                '<p class="col s5 offset-s1 left-align"><strong>Hora prevista de llegada: '+Utils.timeStringFormat(Utils.converToDate(data.HoraLlegada.date))+'</p>'+
+                '<p class="col s5  left-align"><strong>Numero de personas: '+ data.NPersonas +'</p>'+
+                '</div>'+
+
                 '<div class="row">'+
                 '<p class="col s5 left-align offset-s1"><strong>Telefono:</strong> '+ data.Telefono + '</p>'+
                 '<p class="col s5 left-align"><strong>Alergenos:</strong> '+ stralergenos + '</p>'+
@@ -661,8 +666,22 @@
           $('.bservicio').click(function(){
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
-            $('#datos0').css('display','none');
-            $('#datos2').css('display','block');
+            if (Reservas.EstadoReserva == 2) {
+              $('#datos0').css('display','none');
+              $('#datos2').css('display','block');
+            }else{
+              $('#modal1').modal();
+              $('#modal1').modal('open');
+              $('#Si').click(function(){
+                $('#datos0').css('display','none');
+                $('#datos2').css('display','block');
+                $('#modal1').modal('close');
+              });
+              $('#No').click(function(){
+                $('#modal1').modal('close');
+              });
+
+            }
           })
           $('#calendar').append(tr);
         });
