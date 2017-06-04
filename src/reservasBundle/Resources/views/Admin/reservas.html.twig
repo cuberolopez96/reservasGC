@@ -1,36 +1,42 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
+<main class="valign-wrapper">
 <div class="row">
+  <h1 class="col s12 center-align">Reservas</h1>
   {% for reserva in reservas %}
-      <div class="card col s6">
+    <div class="contenedorR col s12 m6">
+      <div class="card tarjetaReserva">
 
-          <div class="card-content">
-            <div class="card-title">
-              <span><strong>{{reserva.nombre}} {{reserva.apellidos}}</strong></span>
-            </div>
-            <p><strong>{{reserva.serviciosservicios.fechaservicio | date()}}</strong></p>
-            <p><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
-            <p><strong>Correo: </strong>{{reserva.correo}}</p>
-            <p><strong>Telefono: </strong>{{reserva.telefono}}</p>
-            <p><strong>Observaciones: </strong>{{reserva.observaciones}}</p>
-            <p><strong>Alergenos :</strong>
-               {% for alergeno in alergenos %}
-                  {% if alergeno.reservasreservas.idreservas == reserva.idreservas %}
-                      {{alergeno.alergenosalergenos.nombre}}
-                  {% endif %}
-               {% endfor %}
-            </p>
-
+        <div class="card-content">
+          <div class="card-title">
+            <span><strong>Reserva de {{reserva.nombre}} {{reserva.apellidos}}</strong></span>
           </div>
-          <div class="card-action">
-            {% if reserva.serviciosservicios.menumenu %}
-              <a href="#">Menu</a>
+          <p><strong>{{reserva.serviciosservicios.fechaservicio | date()}}</strong></p>
+          <p><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
+          <p><strong>Correo: </strong>{{reserva.correo}}</p>
+          <p><strong>Telefono: </strong>{{reserva.telefono}}</p>
+          <p><strong>Observaciones: </strong>{{reserva.observaciones}}</p>
+          <p><strong>Alergenos :</strong>
+            {% for alergeno in alergenos %}
+            {% if alergeno.reservasreservas.idreservas == reserva.idreservas %}
+            {{alergeno.alergenosalergenos.nombre}}
             {% endif %}
-            <a href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
-            <a href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
-          </div>
+            {% endfor %}
+          </p>
+
+        </div>
+        <div class="card-action">
+          {% if reserva.serviciosservicios.menumenu %}
+          <a href="#">Menu</a>
+          {% endif %}
+          <a href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
+          <a href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
+        </div>
       </div>
+
+    </div>
   {% endfor %}
 
 </div>
+</main>
 {% endblock %}

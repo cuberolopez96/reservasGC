@@ -1,6 +1,15 @@
-body{
-  *background-color: #4a4a4a !important;
-	background-image: url("../img/fondoAdmin.jpg");
+main{
+    *background-color: #4a4a4a !important;
+	*background-image: url("../img/fondoAdmin.jpg");
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255 ,255, 255, 0.2)), url(../img/fondoAdmin.jpg);
   background-position: right;
-  background-repeat: no-repeat;
+  *background-repeat: no-repeat;
+}
+
+.tarjetaReserva{
+  padding-top: 1em !important;
+}
+
+h1{
+  color: white;
 }
