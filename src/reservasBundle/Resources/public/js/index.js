@@ -219,7 +219,6 @@
           $('#datos3').css('display','block');
         });
         $('#confirmar').click(function(){
-          $('#confirmacion').css('display','none');
           Reservas.add(Reservas.nombre,
             Reservas.apellidos,
             Reservas.correo, Reservas.telefono,
@@ -227,14 +226,21 @@
             ,Reservas.idServicio,
             Reservas.EstadoReserva,
             Reservas.plazas, Reservas.horallegada ,function(data){
-              $('#descargar').click(function(){
-                window.location.pathname = 'pdf/'+data.Id;
-              });
+                console.log(data.error);
+                if(data.error === undefined){
+                  $('#descargar').click(function(){
+                    window.location.pathname = 'pdf/'+data.Id;
+                  });
+                  $('#confirmacion').css('display','none');
+                  $('#parte2').removeClass('ubicacion');
+                  $('#parte3').addClass('ubicacion');
+                  $('#realizado').css('display','block')
+                }else{
+                  $('#erroradd').text(data.error).fadeIn(1000);
+                }
             });
 
-          $('#parte2').removeClass('ubicacion');
-          $('#parte3').addClass('ubicacion');
-          $('#realizado').css('display','block');
+          ;
         });
 
         $('#salir').click(function(){
@@ -663,7 +669,8 @@
    };
    Utils = {
     timeValidate: function(str){
-      return /^[0-2][0-3]:[0-5][0-9]$/.test(str)
+      $patron = new RegExp("^[0-2][0-3]:[0-5][0-9]$");
+      return $patron.test(str)
     },
     timeStringFormat: function(date){
       let hora = ''+date.getHours(),
