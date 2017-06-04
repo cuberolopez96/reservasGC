@@ -659,8 +659,22 @@
           $('.bservicio').click(function(){
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
-            $('#datos0').css('display','none');
-            $('#datos2').css('display','block');
+            if (Reservas.EstadoReserva == 2) {
+              $('#datos0').css('display','none');
+              $('#datos2').css('display','block');
+            }else{
+              $('#modal1').modal();
+              $('#modal1').modal('open');
+              $('#Si').click(function(){
+                $('#datos0').css('display','none');
+                $('#datos2').css('display','block');
+                $('#modal1').modal('close');
+              });
+              $('#No').click(function(){
+                $('#modal1').modal('close');
+              });
+
+            }
           })
           $('#calendar').append(tr);
         });
