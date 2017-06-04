@@ -59,9 +59,22 @@
 						<p class="col s3"><span id="servicioDuo"></span>Varios Servicios</p>
 
 					</div>
-					<div id="#modal1" class="modal">
-
+					<div id="modal1" class="modal">
+						<div class="modal-content">
+				      <h4>¿Desea acceder a la lista de espera?</h4>
+				      <p>Las plazas para este servicio están completas, pero si lo desea puede acceder
+								a la lista de espera y, en el caso de que quedara alguna plaza libre se le
+								avisaría con un correo y se haría efectiva su reserva</p>
+				    </div>
+				    <div class="modal-footer">
+							<button id="Si" class="modal-action modal-close waves-effect waves-green btn-flat">Lista de Espera</button>
+				      <button id="No" class="modal-action modal-close waves-effect waves-green btn-flat">Salir</button>
+				    </div>
 					</div>
+				</div>
+
+				<div id="datos1" class="">
+
 				</div>
 
 				<div id="datos2" class="card-content">
@@ -70,12 +83,13 @@
 							<div class="input-field marginTop col s12 m8 offset-m2">
     							<label class="comoH3 labelEst">Hora prevista de llegada</label>
 									<input class="inputEst" type="text" id="horallegada" name="" value="" placeholder="15:00">
-									<span id="errorhora" class="errores">La hora es incorrecta</span>
+									<span id="errorhora" class="errores">Debe ser un formato hh:mm</span>
 							</div><!-- end field Hora -->
 
 							<div class="input-field col s12 m8 offset-m2">
 								<label class="comoH3 labelEst">Personas</label>
 								<input class="inputEst" type="number" id="plazas" min="1" max="25" name="" value="">
+								<span id="errorpersonas" class="errores">Como mínimo será uno y como máximo las plazas del servicio</span>
 							</div><!-- end field plazas -->
 
 							<div class="input-field col s12 misBotones">
@@ -95,25 +109,25 @@
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="name">Nombre</label>
 								<input class="inputEst" data-validation="length alphanumeric" class="" id="name" data-tooltip="El nombre no es correcto" type="text" name="" required="required">
-								<span class="errores" id="errorname">El nombre no es Correcto</span>
+								<span class="errores" id="errorname">Debe ser una cadena con 2 caracteres como mínimo</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="ap">Apellidos</label>
 								<input class="inputEst" data-validation="custom" class="" data-tooltip="El apellido no es correcto" data-validation-regexp="^([a-z]+)$" id="ap" type="text" name="" required="required">
-								<span class="errores" id="errorap">El apellido no es correcto</span>
+								<span class="errores" id="errorap">Debe ser una cadena con 2 caracteres como mínimo</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="tlfn" data-error="escriba un número de teléfono válido" data-success="correcto">Telefono</label>
 								<input class="inputEst" data-validation="custom" class="" data-tooltip="El telefono no es correcto" data-validation-regexp="^([0-9]+)$" id="tlfn" type="text" name="">
-								<span class="errores" id="errortlfn">El telefono no es correcto</span>
+								<span class="errores" id="errortlfn">Debe ser un número de 9 dígitos</span>
 							</div>
 
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="email">Correo</label>
 								<input class="inputEst" data-validation="email" class="" data-tooltip="el email no es correcto" id="email" type="text" name="">
-								<span class="errores" id="erroremail">el email no es correcto</span>
+								<span class="errores" id="erroremail">Debe tener formato tucorreo@correo.algo</span>
 							</div>
 
 							<div id="check" class="input-field col s12">
