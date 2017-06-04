@@ -30,7 +30,7 @@ td:hover > .bservicios{
 }
 
 #botones1{
-	margin-top: 3em;
+	margin-top: 0.5em;
 }
 
 #botones1 p{
@@ -215,6 +215,18 @@ main{
 	background-repeat: no-repeat;
 }
 
+.marginTop{
+  margin-top: 2em !important;
+}
+
+.row.marginTop2, span.card-title.activator.grey-text.text-darken-4{
+    margin-top: 1em;
+}
+
+div#realizado {
+    margin-top: 1.5em;
+}
+
 .misBotones{
 	margin-top: 0;
 }
@@ -313,7 +325,7 @@ td, th{
 
 /* FORMULARIOS CAMBIOS RADICALES */
 
-#datos2 .input-field, #datos3{
+#datos2 .input-field, #datos3, #formularioConsulta{
 	text-align: left;
 }
 

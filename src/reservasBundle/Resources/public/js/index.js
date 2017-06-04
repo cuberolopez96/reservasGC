@@ -157,7 +157,7 @@
       });
         $('#atras1').click(function(){
           $('#datos2').css('display','none');
-          $('#datos1').css('display','block');
+          $('#datos0').css('display','block');
         });
         $('#siguiente').click(function(){
           fecha = $('#fecha').val();

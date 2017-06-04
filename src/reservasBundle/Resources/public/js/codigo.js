@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $('select').material_select();
 
+    $(".button-collapse").sideNav();
+
     var picker2 = $('.datepicker'),
     	$input = $('.datepicker').pickadate(),
     	picker = $input.pickadate('picker');

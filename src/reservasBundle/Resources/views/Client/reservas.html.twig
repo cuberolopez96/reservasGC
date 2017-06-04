@@ -66,20 +66,20 @@
 				<div id="datos2" class="card-content">
 					<!-- HORA Y PERSONAS -->
 						<div class="row">
-							<div class="input-field col s12">
-    							<label class="comoH3 labelEst">Hora</label>
-									<input class="inputEst" type="text" id="horallegada" name="" value="">
+							<div class="input-field marginTop col s12 m8 offset-m2">
+    							<label class="comoH3 labelEst">Hora prevista de llegada</label>
+									<input class="inputEst" type="text" id="horallegada" name="" value="" placeholder="15:00">
 									<span id="errorhora" class="errores">La hora es incorrecta</span>
 							</div><!-- end field Hora -->
 
-							<div class="input-field col s12">
+							<div class="input-field col s12 m8 offset-m2">
 								<label class="comoH3 labelEst">Personas</label>
 								<input class="inputEst" type="number" id="plazas" min="1" max="25" name="" value="">
 							</div><!-- end field plazas -->
 
 							<div class="input-field col s12 misBotones">
 								<div id="botones1" class="row">
-									<div class="col s12 m6"><button id="atras1" class="button especial2">Atrás</button></div>
+									<div class="col s12 m6"><button id="atras1" class="button especial2">Anterior</button></div>
 									<div class="col s12 m6"><button id="siguiente" class="button especial">Siguiente</button></div>
 								</div>
 							</div><!-- end field BOTONES -->
@@ -90,7 +90,7 @@
 
 				<div  id="datos3" class="card-content">
 
-						<div class="row">
+						<div class="row marginTop2">
 							<div class="input-field col s12 m6 l3">
 								<label class="labelEst" for="name">Nombre</label>
 								<input class="inputEst" data-validation="length alphanumeric" class="" id="name" data-tooltip="El nombre no es correcto" type="text" name="" required="required">
@@ -222,7 +222,7 @@
 							</div>
 							<div class="input-field col s12 misBotones">
 								<div id="botones1" class="row">
-									<div class="col s12 m6"><button id="atras2" class="button especial2">Atrás</button></div>
+									<div class="col s12 m6"><button id="atras2" class="button especial2">Anterior</button></div>
 									<div class="col s12 m6"><button id="reservar" class="button especial">Reservar</button>	</div>
 								</div>
 							</div>
@@ -232,7 +232,7 @@
 
 				<div id="confirmacion" class="card-content">
 						<div class="row">
-							<span class="card-title activator grey-text text-darken-4">¿Sus datos son correctos?</span>
+							<span class="card-title activator grey-text text-darken-4">Confirme si sus datos son correctos</span>
       						<div id="datosparaconfirmar" class="col s12">
 										<p class="col s2">dato 1</p>
 										<p class="col s2">dato 3</p>
@@ -241,7 +241,7 @@
 						</div>
 						<div class="input-field col s12 misBotones">
 							<div id="botones1" class="row">
-								<div class="col s12 m6"><button id="atras3" class="button especial2">Atrás</button></div>
+								<div class="col s12 m6"><button id="atras3" class="button especial2">Anterior</button></div>
 								<div class="col s12 m6"><button id="confirmar" class="button especial">Confirmar</button>	</div>
 							</div>
 						</div>
@@ -249,10 +249,10 @@
 
 				<div id="realizado" class="card-content">
 						<div class="row">
-							<span class="card-title">¡Su reserva se ha realizado con éxito!</span>
-							<p class="center-align">Puede descargarse la información de su reserva si así lo desea</p>
+							<span class="card-title">¡Realizado!</span>
+							<p class="center-align">Acceda al pdf para descargar su información de reserva</p>
 
-							<p class="col s12 center-align"><button id="descargar" class="button especial separar">Descargar</button>	</p>
+							<p class="col s12 center-align"><button id="descargar" class="button especial separar">PDF</button>	</p>
 							<p class="col s12 center-align"><button id="salir" class="button especial2 separar">Salir</button></p>
 						</div>
 				</div> <!-- REALIZADO - card-content -->
