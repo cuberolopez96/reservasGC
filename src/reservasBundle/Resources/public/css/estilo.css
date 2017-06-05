@@ -71,6 +71,7 @@ td:hover > .bservicios{
 	background-color: #D4CDC5;
 	box-shadow: 1px 2px 4px grey;
 	padding: 0 !important;
+  min-width: 671.46px !important;
 }
 
 .card label, #confirmar .card-title{

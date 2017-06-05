@@ -88,4 +88,33 @@ class Menu
       );
       return $array;
     }
+    /**
+     * @var string
+     */
+    private $precio;
+
+
+    /**
+     * Set precio
+     *
+     * @param string $precio
+     *
+     * @return Menu
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    /**
+     * Get precio
+     *
+     * @return string
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
 }
