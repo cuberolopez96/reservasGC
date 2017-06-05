@@ -14,9 +14,8 @@
               </div>
               <div class="col s12 l4">
                 <label for="">Hora</label>
-                <input type="text" name="hora" placehoder = "HH:ii" pattern="^[0-2][0-3]:[0-5][0-9]$" value="{{servicio.fechaservicio | date('H:i')}}">
-
-
+                <input type="text" name="hora" placehoder = "HH:ii" pattern="^([0-1][0-9])|([0-2][0-3]):[0-5][0-9]$" value="{{servicio.fechaservicio | date('H:i')}}">
+                
               </div>
               <div class="col s12 l4">
                 <label for="">Plazas</label>
