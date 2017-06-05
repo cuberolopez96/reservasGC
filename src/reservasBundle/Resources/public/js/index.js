@@ -208,11 +208,11 @@
           console.log(checkbox);
           Reservas.alergenos = checkbox;
           $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Reservas.nombre +'</p>')
-          .append('<p class="col s12">Apellidos: '+ Reservas.apellidos + '</p>')
-          .append('<p class="col s12">Correo: '+ Reservas.correo + '</p>')
-          .append('<p class="col s12">Telefono: '+ Reservas.telefono + '</p>')
-          .append('<p class="col s12">Observaciones: '+ Reservas.observaciones + '</p>');
-          p = $('<p class="col s12">Alergenos: </p>');
+          .append('<p class="col s6">Apellidos: '+ Reservas.apellidos + '</p>')
+          .append('<p class="col s6">Correo: '+ Reservas.correo + '</p>')
+          .append('<p class="col s6">Telefono: '+ Reservas.telefono + '</p>')
+          .append('<p class="col s6">Observaciones: '+ Reservas.observaciones + '</p>');
+          p = $('<p class="col s6">Alergenos: </p>');
           Reservas.alergenos.forEach(function(value){
             p.text(p.text() +  value + ',');
           });
@@ -698,7 +698,7 @@
       $('html, body').stop().animate({scrollTop:0},"slow");
     },
     timeValidate: function(str){
-      $patron = new RegExp("^[0-2][0-3]:[0-5][0-9]$");
+      $patron = new RegExp("^([0-1][0-9])|([0-2][0-3]):[0-5][0-9]$");
       return $patron.test(str)
     },
     timeStringFormat: function(date){
