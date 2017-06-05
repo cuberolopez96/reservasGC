@@ -207,12 +207,12 @@
           });
           console.log(checkbox);
           Reservas.alergenos = checkbox;
-          $('#datosparaconfirmar').empty().append('<p class="col s12"> Nombre: '+ Reservas.nombre +'</p>')
-          .append('<p class="col s6">Apellidos: '+ Reservas.apellidos + '</p>')
-          .append('<p class="col s6">Correo: '+ Reservas.correo + '</p>')
-          .append('<p class="col s6">Telefono: '+ Reservas.telefono + '</p>')
-          .append('<p class="col s6">Observaciones: '+ Reservas.observaciones + '</p>');
-          p = $('<p class="col s6">Alergenos: </p>');
+          $('#datosparaconfirmar').empty().append('<p class="col s6 left-align"> <strong>Nombre:</strong> '+ Reservas.nombre +'</p>')
+          .append('<p class="col s6 left-align"><strong>Apellidos:</strong> '+ Reservas.apellidos + '</p>')
+          .append('<p class="col s6 left-align"><strong>Correo:</strong> '+ Reservas.correo + '</p>')
+          .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
+          .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
+          p = $('<p class="col s6 left-align"><strong> Alergenos: </strong> </p>');
           Reservas.alergenos.forEach(function(value){
             p.text(p.text() +  value + ',');
           });
