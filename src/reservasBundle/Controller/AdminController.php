@@ -14,6 +14,7 @@ use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 class AdminController extends Controller
 {
+
   public function addlistanegraAction(Request $request){
     $em = $this->getDoctrine()->getEntityManager();
     if ($request->isMethod('POST')) {
@@ -57,7 +58,7 @@ class AdminController extends Controller
     public function indexAction()
     {
 
-      return $this->render('reservasBundle:Admin:index.html.twig');
+      return $this->redirect("/admin/servicios");
     }
     public function editreservasAction($id, Request $request){
       $em = $this->getDoctrine()->getEntityManager();
