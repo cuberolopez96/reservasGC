@@ -1,0 +1,20 @@
+reservasBundle\Entity\Usuarios:
+    type: entity
+    table: null
+    repositoryClass: reservasBundle\Repository\UsuariosRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
+            column: Username
+        password:
+            type: string
+            length: 255
+            column: Password
+    lifecycleCallbacks: {  }

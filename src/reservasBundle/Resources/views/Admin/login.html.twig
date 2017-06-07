@@ -1,0 +1,24 @@
+{% extends 'reservasBundle::layout.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="card col s10 offset-s1">
+    <div class="card-content">
+      <div class="card-title">
+        Login
+      </div>
+      <form action="/admin/login" method="post">
+        <label for="usuario">Usuario</label>
+        <input id="usuario" type="text"  name="username" value="" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" value="" required>
+        <input type="submit" class="button especial" name="login" value="login">
+      </form>
+
+      {% if errores %}
+        <span>{{errores}}</span>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

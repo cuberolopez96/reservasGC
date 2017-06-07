@@ -14,6 +14,9 @@ reservas_client_reservas_pdf:
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }
+reservas_admin_login:
+    path: /admin/login
+    defaults: {_controller: reservasBundle:Admin:login}
 reservas_admin_listados:
     path: /admin/listados
     defaults: {_controller: reservasBundle:Admin:listados }
