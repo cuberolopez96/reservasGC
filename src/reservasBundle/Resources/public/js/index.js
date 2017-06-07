@@ -18,7 +18,10 @@
               stralergenos.join(',');
               $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
                 '<div class="card-content">'+
-                '<span class="card-title">Reserva de '+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+                '<div class="card-title row">'+
+                '<span class="col s10">Reserva de '+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+                '<a id="close" class="col s2 waves-effect material-icons">close</a>'+
+                '</div>'+
                 '<div class ="row">'+
                 '<p class="col s5 offset-s1 left-align"><strong>Fecha Servicio:</strong> '+ data.Servicio.FechaServicio +'</p> '+
                 '<p class="col s5 left-align"><strong>Correo:</strong> '+ data.Correo + '</p>'+
@@ -40,8 +43,11 @@
                 '<a id="anular" class="button especial2" href="#modal2">Anular</a>'+
                 '<a id="editarReserva" class="button especial" href="#">Editar</a>'+
                 '</div>'+
-              '</div>');
+              '</div>').css('display','none').fadeIn("slow");
+              $('#close').click(function(){
+                $('#resultadoConsulta').fadeOut('slow');
 
+              });
               $("#editarReserva").click(function(){
 
                 let checkbox = $('#check input'),
@@ -157,14 +163,14 @@
         Calendar.renderCalendar(Servicios.ServiciosCache);
       })
       $('#atras0').click(function(){
-        $('#datos1').css('display','none');
+        $('#datos1').fadeOut("slow");
         Utils.arriba();
-        $('#datos0').css('display','block');
+        Utils.mostrar($('#datos0'));
       });
         $('#atras1').click(function(){
-          $('#datos2').css('display','none');
+          $('#datos2').fadeOut("slow");
           Utils.arriba();
-          $('#datos0').css('display','block');
+          Utils.mostrar($('#datos0'))
         });
         $('#siguiente').click(function(){
           fecha = $('#fecha').val();
@@ -173,17 +179,17 @@
           if (Utils.timeValidate(Reservas.horallegada)==false) {
             $('#errorhora').fadeIn('slow');
           }else{
-            $('#datos2').css('display','none');
+            $('#datos2').fadeOut("slow");
             $('#checkbox').children('input');
             Utils.arriba();
-            $('#datos3').css('display','block');
+            Utils.mostrar($('#datos3'));
           }
 
         });
         $('#atras2').click(function(){
-          $('#datos3').css('display','none');
+          $('#datos3').fadeOut("slow");
           Utils.arriba();
-          $('#datos2').css('display','block');
+          Utils.mostrar($('#datos2'));
         });
         $('#reservar').click(function(){
 
@@ -191,7 +197,7 @@
             console.log('error');
             return
           }
-          $('#datos3').css('display','none');
+          $('#datos3').fadeOut("slow");
           $('#parte1').removeClass('ubicacion');
           Reservas.nombre = $('#name').val();
           Reservas.apellidos = $('#ap').val();
@@ -220,14 +226,14 @@
           console.log(Reservas + ' Confirmacion');
           $('#parte2').addClass('ubicacion');
           Utils.arriba();
-          $('#confirmacion').css('display','block');
+          Utils.mostrar($('#confirmacion'));
         });
         $('#atras3').click(function(){
-          $('#confirmacion').css('display','none');
+          $('#confirmacion').fadeOut("slow");
           $('#parte2').removeClass('ubicacion');
           $('#parte1').addClass('ubicacion');
           Utils.arriba();
-          $('#datos3').css('display','block');
+          Utils.mostrar($('#datos3'));
         });
         $('#confirmar').click(function(){
           Reservas.add(Reservas.nombre,
@@ -242,11 +248,11 @@
                   $('#descargar').click(function(){
                     window.location.pathname = 'pdf/'+data.Id;
                   });
-                  $('#confirmacion').css('display','none');
+                  $('#confirmacion').fadeOut("slow");
                   $('#parte2').removeClass('ubicacion');
                   $('#parte3').addClass('ubicacion');
                   Utils.arriba();
-                  $('#realizado').css('display','block')
+                  Utils.mostrar($('#realizado'))
                 }else{
                   $('#erroradd').text(data.error).fadeIn(1000);
                 }
@@ -313,7 +319,7 @@
     // valida los campos del formulario de reservas
     validateInput: function(){
       let correcto = true;
-      $('.errores').css('display','none');
+      $('.errores').fadeOut("slow");
       if(/^[a-zA-Z]+(\s*[a-zA-Z]*)*/.test($('#name').val())===false){
         correcto = false;
         console.log("nombre");
@@ -514,8 +520,8 @@
               $('.next').click(function(){
                 Reservas.idServicio = $(this).attr('id');
                 console.log($(this).attr('id') + 'id de el servicio');
-                $('#datos1').css('display','none');
-                $('#datos2').css('display','block');
+                $('#datos1').fadeOut("slow");
+                $('#datos2').fadeIn("slow");
               })
             });
           });
@@ -649,12 +655,7 @@
 
                     bservicios += '<button id="'+row.id+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>';
                     divservicios.append(bservicios);
-                    $('.bservicio').click(function(){
-                      Reservas.idServicio = $(this).attr('id');
-                      console.log($(this).attr('id') + 'id de el servicio');
-                      $('#datos0').css('display','none');
-                      $('#datos2').css('display','block');
-                    })
+
                   }
                   td.append(divservicios);
               });
@@ -667,14 +668,14 @@
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
             if (Reservas.EstadoReserva == 2) {
-              $('#datos0').css('display','none');
-              $('#datos2').css('display','block');
+              $('#datos0').css("display",'none');
+              $('#datos2').css("display",'block');
             }else{
               $('#modal1').modal();
               $('#modal1').modal('open');
               $('#Si').click(function(){
-                $('#datos0').css('display','none');
-                $('#datos2').css('display','block');
+                $('#datos0').css("display",'none');
+                $('#datos2').css("display",'block');
                 $('#modal1').modal('close');
               });
               $('#No').click(function(){
@@ -742,6 +743,13 @@
       date.setMinutes(minutes);
       date.setSeconds(seconds);
       return date;
+    },
+    mostrar: function(object){
+      $('.card').css('display','none');
+      window.setTimeout(function(){
+        object.css('display','block');
+        $('.card').fadeIn('slow');
+      },100);
     },
     getAjax: function(url,success=false) {
      let ajax;
