@@ -1,5 +1,5 @@
 main{
-    *background-color: #4a4a4a !important;
+  *background-color: #4a4a4a !important;
 	*background-image: url("../img/fondoAdmin.jpg");
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255 ,255, 255, 0.2)), url(../img/fondoAdmin.jpg);
   background-position: right;
@@ -16,6 +16,11 @@ h1{
 
 nav{
   position: fixed;
+  z-index: 999 !important;
+}
+
+.marginTop{
+  margin-top: 2em !important;
 }
 
 #navTitulo{
