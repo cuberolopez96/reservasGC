@@ -89,6 +89,10 @@ td:hover > .bservicios{
   height: 100%;
 }
 
+#cardLogin{
+  margin-top: 0 !important;
+}
+
 #check{
 	margin-bottom: 2em;
 	margin-top: 0;
@@ -367,9 +371,18 @@ td, th{
 	position: static !important;
 }
 
+label.active{
+	font-size: 1em !important;
+	color: black !important;
+}
+
 .errores{
   background-color: lightcoral !important;
   border-radius: 0.2em !important;
+}
+
+.sinPadding{
+  padding: 0 !important;
 }
 
 
