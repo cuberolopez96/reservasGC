@@ -26,6 +26,15 @@ reservas_admin_listanegra_add:
 reservas_admin_menus:
     path: /admin/menus
     defaults: {_controller: reservasBundle:Admin:menus }
+reservas_admin_boletin:
+    path: /admin/boletin
+    defaults: {_controller: reservasBundle:Admin:boletin}
+reservas_admin_boletin_add:
+    path: /admin/boletin/add
+    defaults: {_controller: reservasBundle:Admin:addboletin}
+reservas_admin_boletin_edit:
+    path: /admin/boletin/edit/{id}
+    defaults: {_controller: reservasBundle:Admin:editboletin}
 reservas_admin_menus_add:
     path: /admin/menus/add
     defaults: {_controller: reservasBundle:Admin:addmenu }

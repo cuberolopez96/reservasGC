@@ -16,7 +16,7 @@
     <!-- SCRIPTS -->
   </head>
   <body>
-    <nav>
+    <nav style="">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo"><img class="logo" src="{{asset('bundles/reservas/img/image948-e1447362808491.png')}}"></a>
         <span id="navTitulo" class="letraNav">Reservas IES Gran Capitán - Admin</span>
@@ -39,8 +39,11 @@
       </ul>
       </div>
     </nav>
+
       {% block content %}
     {% endblock %}
+
+
   </body>
   <script type="text/javascript" src="{{asset('bundles/reservas/js/jquery-3.2.1.js')}}"></script>
   <script type="text/javascript" src="{{asset('bundles/reservas/js/materialize.min.js')}}"></script>

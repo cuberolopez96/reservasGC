@@ -11,6 +11,7 @@ use reservasBundle\Entity\Servicios;
 use reservasBundle\Entity\Menu;
 use reservasBundle\Entity\Usuario;
 use reservasBundle\Entity\Listanegra;
+use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -89,6 +90,54 @@ class AdminController extends Controller
         $em->flush();
       }
       return true;
+  }
+  public function editboletinAction(Request $request, $id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $plantilla = $em->getRepository('reservasBundle:Misplantillas')->findByIdmisplantillas($id)[0];
+    if ($request->isMethod('POST')) {
+      if ($request->get('edit')) {
+          $plantilla->setAsunto($request->get('asunto'));
+          $plantilla->setTexto($request->get('texto'));
+          $em->persist($plantilla);
+          $em->flush();
+          return $this->redirect('/admin/boletin');
+      }
+    }
+    return $this->render('reservasBundle:Admin:editboletin.html.twig',array(
+      'plantilla'=>$plantilla
+    ));
+  }
+  public function addboletinAction(Request $request){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    if ($request->isMethod('POST')) {
+      $plantilla = new Misplantillas();
+      if ($request->get('add')) {
+          $plantilla->setAsunto($request->get('asunto'));
+          $plantilla->setTexto($request->get('texto'));
+          $em->persist($plantilla);
+          $em->flush();
+          return $this->redirect('/admin/boletin');
+
+      }
+    }
+    return $this->render('reservasBundle:Admin:addboletin.html.twig');
+  }
+  public function boletinAction(Request $request){
+      if (self::isAuthorized() == false) {
+        return $this->redirect('/admin/login');
+      }
+      $em = $this->getDoctrine()->getEntityManager();
+      $plantillas = $em->getRepository('reservasBundle:Misplantillas')->findAll();
+
+      return $this->render('reservasBundle:Admin:boletin.html.twig',array(
+        'plantillas'=>$plantillas
+      ));
   }
   public function deleteAlergenosByMenu($menu){
     if (self::isAuthorized() == false) {
