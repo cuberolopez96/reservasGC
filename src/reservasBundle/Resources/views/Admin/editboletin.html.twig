@@ -1,0 +1,23 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<main class="valign-wrapper center-align">
+  <div class="row">
+    <div class="card col s12">
+      <div class="card-content">
+        <span class="card-title">Edit Formulario</span>
+        <form class="" action="/admin/boletin/edit/{{plantilla.idmisplantillas}}" method="post">
+            <label class="left-align"for="">Asunto</label>
+            <input type="text" name="asunto" value="{{plantilla.asunto}}" required>
+            <label class="left-align"for="">Texto</label>
+            <textarea name="texto" rows="8" cols="80">
+              {{plantilla.texto}}
+            </textarea>
+            <input type="submit" class="button especial" name="edit" value="Edit">
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}
