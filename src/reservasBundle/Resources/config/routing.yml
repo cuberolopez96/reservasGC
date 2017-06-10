@@ -29,6 +29,9 @@ reservas_admin_menus:
 reservas_admin_correos:
     path: /admin/correos
     defaults: {_controller: reservasBundle:Admin:correos}
+reservas_admin_correos_add:
+    path: /admin/correos/add
+    defaults: {_controller: reservasBundle:Admin:addcorreos}
 reservas_admin_boletin:
     path: /admin/boletin
     defaults: {_controller: reservasBundle:Admin:boletin}
