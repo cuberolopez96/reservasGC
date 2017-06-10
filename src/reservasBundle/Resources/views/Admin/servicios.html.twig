@@ -1,7 +1,6 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
 <main class="valign-wrapper">
-
   <div class="row">
       <header class="col s12">
           <h1 class="center-align">Servicios <a href="/admin/servicios/add"><i class="material-icons">library_add</i></a></h1>
@@ -9,15 +8,18 @@
 
 
   <div class="col s12">
-      <div class="card  ">
-        <div class="card-content">
+      <div class="card">
+        <div class="card-content sinPadding">
           <div class="row">
             <table id="listadoServicios" class="bordered col s12 centered  highlight ">
-                <thead>
+                <thead id="titularTabla">
                   <tr>
                     <th>Fecha Servicio</th>
                     <th>Plazas</th>
                     <th>Plazas Ocupadas</th>
+                    <th></th>
+                    <th></th>
+
                   </tr>
                   {#<tr>
                     <td><input type="text" name="" value=""></td>

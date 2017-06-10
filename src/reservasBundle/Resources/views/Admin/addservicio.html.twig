@@ -2,34 +2,39 @@
 {% block content %}
 <main class="valign-wrapper center-align">
   <div class="row marginTop">
-    <div class="card">
-      <div class="card-content">
-        <header class="row">
-          <h2 class="title col s12 center-align">Add servicio</h2>
-        </header>
-        <form class="" action="/admin/servicios/add" method="post">
-            <div class="row">
-              <div class="col s12 l4">
-                <label for="">Fecha del Servicio</label>
-                <input type="text"  name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{"now" | date('d/m/Y')}}">
-              </div>
-              <div class="col s12 l4">
-                <label for="">Hora</label>
-                <input type="text" name="hora" placehoder = "HH:ii" pattern="^[0-2][0-3]:[0-5][0-9]$" value="{{"now" | date('H:i')}}">
 
 
-              </div>
-              <div class="col s12 l4">
-                <label for="">Plazas</label>
-                <input type="number" min="0" name="plazas" value="1">
-              </div>
-              <div class="row">
-                <input type="submit" class="button especial" name="guardar" value="Guardar">
-              </div>
-            </div>
-        </form>
+    <div class="col s12">
+      <div class="card paddingTop">
+        <div class="card-content sinPadding">
+          <span class="card-title">Añadir Servicio</span>
+          <div class="row">
+            <form class="col s12" action="/admin/servicios/add" method="post">
+                <div class="row">
+                  <div class="col s12 l4">
+                    <label class="labelEst left" for="">Fecha del Servicio</label>
+                    <input disabled class="inputEst center-align sinPadding" type="text"  name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{"now" | date('d/m/Y')}}">
+                  </div>
+                  <div class="col s12 l4">
+                    <label class="labelEst left" for="">Hora</label>
+                    <input class="inputEst center-align sinPadding" type="text" name="hora" placehoder = "HH:ii" pattern="^[0-2][0-3]:[0-5][0-9]$" value="{{"now" | date('H:i')}}">
+
+
+                  </div>
+                  <div class="col s12 l4">
+                    <label class="labelEst left" for="">Plazas</label>
+                    <input class="inputEst center-align sinPadding" type="number" min="0" name="plazas" value="1">
+                  </div>
+                  <div class="col s12">
+                    <input type="submit" class="button especial" name="guardar" value="Guardar">
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </main>
 {% endblock %}
