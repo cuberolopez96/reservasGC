@@ -21,10 +21,10 @@ where CAST(s.fechaservicio as date) like  '$dia'";
 
     public function findByToday(){
       $date = new \Datetime();
-      $date = $date->format('Y-m-d H:i:s');
-      $sql ="SELECT sum(r.npersonas) as plazasocupadas,max(s.idservicios) as idservicios,max(s.fechaservicio) as fechaservicio ,max(s.plazas) as plazas
-      from reservasBundle:Servicios as s inner join reservasBundle:Reservas as r with r.serviciosservicios = s.idservicios
-      where s.fechaservicio >= '$date' group by s.idservicios";
+      $date = $date->format('Y-m-d');
+      $sql ="SELECT s.idservicios as idservicios ,s.fechaservicio as fechaservicio ,s.plazas as plazas
+      from reservasBundle:Servicios as s 
+      where  CAST(s.fechaservicio as date) like '$date' or CAST(s.fechaservicio  as date) > '$date' group by s.fechaservicio";
       return $this->getEntityManager()->createQuery($sql)->getResult();
     }
 }

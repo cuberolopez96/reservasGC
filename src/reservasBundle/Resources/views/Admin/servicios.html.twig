@@ -29,12 +29,18 @@
                 </thead>
                 <tbody>
                     {% for index,servicio in servicios %}
+                      {% set plazasocupadas = 0 %}
+                      {% for reserva in reservas %}
+                          {% if reserva.serviciosservicios.idservicios == servicio.idservicios %}
+                            {% set plazasocupadas = plazasocupadas + reserva.npersonas %}
+                          {% endif %}
+                      {% endfor %}
                         <tr>
                             <td>{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
                             <td>{{servicio.plazas}}</td>
-                            <td>{{servicio.plazasocupadas}}</td>
+                            <td>{{plazasocupadas}}</td>
                             <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons">edit</i></a></td>
-                            {#<td><a href="/admin/servicios/delete/{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>#}
+                            <td><a href="/admin/servicios/delete/{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>
                             <td><a href="/admin/servicios/{{servicio.idservicios}}/reservas"><i class="material-icons">assignment</i></a></td>
                         </tr>
                     {% endfor %}

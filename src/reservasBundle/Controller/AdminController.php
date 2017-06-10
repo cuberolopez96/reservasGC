@@ -275,7 +275,7 @@ class AdminController extends Controller
       return $this->redirect('/admin/reservas');
 
     }
-    
+
     public function deleteserviciosAction($id){
       if (self::isAuthorized() == false) {
         return $this->redirect('/admin/login');
@@ -435,7 +435,11 @@ class AdminController extends Controller
       }
       $em = $this->getDoctrine()->getEntityManager();
       $servicios = $em->getRepository("reservasBundle:Servicios")->findByToday();
-      return $this->render("reservasBundle:Admin:servicios.html.twig",array('servicios'=>$servicios));
+      $reservas =  $em->getRepository("reservasBundle:Reservas")->findAll();
+      return $this->render("reservasBundle:Admin:servicios.html.twig",array(
+        'servicios'=>$servicios,
+        'reservas'=>$reservas
+      ));
     }
     public function configAction(Request $request){
       if (self::isAuthorized()==false) {
