@@ -372,8 +372,8 @@ td, th{
 }
 
 label.active{
-	font-size: 1em !important;
-	color: black !important;
+	font-size: 1.2rem !important;
+	color: #624A4D !important;
 }
 
 .errores{
