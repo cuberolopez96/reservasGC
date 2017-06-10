@@ -1,0 +1,24 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<main class="valign-wrapper center-align">
+
+  <div class="row">
+    <div class="card col s12">
+      <div class="card-content">
+          <span class="title">Correos</span>
+          <form class="" action="/admin/boletin/send/{{plantilla.idmisplantillas}}" method="post">
+                {% for correo in correos %}
+                  <div class="row">
+                      <input type="checkbox" id="{{correo.idcorreos}}" class="filled-in" name="correos[]" value="{{correo.email}}">
+                      <label for="{{correo.idcorreos}}">{{correo.email}}</label>
+                  </div>
+                {% endfor %}
+                <input type="submit" class="button especial" name="send" value="Send">
+          </form>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

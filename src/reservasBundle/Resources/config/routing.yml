@@ -26,6 +26,9 @@ reservas_admin_listanegra_add:
 reservas_admin_menus:
     path: /admin/menus
     defaults: {_controller: reservasBundle:Admin:menus }
+reservas_admin_correos:
+    path: /admin/correos
+    defaults: {_controller: reservasBundle:Admin:correos}
 reservas_admin_boletin:
     path: /admin/boletin
     defaults: {_controller: reservasBundle:Admin:boletin}
@@ -35,6 +38,12 @@ reservas_admin_boletin_add:
 reservas_admin_boletin_edit:
     path: /admin/boletin/edit/{id}
     defaults: {_controller: reservasBundle:Admin:editboletin}
+reservas_admin_boletin_send:
+    path: /admin/boletin/send/{id}
+    defaults: {_controller: reservasBundle:Admin:sendboletin}
+reservas_admin_boletin_completado:
+    path: /admin/boletin/completado
+    defaults: {_controller: reservasBundle:Admin:sendboletincompleted}
 reservas_admin_menus_add:
     path: /admin/menus/add
     defaults: {_controller: reservasBundle:Admin:addmenu }

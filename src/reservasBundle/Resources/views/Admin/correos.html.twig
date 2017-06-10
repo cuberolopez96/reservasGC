@@ -1,0 +1,31 @@
+{% extends 'reservasBundle:Admin:layout.html.twig' %}
+{% block content %}
+<main class="valign-wrapper center-align">
+  <div class="row">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Correos <span class="material-icons">library_add</span></span>
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for correo in correos %}
+                <tr>
+                    <td>{{correo.nombre}}</td>
+                    <td>{{correo.apellidos}}</td>
+                    <td>{{correo.email}}</td>
+                    <td><a href="/admin/boletin/delete/{{correo.idcorreos}}"><i class="material-icons">delete</i></a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+      </div>
+  </div>
+</main>
+{% endblock %}
