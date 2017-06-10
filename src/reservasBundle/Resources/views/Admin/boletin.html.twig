@@ -1,30 +1,42 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
 
-<main class="valign-wrapper center-align">
-    <div class=" container row" >
-      {% for plantilla in plantillas %}
-        <div class="row">
-          <div class="card col s12">
-            <div class="card-content">
-              <span class="card-title brown darken-4 white-text">
-              {{plantilla.asunto}}
-              <a href="/admin/boletin/edit/{{plantilla.idmisplantillas}}" class="material-icons">edit</a>
-              <a href="/admin/boletin/send/{{plantilla.idmisplantillas}}" class="material-icons">send</a>
-            </span>
-              <div class="row">
-                  <div class="col s12 left-align">
-                    {{plantilla.texto}}
-                  </div>
-              </div>
-            </div>
 
+  <main class="valign-wrapper center-align ">
+      <div class=" container row">
+        <div class="row" style="margin-top: 20%">
+          <div class="col ">
+            <ul class="collection">
+                <li class="collection-item"><a href="/admin/correos">Correos</a></li>
+                <li class="collection-item"><a href="/admin/boletin">Plantillas</a></li>
+            </ul>
+          </div>
+          <div class="col s12  l10 ">
+            {% for plantilla in plantillas %}
+              <div class="row">
+                <div class="card col s12">
+                  <div class="card-content">
+                    <span class="card-title brown darken-4 white-text">
+                    {{plantilla.asunto}}
+                    <a href="/admin/boletin/edit/{{plantilla.idmisplantillas}}" class="material-icons">edit</a>
+                    <a href="/admin/boletin/send/{{plantilla.idmisplantillas}}" class="material-icons">send</a>
+                  </span>
+                    <div class="row">
+                        <div class="col s12 left-align">
+                          {{plantilla.texto}}
+                        </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            {% endfor %}
           </div>
 
         </div>
-      {% endfor %}
 
-    </div>
-</main>
+      </div>
+  </main>
 
 {% endblock %}

@@ -91,6 +91,48 @@ class AdminController extends Controller
       }
       return true;
   }
+  public function sendboletinAction(Request $request, $id){
+
+    if (self::isAuthorized()== false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $plantilla = $em->getRepository('reservasBundle:Misplantillas')
+    ->findByIdmisplantillas($id)[0];
+    $correos = $em->getRepository('reservasBundle:Correos')->findAll();
+    if ($request->isMethod('POST')) {
+      if ($request->get('send') && $request->get('correos')) {
+        foreach ($request->get('correos') as $key => $correo) {
+          $mail = new \Swift_Message($plantilla->getAsunto());
+          $mail->setTo($correo)
+          ->setFrom('send@email.es')
+          ->setBody($plantilla->getTexto());
+          $this->get('mailer')->send($mail);
+        }
+        return $this->redirect('/admin/boletin/completado');
+      }
+    }
+    return $this->render('reservasBundle:Admin:sendboletin.html.twig',array(
+      'plantilla'=>$plantilla,
+      'correos'=>$correos
+    ));
+  }
+  public function correosAction(){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $correos = $em->getRepository('reservasBundle:Correos')->findAll();
+    return $this->render('reservasBundle:Admin:correos.html.twig',array(
+      'correos'=>$correos
+    ));
+  }
+  public function sendboletincompletedAction(){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    return $this->render('reservasBundle:Admin:emailcompletado.html.twig');
+  }
   public function editboletinAction(Request $request, $id){
     if (self::isAuthorized()==false) {
       return $this->redirect('/admin/login');
