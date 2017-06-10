@@ -10,6 +10,7 @@ use reservasBundle\Entity\MenuHasAlergenos;
 use reservasBundle\Entity\Servicios;
 use reservasBundle\Entity\Menu;
 use reservasBundle\Entity\Usuario;
+use reservasBundle\Entity\Correos;
 use reservasBundle\Entity\Listanegra;
 use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Form\ReservasType;
@@ -116,6 +117,24 @@ class AdminController extends Controller
       'plantilla'=>$plantilla,
       'correos'=>$correos
     ));
+  }
+  public function addcorreosAction(Request $request){
+      if (self::isAuthorized()==false) {
+        return $this->redirect('/admin/login');
+      }
+      $em = $this->getDoctrine()->getEntityManager();
+      if ($request->isMethod('POST')) {
+        if ($request->get('add')) {
+            $correo = new Correos();
+            $correo->setNombre($request->get('nombre'));
+            $correo->setApellidos($request->get('apellidos'));
+            $correo->setEmail($request->get('correo'));
+            $em->persist($correo);
+            $em->flush();
+            return $this->redirect('/admin/correos');
+        }
+      }
+      return $this->render('reservasBundle:Admin:addcorreos.html.twig');
   }
   public function correosAction(){
     if (self::isAuthorized()==false) {
