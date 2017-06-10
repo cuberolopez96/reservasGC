@@ -75,8 +75,11 @@ class AdminController extends Controller
     }
     $em = $this->getDoctrine()->getEntityManager();
     $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
+    $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findByIdestadoreserva(1)[0];
+    $reservas = $em->getRepository('reservasBundle:Reservas')->findByEstadoreservaestadoreserva($estadoreserva);
     return $this->render('reservasBundle:Admin:listados.html.twig', array(
-      'listanegra'=>$listanegra
+      'listanegra'=>$listanegra,
+      'reservas'=>$reservas
     ));
   }
   //importante metodo interno no enrutar
@@ -379,6 +382,17 @@ class AdminController extends Controller
         'menus' => $menus
       ));
     }
+    public function reservasserviciosAction($id){
+        if (self::isAuthorized()==false) {
+          return $this->redirect('/admin/login');
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id);
+        $reservas= $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+        return $this->render('reservasBundle:Admin:reservas.html.twig',array(
+          'reservas'=>$reservas
+        ));
+    }
     public function addserviciosAction(Request $request){
       if (self::isAuthorized()==false) {
         return $this->redirect('/admin/login');
@@ -428,7 +442,7 @@ class AdminController extends Controller
           return $this->redirect('/admin/login');
       }
       $em = $this->getDoctrine()->getEntityManager();
-      $servicios = $em->getRepository("reservasBundle:Servicios")->findAll();
+      $servicios = $em->getRepository("reservasBundle:Servicios")->findByToday();
       return $this->render("reservasBundle:Admin:servicios.html.twig",array('servicios'=>$servicios));
     }
     public function configAction(Request $request){
