@@ -275,17 +275,7 @@ class AdminController extends Controller
       return $this->redirect('/admin/reservas');
 
     }
-    public function reservasAction(){
-      if (self::isAuthorized() == false) {
-        return $this->redirect('/admin/login');
-      }
-      $em = $this->getDoctrine()->getEntityManager();
-      $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
-      $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
-      return $this->render('reservasBundle:Admin:reservas.html.twig',array('reservas'=>$reservas,
-      'alergenos'=>$alergenos
-      ));
-    }
+    
     public function deleteserviciosAction($id){
       if (self::isAuthorized() == false) {
         return $this->redirect('/admin/login');
@@ -389,8 +379,10 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id);
         $reservas= $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+        $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
         return $this->render('reservasBundle:Admin:reservas.html.twig',array(
-          'reservas'=>$reservas
+          'reservas'=>$reservas,
+          'alergenos'=>$alergenos
         ));
     }
     public function addserviciosAction(Request $request){
