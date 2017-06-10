@@ -6,11 +6,7 @@ main{
   *background-repeat: no-repeat;
 }
 
-.tarjetaReserva{
-  padding-top: 1em !important;
-}
-
-h1{
+h1, h1 .material-icons{
   color: white;
 }
 
@@ -23,10 +19,21 @@ nav{
   margin-top: 2em !important;
 }
 
+.material-icons{
+  transition: 1s all;
+}
+
+.material-icons:hover{
+  transform:scale(1.3);
+}
+
 #navTitulo{
   display: none;
 }
 
+.tarjetaReserva{
+  padding-top: 1em !important;
+}
 
 @media screen and (min-width:994px){
   #navTitulo{
