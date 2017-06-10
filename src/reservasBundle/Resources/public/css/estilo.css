@@ -385,6 +385,18 @@ label.active{
   padding: 0 !important;
 }
 
+.sinPaddingBot{
+  padding-bottom: 0 !important;
+}
+
+.paddingTop1{
+  padding-top: 1.5em !important;
+}
+
+.paddingTop2{
+  padding-top: 4em !important;
+}
+
 
 /* RESPONSIVE */
 

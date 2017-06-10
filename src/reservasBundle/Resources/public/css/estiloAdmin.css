@@ -31,14 +31,6 @@ nav{
   display: none;
 }
 
-.paddingTop{
-  padding-top: 1.5em !important;
-}
-
-.sinPadding{
-  padding: 0 !important;
-}
-
 table{
   font-size: 1.3em !important;
   margin-bottom: 0;
