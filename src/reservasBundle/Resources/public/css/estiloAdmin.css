@@ -6,7 +6,7 @@ main{
   *background-repeat: no-repeat;
 }
 
-h1, h1 .material-icons{
+h1, h1 .material-icons, #titularTabla{
   color: white;
 }
 
@@ -31,8 +31,29 @@ nav{
   display: none;
 }
 
+.paddingTop{
+  padding-top: 1.5em !important;
+}
+
+.sinPadding{
+  padding: 0 !important;
+}
+
+table{
+  font-size: 1.5em !important;
+  margin-bottom: 0;
+}
+
+th, td{
+  border-radius: 0 !important;
+}
+
 .tarjetaReserva{
   padding-top: 1em !important;
+}
+
+#titularTabla{
+  background-color: #4a4a4a;
 }
 
 @media screen and (min-width:994px){
