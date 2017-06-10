@@ -372,8 +372,8 @@ td, th{
 }
 
 label.active{
-	font-size: 1em !important;
-	color: black !important;
+	font-size: 1.2rem !important;
+	color: #624A4D !important;
 }
 
 .errores{
@@ -383,6 +383,18 @@ label.active{
 
 .sinPadding{
   padding: 0 !important;
+}
+
+.sinPaddingBot{
+  padding-bottom: 0 !important;
+}
+
+.paddingTop1{
+  padding-top: 1.5em !important;
+}
+
+.paddingTop2{
+  padding-top: 4em !important;
 }
 
 
