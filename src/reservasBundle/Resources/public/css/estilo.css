@@ -381,6 +381,14 @@ label.active{
   border-radius: 0.2em !important;
 }
 
+.conPadding{
+  padding: 0.5em !important;
+}
+
+.sinMargin{
+  margin: 0 !important;
+}
+
 .sinPadding{
   padding: 0 !important;
 }
@@ -395,6 +403,10 @@ label.active{
 
 .paddingTop2{
   padding-top: 4em !important;
+}
+
+.paddingBot{
+  padding-botom: 1em !important;
 }
 
 

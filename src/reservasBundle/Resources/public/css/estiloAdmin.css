@@ -6,7 +6,7 @@ main{
   *background-repeat: no-repeat;
 }
 
-h1, h1 .material-icons, #titularTabla{
+h1, h1 .material-icons, #titularTabla, .titularCard{
   color: white;
 }
 
@@ -44,7 +44,7 @@ th, td{
   padding-top: 1em !important;
 }
 
-#titularTabla{
+#titularTabla, .titularCard{
   background-color: #4a4a4a;
 }
 

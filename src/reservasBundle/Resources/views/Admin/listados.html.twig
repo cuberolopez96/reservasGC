@@ -3,66 +3,72 @@
 <main class="valign-wrapper center-align paddingTop2">
   <div class="row">
     <header class="col s12">
-        <h1 class="center-align">Listados <a href="/admin/servicios/add"><i class="material-icons">library_add</i></a></h1>
+        <h1 class="center-align">Listados</h1>
     </header>
 
-    <div class="card col">
-      <div class="card-content sinPadding">
-            <header class="row">
-              <h4 class="col s12 center-align"> Lista Negra <a href="/admin/listanegra/add"><i class="material-icons">library_add</i></a></h4>
-            </header>
-            
-            <table class="bordered ">
-                <thead>
-                  <tr>
-                    <th>Correo</th>
-                  </tr>
-                </thead>
-                <tbody>
+<div class="col s6">
+  <div class="card">
+    <div class="card-content sinPadding">
+          <card-title class="row">
+            <h2 class="col s12 center-align titularCard sinMargin conPadding"> Lista Negra <a href="/admin/listanegra/add"><i class="material-icons">library_add</i></a></h2>
+          </card-title>
 
-                    {% for correo in listanegra %}
-                      <tr>
-                        <td>{{correo.correo}}</td>
-                        <td><a href="/admin/listanegra/delete/{{correo.idlistanegra}}" class="material-icons">delete</a></td>
-                      </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+          <table class="bordered ">
+              <thead>
+                <tr>
+                  <th>Correo</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                  {% for correo in listanegra %}
+                    <tr>
+                      <td>{{correo.correo}}</td>
+                      <td><a href="/admin/listanegra/delete/{{correo.idlistanegra}}" class="material-icons">delete</a></td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
 
 
-
-        </div>
 
       </div>
-    <div class="card col">
-      <div class="card-content sinPadding">
+
+    </div>
+</div>
+
+<div class="col s6">
+  <div class="card">
+    <div class="card-content sinPadding">
 
 
-            <card-title class="row">
-              <h2 class="col s12 center-align"> Lista Espera</h2>
-            </card-title>
-        <table class="bordered ">
-                <thead>
-                  <tr>
-                    <th>Correo</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <card-title class="row">
+            <h2 class="col s12 center-align titularCard sinMargin conPadding"> Lista Espera</h2>
+          </card-title>
+      <table class="bordered ">
+              <thead>
+                <tr>
+                  <th>Correo</th>
+                </tr>
+              </thead>
+              <tbody>
 
-                    {% for reserva in reservas %}
-                      <tr>
-                        <td>{{reserva.correo}}</td>
-                        <td><a href="/admin/listanegra/delete/{{reserva.idreservas}}" class="material-icons">delete</a></td>
-                      </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                  {% for reserva in reservas %}
+                    <tr>
+                      <td>{{reserva.correo}}</td>
+                      <td><a href="/admin/listanegra/delete/{{reserva.idreservas}}" class="material-icons">delete</a></td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
 
 
-
-        </div>
 
       </div>
+
+    </div>
+</div>
+
 
     </div>
 </main>
