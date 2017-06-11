@@ -37,7 +37,7 @@ reservas_admin_correos_add:
     defaults: {_controller: reservasBundle:Admin:addcorreos}
 reservas_admin_correos_delete:
     path: /admin/correos/delete/{id}
-    defaults: {_controller: reservasBundle:Admin:deletecorreos}
+    defaults: {_controller: reservasBundle:Admin:delete}
 reservas_admin_boletin:
     path: /admin/boletin
     defaults: {_controller: reservasBundle:Admin:boletin}
@@ -50,6 +50,9 @@ reservas_admin_boletin_edit:
 reservas_admin_boletin_send:
     path: /admin/boletin/send/{id}
     defaults: {_controller: reservasBundle:Admin:sendboletin}
+reservas_afmin_boletin_delete:
+    path: /admin/boletin/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deleteboletin}
 reservas_admin_boletin_completado:
     path: /admin/boletin/completado
     defaults: {_controller: reservasBundle:Admin:sendboletincompleted}

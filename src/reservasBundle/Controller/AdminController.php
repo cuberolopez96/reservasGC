@@ -173,6 +173,17 @@ class AdminController extends Controller
       'correos'=>$correos
     ));
   }
+  public function deleteboletinAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $plantilla = $em->getRepository('reservasBundle:Misplantillas')
+    ->findByIdmisplantillas($id)[0];
+    $em->remove($plantilla);
+    $em->flush();
+    return $this->redirect('/admin/boletin');
+  }
   public function sendboletincompletedAction(){
     if (self::isAuthorized()==false) {
       return $this->redirect('/admin/login');
