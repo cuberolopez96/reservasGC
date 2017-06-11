@@ -2,7 +2,23 @@
   let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
-
+    $('[id^="input(.*)"]').keyup(function(event){
+        console.log('hola');
+        let id, filtrados, value;
+        id = $(this).attr('id');
+        id = $id.replace('input','');
+        filtrados = $('.row'+$id);
+        search = $(this).val();
+        filtro = new RegExp(search);
+        $.each($filtrados,function(index,row){
+          value = row.val();
+          if (filtro.test(value) == false) {
+            row.css('display','none');
+          }else{
+            row.css('display','block');
+          }
+        });
+    });
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
 

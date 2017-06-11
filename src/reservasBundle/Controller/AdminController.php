@@ -299,7 +299,7 @@ class AdminController extends Controller
       return $this->redirect('/admin/menus');
     }
     public function editmenuAction(Request $request, $id){
-      if (self::isAuthorized()) {
+      if (self::isAuthorized()==false) {
         return $this->redirect('/admin/login');
       }
       $em = $this->getDoctrine()->getEntityManager();
@@ -337,7 +337,7 @@ class AdminController extends Controller
 
     }
     public function addmenuAction(Request $request){
-      if (self::isAuthorized()) {
+      if (self::isAuthorized()==false) {
         return $this->redirect('/admin/login');
       }
       $em = $this->getDoctrine()->getEntityManager();
