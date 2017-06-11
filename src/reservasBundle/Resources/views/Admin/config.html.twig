@@ -8,8 +8,28 @@
       <div class="card paddingTop1">
         <div class="card-content">
           <form class="" action="" method="post">
-            {{form_widget(form)}}
-            <input type="submit" class="button especial" name="" value="Guardar">
+            <div class="">
+              <label for="confirmacion">
+                Confirmación
+              </label>
+              <textarea id="confirmacionadmin" name="confirmacion" rows="8" cols="80">
+                {{config.confirmacion}}
+              </textarea>
+            </div>
+            <div class="">
+              <label for="listanegra">Lista Negra</label>
+              <textarea name="listanegra" id="listanegra" rows="8" cols="80">
+                {{config.listanegra}}
+              </textarea>
+            </div>
+            <div class="">
+              <label for="recordatorio" >Cancelacion</label>
+              <textarea name="recordatorio" id="recordatorio" rows="8" cols="80">
+                {{config.recordatorio}}
+              </textarea>
+            </div>
+
+            <input type="submit" class="button especial" name="guardar" value="Guardar">
           </form>
         </div>
 
