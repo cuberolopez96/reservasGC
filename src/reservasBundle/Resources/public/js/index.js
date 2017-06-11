@@ -2,20 +2,20 @@
   let Utils,Calendar,Servicios,serviciosdata,fechaActual;
 
   $(document).ready(function(){
-    $('[id^="input(.*)"]').keyup(function(event){
+    $('.filtro').keyup(function(event){
         console.log('hola');
         let id, filtrados, value;
         id = $(this).attr('id');
-        id = $id.replace('input','');
-        filtrados = $('.row'+$id);
+        id = id.replace('input','');
+        filtrados = $('.row'+id);
         search = $(this).val();
         filtro = new RegExp(search);
-        $.each($filtrados,function(index,row){
-          value = row.val();
+        $.each(filtrados,function(index,row){
+          value = row.textContent;
           if (filtro.test(value) == false) {
-            row.css('display','none');
+            row.parentNode.setAttribute('style','display:none');
           }else{
-            row.css('display','block');
+            row.parentNode.removeAttribute('style');
           }
         });
     });
