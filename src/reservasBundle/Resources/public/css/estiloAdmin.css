@@ -19,6 +19,10 @@ nav{
   margin-top: 2em !important;
 }
 
+.marginBot{
+  margin-bottom: 0.7em !important;
+}
+
 .material-icons{
   transition: 1s all;
 }
@@ -29,6 +33,10 @@ nav{
 
 #navTitulo{
   display: none;
+}
+
+.altoFijo{
+  min-height: 5em !important;
 }
 
 table{

@@ -6,30 +6,29 @@
 
     <div class="col s12">
       <div class="card paddingTop1">
-        <div class="card-content">
+        <div class="card-content sinPaddingBot">
           <form class="" action="" method="post">
-            <div class="">
-              <label for="confirmacion">
-                Confirmación
-              </label>
-              <textarea id="confirmacionadmin" name="confirmacion" rows="8" cols="80">
+            <div class="input-field col s12 l6 obs">
+              <label class="comoH3 labelEst" for="confirmacionadmin">Confirmación</label>
+              <textarea id="confirmacionadmin" class="materialize-textarea textareaEst" name="confirmacion">
                 {{config.confirmacion}}
               </textarea>
             </div>
-            <div class="">
-              <label for="listanegra">Lista Negra</label>
-              <textarea name="listanegra" id="listanegra" rows="8" cols="80">
+            <div class="input-field col s12 l6 obs">
+              <label class="comoH3 labelEst" for="listanegra">Lista Negra</label>
+              <textarea name="listanegra" id="listanegra" class="materialize-textarea textareaEst">
                 {{config.listanegra}}
               </textarea>
             </div>
-            <div class="">
-              <label for="recordatorio" >Cancelacion</label>
-              <textarea name="recordatorio" id="recordatorio" rows="8" cols="80">
+            <div class="input-field col s12 l6 obs">
+              <label class="labelEst" for="recordatorio" >Cancelacion</label>
+              <textarea name="recordatorio" id="recordatorio" class="materialize-textarea textareaEst">
                 {{config.recordatorio}}
               </textarea>
             </div>
-
-            <input type="submit" class="button especial" name="guardar" value="Guardar">
+            <div class="botones center-align conPadding">
+              <input type="submit" class="button especial" name="guardar" value="Guardar">
+            </div>
           </form>
         </div>
 
