@@ -15,7 +15,7 @@ class ConfigType extends AbstractType
     {
         $builder->add('confirmacion')->add('recordatorio')->add('listanegra')        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -1,19 +1,21 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
-<main>
+<main class="valign-wrapper paddingTop2">
 <div class="row">
-  <h1 class="col s12 center-align">Menús <a href="/admin/menus/add" class="material-icons">library_add</a></h1>
+  <header class="col s12">
+      <h1 class="center-align">Menús <a href="/admin/menus/add"><i class="material-icons">library_add</i></a></h1>
+  </header>
 
   <div class="col s12">
     <div class="card">
-      <div class="card-content">
-        <table class="bordered">
-          <thead>
+      <div class="card-content sinPadding">
+        <table class="bordered centered  highlight">
+          <thead id="titularTabla">
               <tr>
                 <th>Descripción</th>
-
+                <th></th>
+                <th></th>
               </tr>
-
           </thead>
           <tbody>
             {% for menu in menus %}

@@ -1,14 +1,18 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
-<main class="valign-wrapper center-align">
+<main class="valign-wrapper center-align paddingTop2">
   <div class="row">
+    <header class="col s12">
+        <h1 class="center-align">Listados <a href="/admin/servicios/add"><i class="material-icons">library_add</i></a></h1>
+    </header>
+
     <div class="card col">
-      <div class="card-content">
+      <div class="card-content sinPadding">
 
 
-            <header class="row">
-              <h4 class="col s12 center-align"> Lista Negra</h4>
-            </header>
+            <card-title class="row">
+              <h2 class="col s12 center-align"> Lista Negra</h2>
+            </card-title>
             <table class="bordered ">
                 <thead>
                   <tr>
@@ -32,12 +36,12 @@
 
       </div>
     <div class="card col">
-      <div class="card-content">
+      <div class="card-content sinPadding">
 
 
-            <header class="row">
-              <h4 class="col s12 center-align"> Lista Espera</h4>
-            </header>
+            <card-title class="row">
+              <h2 class="col s12 center-align"> Lista Espera</h2>
+            </card-title>
         <table class="bordered ">
                 <thead>
                   <tr>
