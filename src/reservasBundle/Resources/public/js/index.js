@@ -4,20 +4,25 @@
   $(document).ready(function(){
     $('.filtro').keyup(function(event){
         console.log('hola');
-        let id, filtrados, value;
+        let id, filtrados, value,bandera;
         id = $(this).attr('id');
         id = id.replace('input','');
         filtrados = $('.row'+id);
         search = $(this).val();
         filtro = new RegExp(search);
+        bandera = false;
         $.each(filtrados,function(index,row){
           value = row.textContent;
           if (filtro.test(value) == false) {
             row.parentNode.setAttribute('style','display:none');
           }else{
             row.parentNode.removeAttribute('style');
+            bandera = true;
           }
         });
+        if (bandera == false) {
+          $('.row'+id).parent().removeAttr('style');
+        }
     });
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
