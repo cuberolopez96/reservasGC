@@ -448,19 +448,20 @@ class AdminController extends Controller
       $em=$this->getDoctrine()->getEntityManager();
       $configs = $em->getRepository('reservasBundle:Config')->findAll();
       $config = $configs[0];
-      $form = $this->createForm(ConfigType::class,$config);
       if ($request->isMethod('POST')) {
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($config);
-            $em->flush();
-
-
+        if ($request->get('guardar')) {
+          $config->setConfirmacion($request->get('confirmacion'));
+          $config->setRecordatorio($request->get('recordatorio'));
+          $config->setListanegra($request->get('listanegra'));
+          $em->persist($config);
+          $em->flush();
+          return $this->redirect('/admin/config');
         }
+
     }
       return $this->render('reservasBundle:Admin:config.html.twig',array(
-        'form'=>$form->createView()
+        'config'=>$config
       ));
 
     }
