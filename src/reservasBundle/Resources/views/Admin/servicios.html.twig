@@ -21,13 +21,14 @@
                         <th></th>
                         <th></th>
                       </tr>
-                      {#<tr>
-                        <td><input type="text" name="" value=""></td>
-                        <td><input type="text" name="" value=""></td>
-                      </tr>#}
 
                     </thead>
                     <tbody>
+                      <tr>
+                        <td><input type="text" class ="filtro" id="inputFechaServicio"name="" value=""></td>
+                        <td><input type="text" class="filtro" id="inputPlazas" name="" value=""></td>
+                        <td><input type="text" class="filtro" id="inputPlazasOcupadas" name="" value=""></td>
+                      </tr>
                         {% for index,servicio in servicios %}
                           {% set plazasocupadas = 0 %}
                           {% for reserva in reservas %}
@@ -36,9 +37,9 @@
                               {% endif %}
                           {% endfor %}
                             <tr>
-                                <td>{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
-                                <td>{{servicio.plazas}}</td>
-                                <td>{{plazasocupadas}}</td>
+                                <td class="rowFechaServicio">{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
+                                <td class="rowPlazas">{{servicio.plazas}}</td>
+                                <td class="rowPlazasOcupadas">{{plazasocupadas}}</td>
                                 <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons">edit</i></a></td>
                                 <td><a href="/admin/servicios/delete/{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>
                                 <td><a href="/admin/servicios/{{servicio.idservicios}}/reservas"><i class="material-icons">assignment</i></a></td>
