@@ -381,6 +381,10 @@ label.active{
   border-radius: 0.2em !important;
 }
 
+.conMargin{
+  margin: 1em !important;
+}
+
 .conPadding{
   padding: 0.5em !important;
 }

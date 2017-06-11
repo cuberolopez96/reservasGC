@@ -1,32 +1,32 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
-<main class="valign-wrapper">
+<main class="valign-wrapper paddingTop2">
   <div class="row">
-    <h1 class="col s12 center-align">Configuración</h1>
+    <h1 class="col s12 center-align">Configuración de Recordatorios</h1>
 
-    <div class="col s12">
+    <div class="col s12 l8 offset-l2">
       <div class="card paddingTop1">
         <div class="card-content sinPaddingBot">
-          <form class="" action="" method="post">
-            <div class="input-field col s12 l6 obs">
+          <form class="row sinMargin" action="" method="post">
+            <div class="input-field col s12 obs sinMargin">
               <label class="comoH3 labelEst" for="confirmacionadmin">Confirmación</label>
-              <textarea id="confirmacionadmin" class="materialize-textarea textareaEst" name="confirmacion">
+              <textarea id="confirmacionadmin" class="textareaEst" name="confirmacion">
                 {{config.confirmacion}}
               </textarea>
             </div>
-            <div class="input-field col s12 l6 obs">
+            <div class="input-field col s12 obs">
               <label class="comoH3 labelEst" for="listanegra">Lista Negra</label>
-              <textarea name="listanegra" id="listanegra" class="materialize-textarea textareaEst">
+              <textarea name="listanegra" id="listanegra" class="textareaEst">
                 {{config.listanegra}}
               </textarea>
             </div>
-            <div class="input-field col s12 l6 obs">
-              <label class="labelEst" for="recordatorio" >Cancelacion</label>
-              <textarea name="recordatorio" id="recordatorio" class="materialize-textarea textareaEst">
+            <div class="input-field col s12 obs">
+              <label class="labelEst" for="recordatorio" >Cancelación</label>
+              <textarea name="recordatorio" id="recordatorio" class="textareaEst">
                 {{config.recordatorio}}
               </textarea>
             </div>
-            <div class="botones center-align conPadding">
+            <div class="input-field col s12 center-align conPadding conMargin">
               <input type="submit" class="button especial" name="guardar" value="Guardar">
             </div>
           </form>
