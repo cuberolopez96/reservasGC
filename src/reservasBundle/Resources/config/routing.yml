@@ -23,6 +23,9 @@ reservas_admin_listados:
 reservas_admin_listanegra_add:
     path: /admin/listanegra/add
     defaults: {_controller: reservasBundle:Admin:addlistanegra }
+reservas_admin_listanegra_remove:
+    path: /admin/listanegra/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deletelistanegra}
 reservas_admin_menus:
     path: /admin/menus
     defaults: {_controller: reservasBundle:Admin:menus }
@@ -32,6 +35,9 @@ reservas_admin_correos:
 reservas_admin_correos_add:
     path: /admin/correos/add
     defaults: {_controller: reservasBundle:Admin:addcorreos}
+reservas_admin_correos_delete:
+    path: /admin/correos/delete/{id}
+    defaults: {_controller: reservasBundle:Admin:deletecorreos}
 reservas_admin_boletin:
     path: /admin/boletin
     defaults: {_controller: reservasBundle:Admin:boletin}

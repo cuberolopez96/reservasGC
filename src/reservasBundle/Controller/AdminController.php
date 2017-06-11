@@ -52,6 +52,17 @@ class AdminController extends Controller
       }
       return $this->render("reservasBundle:Admin:login.html.twig",array('errores'=>$errores));
   }
+  public function deletelistanegraAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $listanegra = $em->getRepository('reservasBundle:Listanegra')
+    ->findByIdlistanegra($id)[0];
+    $em->remove($listanegra);
+    $em->flush();
+    return $this->redirect('/admin/listados');
+  }
   public function addlistanegraAction(Request $request){
     if (self::isAuthorized() == false) {
       return $this->redirect('/login');
@@ -120,6 +131,19 @@ class AdminController extends Controller
       'plantilla'=>$plantilla,
       'correos'=>$correos
     ));
+  }
+  public function deletecorreosAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $correo = $em->getRepository('reservasBundle:Correos')
+    ->findByIdcorreos($id)[0];
+    $em->remove($correo);
+    $em->flush();
+    return $this->redirect('/admin/correos');
+
+
   }
   public function addcorreosAction(Request $request){
       if (self::isAuthorized()==false) {
