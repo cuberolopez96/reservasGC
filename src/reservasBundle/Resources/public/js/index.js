@@ -24,6 +24,20 @@
           $('.row'+id).parent().removeAttr('style');
         }
     });
+    // Si estamos en admin servicios
+    if (window.location.pathname === '/admin/servicios') {
+      $('.modaldelete').click(function(event){
+        let idservicio = $(this).attr('servicio');
+        event.preventDefault();
+        $('#modal1').modal();
+        $('#modal1').modal('open');
+        $('#delete').click(function(event){
+          event.preventDefault();
+          window.location.pathname="/admin/servicios/delete/"+idservicio;
+        });
+      })
+    }
+
     // Si estamos en consultar
     if (window.location.pathname === '/consultar') {
 

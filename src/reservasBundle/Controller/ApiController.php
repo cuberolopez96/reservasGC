@@ -31,6 +31,17 @@ class ApiController extends Controller
         }
         return true;
     }
+    public function removeReserva($reserva){
+      self::deleteAlergenosByReserva($reserva);
+      $message = new \Swift_Message('Se ha Anulado su reserva');
+      $message->setTo($reserva->getCorreo());
+      $message->setFrom('send@email.com');
+      $message->setBody('se ha eliminado su reserva pongase en contacto con el administrador');
+      $this->get('mailer')->send($message);
+      $em = $this->getDoctrine()->getEntityManager();
+      $em->remove($reserva);
+      $em->flush();
+    }
 
     public function reservasAction(){
       $em = $this->getDoctrine()->getEntityManager();
@@ -45,8 +56,7 @@ class ApiController extends Controller
     public function deletereservasAction(Request $request){
       $em = $this->getDoctrine()->getEntityManager();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($request->get('id'))[0];
-      $em->remove($reserva);
-      $em->flush();
+      self::removeReserva($reserva);
       $response = new JsonResponse(true);
       return $response;
 
@@ -78,6 +88,11 @@ class ApiController extends Controller
         $em->persist($reservashasalergenos);
         $em->flush();
       }
+      $message = new \Swift_Message('Se ha editado su reserva');
+      $message->setTo($reserva->getCorreo());
+      $message->setFrom('send@email.com');
+      $message->setBody('Se ha editado su reserva');
+      $this->get('mailer')->send($message);
       $response =  new JsonResponse(true);
       return $response;
     }
@@ -118,7 +133,11 @@ class ApiController extends Controller
           $em->persist($reservashasalergenos);
           $em->flush();
         }
-
+        $message = new \Swift_Message('Se ha realizado su reserva');
+        $message->setTo($reservas->getCorreo());
+        $message->setFrom('send@email.com');
+        $message->setBody('Se ha añadido su reserva con exito');
+        $this->get('mailer')->send($message);
         $response = new JsonResponse($reservas->toArray());
         return $response;
       } catch (Exception $e) {

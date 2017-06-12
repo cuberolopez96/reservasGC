@@ -27,6 +27,33 @@ class AdminController extends Controller
     }
     return $bandera;
   }
+  public function sendBoletinToOrders($reservas, \Swift_Message $message){
+    foreach ($reservas as $key => $reserva) {
+      print_r($reserva->getCorreo());
+      $message->setTo($reserva->getCorreo());
+      $this->get('mailer')->send($message);
+    }
+  }
+  public function removeReserva($reserva){
+    self::deleteAlergenosByReserva($reserva);
+    $em= $this->getDoctrine()->getEntityManager();
+    $message = new \Swift_Message('Se ha eliminado su reserva');
+    $message->setTo($reserva->getCorreo());
+    $message->setFrom('send@email.com');
+    $message->setBody('se ha eliminado su reserva, Pongase en contacto con el administrador');
+    $this->get('mailer')->send($message);
+    $em->remove($reserva);
+    $em->flush();
+  }
+  public function removeServicio($servicio){
+    $em= $this->getDoctrine()->getEntityManager();
+    $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+    foreach ($reservas as $key => $reserva) {
+      self::removeReserva($reserva);
+    }
+    $em->remove($servicio);
+    $em->flush();
+  }
   public function loginAction(Request $request){
       $em = $this->getDoctrine()->getEntityManager();
       $errores = "";
@@ -319,8 +346,7 @@ class AdminController extends Controller
 
       $servicio = $em->getRepository("reservasBundle:Servicios")
       ->findByIdservicios($id)[0];
-      $em->remove($servicio);
-      $em->flush();
+      self::removeServicio($servicio);
       return $this->redirect('/admin/servicios');
     }
     public function deletemenuAction(Request $request, $id){
@@ -462,7 +488,7 @@ class AdminController extends Controller
       $servicio = $em->getRepository("reservasBundle:Servicios")
       ->findByIdservicios($id)[0];
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
-
+      $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
             $fecha = $request->get('fecha').' '.$request->get('hora');
@@ -474,6 +500,10 @@ class AdminController extends Controller
             $servicio->setPlazas($request->get('plazas'));
             $em->persist($servicio);
             $em->flush();
+            $message = new \Swift_Message('Cambio en El servicio');
+            $message->setFrom('send@email.com');
+            $message->setBody('Se ha cambiado el servicio , pongase en contacto con el administrador');
+            self::sendBoletinToOrders($reservas,$message);
             return $this->redirect('/admin/servicios');
         }
 
