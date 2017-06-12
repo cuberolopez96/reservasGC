@@ -1,29 +1,31 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
+<main class="valign-wrapper paddingTop2">
 <div class="row">
+  <header class="col s12">
+    <h1 class="col s12 center-align">Editar Menú</h1>
+  </header>
+
   <div class="col s12">
     <div class="card">
-      <div class="card content">
-          <header class="row">
-              <h4 class="col s12 center-align">Editar Menu</h4>
-          </header>
+      <div class="card-content paddingTop1">
           <form class="" action="/admin/menus/editar/{{menu.idmenu}}" method="post">
             <div class="row">
-              <div class="col s12">
-                  <label for="">Precio</label>
-                  <input type="number" step="any" name="precio" min="0" value="{{menu.precio}}">
+              <div class="col s12 m9">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" class="textareaEst" name="descripcion" rows="8" cols="80">
+                  {{menu.descripción}}
+                </textarea>
+              </div>
+
+              <div class="col s12 m3">
+                  <label>Precio</label>
+                  <input class="inputEst" type="number" step="any" name="precio" min="0" value="{{menu.precio}}">
               </div>
             </div>
-              <div class="row">
-                <div class="col s12">
-                  <label for="descripcion">Descripción</label>
-                  <textarea id="descripcion" name="descripcion" rows="8" cols="80">
-                    {{menu.descripción}}
-                  </textarea>
-                </div>
 
-              </div>
-              <div class="row">
+            <div class="row">
+              <label class="col s12 comoH3 marginBot">Alérgenos</label>
                 {% for alergeno in alergenos %}
                 {% set checked = "" %}
                 {% for malergeno in myalergenos %}
@@ -38,7 +40,11 @@
 
                 {% endfor %}
               </div>
-              <input type="submit" class="button especial" name="guardar" value="Guardar">
+            <div class="row sinMargin">
+                <div class="col s12 center-align">
+                  <input type="submit" class="button especial" name="guardar" value="Editar">
+                </div>
+              </div>
           </form>
       </div>
     </div>
@@ -46,4 +52,5 @@
   </div>
 
 </div>
+</main>
 {% endblock %}

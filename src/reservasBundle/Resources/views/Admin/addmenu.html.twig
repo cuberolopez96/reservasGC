@@ -1,29 +1,31 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
+<main class="valign-wrapper paddingTop2">
 <div class="row">
+  <header class="col s12">
+    <h1 class="center-align">Añadir Menú</h1>
+  </header>
+
   <div class="col s12">
     <div class="card">
-      <div class="card content">
-          <header class="row">
-            <h2 class="col s12 center-align">Añadir menú</h2>
-          </header>
+      <div class="card-content paddingTop1">
           <form class="" action="/admin/menus/add" method="post">
             <div class="row">
-              <div class="col s12">
-                  <label for="">Precio</label>
-                  <input  type="number" step="any" name="precio" min="0" value="">
+              <div class="col s12 m9">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" class="textareaEst sinPadding" name="descripcion" rows="8" cols="80">
+                  Texto por defecto
+                </textarea>
+              </div>
+
+              <div class="col s12 m3">
+                  <label class="comoH3">Precio</label>
+                  <input  class="inputEst sinPadding center-align" type="number" step="any" name="precio" min="0" value="">
               </div>
             </div>
-              <div class="row">
-                <div class="col s12">
-                  <label for="descripcion">Descripción</label>
-                  <textarea id="descripcion" name="descripcion" rows="8" cols="80">
-                    Texto por defecto
-                  </textarea>
-                </div>
 
-              </div>
               <div class="row">
+                <label class="col s12 comoH3 marginBot">Alérgenos</label>
                 {% for alergeno in alergenos %}
                   <div class="col s12 l2">
                       <input type="checkbox" id="{{alergeno.nombre}}" class="filled_in" name="alergenos[]" value="{{alergeno.nombre}}">
@@ -31,7 +33,12 @@
                   </div>
                 {% endfor %}
               </div>
-              <input type="submit" class="button especial" name="add" value="Add">
+
+              <div class="row sinMargin">
+                  <div class="col s12 center-align">
+                    <input type="submit" class="button especial" name="add" value="Añadir">
+                  </div>
+              </div>
           </form>
       </div>
     </div>
@@ -39,4 +46,5 @@
   </div>
 
 </div>
+</main>
 {% endblock %}

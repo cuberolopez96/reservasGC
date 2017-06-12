@@ -1,36 +1,42 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
+<main class="valign-wrapper paddingTop2">
 <div class="row">
+  <header class="col s12">
+      <h1 class="center-align">Editar Reserva</h1>
+  </header>
+
+  <div class="col s12">
     <div class="card">
-      <div class="card-content">
+      <div class="card-content paddingTop1">
               <form class="" action="/admin/reservas/editar/{{reserva.idreservas}}" method="post">
                 <div class="row">
                   <div class="col s12 l3">
                       <label for="">Nombre</label>
-                      <input type="text" name="nombre" value="{{reserva.nombre}}" required>
+                      <input class="inputEst" type="text" name="nombre" value="{{reserva.nombre}}" required>
                   </div>
 
                   <div class="col s12 l3">
                       <label for="">Apellidos</label>
-                      <input type="text" name="apellidos" value="{{reserva.apellidos}}" required>
+                      <input class="inputEst" type="text" name="apellidos" value="{{reserva.apellidos}}" required>
                   </div>
                   <div class="col s12 l3">
                       <label for="">Correo</label>
-                      <input type="text" name="correo" value="{{reserva.correo}}" required>
+                      <input class="inputEst" type="text" name="correo" value="{{reserva.correo}}" required>
                   </div>
                   <div class="col s12 l3">
                       <label for="">Telefono</label>
-                      <input type="text" name="telefono" value="{{reserva.telefono}}" required>
+                      <input class="inputEst" type="text" name="telefono" value="{{reserva.telefono}}" required>
                   </div>
               </div>
               <div class="row">
                 <div class="col s12 l6">
                     <label for="">Observaciones</label>
-                    <textarea name="observaciones" rows="8" cols="80">{{reserva.observaciones}}</textarea>
+                    <textarea class="textareaEst" name="observaciones" rows="8" cols="80">{{reserva.observaciones}}</textarea>
                 </div>
                 <div class="col s12 l6">
-                    <label for="">Estado de la reserva</label>
-                    <select class="" name="estado">
+                    <label class="comoH3">Estado de la reserva</label>
+                    <select name="estado">
                       {% for estado in estadosreserva %}
                           <option value="{{estado.idestadoreserva}}">{{estado.nombre}}</option>
                       {% endfor %}
@@ -39,6 +45,7 @@
                 </div>
               </div>
               <div class="row">
+                <label class="col s12 comoH3 marginBot">Alérgenos</label>
                 {% for alergeno in alergenos %}
                       {% set checked = "" %}
                       {% for malergeno in myalergenos %}
@@ -52,10 +59,15 @@
                       </div>
                 {% endfor %}
               </div>
-              <input type="submit" class="button especial" name="guardar" value="guardar">
+
+              <div class="center-align">
+                <input type="submit" class="button especial" name="guardar" value="Editar">
+              </div>
               </form>
       </div>
 
     </div>
+  </div>
 </div>
+</main>
 {% endblock %}

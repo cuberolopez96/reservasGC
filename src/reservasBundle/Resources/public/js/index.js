@@ -49,12 +49,12 @@
                 '</div>'+
                 '<div class="row">'+
                 '<p class="col s5 offset-s1 left-align"><strong>Hora prevista de llegada: '+Utils.timeStringFormat(Utils.converToDate(data.HoraLlegada.date))+'</p>'+
-                '<p class="col s5  left-align"><strong>Numero de personas: '+ data.NPersonas +'</p>'+
+                '<p class="col s5  left-align"><strong>Número de personas: '+ data.NPersonas +'</p>'+
                 '</div>'+
 
                 '<div class="row">'+
-                '<p class="col s5 left-align offset-s1"><strong>Telefono:</strong> '+ data.Telefono + '</p>'+
-                '<p class="col s5 left-align"><strong>Alergenos:</strong> '+ stralergenos + '</p>'+
+                '<p class="col s5 left-align offset-s1"><strong>Teléfono:</strong> '+ data.Telefono + '</p>'+
+                '<p class="col s5 left-align"><strong>Alérgenos:</strong> '+ stralergenos + '</p>'+
                 '</div>'+
                 '<div class="row">'+
                 '<p class="col s12"><strong>Observaciones:</strong> ' + data.Observaciones + '</p>'+

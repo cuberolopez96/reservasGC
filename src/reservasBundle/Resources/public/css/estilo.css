@@ -413,6 +413,13 @@ label.active{
   padding-botom: 1em !important;
 }
 
+.paddingIzda{
+  padding-left: 1em !important;
+}
+
+.minus{
+    text-transform: capitalize !important;
+}
 
 /* RESPONSIVE */
 

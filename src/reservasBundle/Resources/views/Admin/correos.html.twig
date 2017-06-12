@@ -2,15 +2,21 @@
 {% block content %}
 <main class="valign-wrapper center-align">
   <div class="row">
+
+    <header class="col s12">
+        <h1 class="center-align">Correos</h1>
+    </header>
+
+    <div class="col s12">
       <div class="card">
-        <div class="card-content">
-          <span class="card-title">Correos <a class="material-icons">library_add</a></span>
+        <div class="card-content sinPadding">
           <table class="bordered">
-            <thead>
+            <thead id="titularTabla">
               <tr>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Email</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -24,8 +30,10 @@
               {% endfor %}
             </tbody>
           </table>
-
+        </div>
       </div>
+    </div>
+
   </div>
 </main>
 {% endblock %}
