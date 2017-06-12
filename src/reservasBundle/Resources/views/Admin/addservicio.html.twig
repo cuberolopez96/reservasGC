@@ -28,6 +28,14 @@
                     <input class="inputEst center-align sinPadding" type="number" min="0" name="plazas" value="1">
                   </div>
                   <div class="col s12">
+                    <label class="labelEst left" for="">Menus</label>
+                    <select class="inputEst" name="menu">
+                        {% for menu in menus %}
+                            <option value="{{menu.idmenu}}">{{menu.descripción}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col s12">
                     <input type="submit" class="button especial" name="guardar" value="Añadir">
                   </div>
                 </div>

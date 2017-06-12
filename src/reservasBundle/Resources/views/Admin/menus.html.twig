@@ -13,6 +13,7 @@
           <thead id="titularTabla">
               <tr>
                 <th>Descripción</th>
+                <th>Precio</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -21,6 +22,7 @@
             {% for menu in menus %}
                 <tr>
                   <td>{{menu.descripción}}</td>
+                  <td>{{menu.precio}}</td>
                   <td><a href="/admin/menus/editar/{{menu.idmenu}}" class="material-icons">edit</a></td>
                   <td><a href="/admin/menus/delete/{{menu.idmenu}}" class="material-icons">delete</a></td>
                 </tr>

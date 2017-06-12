@@ -378,7 +378,6 @@ class AdminController extends Controller
       $em = $this->getDoctrine()->getEntityManager();
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
-
       if ($request->isMethod('POST')) {
         $menu->setDescripción($request->get('descripcion'));
         $menu->setPrecio($request->get('precio'));
@@ -425,9 +424,13 @@ class AdminController extends Controller
         return $this->redirect('/admin/login');
       }
       $em = $this->getDoctrine()->getEntityManager();
+      $menus = $em->getRepository('reservasBundle:Menu')->findAll();
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
+          $menu = $em->getRepository('reservasBundle:Menu')
+          ->findByIdmenu($request->get('menu'))[0];
           $servicio = new Servicios();
+          $servicio->setMenumenu($menu);
           $fecha = $request->get('fecha').' '.$request->get('hora');
           $fecha = str_replace('/','-',$fecha);
           $servicio->setFechaservicio(new \DateTime($fecha));
@@ -437,7 +440,9 @@ class AdminController extends Controller
           return $this->redirect('/admin/servicios');
         }
       }
-      return $this->render('reservasBundle:Admin:addservicio.html.twig');
+      return $this->render('reservasBundle:Admin:addservicio.html.twig',
+        array('menus'=>$menus)
+      );
     }
     public function editserviciosAction($id, Request $request ){
       if (self::isAuthorized()==false) {
