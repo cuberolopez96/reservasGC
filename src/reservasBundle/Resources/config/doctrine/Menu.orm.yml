@@ -12,6 +12,13 @@ reservasBundle\Entity\Menu:
             generator:
                 strategy: IDENTITY
     fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nombre
         descripción:
             type: string
             nullable: true

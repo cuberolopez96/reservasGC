@@ -26,6 +26,9 @@ reservas_admin_listanegra_add:
 reservas_admin_listanegra_remove:
     path: /admin/listanegra/delete/{id}
     defaults: {_controller: reservasBundle:Admin:deletelistanegra}
+reservas_admin_menu:
+    path: /admin/menu/{id}
+    defaults: {_controller: reservasBundle:Admin:profilemenu}
 reservas_admin_menus:
     path: /admin/menus
     defaults: {_controller: reservasBundle:Admin:menus }
