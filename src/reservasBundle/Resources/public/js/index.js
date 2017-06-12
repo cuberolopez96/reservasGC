@@ -297,6 +297,7 @@
     observaciones: null,
     alergenos: null,
     horallegada: null,
+    HoraSugerida: null,
     EstadoReserva:null,
     npersonas: null,
     ReservasCache: null,
@@ -688,14 +689,18 @@
           $('.bservicio').click(function(){
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
+            Reservas.HoraSugerida = $(this).text();
+            console.log(Reservas.HoraSugerida);
             if (Reservas.EstadoReserva == 2) {
               $('#datos0').css("display",'none');
+              $('#horallegada').val(Reservas.HoraSugerida);
               $('#datos2').css("display",'block');
             }else{
               $('#modal1').modal();
               $('#modal1').modal('open');
               $('#Si').click(function(){
                 $('#datos0').css("display",'none');
+                $('#horallegada').val(Reservas.HoraSugerida);
                 $('#datos2').css("display",'block');
                 $('#modal1').modal('close');
               });
