@@ -117,4 +117,33 @@ class Menu
     {
         return $this->precio;
     }
+    /**
+     * @var string
+     */
+    private $nombre;
+
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return Menu
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
 }

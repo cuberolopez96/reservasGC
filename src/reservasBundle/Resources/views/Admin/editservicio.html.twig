@@ -24,6 +24,14 @@
                 <label class="left comoH3" for="">Plazas</label>
                 <input class="inputEst center-align sinPadding" type="number" min="0" name="plazas" value="{{servicio.plazas}}">
               </div>
+              <div class="col s12 ">
+                  <label for="">Menu</label>
+                  <select class="inputEst" name="menu">
+                      {% for menu in menus %}
+                        <option value="{{menu.idmenu}}">{{menu.nombre}}</option>
+                      {% endfor %}
+                  </select>
+              </div>
               <div class="row center-align">
                 <input type="submit" class="button especial" name="guardar" value="Editar">
               </div>

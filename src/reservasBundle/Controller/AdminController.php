@@ -406,17 +406,27 @@ class AdminController extends Controller
         'menus' => $menus
       ));
     }
+    public function profilemenuAction($id){
+        if (self::isAuthorized() == false) {
+          return $this->redirect('/admin/login');
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
+        return $this->render('reservasBundle:Admin:menu.html.twig',array('menu'=>$menu));
+
+    }
     public function reservasserviciosAction($id){
         if (self::isAuthorized()==false) {
           return $this->redirect('/admin/login');
         }
         $em = $this->getDoctrine()->getEntityManager();
-        $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id);
+        $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
         $reservas= $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
         $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
         return $this->render('reservasBundle:Admin:reservas.html.twig',array(
           'reservas'=>$reservas,
-          'alergenos'=>$alergenos
+          'alergenos'=>$alergenos,
+          'servicio'=>$servicio
         ));
     }
     public function addserviciosAction(Request $request){
@@ -451,21 +461,27 @@ class AdminController extends Controller
       $em = $this->getDoctrine()->getEntityManager();
       $servicio = $em->getRepository("reservasBundle:Servicios")
       ->findByIdservicios($id)[0];
-      $form = $this->createForm(ServiciosType::class,$servicio);
+      $menus = $em->getRepository('reservasBundle:Menu')->findAll();
+
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
             $fecha = $request->get('fecha').' '.$request->get('hora');
             $fecha = str_replace('/','-',$fecha);
+            $menu = $em->getRepository('reservasBundle:Menu')
+            ->findByIdmenu($request->get('menu'))[0];
+            $servicio->setMenumenu($menu);
             $servicio->setFechaservicio(new \DateTime($fecha));
             $servicio->setPlazas($request->get('plazas'));
             $em->persist($servicio);
             $em->flush();
+            return $this->redirect('/admin/servicios');
         }
 
 
       }
     return $this->render('reservasBundle:Admin:editservicio.html.twig',array(
       'servicio'=> $servicio,
+      'menus'=>$menus
 
     ));
     }

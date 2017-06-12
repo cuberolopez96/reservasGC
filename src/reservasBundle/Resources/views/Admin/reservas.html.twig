@@ -2,7 +2,21 @@
 {% block content %}
 <main class="valign-wrapper paddingTop2">
 <div class="row">
-  <h1 class="col s12 center-align">Reservas</h1>
+  <h1 class="col s12 center-align">Reservas
+
+    {% if servicio.menumenu !=false and servicio.menumenu != null %}
+        {% set menu = servicio.menumenu %}
+        <a href="/admin/menu/{{menu.idmenu}}" class="button especial">Ver Menu</a>
+    {% endif %}
+  </h1>
+
+  {% if reservas|length == 0 or reservas == false %}
+  <div class="card col s12">
+    <div class="card-content">
+        <span  class="card-title center-align"> Aún no se han realizado reservas para este servicio</span>
+    </div>
+  </div>
+  {% endif %}
   {% for reserva in reservas %}
     <div class="contenedorR col s12 m6">
       <div class="card">
@@ -28,9 +42,6 @@
 
         </div>
         <div class="card-action center-align">
-          {% if reserva.serviciosservicios.menumenu %}
-          <a href="#">Menú</a>
-          {% endif %}
           <a class="button especial2 minus" href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
           <a class="button especial minus" href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
         </div>
