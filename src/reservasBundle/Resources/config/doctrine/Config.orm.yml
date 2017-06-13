@@ -15,4 +15,11 @@ reservasBundle\Entity\Config:
             type: text
         listanegra:
             type: text
+        cancelacion:
+            type: text
+        edicionservicio:
+            type: text
+        edicionreserva:
+            type: text
+        
     lifecycleCallbacks: {  }

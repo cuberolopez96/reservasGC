@@ -109,4 +109,91 @@ class Config
     {
         return $this->listanegra;
     }
+    /**
+     * @var string
+     */
+    private $cancelacion;
+
+    /**
+     * @var string
+     */
+    private $edicionservicio;
+
+    /**
+     * @var string
+     */
+    private $edicionreserva;
+
+
+    /**
+     * Set cancelacion
+     *
+     * @param string $cancelacion
+     *
+     * @return Config
+     */
+    public function setCancelacion($cancelacion)
+    {
+        $this->cancelacion = $cancelacion;
+
+        return $this;
+    }
+
+    /**
+     * Get cancelacion
+     *
+     * @return string
+     */
+    public function getCancelacion()
+    {
+        return $this->cancelacion;
+    }
+
+    /**
+     * Set edicionservicio
+     *
+     * @param string $edicionservicio
+     *
+     * @return Config
+     */
+    public function setEdicionservicio($edicionservicio)
+    {
+        $this->edicionservicio = $edicionservicio;
+
+        return $this;
+    }
+
+    /**
+     * Get edicionservicio
+     *
+     * @return string
+     */
+    public function getEdicionservicio()
+    {
+        return $this->edicionservicio;
+    }
+
+    /**
+     * Set edicionreserva
+     *
+     * @param string $edicionreserva
+     *
+     * @return Config
+     */
+    public function setEdicionreserva($edicionreserva)
+    {
+        $this->edicionreserva = $edicionreserva;
+
+        return $this;
+    }
+
+    /**
+     * Get edicionreserva
+     *
+     * @return string
+     */
+    public function getEdicionreserva()
+    {
+        return $this->edicionreserva;
+    }
 }

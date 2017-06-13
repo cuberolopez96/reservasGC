@@ -27,6 +27,12 @@ reservasBundle\Entity\Servicios:
             options:
                 unsigned: false
             column: Plazas
+        plazasocupadas:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: PlazasOcupadas
     manyToOne:
         menumenu:
             targetEntity: Menu

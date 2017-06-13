@@ -37,10 +37,11 @@ class AdminController extends Controller
   public function removeReserva($reserva){
     self::deleteAlergenosByReserva($reserva);
     $em= $this->getDoctrine()->getEntityManager();
+    $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
     $message = new \Swift_Message('Se ha eliminado su reserva');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
-    $message->setBody('se ha eliminado su reserva, Pongase en contacto con el administrador');
+    $message->setBody($config->getCancelacion());
     $this->get('mailer')->send($message);
     $em->remove($reserva);
     $em->flush();
@@ -332,9 +333,8 @@ class AdminController extends Controller
       }
       $em = $this->getDoctrine()->getEntityManager();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
-      $em->remove($reserva);
-      $em->flush();
-      return $this->redirect('/admin/reservas');
+      self::removeReserva($reserva);
+      return $this->redirect('/admin/servicios');
 
     }
 
@@ -500,9 +500,10 @@ class AdminController extends Controller
             $servicio->setPlazas($request->get('plazas'));
             $em->persist($servicio);
             $em->flush();
+            $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
             $message = new \Swift_Message('Cambio en El servicio');
             $message->setFrom('send@email.com');
-            $message->setBody('Se ha cambiado el servicio , pongase en contacto con el administrador');
+            $message->setBody($config->getEdicionservicio());
             self::sendBoletinToOrders($reservas,$message);
             return $this->redirect('/admin/servicios');
         }
@@ -540,6 +541,9 @@ class AdminController extends Controller
           $config->setConfirmacion($request->get('confirmacion'));
           $config->setRecordatorio($request->get('recordatorio'));
           $config->setListanegra($request->get('listanegra'));
+          $config->setCancelacion($request->get('cancelacion'));
+          $config->setEdicionservicio($request->get('edicions'));
+          $config->setEdicionreserva($request->get('edicionr'));
           $em->persist($config);
           $em->flush();
           return $this->redirect('/admin/config');

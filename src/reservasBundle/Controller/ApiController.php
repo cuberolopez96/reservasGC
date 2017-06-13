@@ -33,10 +33,11 @@ class ApiController extends Controller
     }
     public function removeReserva($reserva){
       self::deleteAlergenosByReserva($reserva);
+      $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody('se ha eliminado su reserva pongase en contacto con el administrador');
+      $message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
       $em = $this->getDoctrine()->getEntityManager();
       $em->remove($reserva);
@@ -88,10 +89,11 @@ class ApiController extends Controller
         $em->persist($reservashasalergenos);
         $em->flush();
       }
+      $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
       $message = new \Swift_Message('Se ha editado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody('Se ha editado su reserva');
+      $message->setBody($config->getEdicionreserva());
       $this->get('mailer')->send($message);
       $response =  new JsonResponse(true);
       return $response;
@@ -109,6 +111,7 @@ class ApiController extends Controller
         $reservas->setTelefono($request->get('telefono'));
         $reservas->setObservaciones($request->get('observaciones'));
         $reservas->setNpersonas($request->get('npersonas'));
+        $servicio->setPlazasocupadas($servicio->getPlazasocupadas() + intval($request->get('npersonas')));
         $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
         $reservas->setServiciosservicios($servicio);
         $reservas->setEstadoreservaestadoreserva($estadoreserva);
@@ -119,6 +122,7 @@ class ApiController extends Controller
         }
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
+        $em->flush($servicio);
         $em->flush();
         $alergenos = [];
         if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
@@ -133,10 +137,11 @@ class ApiController extends Controller
           $em->persist($reservashasalergenos);
           $em->flush();
         }
+        $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
         $message = new \Swift_Message('Se ha realizado su reserva');
         $message->setTo($reservas->getCorreo());
         $message->setFrom('send@email.com');
-        $message->setBody('Se ha añadido su reserva con exito');
+        $message->setBody($config->getConfirmacion());
         $this->get('mailer')->send($message);
         $response = new JsonResponse($reservas->toArray());
         return $response;
@@ -156,19 +161,16 @@ class ApiController extends Controller
         $date = new \Datetime($request->get('fecha'));
 
         $em = $this->getDoctrine()->getEntityManager();
-        $plazas = $em->getRepository('reservasBundle:Reservas')->getPlazasOcupadas($request->get('id'));
+        $plazas = $em->getRepository('reservasBundle:Servicios')->findById($request->get('id'));
 
         $response = new JsonResponse($plazas);
         return $response;
     }
     public function serviciosAction(){
       $em = $this->getDoctrine()->getEntityManager();
-      $servicios = $em->getRepository('reservasBundle:Servicios')->findAll();
+      $servicios = $em->getRepository('reservasBundle:Servicios')->findByToday();
       $auxservicios = array();
-      foreach ($servicios as $key => $servicio) {
-        $auxservicios[]=$servicio->toArray();
-      }
-      $response = new JsonResponse($auxservicios);
+      $response = new JsonResponse($servicios);
       return $response;
     }
     public function serviciosbyidAction(Request $request){

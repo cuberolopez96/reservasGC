@@ -100,7 +100,7 @@ reservas_api_reservas:
     path: /api/reservas
     defaults: {_controller: reservasBundle:Api:reservas}
 reservas_api_reservas_plazas:
-    path: /api/reservas/plazas
+    path: /api/servicios/plazas
     defaults: {_controller: reservasBundle:Api:plazasrestantes}
     methods: POST
 reservas_api_reservas_alergenos:
