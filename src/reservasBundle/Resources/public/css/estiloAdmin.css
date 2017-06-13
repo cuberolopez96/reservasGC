@@ -77,6 +77,10 @@ th, td{
   font-weight: bold;
 }
 
+#colMala{
+  background: rgba(255,255,255,0.5);
+}
+
 
 @media screen and (min-width:602px){
   #colMala{
