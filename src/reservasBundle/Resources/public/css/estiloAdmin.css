@@ -56,6 +56,39 @@ th, td{
   background-color: #4a4a4a;
 }
 
+
+/* MANUAL USUARIO */
+
+#listadoEst{
+  border-radius: 0.2em !important;
+}
+
+#listadoEst i{
+  background-color: #624A4D;
+}
+
+#listadoEst .collection-header{
+  background-color: #624A4D;
+  color: white;
+  text-align: center;
+}
+
+#listadoEst .title{
+  font-weight: bold;
+}
+
+#colMala{
+  background: rgba(255,255,255,0.5);
+}
+
+
+@media screen and (min-width:602px){
+  #colMala{
+    display: flex;
+    align-items: center;
+  }
+}
+
 @media screen and (min-width:994px){
   table{
     font-size: 1em !important;
@@ -64,4 +97,5 @@ th, td{
   #navTitulo{
     display: inline-block;
   }
+
 }

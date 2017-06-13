@@ -556,6 +556,14 @@ class AdminController extends Controller
 
     }
 
+    public function manualAction(){
+      if (self::isAuthorized()==false) {
+          return $this->redirect('/admin/login');
+      }
+
+      return $this->render("reservasBundle:Admin:manual.html.twig");
+    }
+
 
 }
 
