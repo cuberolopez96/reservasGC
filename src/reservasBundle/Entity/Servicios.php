@@ -120,7 +120,7 @@ class Servicios
     /**
      * @var integer
      */
-    private $plazasocupadas;
+    private $plazasocupadas = 0;
 
 
     /**

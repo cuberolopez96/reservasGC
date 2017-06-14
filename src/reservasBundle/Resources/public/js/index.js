@@ -566,6 +566,12 @@
           return true;
         });
      },
+     colorearBCalendario(divservicios){
+       console.log(divservicios);
+       if(divservicios.children('.bservicio').length === 1){
+         divservicios.parent().children('.bcalendario').addClass(divservicios.children('.bservicio')[0].className).removeClass('bservicio');
+       }
+     },
      colorearServicios: function(servicio,bservicio){
 
 
@@ -574,26 +580,16 @@
            if (servicio.plazasdisponibles <= 0) {
              bservicio.addClass("colorOcupado");
              bservicio.attr('estado','1');
-             console.log(bservicio.parent().children('bservicio').length);
-             if (bservicio.parent().children('.bservicio').length === 1) {
-               bservicio.parent().parent().children('.bcalendario').addClass('colorOcupado');
-             }
              console.log("deberia de haber cambiado al color rojo");
            }else{
               if (parseInt(servicio.plazasocupadas) > porcentage) {
                   bservicio.addClass('colorPocoDisp');
                   bservicio.attr('estado','1');
-                  if (bservicio.parent().children('.bservicio').length === 1) {
-                    bservicio.parent().parent().children('.bcalendario').addClass('colorPocoDisp');
-                  }
+
               }else{
                   bservicio.addClass('colorDisponible');
                   bservicio.attr('estado','2');
-                  console.log('disponible');
-                  console.log(bservicio.parent().children());
-                  if (bservicio.parent().children('.bservicio').length === 1) {
-                      bservicio.parent().parent().children('.bcalendario').addClass('colorDisponible');
-                  }
+
               }
            }
          },
@@ -660,12 +656,13 @@
                       console.log(fecha);
 
                       bservicios = $('<button id ="'+ row.idservicios +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
-                      Calendar.colorearServicios(row, bservicios);
                       divservicios.append(bservicios);
+                      td.append(divservicios);
+                      Calendar.colorearServicios(row, bservicios,value[i]);
                    }
-                    td.append(divservicios);
                 });
                 tr.append(td);
+                Calendar.colorearBCalendario(divservicios);
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>');
               }
@@ -680,17 +677,19 @@
               divservicios = $('<div class="bservicios"></div>');
               servicios.forEach(function(row){
 
+                let fecha= Utils.converToDate(row.fechaservicio.date),
+                hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
-                    let fecha= Utils.converToDate(row.FechaServicio),
-                    hora=Utils.timeStringFormat(fecha);
 
-                    bservicios += '<button id="'+row.id+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>';
+                    bservicios = $('<button id="'+row.idservicios+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                     divservicios.append(bservicios);
+                    Calendar.colorearServicios(row, bservicios);
 
                   }
                   td.append(divservicios);
               });
               tr.append(td);
+              Calendar.colorearBCalendario(divservicios);
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
