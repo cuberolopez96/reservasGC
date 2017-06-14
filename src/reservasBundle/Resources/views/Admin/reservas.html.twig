@@ -2,21 +2,26 @@
 {% block content %}
 <main class="valign-wrapper paddingTop2">
 <div class="row">
-  <h1 class="col s12 center-align">Reservas
+  <h1 class="col s12 center-align">Reservas</h1>
 
+  <div class="col s12 center-align">
     {% if servicio.menumenu !=false and servicio.menumenu != null %}
-        {% set menu = servicio.menumenu %}
-        <a href="/admin/menu/{{menu.idmenu}}" class="button especial">Ver Menu</a>
+    {% set menu = servicio.menumenu %}
+    <a href="/admin/menu/{{menu.idmenu}}" class="button especial grande">Ver Menu</a>
     {% endif %}
-  </h1>
+  </div>
+
+<!--<div class="col s12">
+  <div class="row">-->
 
   {% if reservas|length == 0 or reservas == false %}
   <div class="card col s12">
-    <div class="card-content">
-        <span  class="card-title center-align"> Aún no se han realizado reservas para este servicio</span>
+    <div class="card-content paddingTop1">
+        <span  class="card-title center-align">Aún no se han realizado reservas para este servicio</span>
     </div>
   </div>
   {% endif %}
+
   {% for reserva in reservas %}
     <div class="contenedorR col s12 m6">
       <div class="card">
@@ -26,12 +31,12 @@
             <span><strong>Reserva de {{reserva.nombre}} {{reserva.apellidos}}</strong></span>
           </div>
           <div class="row conPadding">
-            <p class="col s12 m6"><strong>{{reserva.serviciosservicios.fechaservicio | date()}}</strong></p>
-            <p class="col s12 m6"><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
-            <p class="col s12 m6"><strong>Correo: </strong>{{reserva.correo}}</p>
-            <p class="col s12 m6"><strong>Telefono: </strong>{{reserva.telefono}}</p>
-            <p class="col s12 m6"><strong>Observaciones: </strong>{{reserva.observaciones}}</p>
-            <p class="col s12 m6"><strong>Alergenos :</strong>
+            <p class="col s12 l6"><strong>{{reserva.serviciosservicios.fechaservicio | date()}}</strong></p>
+            <p class="col s12 l6"><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
+            <p class="col s12 l6"><strong>Correo: </strong>{{reserva.correo}}</p>
+            <p class="col s12 l6"><strong>Telefono: </strong>{{reserva.telefono}}</p>
+            <p class="col s12 l6"><strong>Observaciones: </strong>{{reserva.observaciones}}</p>
+            <p class="col s12 l6"><strong>Alergenos :</strong>
               {% for alergeno in alergenos %}
               {% if alergeno.reservasreservas.idreservas == reserva.idreservas %}
               {{alergeno.alergenosalergenos.nombre}}
@@ -49,6 +54,8 @@
 
     </div>
   {% endfor %}
+<!--</div>
+</div>-->
 
 </div>
 </main>

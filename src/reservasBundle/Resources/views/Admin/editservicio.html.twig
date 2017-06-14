@@ -11,29 +11,29 @@
         <div class="card-content sinPaddingBot">
           <form class="" action="/admin/servicios/editar/{{servicio.idservicios}}" method="post">
             <div class="row">
-              <div class="col s12 l4">
+              <div class="col s12 l6">
                 <label class="left comoH3" for="">Fecha del Servicio</label>
                 <input class="inputEst center-align sinPadding" type="text" disabled name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{servicio.fechaservicio | date('d/m/Y')}}">
               </div>
-              <div class="col s12 l4">
-                <label class="left comoH3" for="">Hora</label>
+              <div class="col s12 l6">
+                <label class="left comoH3" for="">Hora del Servicio</label>
                 <input class="inputEst center-align sinPadding" type="text" name="hora" placehoder = "HH:ii" pattern="^([0-1][0-9]|[0-2][0-3]):[0-5][0-9]$" value="{{servicio.fechaservicio | date('H:i')}}">
 
               </div>
-              <div class="col s12 l4">
-                <label class="left comoH3" for="">Plazas</label>
+              <div class="col s12 l6">
+                <label class="left comoH3" for="">Plazas Máximas</label>
                 <input class="inputEst center-align sinPadding" type="number" min="0" name="plazas" value="{{servicio.plazas}}">
               </div>
-              <div class="col s12 ">
-                  <label for="">Menu</label>
-                  <select class="inputEst" name="menu">
+              <div class="col s12 l6">
+                  <label class="labelEst comoH3"for="">Menú</label>
+                  <select name="menu">
                       {% for menu in menus %}
                         <option value="{{menu.idmenu}}">{{menu.nombre}}</option>
                       {% endfor %}
                   </select>
               </div>
               <div class="row center-align">
-                <input type="submit" class="button especial" name="guardar" value="Editar">
+                <input type="submit" class="button especial" name="guardar" value="Guardar">
               </div>
             </div>
           </form>
