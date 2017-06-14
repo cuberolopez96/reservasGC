@@ -117,4 +117,33 @@ class Servicios
       );
       return $array;
     }
+    /**
+     * @var integer
+     */
+    private $plazasocupadas = 0;
+
+
+    /**
+     * Set plazasocupadas
+     *
+     * @param integer $plazasocupadas
+     *
+     * @return Servicios
+     */
+    public function setPlazasocupadas($plazasocupadas)
+    {
+        $this->plazasocupadas = $plazasocupadas;
+
+        return $this;
+    }
+
+    /**
+     * Get plazasocupadas
+     *
+     * @return integer
+     */
+    public function getPlazasocupadas()
+    {
+        return $this->plazasocupadas;
+    }
 }

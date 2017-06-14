@@ -2,29 +2,28 @@
 {% block content %}
 <main class="valign-wrapper center-align">
   <div class="row">
-    
-    <h1 class="col s12">Editar Plantilla</h1>
+
+    <h1 class="col s12">Editar Boletín</h1>
 
     <div class="col s12">
       <div class="card">
       <div class="card-content paddingTop1">
         <form class="" action="/admin/boletin/edit/{{plantilla.idmisplantillas}}" method="post">
           <div class="row">
-
             <div class="col s12 m6">
-              <label class="left" for="">Asunto</label>
-              <input class="inputEst sinPadding center-align" type="text" name="asunto" value="{{plantilla.asunto}}" required>
-            </div>
-
-            <div class="col s12 m6">
-              <label class="left"for="">Mensaje</label>
-              <textarea class="textareaEst" name="texto" rows="8" cols="80">
+              <label class="center"for="">Mensaje</label>
+              <textarea class="materialize-textarea textareaEst sinPadding center-align" name="texto" rows="8" cols="80">
                 {{plantilla.texto}}
               </textarea>
             </div>
 
+            <div class="col s12 m6">
+              <label class="left-align" for="">Asunto</label>
+              <input class="inputEst sinPadding center-align" type="text" name="asunto" value="{{plantilla.asunto}}" required>
+            </div>
+
             <div class="col s12">
-              <input type="submit" class="button especial" name="edit" value="Editar">
+              <input type="submit" class="button especial" name="edit" value="Guardar">
             </div>
           </div>
         </form>
