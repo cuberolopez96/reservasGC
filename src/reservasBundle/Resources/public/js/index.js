@@ -463,7 +463,7 @@
      },
      //devuelve las plazas ocupadas de un servicio
      getPlazasOcupadas: function(id, success = null){
-       Utils.postAjax('api/reservas/plazas',{
+       Utils.postAjax('api/servicios/plazas',{
          id: id
        },function(data){
          success(data);
@@ -499,7 +499,9 @@
        //Recorremos los servicios
       $.each(servicios,function(index,value){
          // la fecha del Servicio en un date;
-         dateServicio = Utils.converToDate(value.FechaServicio);
+
+         dateServicio = Utils.converToDate(value.fechaservicio.date);
+
          // Comparamos date y devolvemos true si es igual
          if (Utils.dateStringFormat(paramDate) === Utils.dateStringFormat(dateServicio)) {
            flag =  true;
@@ -522,7 +524,7 @@
           console.log('he entrado 2');
           $('#datos1  .row #servicios').empty();
           data.forEach(function(row){
-            console.log(row);
+
             Servicios.getPlazasOcupadas(row.Id, function(fila){
               let img = 'cardImageVerde.jpg';
               if (fila.length > 0) {
@@ -564,45 +566,33 @@
           return true;
         });
      },
-     colorearServicios: function(id,bservicio){
-       Servicios.getPlazasOcupadas(id,function(data){
-         if (data.length > 0) {
-           let diferencia= (parseInt(data[0].Plazas)-parseInt(data[0].POcupadas)),
-           porcentage = parseInt(data[0].Plazas) * 0.8;
-           if (diferencia < 0) {
+     colorearBCalendario(divservicios){
+       console.log(divservicios);
+       if(divservicios.children('.bservicio').length === 1){
+         divservicios.parent().children('.bcalendario').addClass(divservicios.children('.bservicio')[0].className).removeClass('bservicio');
+       }
+     },
+     colorearServicios: function(servicio,bservicio){
+
+
+
+           let porcentage = parseInt(servicio.plazas) * 0.8;
+           if (servicio.plazasdisponibles <= 0) {
              bservicio.addClass("colorOcupado");
              bservicio.attr('estado','1');
-             console.log(bservicio.parent().children('bservicio').length);
-             if (bservicio.parent().children('.bservicio').length === 1) {
-               bservicio.parent().parent().children('.bcalendario').addClass('colorOcupado');
-             }
              console.log("deberia de haber cambiado al color rojo");
            }else{
-              if (parseInt(data[0].POcupadas) > porcentage) {
+              if (parseInt(servicio.plazasocupadas) > porcentage) {
                   bservicio.addClass('colorPocoDisp');
                   bservicio.attr('estado','1');
-                  if (bservicio.parent().children('.bservicio').length === 1) {
-                    bservicio.parent().parent().children('.bcalendario').addClass('colorPocoDisp');
-                  }
+
               }else{
                   bservicio.addClass('colorDisponible');
                   bservicio.attr('estado','2');
-                  if (bservicio.parent().children('.bservicio').length === 1) {
-                      bservicio.parent().parent().children('.bcalendario').addClass('colorDisponible');
-                  }
+
               }
            }
-         }else{
-           bservicio.addClass("colorDisponible");
-           bservicio.attr('estado','2');
-           if (bservicio.parent().children('.bservicio').length === 1) {
-               bservicio.parent().parent().children('.bcalendario').addClass('colorDisponible');
-
-           }
-
-         }
-       })
-     },
+         },
      renderCalendar: function(servicios){
         let max,fecha,fechas, semana;
         fecha = new Date();
@@ -653,24 +643,26 @@
           tr = $('<tr id = "'+ index +'"></tr>');
           for (var i = 1; i < 7; i++) {
             if (value[i]) {
+              console.log(value[i]);
               if (Calendar.EnableDate(value[i],servicios)===true) {
                 td = $('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario" >'+value[i]+'</button></td>')
                 bservicios = "";
                 divservicios = $('<div class="bservicios "></div>');
                 servicios.forEach(function(row){
-
-                    let fecha= Utils.converToDate(row.FechaServicio),
+                    console.log(row + ' servicio');
+                    let fecha= Utils.converToDate(row.fechaservicio.date),
                     hora=Utils.timeStringFormat(fecha);
                     if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
                       console.log(fecha);
 
-                      bservicios = $('<button id ="'+ row.id +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
-                      Calendar.colorearServicios(row.id, bservicios);
+                      bservicios = $('<button id ="'+ row.idservicios +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                       divservicios.append(bservicios);
+                      td.append(divservicios);
+                      Calendar.colorearServicios(row, bservicios,value[i]);
                    }
-                    td.append(divservicios);
                 });
                 tr.append(td);
+                Calendar.colorearBCalendario(divservicios);
               }else{
                 tr.append('<td id="'+i+'">'+value[i]+'</td>');
               }
@@ -685,17 +677,19 @@
               divservicios = $('<div class="bservicios"></div>');
               servicios.forEach(function(row){
 
+                let fecha= Utils.converToDate(row.fechaservicio.date),
+                hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
-                    let fecha= Utils.converToDate(row.FechaServicio),
-                    hora=Utils.timeStringFormat(fecha);
 
-                    bservicios += '<button id="'+row.id+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>';
+                    bservicios = $('<button id="'+row.idservicios+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                     divservicios.append(bservicios);
+                    Calendar.colorearServicios(row, bservicios);
 
                   }
                   td.append(divservicios);
               });
               tr.append(td);
+              Calendar.colorearBCalendario(divservicios);
             }else{
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
@@ -767,7 +761,8 @@
       fecha  = fecha.split(' ');
       tiempo = fecha[1];
       fecha = fecha[0];
-      fecha = fecha.replace('-','/')
+      fecha = fecha.replace('-','/');
+      fecha = fecha.replace('-','/');
       fecha = fecha.split('/');
       day = fecha[2];
       month = fecha[1];

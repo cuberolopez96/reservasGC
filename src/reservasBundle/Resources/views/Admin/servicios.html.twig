@@ -26,6 +26,7 @@
                         <th>Fecha Servicio</th>
                         <th>Plazas</th>
                         <th>Plazas Ocupadas</th>
+                        <th>Plazas Disponibles</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -37,21 +38,18 @@
                         <td><input type="text" class ="filtro center-align" id="inputFechaServicio"name="" value=""></td>
                         <td><input type="text" class="filtro center-align" id="inputPlazas" name="" value=""></td>
                         <td><input type="text" class="filtro center-align" id="inputPlazasOcupadas" name="" value=""></td>
+                        <td><input type="text" class="filtro center-align" id="inputPlazasDisponibles" name="" value=""></td>
                         <td></td>
                         <td></td>
                         <td></td>
                       </tr>
                         {% for index,servicio in servicios %}
-                          {% set plazasocupadas = 0 %}
-                          {% for reserva in reservas %}
-                              {% if reserva.serviciosservicios.idservicios == servicio.idservicios %}
-                                {% set plazasocupadas = plazasocupadas + reserva.npersonas %}
-                              {% endif %}
-                          {% endfor %}
+
                             <tr>
                                 <td class="rowFechaServicio">{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
                                 <td class="rowPlazas">{{servicio.plazas}}</td>
-                                <td class="rowPlazasOcupadas">{{plazasocupadas}}</td>
+                                <td class="rowPlazasOcupadas">{{servicio.plazasocupadas}}</td>
+                                <td class="rowPlazasDisponibles">{{servicio.plazasdisponibles}}</td>
                                 <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons">edit</i></a></td>
                                 <td><a class="modaldelete" href="#" servicio="{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>
                                 <td><a href="/admin/servicios/{{servicio.idservicios}}/reservas"><i class="material-icons">assignment</i></a></td>
