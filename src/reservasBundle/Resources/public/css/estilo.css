@@ -16,9 +16,20 @@ body{
   background-color: #4a4a4a;
   color: white;
 }
+
+.bcalendario:hover, .bcalendario:focus, .bservicio:hover, .bservicio:focus{
+  background-color: silver !important;
+  color: #333 !important;
+}
+
+.bservicio{
+  margin: 0.1em;
+}
+
 .bservicios{
   display: none;
   position: absolute;
+  z-index: 999 !important;
   transition: 1s;
 }
 td:hover > .bservicios{
@@ -153,7 +164,9 @@ td:hover > .bservicios{
 }
 
 .especial:focus, .especial:active{
-  background-color: #c3cd77 !important;
+  background-color: white !important;
+  color: #439bb4 !important;
+  border-color: #439bb4 !important;
 }
 
 .especial2{
@@ -420,6 +433,8 @@ label.active{
 .minus{
     text-transform: capitalize !important;
 }
+
+
 
 /* RESPONSIVE */
 
