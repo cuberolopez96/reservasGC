@@ -6,6 +6,10 @@ main{
   *background-repeat: no-repeat;
 }
 
+.grande{
+  font-size: 1.5em;
+}
+
 h1, h1 .material-icons, #titularTabla, .titularCard{
   color: white;
 }
