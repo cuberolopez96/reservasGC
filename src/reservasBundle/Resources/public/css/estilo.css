@@ -129,6 +129,17 @@ td:hover > .bservicios{
 .colorPocoDisp{
   background-color: lightsalmon;
 }
+.colorDisponible2{
+  color: MediumSeaGreen;
+}
+
+.colorOcupado2{
+  color: lightcoral;
+}
+
+.colorPocoDisp2{
+  color: lightsalmon;
+}
 
 .data{
 	margin-top: 1.8em;

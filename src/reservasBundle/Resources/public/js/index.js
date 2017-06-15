@@ -607,7 +607,7 @@
            }else{
               if (parseInt(servicio.plazasocupadas) > porcentage) {
                   bservicio.addClass('colorPocoDisp');
-                  bservicio.attr('estado','1');
+                  bservicio.attr('estado','2');
 
               }else{
                   bservicio.addClass('colorDisponible');
@@ -678,7 +678,7 @@
                     if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
                       console.log(fecha);
 
-                      bservicios = $('<button id ="'+ row.idservicios +' plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
+                      bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                       divservicios.append(bservicios);
                       td.append(divservicios);
                       Calendar.colorearServicios(row, bservicios,value[i]);

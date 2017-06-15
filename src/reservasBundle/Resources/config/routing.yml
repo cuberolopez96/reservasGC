@@ -89,6 +89,9 @@ reservas_admin_servicios_edit:
 reservas_admin_servicios_delete:
     path: /admin/servicios/delete/{id}
     defaults: {_controller: reservasBundle:Admin:deleteservicios }
+reservas_admin_servicios_recordatorios:
+    path: /admin/servicios/recordatorios/{id}
+    defaults: {_controller: reservasBundle:Admin:lauchrecordservice}
 reservas_admin_manual:
   path: /admin/manual
   defaults: {_controller: reservasBundle:Admin:manual}

@@ -28,6 +28,26 @@ class AdminController extends Controller
     }
     return $bandera;
   }
+  public function plusPlazasOcupadas( $reserva){
+    $em = $this->getDoctrine()->getEntityManager();
+    $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
+    if ($idestado == 2) {
+      $servicio = $reserva->getServiciosservicios();
+      $servicio->setPlazasocupadas($servicio->getPlazasocupadas() + $reserva->getNpersonas());
+      $em->persist($servicio);
+      $em->flush();
+    }
+  }
+  public function lessPlazasOcupadas( $reserva){
+    $em = $this->getDoctrine()->getEntityManager();
+    $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
+    if ($idestado == 2) {
+      $servicio = $reserva->getServiciosservicios();
+      $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
+      $em->persist($servicio);
+      $em->flush();
+    }
+  }
   public function sendBoletinToOrders($reservas, \Swift_Message $message){
     foreach ($reservas as $key => $reserva) {
       print_r($reserva->getCorreo());
@@ -44,10 +64,9 @@ class AdminController extends Controller
     $message->setFrom('send@email.com');
     $message->setBody($config->getCancelacion());
     $this->get('mailer')->send($message);
-    $servicio = $reserva->getServiciosservicios();
-    $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
     $em->remove($reserva);
     $em->flush();
+    self::lessPlazasOcupadas($reserva);
   }
   public function addlistanegrabyreservaAction($id){
     if (self::isAuthorized()==false) {
@@ -73,6 +92,7 @@ class AdminController extends Controller
     $servicio = $reserva->getServiciosservicios();
     $em->persist($reserva);
     $em->flush();
+    self::plusPlazasOcupadas($reserva);
     return $this->redirect('/admin/servicios/'.$servicio->getIdservicios().'/reservas');
   }
   public function resendreservasAction($id){
@@ -320,6 +340,18 @@ class AdminController extends Controller
     }
     return true;
   }
+    public function lauchrecordserviceAction($id){
+      if (self::isAuthorized()==false) {
+          return $this->redirect('/admin/login');
+      }
+      $em = $this->getDoctrine()->getEntityManager();
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
+      $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+      $message = new \Swift_Message('Recordatorio de Reserva');
+      $message->setBody('Queda menos de un dia para hacer efectiva su reserva');
+      self::sendBoletinToOrders($reservas,$message);
+      return $this->redirect('/admin/servicios/'.$servicio->getIdservicios().'/reservas');
+    }
     public function indexAction()
     {
 

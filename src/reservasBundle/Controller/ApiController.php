@@ -21,6 +21,26 @@ class ApiController extends Controller
       $response = new JsonResponse($array);
       return $response;
     }
+    public function plusPlazasOcupadas( $reserva){
+      $em = $this->getDoctrine()->getEntityManager();
+      $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
+      if ($idestado == 2) {
+        $servicio = $reserva->getServiciosservicios();
+        $servicio->setPlazasocupadas($servicio->getPlazasocupadas() + $reserva->getNpersonas());
+        $em->persist($servicio);
+        $em->flush();
+      }
+    }
+    public function lessPlazasOcupadas( $reserva){
+      $em = $this->getDoctrine()->getEntityManager();
+      $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
+      if ($idestado == 2) {
+        $servicio = $reserva->getServiciosservicios();
+        $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
+        $em->persist($servicio);
+        $em->flush();
+      }
+    }
     //importante metodo interno no enrutar
     public function deleteAlergenosByReserva($reserva){
         $em=$this->getDoctrine()->getEntityManager();
@@ -40,11 +60,10 @@ class ApiController extends Controller
       $message->setFrom('send@email.com');
       $message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
-      $servicio = $reserva->getServiciosservicios();
-      $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
       $em->persist($servicio);
       $em->remove($reserva);
       $em->flush();
+      self::lessPlazasOcupadas($reserva);
     }
 
     public function reservasAction(){
@@ -114,7 +133,6 @@ class ApiController extends Controller
         $reservas->setTelefono($request->get('telefono'));
         $reservas->setObservaciones($request->get('observaciones'));
         $reservas->setNpersonas($request->get('npersonas'));
-        $servicio->setPlazasocupadas($servicio->getPlazasocupadas() + intval($request->get('npersonas')));
         $reservas->setHorallegada(new \Datetime($request->get('horallegada')));
         $reservas->setServiciosservicios($servicio);
         $reservas->setEstadoreservaestadoreserva($estadoreserva);
@@ -125,7 +143,8 @@ class ApiController extends Controller
         }
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
-        $em->persist($servicio);
+
+
         if ($request->get('suscrito')== 1) {
           $correo = new Correos();
           $correo->setNombre($reservas->getNombre());
@@ -134,6 +153,7 @@ class ApiController extends Controller
           $em->persist($correo);
         }
         $em->flush();
+        self::plusPlazasOcupadas($reservas);
         $alergenos = [];
         if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
           $alergenos = $request->get('alergenos');
