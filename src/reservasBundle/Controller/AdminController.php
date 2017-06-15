@@ -44,7 +44,7 @@ class AdminController extends Controller
     $message->setFrom('send@email.com');
     $message->setBody($config->getCancelacion());
     $this->get('mailer')->send($message);
-    $servicio = $reserva->setServiciosservicios();
+    $servicio = $reserva->getServiciosservicios();
     $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
     $em->remove($reserva);
     $em->flush();
@@ -366,6 +366,11 @@ class AdminController extends Controller
       }
       $em = $this->getDoctrine()->getEntityManager();
       $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
+      $servicios = $em->getRepository('reservasBundle:Servicios')->findByMenumenu($menu);
+      foreach ($servicio as $key => $servicios) {
+        $servicio->setMenumenu(null);
+      }
+      self::deleteAlergenosByMenu($menu);
       $em->remove($menu);
       $em->flush();
       return $this->redirect('/admin/menus');
@@ -437,6 +442,9 @@ class AdminController extends Controller
       array('alergenos'=>$alergenos));
     }
     public  function menusAction(){
+      if (self::isAuthorized()==false) {
+        return $this->redirect('/admin/login');
+      }
       $em = $this->getDoctrine()->getEntityManager();
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
       return $this->render('reservasBundle:Admin:menus.html.twig',array(
