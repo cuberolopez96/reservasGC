@@ -49,6 +49,47 @@ class AdminController extends Controller
     $em->remove($reserva);
     $em->flush();
   }
+  public function addlistanegrabyreservaAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $listanegra = new Listanegra();
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+    $listanegra->setCorreo($reserva->getCorreo());
+    $em->persist($listanegra);
+    $em->flush();
+    $servicio = $reserva->getServiciosservicios();
+    return $this->redirect('/admin/servicios/'.$servicio->getIdservicios().'/reservas');
+  }
+  public function confirmreservasAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+    $estadoreserva = $em->getRepository('reservasBundle:estadoreserva')->findByIdestadoreserva(2)[0];
+    $reserva->setEstadoreservaestadoreserva($estadoreserva);
+    $servicio = $reserva->getServiciosservicios();
+    $em->persist($reserva);
+    $em->flush();
+    return $this->redirect('/admin/servicios/'.$servicio->getIdservicios().'/reservas');
+  }
+  public function resendreservasAction($id){
+    if (self::isAuthorized()==false) {
+      return $this->redirect('/admin/login');
+    }
+    $em = $this->getDoctrine()->getEntityManager();
+    $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+    $message = new \Swift_Message('Plazas Disponibles Restaurante');
+    $message->setTo($reserva->getCorreo());
+    $message->setFrom('send@email.com');
+    $message->setBody($config->getClistaespera());
+    $this->get('mailer')->send($message);
+    return $this->render('reservasBundle:Admin:emailcompletado.html.twig');
+
+  }
   public function removeServicio($servicio){
     $em= $this->getDoctrine()->getEntityManager();
     $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
@@ -117,11 +158,9 @@ class AdminController extends Controller
     }
     $em = $this->getDoctrine()->getEntityManager();
     $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
-    $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findByIdestadoreserva(1)[0];
-    $reservas = $em->getRepository('reservasBundle:Reservas')->findByEstadoreservaestadoreserva($estadoreserva);
-    return $this->render('reservasBundle:Admin:listados.html.twig', array(
+      return $this->render('reservasBundle:Admin:listados.html.twig', array(
       'listanegra'=>$listanegra,
-      'reservas'=>$reservas
+
     ));
   }
   //importante metodo interno no enrutar
@@ -264,7 +303,7 @@ class AdminController extends Controller
       }
       $em = $this->getDoctrine()->getEntityManager();
       $plantillas = $em->getRepository('reservasBundle:Misplantillas')->findAll();
-
+      $plantillas = array_reverse($plantillas);
       return $this->render('reservasBundle:Admin:boletin.html.twig',array(
         'plantillas'=>$plantillas
       ));
@@ -457,7 +496,11 @@ class AdminController extends Controller
         }
         $em = $this->getDoctrine()->getEntityManager();
         $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
-        return $this->render('reservasBundle:Admin:menu.html.twig',array('menu'=>$menu));
+        $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+        return $this->render('reservasBundle:Admin:menu.html.twig',array(
+          'menu'=>$menu,
+          'alergenos'=>$alergenos
+        ));
 
     }
     public function reservasserviciosAction($id){
@@ -468,10 +511,12 @@ class AdminController extends Controller
         $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
         $reservas= $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
         $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
+        $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
         return $this->render('reservasBundle:Admin:reservas.html.twig',array(
           'reservas'=>$reservas,
           'alergenos'=>$alergenos,
-          'servicio'=>$servicio
+          'servicio'=>$servicio,
+          'blacklist'=>$listanegra
         ));
     }
     public function addserviciosAction(Request $request){
@@ -557,12 +602,12 @@ class AdminController extends Controller
       if ($request->isMethod('POST')) {
 
         if ($request->get('guardar')) {
-          $config->setConfirmacion($request->get('confirmacion'));
-          $config->setRecordatorio($request->get('recordatorio'));
-          $config->setListanegra($request->get('listanegra'));
-          $config->setCancelacion($request->get('cancelacion'));
-          $config->setEdicionservicio($request->get('edicions'));
-          $config->setEdicionreserva($request->get('edicionr'));
+          $config->setConfirmacion(trim($request->get('confirmacion')));
+          $config->setRecordatorio(trim($request->get('recordatorio')));
+          $config->setCancelacion(trim($request->get('cancelacion')));
+          $config->setEdicionservicio(trim($request->get('edicions')));
+          $config->setEdicionreserva(trim($request->get('edicionr')));
+          $config->setClistaespera(trim($request->get('clistaespera')));
           $em->persist($config);
           $em->flush();
           return $this->redirect('/admin/config');

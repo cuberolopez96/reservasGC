@@ -13,7 +13,7 @@ reservasBundle\Entity\Config:
             type: text
         recordatorio:
             type: text
-        listanegra:
+        clistaespera:
             type: text
         cancelacion:
             type: text
@@ -21,5 +21,5 @@ reservasBundle\Entity\Config:
             type: text
         edicionreserva:
             type: text
-        
+
     lifecycleCallbacks: {  }

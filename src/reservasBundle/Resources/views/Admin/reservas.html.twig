@@ -9,6 +9,7 @@
     {% set menu = servicio.menumenu %}
     <a href="/admin/menu/{{menu.idmenu}}" class="button especial grande">Ver Menu</a>
     {% endif %}
+
   </div>
 
 <!--<div class="col s12">
@@ -23,6 +24,7 @@
   {% endif %}
 
   {% for reserva in reservas %}
+
     <div class="contenedorR col s12 m6">
       <div class="card">
 
@@ -33,22 +35,46 @@
           <div class="row conPadding">
             <p class="col s12 l6"><strong>Fecha Servicio:</strong>{{reserva.serviciosservicios.fechaservicio | date('d-m-Y')}}</p>
             <p class="col s12 l6"><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
-            <p class="col s12 l6"><strong>Correo: </strong>{{reserva.correo}}</p>
+            <p class="col s12 l6"><strong>Correo: </strong>
+              {% set bandera = false %}
+              {% for lcorreo in blacklist %}
+                  {% if lcorreo.correo == reserva.correo %}
+                      {% set bandera  = true %}
+                  {% endif %}
+              {% endfor %}
+              {% if bandera == true %}
+              <span class="red-text">{{reserva.correo}}</span>
+              {% else %}
+                  {{reserva.correo}}
+              {% endif %}
+            </p>
             <p class="col s12 l6"><strong>Telefono: </strong>{{reserva.telefono}}</p>
             <p class="col s12 l6"><strong>Observaciones: </strong>{{reserva.observaciones}}</p>
             <p class="col s12 l6"><strong>Alergenos :</strong>
+              {% set ralergenos = [] %}
               {% for alergeno in alergenos %}
               {% if alergeno.reservasreservas.idreservas == reserva.idreservas %}
-              {{alergeno.alergenosalergenos.nombre}}
+                {% set ralergenos = ralergenos|merge([alergeno.alergenosalergenos.nombre])%}
               {% endif %}
               {% endfor %}
+              {{ralergenos | join(',')}}
             </p>
+            <p class="col s12 l6"><strong>Estado de la Reserva:</strong> {{reserva.estadoreservaestadoreserva.nombre}}</p>
           </div>
 
         </div>
         <div class="card-action center-align">
-          <a class="button especial2 minus" href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
-          <a class="button especial minus" href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
+          <div class="row">
+            <a class="button especial2 minus col" href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
+            <a class="button especial minus col" href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
+            {% if reserva.estadoreservaestadoreserva.idestadoreserva == 1 %}
+              <a href="/admin/reservas/resend/{{reserva.idreservas}}" class="button especial2 minus col">Reenviar</a>
+              <a href="/admin/reservas/confirmar/{{reserva.idreservas}}" class="button especial minus col">Confirmar</a>
+            {% endif %}
+            {% if date(servicio.fechaservicio) < date("now")  and bandera == false %}
+              <a href="/admin/reservas/listanegra/add/{{reserva.idreservas}}" class="button especial minus">Lista Negra</a>
+            {% endif %}
+          </div>
         </div>
       </div>
 

@@ -92,7 +92,15 @@ reservas_admin_servicios_delete:
 reservas_admin_manual:
   path: /admin/manual
   defaults: {_controller: reservasBundle:Admin:manual}
-
+reservas_admin_reservas_confirm:
+    path: /admin/reservas/confirmar/{id}
+    defaults: {_controller: reservasBundle:Admin:confirmreservas}
+reservas_admin_reservas_addlistanegra:
+    path: /admin/reservas/listanegra/add/{id}
+    defaults: {_controller: reservasBundle:Admin:addlistanegrabyreserva}
+reservas_admin_reservas_resend:
+    path: /admin/reservas/resend/{id}
+    defaults: {_controller: reservasBundle:Admin:resendreservas }
 reservas_admin_reservas_delete:
     path: /admin/reservas/delete/{id}
     defaults: {_controller: reservasBundle:Admin:deletereservas }
