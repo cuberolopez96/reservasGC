@@ -2,18 +2,34 @@
 {% block content %}
 <main class="valign-wrapper center-align">
   <div class="row">
-    <div class="card col s12">
-      <div class="card-content">
-        <span class="card-title">Añadir Formulario</span>
+    <h1 class="col s12">Añadir Boletín</h1>
+
+    <div class="col s12">
+      <div class="card">
+      <div class="card-content paddingTop1">
+
         <form class="" action="/admin/boletin/add" method="post">
-            <label class="left-align"for="">Asunto</label>
-            <input type="text" name="asunto" value="" required>
-            <label class="left-align"for="">Texto</label>
-            <textarea name="texto" rows="8" cols="80"></textarea>
-            <input type="submit" class="button especial" name="add" value="Add">
+            <div class="row">
+              <div class="col s12 m6">
+                <label class="comoH3 labelEst center"for="">Mensaje</label>
+                <textarea class="materialize-textarea textareaEst sinPadding center-align" name="texto" rows="8" cols="80"></textarea>
+              </div>
+
+              <div class="col s12 m6">
+                <label class="comoH3 labelEst center"for="">Asunto</label>
+                <input class="inputEst sinPadding center-align" type="text" name="asunto" value="" required>
+              </div>
+
+              <div class="col s12">
+                <input type="submit" class="button especial" name="add" value="Añadir">
+              </div>
+          </div>
+
         </form>
+
       </div>
 
+    </div>
     </div>
 
   </div>

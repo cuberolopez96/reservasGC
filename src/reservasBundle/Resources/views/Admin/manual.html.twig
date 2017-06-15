@@ -7,20 +7,26 @@
     <!-- Tarjeta 1 -->
     <div class="col s12">
       <div id="colMala" class="row">
-        <img class="col s12 m6" src="{{asset('bundles/reservas/img/Inicio.JPG')}}">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/login.JPG')}}">
 
         <div id="listadoEst" class="col s12 m6">
           <ul class="collection with-header left-align">
-            <li class="collection-header active avatar"><h4>Inicio</h4></li>
+            <li class="collection-header active avatar"><h4>Login</h4></li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">1</i>
-              <span class="title">Consultar</span>
-              <p>Una vez realizada una reserva puede consultarse la información de ésta desde aquí</p>
+              <span class="title">Nombre de Usuario</span>
+              <p>Añadir el nombre de usuario para acceder a la administración de las reservas</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">2</i>
-              <span class="title">Reservar</span>
-              <p>Para realizar una reserva en el Restaurante del IES Gran capitán acceda aquí</p>
+              <span class="title">Contraseña</span>
+              <p>Añadir la contraseña para acceder a la administración de las reservas</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Datos Correctos</span>
+              <p>Si los datos son correctos tendrá acceso a la aplicación,
+                sino saldrá un mensaje de error avisando que los datos son incorrectos</p>
             </li>
           </ul>
         </div>
@@ -31,23 +37,267 @@
       <div id="colMala" class="row">
         <div id="listadoEst" class="col s12 m6">
           <ul class="collection with-header left-align">
-            <li class="collection-header active avatar"><h4>Inicio</h4></li>
+            <li class="collection-header active avatar"><h4>Servicios</h4></li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">1</i>
-              <span class="title">Consultar</span>
-              <p>Una vez realizada una reserva puede consultarse la información de ésta desde aquí</p>
+              <span class="title">Menú</span>
+              <p>En esta primera página nos encontramos con el menú, con el que podemos
+                pasar por los diferentes apartados de la aplicación: <strong>Servicios</strong>, <strong>Menús</strong>,
+                <strong>Listados</strong>, <strong>Boletín</strong>, <strong>Configuración</strong></p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">2</i>
-              <span class="title">Reservar</span>
-              <p>Para realizar una reserva en el Restaurante del IES Gran capitán acceda aquí</p>
+              <span class="title">Filtrar Servicios</span>
+              <p>Los inputs ubicados al principio de la tabla permiten filtrar los servicios
+                por fecha de servicio, plazas máximas, plazas ocupadas y plazas disponibles,
+                lo cual facilita su localización</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Añadir</span>
+              <p>Desde el botón más, junto al título, se puede añadir un nuevo servicio.
+                Saldrá un formulario a rellenar con los datos de la fecha, la hora, las plazas
+                máximas y podrá asociársele un menú si así se desea</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Editar</span>
+              <p>El icono del lápiz abre un formulario similar al anterior, pero con la diferencia de que su función
+                es modificar los datos del servicio</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">5</i>
+              <span class="title">Borrar</span>
+              <p>El icono de la papelera permite eliminar un servicio; aunque antes nos preguntará si realmente
+                es lo que deseamos hacer para evitar posibles accidentes</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">6</i>
+              <span class="title">Ver las Reservas</span>
+              <p>El icono de la lista nos da acceso a las reservas de ese servicio concreto, enviándonos a una
+                página que recoge todas las existentes</p>
             </li>
           </ul>
         </div>
+        <div class="col s12 m6">
+          <div class="row">
+            <img class="col s12 " src="{{asset('bundles/reservas/img/menu.JPG')}}">
+            <img class="col s12 " src="{{asset('bundles/reservas/img/servicios1.JPG')}}">
+            <img class="col s12 " src="{{asset('bundles/reservas/img/servicios12.jpg.JPG')}}">
+          </div>
 
-        <img class="col s12 m6" src="{{asset('bundles/reservas/img/Inicio.JPG')}}">    
+        </div>
       </div>
     </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/menus.JPG')}}">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Menús</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Añadir</span>
+              <p>Desde el icono del más situado junto al título tenemos acceso
+              a un formulario para crear un menú, introduciendo su descripción,
+              precio y alérgenos asociados</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Editar</span>
+              <p>De igual modo, pueden modificarse los menús previamente
+              creados pulsando el icono del lápiz</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Borrar</span>
+              <p>El icono de la papelera elimina el menú en cuestión</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 4 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Listados</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Lista de Espera</span>
+              <p>Aquí aparecen los correos de las reservas que se encuentran
+              en la lista de espera (aquellas que no han reservado por falta
+              de plazas, pero quieren hacerlo)</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Lista Negra</span>
+              <p>Son aquellos correos de personas que han tenido una conducta
+              poco responsable a la hora de reservar, que por ejemplo, no se han
+              presentado sin avisar previamente, y se considera oportuno añadirlos
+              aquí</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Añadir</span>
+              <p>Sólo pueden añadirse correos a la lista negra desde el icono del más,
+                puesto que los casos de lista de espera se incluyen de forma automática al
+                realizar una reserva accediendo desde un servicio sin plazas y consintiendo
+                incluirse aqui</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Borrar</span>
+              <p>Pueden eliminarse correos de cualquiera de ambas listas de correos</p>
+            </li>
+          </ul>
+        </div>
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/listados.JPG')}}">
+
+      </div>
+    </div>
+
+    <!-- Tarjeta 5 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/boletin.JPG')}}">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Boletín</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title"Boletines</span>
+              <p>Pueden crearse boletines para mandarse posteriormente por correo,
+                a modo de plantillas.
+              </p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Correos</span>
+              <p>Desde aquí pueden verse todos los correos subscritos al boletín
+              (opción disponible a la hora de realizar la reserva)</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Enviar</span>
+              <p>El icono de la flecha sirve para enviar el boletín en cuestión,
+              pudiendo elegir un correo de los disponibles de entre los
+              subscriptores (pueden elegirse varios correos)</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Añadir</span>
+              <p>Se crean los boletines cliqueando en el icono del más,
+              mostrándonos un formulario sencillo para introducir asunto
+              y mensaje</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">5</i>
+              <span class="title">Editar</span>
+              <p>Con el icono del lápiz, del mismo modo pueden modificarse
+              los boletines seleccionados con un formulario similar al anterior</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">6</i>
+              <span class="title">Borrar</span>
+              <p>Desde el icono de la papelera pueden eliminarse los boletines
+              previamente creados</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 6 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Correos</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Añadir</span>
+              <p>Puede añadirse manualmente un correo como subscriptor,
+              incluyendo nombre de la persona, apellidos y email como datos.
+              Estos correos pueden elegirse posteriormente para enviarles boletines
+              informativos</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Borrar</span>
+              <p>Asimismo se permite la eliminación de los correos previamente
+              creados</p>
+            </li>
+          </ul>
+        </div>
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/correos.JPG')}}">
+
+      </div>
+    </div>
+
+    <!-- Tarjeta 7 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/config.JPG')}}">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Configuración</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Recordatorios</span>
+              <p>Son los mensajes automáticos que se envían por correo al realizar
+                determinadas acciones, como reservar o anular una reserva, entre otros</p>
+              </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Confirmación</span>
+              <p>Donde se introduce el mensaje que es enviado por correo para la
+              confirmación de la reserva</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Lista Negra</span>
+              <p>Mensaje de aviso de que alguien de la lista negra ha realizado una reserva</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Cancelación</span>
+              <p>Aviso de que la reserva ha sido cancelada</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">5</i>
+              <span class="title">Edición del Servicio</span>
+              <p>Mensaje que indica que los datos del servicio han sido editados</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">6</i>
+              <span class="title">Edición de la Reserva</span>
+              <p>Nota informativa de que los datos de la reserva han sido
+              modificados</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

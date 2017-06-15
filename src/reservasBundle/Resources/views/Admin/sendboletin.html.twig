@@ -3,11 +3,14 @@
 <main class="valign-wrapper">
   <div class="row">
 
-    <h1 class="col s12 center-align">Enviar Plantilla</h1>
+    <h1 class="col s12 center-align">Enviar Boletín</h1>
 
     <div class="col s12 m8 offset-m2">
       <div class="card paddingIzda">
       <div class="card-content paddingTop1">
+          <div class="card-title marginBot">
+            <p class="center-align"><strong>Subscriptores</strong></p>
+          </div>
           <form class="" action="/admin/boletin/send/{{plantilla.idmisplantillas}}" method="post">
             {% for correo in correos %}
             <div class="row">

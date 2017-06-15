@@ -39,6 +39,30 @@ nav{
   display: none;
 }
 
+#partesBoletin li, #partesBoletin a{
+  padding: 0.5em;
+  background-color: #333;
+  color: #D4CDC5 !important;
+  transition: 1s all;
+}
+
+#partesBoletin li:hover, #partesBoletin li:hover a{
+  background-color: grey !important;
+}
+
+#partesBoletin{
+  border: none !important;
+}
+
+.parteBActiva{
+  color: #439BB4 !important;
+  border-color: #439BB4 !important;
+}
+
+.collection .collection-item {
+  border-bottom: 2px solid #D4CDC5 !important;
+}
+
 .altoFijo{
   min-height: 5em !important;
 }
@@ -83,6 +107,10 @@ th, td{
 
 #colMala{
   background: rgba(255,255,255,0.5);
+}
+
+label.comoH3.labelEst.active {
+    color: #534941 !important;
 }
 
 
