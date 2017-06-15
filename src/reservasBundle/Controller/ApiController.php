@@ -33,13 +33,16 @@ class ApiController extends Controller
     }
     public function removeReserva($reserva){
       self::deleteAlergenosByReserva($reserva);
+      $em = $this->getDoctrine()->getEntityManager();
       $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
       $message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
-      $em = $this->getDoctrine()->getEntityManager();
+      $servicio = $reserva->getServiciosservicios();
+      $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
+      $em->persist($servicio);
       $em->remove($reserva);
       $em->flush();
     }

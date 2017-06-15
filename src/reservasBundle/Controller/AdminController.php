@@ -43,6 +43,8 @@ class AdminController extends Controller
     $message->setFrom('send@email.com');
     $message->setBody($config->getCancelacion());
     $this->get('mailer')->send($message);
+    $servicio = $reserva->setServiciosservicios();
+    $servicio->setPlazasocupadas($servicio->getPlazasocupadas() - $reserva->getNpersonas());
     $em->remove($reserva);
     $em->flush();
   }
@@ -311,6 +313,7 @@ class AdminController extends Controller
                 $ralergeno->setReservasreservas($reserva);
                 $em->persist($ralergeno);
                 $em->flush();
+                return $this->redirect('/admin/servicios');
               }
             }
             $reserva->setEstadoreservaestadoreserva($estadoreserva);

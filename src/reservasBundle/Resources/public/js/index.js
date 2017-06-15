@@ -210,15 +210,23 @@
         $('#siguiente').click(function(){
           fecha = $('#fecha').val();
           Reservas.horallegada = $('#horallegada').val();
+          Reservas.plazas = $('#plazas').val();
 
           if (Utils.timeValidate(Reservas.horallegada)==false) {
             $('#errorhora').fadeIn('slow');
           }else{
-            $('#datos2').fadeOut("slow");
-            $('#checkbox').children('input');
-            Utils.arriba();
-            Utils.mostrar($('#datos3'));
+            console.log($('#plazas').attr('max'));
+            if (Reservas.MaxValidate(parseInt(Reservas.plazas),parseInt($('#plazas').attr('max')))===false) {
+                $('#errorpersonas').fadeIn('slow');
+            }else{
+              $('#datos2').fadeOut("slow");
+              $('#checkbox').children('input');
+              Utils.arriba();
+              Utils.mostrar($('#datos3'));
+            }
+
           }
+
 
         });
         $('#atras2').click(function(){
@@ -239,7 +247,6 @@
           Reservas.correo = $('#email').val();
           Reservas.telefono = $('#tlfn').val();
           Reservas.observaciones = $('#observaciones').val();
-          Reservas.plazas = $('#plazas').val();
           checkbox = [];
           $.each($('#check input'),function(index,value){
             if(value.checked  == true){
@@ -317,6 +324,14 @@
     ReservasCache: null,
     consultaCache:null,
     reservaCache: null,
+    MaxValidate: function(value,max){
+      if (max >= value) {
+        return true;
+      }else{
+        return false;
+      }
+
+    },
     delete: function(id){
       Utils.postAjax('api/reservas/delete',{
         id:id
@@ -427,7 +442,10 @@
    }
    // Objeto que controla la gestion de los servicios
    Servicios = {
-     ServiciosCache: null,//datos de los servicios guardados en cache;
+     ServiciosCache: null,
+     PlazasDisponibles: null,
+     Plazas: null,
+     //datos de los servicios guardados en cache;
      //devuelve los servicios
      Get: function(success = null){
        Utils.getAjax('/api/servicios',function(data){
@@ -655,7 +673,7 @@
                     if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
                       console.log(fecha);
 
-                      bservicios = $('<button id ="'+ row.idservicios +'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
+                      bservicios = $('<button id ="'+ row.idservicios +' plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                       divservicios.append(bservicios);
                       td.append(divservicios);
                       Calendar.colorearServicios(row, bservicios,value[i]);
@@ -681,7 +699,7 @@
                 hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
 
-                    bservicios = $('<button id="'+row.idservicios+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
+                    bservicios = $('<button id="'+row.idservicios+'" plazas="'+row.plazas+'" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                     divservicios.append(bservicios);
                     Calendar.colorearServicios(row, bservicios);
 
@@ -698,10 +716,14 @@
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
             Reservas.HoraSugerida = $(this).text();
+            Servicios.PlazasDisponibles = $(this).attr('disponibles');
+            Servicios.Plazas = $(this).attr('plazas');
             console.log(Reservas.HoraSugerida);
             if (Reservas.EstadoReserva == 2) {
               $('#datos0').css("display",'none');
               $('#horallegada').val(Reservas.HoraSugerida);
+              $('#disponibles').text(Servicios.PlazasDisponibles);
+              $('#plazas').attr('max',Servicios.PlazasDisponibles);
               $('#datos2').css("display",'block');
             }else{
               $('#modal1').modal();
@@ -709,6 +731,7 @@
               $('#Si').click(function(){
                 $('#datos0').css("display",'none');
                 $('#horallegada').val(Reservas.HoraSugerida);
+                $('#disponibles').text(Servicios.PlazasDisponibles);
                 $('#datos2').css("display",'block');
                 $('#modal1').modal('close');
               });

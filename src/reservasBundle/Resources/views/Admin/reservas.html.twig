@@ -31,7 +31,7 @@
             <span><strong>Reserva de {{reserva.nombre}} {{reserva.apellidos}}</strong></span>
           </div>
           <div class="row conPadding">
-            <p class="col s12 l6"><strong>{{reserva.serviciosservicios.fechaservicio | date()}}</strong></p>
+            <p class="col s12 l6"><strong>Fecha Servicio:</strong>{{reserva.serviciosservicios.fechaservicio | date('d-m-Y')}}</p>
             <p class="col s12 l6"><strong>Hora llegada: </strong> {{reserva.horallegada | date('H:i')}}</p>
             <p class="col s12 l6"><strong>Correo: </strong>{{reserva.correo}}</p>
             <p class="col s12 l6"><strong>Telefono: </strong>{{reserva.telefono}}</p>
