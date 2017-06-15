@@ -22,6 +22,10 @@ reservas_admin_reservas_profile:
 reservas_admin_servicios:
     path: /admin/servicios
     defaults: {_controller: reservasBundle:Admin:servicios}
+reservas_admin_servicios_before:
+    path: /admin/serviciosbefore
+    defaults: {_controller: reservasBundle:Admin:serviciosanteriores}
+
 reservas_admin_servicio:
     path: /admin/servicios/{id}
     defaults: {_controller: reservasBundle:Admin:servicio}

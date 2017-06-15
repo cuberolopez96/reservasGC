@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminController extends Controller
 {
+
   public function isAuthorized(){
     $session = new Session();
     $bandera = false;
@@ -340,7 +341,14 @@ class AdminController extends Controller
       return $this->redirect('/admin/servicios');
 
     }
-
+    public function serviciosanterioresAction(){
+      if (self::isAuthorized() == false) {
+          return $this->redirect('/admin/login');
+      }
+      $em = $this->getDoctrine()->getEntityManager();
+      $servicios = $em->getRepository('reservasBundle:Servicios')->findByBeforeToday();
+      return $this->render('reservasBundle:Admin:servicios.html.twig',array('servicios'=>$servicios));
+    }
     public function deleteserviciosAction($id){
       if (self::isAuthorized() == false) {
         return $this->redirect('/admin/login');

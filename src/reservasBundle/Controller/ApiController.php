@@ -25,7 +25,7 @@ class ApiController extends Controller
     public function deleteAlergenosByReserva($reserva){
         $em=$this->getDoctrine()->getEntityManager();
         $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
-        foreach( $alergenos as $alergeno){
+        foreach($alergenos as $alergeno){
           $em->remove($alergeno);
           $em->flush();
         }
@@ -125,7 +125,14 @@ class ApiController extends Controller
         }
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
-        $em->flush($servicio);
+        $em->persist($servicio);
+        if ($request->get('suscrito')== 1) {
+          $correo = new Correos();
+          $correo->setNombre($reservas->getNombre());
+          $correo->setApellidos($reservas->getApellidos());
+          $correo->setEmail($reservas->getCorreo());
+          $em->persist($correo);
+        }
         $em->flush();
         $alergenos = [];
         if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){

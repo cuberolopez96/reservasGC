@@ -74,6 +74,9 @@ reservas_admin_config:
 reservas_admin_servicios:
     path: /admin/servicios
     defaults: {_controller: reservasBundle:Admin:servicios }
+reservas_admin_servicios_anteriores:
+    path: /admin/servicios/anteriores
+    defaults: {_controller: reservasBundle:Admin:serviciosanteriores }
 reservas_admin_servicios_reservas:
     path: /admin/servicios/{id}/reservas
     defaults: {_controller: reservasBundle:Admin:reservasservicios}

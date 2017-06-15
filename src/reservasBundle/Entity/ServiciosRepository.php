@@ -30,5 +30,13 @@ where CAST(s.fechaservicio as date) like  '$dia'";
       where  CAST(s.fechaservicio as date) like '$date' or CAST(s.fechaservicio  as date) > '$date' group by s.fechaservicio";
       return $this->getEntityManager()->createQuery($sql)->getResult();
     }
+    public function findByBeforeToday(){
+      $date = new \Datetime();
+      $date = $date->format('Y-m-d');
+      $sql ="SELECT s.idservicios as idservicios ,s.fechaservicio as fechaservicio ,s.plazas as plazas, s.plazasocupadas, (s.plazas - s.plazasocupadas) as plazasdisponibles
+      from reservasBundle:Servicios as s
+      where  CAST(s.fechaservicio as date) like '$date' or CAST(s.fechaservicio  as date) <  '$date' group by s.fechaservicio";
+      return $this->getEntityManager()->createQuery($sql)->getResult();
+    }
 }
  ?>

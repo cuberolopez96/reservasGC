@@ -247,6 +247,9 @@
           Reservas.correo = $('#email').val();
           Reservas.telefono = $('#tlfn').val();
           Reservas.observaciones = $('#observaciones').val();
+          if ($('#boletin')[0].checked) {
+              Reservas.Suscrito = 1;
+          }
           checkbox = [];
           $.each($('#check input'),function(index,value){
             if(value.checked  == true){
@@ -284,7 +287,7 @@
             Reservas.observaciones, Reservas.alergenos
             ,Reservas.idServicio,
             Reservas.EstadoReserva,
-            Reservas.plazas, Reservas.horallegada ,function(data){
+            Reservas.plazas, Reservas.horallegada,Reservas.Suscrito ,function(data){
                 console.log(data.error);
                 if(data.error === undefined){
                   $('#descargar').click(function(){
@@ -324,6 +327,7 @@
     ReservasCache: null,
     consultaCache:null,
     reservaCache: null,
+    Suscrito: 0,
     MaxValidate: function(value,max){
       if (max >= value) {
         return true;
@@ -412,7 +416,7 @@
 
     },
     // añade reservas
-    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,estado,npersonas,horallegada,success = null){
+    add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,estado,npersonas,horallegada,suscrito,success = null){
       Utils.postAjax('api/reservas/add',{
         nombre: nombre,
         apellidos: apellidos,
@@ -423,6 +427,7 @@
         estado: estado,
         alergenos: alergenos,
         npersonas: npersonas,
+        suscrito: suscrito,
         horallegada: horallegada,
       },function(data){
           success(data);
