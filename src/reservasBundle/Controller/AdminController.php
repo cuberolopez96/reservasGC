@@ -55,6 +55,14 @@ class AdminController extends Controller
       $this->get('mailer')->send($message);
     }
   }
+  public function sendBoletinToConfirmedOrders($reservas, \Swift_Message $message){
+    foreach ($reservas as $key => $reserva) {
+      if ($reserva->getEstadoreservaestadoreserva()->getIdestadoreserva()==2) {
+        $message->setTo($reserva->getCorreo());
+        $this->get('mailer')->send($message);
+      }
+    }
+  }
   public function removeReserva($reserva){
     self::deleteAlergenosByReserva($reserva);
     $em= $this->getDoctrine()->getEntityManager();
@@ -340,7 +348,7 @@ class AdminController extends Controller
     }
     return true;
   }
-    public function lauchrecordserviceAction($id){
+    public function launchrecordserviceAction($id){
       if (self::isAuthorized()==false) {
           return $this->redirect('/admin/login');
       }
@@ -348,8 +356,9 @@ class AdminController extends Controller
       $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
       $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
       $message = new \Swift_Message('Recordatorio de Reserva');
+      $message->setFrom('send@email.com');
       $message->setBody('Queda menos de un dia para hacer efectiva su reserva');
-      self::sendBoletinToOrders($reservas,$message);
+      self::sendBoletinToConfirmedOrders($reservas,$message);
       return $this->redirect('/admin/servicios/'.$servicio->getIdservicios().'/reservas');
     }
     public function indexAction()
