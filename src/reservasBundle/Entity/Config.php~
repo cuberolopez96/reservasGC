@@ -196,4 +196,33 @@ class Config
     {
         return $this->edicionreserva;
     }
+    /**
+     * @var string
+     */
+    private $clistaespera;
+
+
+    /**
+     * Set clistaespera
+     *
+     * @param string $clistaespera
+     *
+     * @return Config
+     */
+    public function setClistaespera($clistaespera)
+    {
+        $this->clistaespera = $clistaespera;
+
+        return $this;
+    }
+
+    /**
+     * Get clistaespera
+     *
+     * @return string
+     */
+    public function getClistaespera()
+    {
+        return $this->clistaespera;
+    }
 }
