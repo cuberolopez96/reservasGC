@@ -734,6 +734,7 @@
               tr.append('<td id="'+i+'">'+value[0]+'</td>')
             }
           }
+          $('#calendar').append(tr);
           $('.bservicio').click(function(){
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
@@ -763,7 +764,6 @@
 
             }
           })
-          $('#calendar').append(tr);
         });
         /*$(".bcalendario").mouseenter(function(){
           $('.modal').modal();
