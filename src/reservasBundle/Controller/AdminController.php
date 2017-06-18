@@ -28,6 +28,14 @@ class AdminController extends Controller
     }
     return $bandera;
   }
+
+  public function logoutAction()
+  {
+    $session=new Session();
+    $session->remove('user');
+    return $this->redirect('/admin');
+  }
+
   public function plusPlazasOcupadas( $reserva){
     $em = $this->getDoctrine()->getEntityManager();
     $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
@@ -175,7 +183,7 @@ class AdminController extends Controller
         $em->persist($listanegra);
         $em->flush();
 
-        $this->redirect('/admin/listados');
+        return $this->redirect('/admin/listados');
       }
     }
     return $this->render('reservasBundle:Admin:addlistanegra.html.twig');
@@ -451,7 +459,7 @@ class AdminController extends Controller
       $em = $this->getDoctrine()->getEntityManager();
       $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
       $servicios = $em->getRepository('reservasBundle:Servicios')->findByMenumenu($menu);
-      foreach ($servicio as $key => $servicios) {
+      foreach ($servicios as $key => $servicio) {
         $servicio->setMenumenu(null);
       }
       self::deleteAlergenosByMenu($menu);
@@ -469,6 +477,7 @@ class AdminController extends Controller
 
       if ($request->isMethod('POST')) {
         if ($request->get('guardar')) {
+          $menu->setNombre($request->get('nombre'));
           $menu->setDescripción($request->get('descripcion'));
           $menu->setPrecio($request->get('precio'));
           $em->persist($menu);
@@ -483,7 +492,7 @@ class AdminController extends Controller
               $malergeno->setMenumenu($menu);
               $em->persist($malergeno);
               $em->flush();
-
+              return $this->redirect('/admin/menus');
             }
           }
 
@@ -505,6 +514,7 @@ class AdminController extends Controller
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
+        $menu->setNombre($request->get('nombre'));
         $menu->setDescripción($request->get('descripcion'));
         $menu->setPrecio($request->get('precio'));
         $em->persist($menu);

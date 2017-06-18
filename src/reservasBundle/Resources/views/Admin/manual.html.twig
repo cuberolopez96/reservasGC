@@ -4,7 +4,7 @@
   <div class="row">
 
     <h1 class="col s12 center-align">Manual de Usuario</h1>
-    <!-- Tarjeta 1 -->
+    <!-- Tarjeta 0 -->
     <div class="col s12">
       <div id="colMala" class="row">
         <img class="col s12 m6" src="{{asset('bundles/reservas/img/login.JPG')}}">
@@ -32,61 +32,158 @@
         </div>
       </div>
     </div>
+
+    <!-- Tarjeta 1 -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+
+        <div id="listadoEst" class="col s12 m6">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Menú de Navegación</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Servicios</span>
+              <p>Sección para gestionar los servicios. Pueden crearse, editarse o eliminarse.
+              Se permite la consulta de los servicios existentes, incluidos los ya pasados,
+              y de las reservas asociados a éstos</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Menús</span>
+              <p>Apartado para la creación de menús, posibilitando asimismo su edición y
+                eliminación</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Lista Negra</span>
+              <p>Aquí nos encontramos todos los correos de los usuarios que han tenido una
+              conducta inapropiada, pudiendo añadirse y eliminarse</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Boletín</span>
+              <p>Sección para crear un boletín y poder enviarlo a los correos subscritos a éste.
+               Pueden ediarse, borrarse y añadir nuevos correos a los que enviarles boletines</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">5</i>
+              <span class="title">Configuración</span>
+              <p>Apartado en el que se indican los mensajes que aparecen en los recordatorios
+              automáticos que se envían por correo (como de confirmación, edición de servicios,
+              etc)</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">6</i>
+              <span class="title">Salir</span>
+              <p>En caso de querer desloguearse el administrador, desde aquí podrá hacerlo</p>
+            </li>
+          </ul>
+        </div>
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/menu.JPG')}}">
+
+      </div>
+    </div>
+
     <!-- Tarjeta 2 -->
     <div class="col s12">
       <div id="colMala" class="row">
-        <div id="listadoEst" class="col s12 m6">
+        <img class="col s12 m7" src="{{asset('bundles/reservas/img/servicios.JPG')}}">
+
+        <div id="listadoEst" class="col s12 m5">
           <ul class="collection with-header left-align">
             <li class="collection-header active avatar"><h4>Servicios</h4></li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">1</i>
-              <span class="title">Menú</span>
-              <p>En esta primera página nos encontramos con el menú, con el que podemos
-                pasar por los diferentes apartados de la aplicación: <strong>Servicios</strong>, <strong>Menús</strong>,
-                <strong>Listados</strong>, <strong>Boletín</strong>, <strong>Configuración</strong></p>
+              <span class="title">Ver Anteriores</span>
+              <p>Visualiza los servicios antiguos y cambia el botón por otro llamado
+                "Ver Próximos" para ver los servicios actuales y posteriores (estos
+                son los que se ven por defecto)</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">2</i>
               <span class="title">Filtrar Servicios</span>
-              <p>Los inputs ubicados al principio de la tabla permiten filtrar los servicios
-                por fecha de servicio, plazas máximas, plazas ocupadas y plazas disponibles,
-                lo cual facilita su localización</p>
+              <p>Los campos vacíos ubicados al principio de la tabla permiten filtrar los servicios
+                por fecha de servicio, plazas máximas, plazas disponibles o plazas en espera (reservas
+                incluídas en la lista de espera para ese servicio)</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">3</i>
+              <span class="title">Estado del Servicio</span>
+              <p>Muestra el color de estado del servicio: verde si está disponible (quedan plazas
+                libres), rojo si está ocupado (no quedan plazas disponibles) y naranja si las
+                plazas ocupadas superan el 80% del total</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
               <span class="title">Añadir</span>
               <p>Desde el botón más, junto al título, se puede añadir un nuevo servicio.
                 Saldrá un formulario a rellenar con los datos de la fecha, la hora, las plazas
                 máximas y podrá asociársele un menú si así se desea</p>
             </li>
             <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">4</i>
+              <i class="listEst comoH3 circle">5</i>
               <span class="title">Editar</span>
               <p>El icono del lápiz abre un formulario similar al anterior, pero con la diferencia de que su función
                 es modificar los datos del servicio</p>
             </li>
             <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">5</i>
+              <i class="listEst comoH3 circle">6</i>
               <span class="title">Borrar</span>
               <p>El icono de la papelera permite eliminar un servicio; aunque antes nos preguntará si realmente
                 es lo que deseamos hacer para evitar posibles accidentes</p>
             </li>
             <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">6</i>
+              <i class="listEst comoH3 circle">7</i>
               <span class="title">Ver las Reservas</span>
               <p>El icono de la lista nos da acceso a las reservas de ese servicio concreto, enviándonos a una
                 página que recoge todas las existentes</p>
             </li>
           </ul>
         </div>
-        <div class="col s12 m6">
-          <div class="row">
-            <img class="col s12 " src="{{asset('bundles/reservas/img/menu.JPG')}}">
-            <img class="col s12 " src="{{asset('bundles/reservas/img/servicios1.JPG')}}">
-            <img class="col s12 " src="{{asset('bundles/reservas/img/servicios12.jpg.JPG')}}">
-          </div>
+      </div>
+    </div>
 
+
+    <!-- Tarjeta Add Servicio -->
+    <div class="col s12">
+      <div id="colMala" class="row">
+
+        <div id="listadoEst" class="col s12 m5">
+          <ul class="collection with-header left-align">
+            <li class="collection-header active avatar"><h4>Añadir Servicio</h4></li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">1</i>
+              <span class="title">Comparativa con Editar Servicio</span>
+              <p>Los campos son los mismos que si se editase,
+              la diferencia es que la fecha no puede modificarse
+              y en vez de añadir uno nuevo, se guardarían los
+              cambios realizados</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">2</i>
+              <span class="title">Fecha del Servicio</span>
+              <p>Se elige cuándo será el servicio. El formato de
+                la fecha debe ser dd/mm/aaaa</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">3</i>
+              <span class="title">Hora del Servicio</span>
+              <p>Hay que indicar una fecha con formato hh:mm</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Plazas Máximas</span>
+              <p>Son las plazas máximas disponibles para reservar
+              (no se admiten números menores o iguales a 0)</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">4</i>
+              <span class="title">Menú</span>
+              <p>Puede elegirse un menú (si existe) de forma opcional</p>
+            </li>
+          </ul>
         </div>
+        <img class="col s12 m7" src="{{asset('bundles/reservas/img/addservicio.JPG')}}">
       </div>
     </div>
 
@@ -127,38 +224,21 @@
 
         <div id="listadoEst" class="col s12 m6">
           <ul class="collection with-header left-align">
-            <li class="collection-header active avatar"><h4>Listados</h4></li>
-            <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">1</i>
-              <span class="title">Lista de Espera</span>
-              <p>Aquí aparecen los correos de las reservas que se encuentran
-              en la lista de espera (aquellas que no han reservado por falta
-              de plazas, pero quieren hacerlo)</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">2</i>
-              <span class="title">Lista Negra</span>
-              <p>Son aquellos correos de personas que han tenido una conducta
-              poco responsable a la hora de reservar, que por ejemplo, no se han
-              presentado sin avisar previamente, y se considera oportuno añadirlos
-              aquí</p>
-            </li>
+            <li class="collection-header active avatar"><h4>Lista Negra</h4></li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">3</i>
               <span class="title">Añadir</span>
               <p>Sólo pueden añadirse correos a la lista negra desde el icono del más,
-                puesto que los casos de lista de espera se incluyen de forma automática al
-                realizar una reserva accediendo desde un servicio sin plazas y consintiendo
-                incluirse aqui</p>
+                considerando el administrador que ese usuario merece incluirse aquí</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">4</i>
               <span class="title">Borrar</span>
-              <p>Pueden eliminarse correos de cualquiera de ambas listas de correos</p>
+              <p>Pueden eliminarse los correos desde el icono de la papelera </p>
             </li>
           </ul>
         </div>
-        <img class="col s12 m6" src="{{asset('bundles/reservas/img/listados.JPG')}}">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/listanegra.JPG')}}">
 
       </div>
     </div>
@@ -238,7 +318,7 @@
             </li>
           </ul>
         </div>
-        <img class="col s12 m6" src="{{asset('bundles/reservas/img/correos.JPG')}}">
+        <img class="col s12 m6" src="{{asset('bundles/reservas/img/correosbol.JPG')}}">
 
       </div>
     </div>
@@ -261,28 +341,35 @@
               <i class="listEst comoH3 circle">2</i>
               <span class="title">Confirmación</span>
               <p>Donde se introduce el mensaje que es enviado por correo para la
-              confirmación de la reserva</p>
+              confirmación de la reserva. Así el usuario se asegura de que la
+              realizó correctamente</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">3</i>
-              <span class="title">Lista Negra</span>
-              <p>Mensaje de aviso de que alguien de la lista negra ha realizado una reserva</p>
+              <span class="title">Cancelación</span>
+              <p>Aviso de que la reserva ha sido cancelada. Es algo que el usuario
+              necesita saber para no asistir</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">4</i>
-              <span class="title">Cancelación</span>
-              <p>Aviso de que la reserva ha sido cancelada</p>
+              <span class="title">Edición del Servicio</span>
+              <p>Mensaje que indica que los datos del servicio han sido editados,
+              para que el usuario sopese si esto cambia su decisión de asistir
+              al restaurante o no</p>
             </li>
             <li class="collection-item avatar">
               <i class="listEst comoH3 circle">5</i>
-              <span class="title">Edición del Servicio</span>
-              <p>Mensaje que indica que los datos del servicio han sido editados</p>
-            </li>
-            <li class="collection-item avatar">
-              <i class="listEst comoH3 circle">6</i>
               <span class="title">Edición de la Reserva</span>
               <p>Nota informativa de que los datos de la reserva han sido
-              modificados</p>
+              modificados, para que el usuario se replantee si ha perdido
+              el interés en ella o no</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="listEst comoH3 circle">5</i>
+              <span class="title">Confirmación de la lista de espera</span>
+              <p>Mensaje que se envía al usuario que se encontraba en la lista de espera
+              en un servicio para que contacte por correo con el administrador si sigue
+              interesado</p>
             </li>
           </ul>
         </div>

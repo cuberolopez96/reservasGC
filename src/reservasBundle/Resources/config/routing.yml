@@ -17,6 +17,9 @@ reservas_admin:
 reservas_admin_login:
     path: /admin/login
     defaults: {_controller: reservasBundle:Admin:login}
+reservas_admin_logout:
+    path: /admin/logout
+    defaults: {_controller: reservasBundle:Admin:logout}
 reservas_admin_listados:
     path: /admin/listados
     defaults: {_controller: reservasBundle:Admin:listados }

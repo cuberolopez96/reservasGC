@@ -1,6 +1,6 @@
 {% extends 'reservasBundle:Admin:layout.html.twig' %}
 {% block content %}
-<main class="valign-wrapper center-align">
+<main class="valign-wrapper center-align paddingTop2">
   <div class="row">
 
     <header class="col s12">
@@ -9,6 +9,18 @@
           <a href="/admin/correos/add"><i class="material-icons">library_add</i></a>
         </h1>
     </header>
+
+    <div class="col s12">
+      <div class="container row">
+
+        <div class="row" >
+
+          <div class="col s12">
+            <ul id="partesBoletin" class="collection row center-align">
+                <li class="collection-item col s12 m6 comoH3"><a href="/admin/correos">Correos</a></li>
+                <li class="collection-item col s12 m6 comoH3"><a href="/admin/boletin">Boletines</a></li>
+            </ul>
+          </div>
 
     <div class="col s12">
       <div class="card">
@@ -35,7 +47,7 @@
           </table>
         </div>
       </div>
-    </div>
+    </div></div></div></div>
 
   </div>
 </main>

@@ -12,6 +12,7 @@
         <table class="bordered centered  highlight">
           <thead id="titularTabla">
               <tr>
+                <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th></th>
@@ -21,6 +22,7 @@
           <tbody>
             {% for menu in menus %}
                 <tr>
+                  <td>{{menu.nombre}}</td>
                   <td>{{menu.descripción}}</td>
                   <td>{{menu.precio}}</td>
                   <td><a href="/admin/menus/editar/{{menu.idmenu}}" class="material-icons">edit</a></td>

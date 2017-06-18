@@ -12,16 +12,22 @@
           <form class="" action="/admin/menus/add" method="post">
             <div class="row">
               <div class="col s12 m9">
+                <label class="comoH3">Nombre</label>
+                <input id="nombre" required class="inputEst sinPadding center-align" name="nombre"  type="text" name="nombre">
+              </div>
+
+              <div class="col s12 m3">
+                <label class="comoH3">Precio</label>
+                <input  class="inputEst sinPadding center-align" type="number" step="any" name="precio" min="0" value="">
+              </div>
+
+              <div class="col s12 m9">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" class="textareaEst sinPadding" name="descripcion" rows="8" cols="80">
+                <textarea id="descripcion" class="materialize-textarea textareaEst sinPadding" name="descripcion" rows="8" cols="80">
                   Texto por defecto
                 </textarea>
               </div>
 
-              <div class="col s12 m3">
-                  <label class="comoH3">Precio</label>
-                  <input  class="inputEst sinPadding center-align" type="number" step="any" name="precio" min="0" value="">
-              </div>
             </div>
 
               <div class="row">

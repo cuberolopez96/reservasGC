@@ -114,6 +114,12 @@ label.comoH3.labelEst.active {
 }
 
 
+ul#mobile-demo {
+    background: #D9D2C0;
+}
+
+
+
 @media screen and (min-width:602px){
   #colMala{
     display: flex;

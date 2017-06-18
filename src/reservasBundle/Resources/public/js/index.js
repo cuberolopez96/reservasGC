@@ -176,7 +176,7 @@
       let fecha,hora,plazas,nombre,apellidos,correo,telefonos,checkbox,observaciones;
       fechaActual = new Date();
       Calendar.mes = new Date().getMonth();
-      Calendar.año = new Date().getFullYear();
+      Calendar.year = new Date().getFullYear();
       Servicios.Get(function(){
         Calendar.renderCalendar(Servicios.ServiciosCache);
       })
@@ -186,14 +186,31 @@
       $('#diaAnterior').click(function(event){
         let date;
         event.preventDefault();
-        Calendar.mes = Calendar.mes - 1;
+
+        if (Calendar.mes === 0) {
+          Calendar.year = Calendar.year - 1;
+          Calendar.mes = 11;
+          console.log(Calendar.mes);
+
+        }else{
+          Calendar.mes -= 1;
+        }
+
         Calendar.ToggleButtons();
         Calendar.renderCalendar(Servicios.ServiciosCache);
 
       });
       $('#diaSiguiente').click(function(event){
         event.preventDefault();
-        Calendar.mes = Calendar.mes+ 1;
+        if (Calendar.mes === 11) {
+          Calendar.year += 1;
+          console.log(Calendar.year);
+          console.log("he cambiado al año siguiente");
+          Calendar.mes = 0;
+        }else{
+          Calendar.mes += 1;
+        }
+
         Calendar.ToggleButtons();
         Calendar.renderCalendar(Servicios.ServiciosCache);
       })
@@ -496,19 +513,16 @@
    };
    Calendar = {
      mes: null,
+     year: null,
      meses: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
      //habilita o deshabilita los botones del calendario en función del mes
      ToggleButtons: function(){
-       if(Calendar.mes <= fechaActual.getMonth()){
+       if(Calendar.mes <= fechaActual.getMonth() && Calendar.year <= fechaActual.getFullYear()){
          $('#diaAnterior').attr('disabled','disabled');
        }else{
          $('#diaAnterior').removeAttr('disabled');
        }
-       if(Calendar.mes >= 11){
-         $('#diaSiguiente').attr('disabled','disabled');
-       }else{
-         $('#diaSiguiente').removeAttr('disabled');
-       }
+
      },
      //habilitar dias
      EnableDate: function(dia,servicios){
@@ -519,6 +533,7 @@
        paramDate=new Date();
        paramDate.setMonth(Calendar.mes);
        paramDate.setDate(dia);
+       paramDate.setFullYear(Calendar.year);
        //Recorremos los servicios
       $.each(servicios,function(index,value){
          // la fecha del Servicio en un date;
@@ -621,7 +636,8 @@
         fecha = new Date();
         fecha.setDate(1);
         fecha.setMonth(Calendar.mes);
-        $('#mesActual').empty().text(Calendar.meses[Calendar.mes]);
+        fecha.setFullYear(Calendar.year);
+        $('#mesActual').empty().text(Calendar.meses[Calendar.mes]+' '+Calendar.year);
         $('#calendar').empty();
         semana = 0;
         switch(Calendar.mes){
@@ -668,15 +684,16 @@
             if (value[i]) {
               console.log(value[i]);
               if (Calendar.EnableDate(value[i],servicios)===true) {
-                td = $('<td id="'+i+'"><button class="btn-floating btn-tiny bcalendario" >'+value[i]+'</button></td>')
+                td = $('<td id="'+i+'-'+Calendar.year+'"><button class="btn-floating btn-tiny bcalendario" >'+value[i]+'</button></td>')
                 bservicios = "";
                 divservicios = $('<div class="bservicios "></div>');
                 servicios.forEach(function(row){
                     console.log(row + ' servicio');
                     let fecha= Utils.converToDate(row.fechaservicio.date),
                     hora=Utils.timeStringFormat(fecha);
-                    if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
-                      console.log(fecha);
+                    console.log(fecha.getFullYear());
+                    if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && Calendar.year === fecha.getFullYear()) {
+                      console.log('he entrado y esto no tiene sentido alguno');
 
                       bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
                       divservicios.append(bservicios);
