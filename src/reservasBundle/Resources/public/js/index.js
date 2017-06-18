@@ -25,7 +25,7 @@
         }
     });
     // Si estamos en admin servicios
-    if (window.location.pathname === '/admin/servicios') {
+    if (window.location.pathname === '/admin/servicios' || window.location.pathname === '/admin/servicios/anteriores') {
       $('.modaldelete').click(function(event){
         let idservicio = $(this).attr('servicio');
         event.preventDefault();
