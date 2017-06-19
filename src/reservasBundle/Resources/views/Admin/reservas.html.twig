@@ -4,15 +4,15 @@
 <div class="row">
   <h1 class="col s12 center-align">Reservas</h1>
 
-  <div class="col s12 center-align">
+  <div class="row center-align">
     {% if servicio.menumenu !=false and servicio.menumenu != null %}
     {% set menu = servicio.menumenu %}
-    <a href="/admin/menu/{{menu.idmenu}}" class="button especial grande">Ver Menu</a>
+    <div class="col s12 l6 paddingTop1"><a href="/admin/menu/{{menu.idmenu}}" class="button especial grande">Ver Menu</a></div>
     {% endif %}
     {% set diferencia = date((servicio.fechaservicio | date('d-m-Y'))).diff(date(("now" | date('d-m-Y')))) %}
 
     {% if diferencia.days == 1 %}
-        <a href="/admin/servicios/recordatorios/{{servicio.idservicios}}"class="button especial grande">Lanzar Recordatorios</a>
+        <div class="col s12 l6 paddingTop1"><a href="/admin/servicios/recordatorios/{{servicio.idservicios}}"class="button especial grande">Recordatorios</a></div>
     {% endif %}
   </div>
 
@@ -69,20 +69,20 @@
         </div>
         <div class="card-action center-align">
           <div class="row">
-            <a class="button especial2 minus col" href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
-            <a class="button especial minus col" href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
+            <a class="button especial2 minus col s12 l2 offset-l1" href="/admin/reservas/delete/{{reserva.idreservas}}">Anular</a>
+            <a class="button especial minus col s12 l2" href="/admin/reservas/editar/{{reserva.idreservas}}">Editar</a>
             {% set aviso = false %}
             {% if reserva.estadoreservaestadoreserva.idestadoreserva == 1 %}
-              <a href="/admin/reservas/resend/{{reserva.idreservas}}" class="button especial2 minus col">Reenviar</a>
+              <a href="/admin/reservas/resend/{{reserva.idreservas}}" class="button especial2 minus col s12 l2">Reenviar</a>
               {% if (servicio.plazas - servicio.plazasocupadas) > reserva.npersonas %}
-                <a href="/admin/reservas/confirmar/{{reserva.idreservas}}" class="button especial minus col">Confirmar</a>
+                <a href="/admin/reservas/confirmar/{{reserva.idreservas}}" class="button especial minus col s12 l2">Confirmar</a>
                 {% else %}
                   {% set aviso = true %}
               {% endif %}
 
             {% endif %}
             {% if date(servicio.fechaservicio) < date("now")  and bandera == false %}
-              <a href="/admin/reservas/listanegra/add/{{reserva.idreservas}}" class="button especial minus">Lista Negra</a>
+              <a href="/admin/reservas/listanegra/add/{{reserva.idreservas}}" class="button especial minus col s12 l3 marginTop offset-l4">Lista Negra</a>
             {% endif %}
           </div>
           <div class="">
