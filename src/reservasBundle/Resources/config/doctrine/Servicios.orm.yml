@@ -17,6 +17,14 @@ reservasBundle\Entity\Servicios:
             generator:
                 strategy: IDENTITY
     fields:
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: Nombre
+
         fechaservicio:
             type: datetime
             nullable: true
