@@ -33,6 +33,7 @@
                 <table id="listadoServicios" class="bordered col s12 centered  highlight ">
                     <thead id="titularTabla">
                       <tr>
+                        <th>Nombre</th>
                         <th>Fecha Servicio</th>
                         <th>Plazas Máximas</th>
                         <th>Plazas Disponibles</th>
@@ -47,6 +48,7 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td><input type="text" class="filtro center-align" name="" id="inputNombre" value=""></td>
                         <td><input type="text" class ="filtro center-align" id="inputFechaServicio"name="" value=""></td>
                         <td><input type="text" class="filtro center-align" id="inputPlazas" name="" value=""></td>
                         <td><input type="text" class="filtro center-align" id="inputPlazasDisponibles" name="" value=""></td>
@@ -58,6 +60,7 @@
                         {% for index,servicio in servicios %}
                             {% set porcentage = (servicio.plazas * 0.8) %}
                             <tr>
+                                <td class="rowNombre">{{servicio.nombre}}</td>
                                 <td class="rowFechaServicio">{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
                                 <td class="rowPlazas">{{servicio.plazas}}</td>
                                 <td class="rowPlazasDisponibles">{{servicio.plazasdisponibles}}</td>

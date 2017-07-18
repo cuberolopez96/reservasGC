@@ -12,6 +12,10 @@
           <form class="" action="/admin/servicios/editar/{{servicio.idservicios}}" method="post">
             <div class="row">
               <div class="col s12 l6">
+                <label class="left comoH3" for="">Nombre</label>
+                <input class="inputEst center-align sinPadding" type="text"  name="nombre" required value="{{servicio.nombre}}">
+              </div>
+              <div class="col s12 l6">
                 <label class="left comoH3" for="">Fecha del Servicio</label>
                 <input class="inputEst center-align sinPadding" type="text" disabled name="fecha" placeholder="dd/mm/YYYY" pattern="\d\d/\d\d/\d\d\d\d"  value="{{servicio.fechaservicio | date('d/m/Y')}}">
               </div>
@@ -24,7 +28,7 @@
                 <label class="left comoH3" for="">Plazas Máximas</label>
                 <input class="inputEst center-align sinPadding" type="number" min="0" name="plazas" value="{{servicio.plazas}}">
               </div>
-              <div class="col s12 l6">
+              <div class="col s12 l12">
                   <label class="labelEst comoH3"for="">Menú</label>
                   <select name="menu">
                       {% for menu in menus %}

@@ -588,6 +588,7 @@ class AdminController extends Controller
           $servicio->setMenumenu($menu);
           $fecha = $request->get('fecha').' '.$request->get('hora');
           $fecha = str_replace('/','-',$fecha);
+          $servicio->setNombre($request->get('nombre'));
           $servicio->setFechaservicio(new \DateTime($fecha));
           $servicio->setPlazas($request->get('plazas'));
           $em->persist($servicio);
@@ -614,6 +615,7 @@ class AdminController extends Controller
             $fecha = str_replace('/','-',$fecha);
             $menu = $em->getRepository('reservasBundle:Menu')
             ->findByIdmenu($request->get('menu'))[0];
+            $servicio->setNombre($request->get('nombre'));
             $servicio->setMenumenu($menu);
             $servicio->setFechaservicio(new \DateTime($fecha));
             $servicio->setPlazas($request->get('plazas'));
