@@ -23,7 +23,7 @@ class ClientController extends Controller
         $pdf->Cell(25);
 
         $pdf->SetFont('Arial','B',20);
-        $pdf->Cell(60,20,utf8_decode('Reserva Restaurante IES Gran Capitán '));
+        $pdf->Cell(60,20,utf8_decode('Reserva Restaurante-Escuela IES Gran Capitán '));
         $pdf->ln();
         $pdf->ln();
 
@@ -71,13 +71,13 @@ class ClientController extends Controller
         }
         $str = join(', ', $str);
         $pdf->SetFont('Arial','',16);
-        $pdf->Cell(40,10,$str);
+        $pdf->Cell(40,10,utf8_decode($str));
         $pdf->ln();
         $pdf->SetFont('Arial','B',16);
         $pdf->Cell(40,10,'Observaciones: ');
         $pdf->ln();
         $pdf->SetFont('Arial','',16);
-        $pdf->Cell(40,10,$reserva->getObservaciones());
+        $pdf->Cell(40,10,utf8_decode($reserva->getObservaciones()));
         $pdf->ln();
         $pdf->ln();
 
