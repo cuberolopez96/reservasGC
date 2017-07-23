@@ -21,5 +21,14 @@ reservasBundle\Entity\Config:
             type: text
         edicionreserva:
             type: text
+        Email_Administrador:
+            type: string
+            nullable: true
+            length: 255
+        Firma_Administrador:
+            type: string
+            nullable: true
+            length: 255
+
 
     lifecycleCallbacks: {  }

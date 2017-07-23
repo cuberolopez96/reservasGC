@@ -665,6 +665,8 @@ class AdminController extends Controller
           $config->setEdicionservicio(trim($request->get('edicions')));
           $config->setEdicionreserva(trim($request->get('edicionr')));
           $config->setClistaespera(trim($request->get('clistaespera')));
+          $config->setEmailAdministrador(trim($request->get('email')));
+          $config->setFirmaAdministrador(trim($request->get('firma')));
           $em->persist($config);
           $em->flush();
           return $this->redirect('/admin/config');
