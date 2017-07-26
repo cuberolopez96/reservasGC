@@ -32,7 +32,7 @@
               <div class="row">
                 <table id="listadoServicios" class="bordered col s12 centered  highlight ">
                     <thead id="titularTabla">
-                      <tr>
+                      <tr class="columnasServ">
                         <th>Nombre</th>
                         <th>Fecha Servicio</th>
                         <th>Plazas Máximas</th>
@@ -47,7 +47,7 @@
 
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr class="columnasServ">
                         <td><input type="text" class="filtro center-align" name="" id="inputNombre" value=""></td>
                         <td><input type="text" class ="filtro center-align" id="inputFechaServicio"name="" value=""></td>
                         <td><input type="text" class="filtro center-align" id="inputPlazas" name="" value=""></td>
@@ -59,7 +59,7 @@
                       </tr>
                         {% for index,servicio in servicios %}
                             {% set porcentage = (servicio.plazas * 0.8) %}
-                            <tr>
+                            <tr class="columnasServ">
                                 <td class="rowNombre">{{servicio.nombre}}</td>
                                 <td class="rowFechaServicio">{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</td>
                                 <td class="rowPlazas">{{servicio.plazas}}</td>
@@ -75,16 +75,16 @@
                                 {{plazasespera}}
                               </td>
                                 {% if porcentage < servicio.plazasocupadas and servicio.plazasocupadas < servicio.plazas %}
-                                  <td><i class="material-icons colorPocoDisp2">fiber_manual_record</i></td>
+                                  <td><i class="material-icons colorPocoDisp2 iconosServ">fiber_manual_record</i></td>
                                 {% elseif servicio.plazasocupadas >= servicio.plazas %}
-                                  <td><i class="material-icons colorOcupado2">fiber_manual_record</i></td>
+                                  <td><i class="material-icons colorOcupado2 iconosServ">fiber_manual_record</i></td>
                                 {% else %}
-                                    <td><i class="material-icons colorDisponible2">fiber_manual_record</i></td>
+                                    <td><i class="material-icons colorDisponible2 iconosServ">fiber_manual_record</i></td>
                                 {% endif %}
 
-                                <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons">edit</i></a></td>
-                                <td><a class="modaldelete" href="#" servicio="{{servicio.idservicios}}"><i class="material-icons">delete</i></a></td>
-                                <td><a href="/admin/servicios/{{servicio.idservicios}}/reservas"><i class="material-icons">assignment</i></a></td>
+                                <td><a href="/admin/servicios/editar/{{servicio.idservicios}}"><i class="material-icons iconosServ">edit</i></a></td>
+                                <td><a class="modaldelete" href="#" servicio="{{servicio.idservicios}}"><i class="material-icons iconosServ">delete</i></a></td>
+                                <td><a href="/admin/servicios/{{servicio.idservicios}}/reservas"><i class="material-icons iconosServ">assignment</i></a></td>
                             </tr>
 
                         {% endfor %}

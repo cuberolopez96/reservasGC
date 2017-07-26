@@ -118,9 +118,28 @@ ul#mobile-demo {
     background: #D9D2C0;
 }
 
+.correoEst td{
+  font-size: 0.39em;
+}
+
+.iconosServ{
+  font-size: 2em;
+}
+
+.columnasServ{
+  font-size: 0.5em;
+}
 
 
 @media screen and (min-width:602px){
+  .correoEst td{
+    font-size: 0.5em;
+  }
+
+  .columnasServ{
+    font-size: 0.65em;
+  }
+
   #colMala{
     display: flex;
     align-items: center;
@@ -130,6 +149,10 @@ ul#mobile-demo {
 @media screen and (min-width:994px){
   table{
     font-size: 1em !important;
+  }
+
+  .correoEst td, .columnasServ{
+    font-size: 1em;
   }
 
   #navTitulo{

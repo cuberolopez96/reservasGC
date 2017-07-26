@@ -4,50 +4,44 @@
   <div class="row">
 
     <header class="col s12">
-        <h1 class="center-align">
-          Correos
+        <h1 class="center-align">Correos
           <a href="/admin/correos/add"><i class="material-icons">library_add</i></a>
         </h1>
     </header>
 
     <div class="col s12">
-      <div class="container row">
-
-        <div class="row" >
-
-          <div class="col s12">
-            <ul id="partesBoletin" class="collection row center-align">
-                <li class="collection-item col s12 m6 comoH3"><a href="/admin/correos">Correos</a></li>
-                <li class="collection-item col s12 m6 comoH3"><a href="/admin/boletin">Boletines</a></li>
-            </ul>
-          </div>
+      <ul id="partesBoletin" class="collection row center-align">
+          <li class="collection-item col s12 m6 comoH3"><a href="/admin/correos">Correos</a></li>
+          <li class="collection-item col s12 m6 comoH3"><a href="/admin/boletin">Boletines</a></li>
+      </ul>
+    </div>
 
     <div class="col s12">
-      <div class="card">
-        <div class="card-content sinPadding">
-          <table class="bordered">
-            <thead id="titularTabla">
-              <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Email</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for correo in correos %}
-                <tr>
-                    <td>{{correo.nombre}}</td>
-                    <td>{{correo.apellidos}}</td>
-                    <td>{{correo.email}}</td>
-                    <td><a href="/admin/correos/delete/{{correo.idcorreos}}"><i class="material-icons">delete</i></a></td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+        <div class="card">
+          <div class="card-content sinPadding">
+              <table class="bordered correoEst">
+                <thead id="titularTabla">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for correo in correos %}
+                    <tr>
+                        <td>{{correo.nombre}}</td>
+                        <td>{{correo.apellidos}}</td>
+                        <td>{{correo.email}}</td>
+                        <td><a href="/admin/correos/delete/{{correo.idcorreos}}"><i class="material-icons">delete</i></a></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
         </div>
       </div>
-    </div></div></div></div>
 
   </div>
 </main>
