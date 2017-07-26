@@ -8,6 +8,7 @@ reservasBundle\Entity\Config:
             id: true
             generator:
                 strategy: AUTO
+    
     fields:
         confirmacion:
             type: text
@@ -29,6 +30,7 @@ reservasBundle\Entity\Config:
             type: string
             nullable: true
             length: 255
+
 
 
     lifecycleCallbacks: {  }

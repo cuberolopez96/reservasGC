@@ -9,7 +9,7 @@
   <div class="col s12">
     <div class="card">
       <div class="card-content paddingTop1">
-          <form class="" action="/admin/menus/add" method="post">
+          <form class="" action="/admin/menus/add" enctype="multipart/form-data" method="post">
             <div class="row">
               <div class="col s12 m9">
                 <label class="comoH3">Nombre</label>
@@ -26,6 +26,10 @@
                 <textarea id="descripcion" class="materialize-textarea textareaEst sinPadding" name="descripcion" rows="8" cols="80">
                   Texto por defecto
                 </textarea>
+              </div>
+              <div class="col s12 m3">
+                <label class="comoH3">Imagen</label>
+                <input   class="button especial" type="file"  name="imagen" required>
               </div>
 
             </div>

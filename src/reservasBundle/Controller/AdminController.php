@@ -16,6 +16,7 @@ use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminController extends Controller
 {
@@ -514,9 +515,11 @@ class AdminController extends Controller
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
+        $file = $request->files->get('imagen');
         $menu->setNombre($request->get('nombre'));
         $menu->setDescripción($request->get('descripcion'));
         $menu->setPrecio($request->get('precio'));
+        $menu->setImagen($file->move("imagenes",$file->getClientOriginalName()));
         $em->persist($menu);
         $em->flush();
         if ($request->get('alergenos')) {
