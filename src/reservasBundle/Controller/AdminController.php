@@ -16,7 +16,6 @@ use reservasBundle\Entity\Misplantillas;
 use reservasBundle\Form\ReservasType;
 use reservasBundle\Form\ServiciosType;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminController extends Controller
 {
@@ -515,11 +514,9 @@ class AdminController extends Controller
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
-        $file = $request->files->get('imagen');
         $menu->setNombre($request->get('nombre'));
         $menu->setDescripción($request->get('descripcion'));
         $menu->setPrecio($request->get('precio'));
-        $menu->setImagen($file->move("imagenes",$file->getClientOriginalName()));
         $em->persist($menu);
         $em->flush();
         if ($request->get('alergenos')) {
@@ -585,8 +582,12 @@ class AdminController extends Controller
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
-          $menu = $em->getRepository('reservasBundle:Menu')
-          ->findByIdmenu($request->get('menu'))[0];
+          if ($request->get('menu') != "null") {
+            $menu = $em->getRepository('reservasBundle:Menu')
+            ->findByIdmenu($request->get('menu'))[0];
+          }else{
+            $menu = null;
+          }
           $servicio = new Servicios();
           $servicio->setMenumenu($menu);
           $fecha = $request->get('fecha').' '.$request->get('hora');

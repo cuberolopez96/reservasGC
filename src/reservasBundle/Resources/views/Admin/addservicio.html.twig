@@ -34,6 +34,7 @@
                   <div class="col s12 l12">
                     <label class="labelEst left comoH3" for="">Menú</label>
                     <select name="menu">
+                        <option value="null">Ninguno</option>
                         {% for menu in menus %}
                             <option value="{{menu.idmenu}}">{{menu.nombre}}</option>
                         {% endfor %}

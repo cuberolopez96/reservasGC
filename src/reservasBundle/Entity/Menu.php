@@ -1,7 +1,6 @@
 <?php
 
 namespace reservasBundle\Entity;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Menu
@@ -16,19 +15,12 @@ class Menu
     /**
      * @var string
      */
-    private $nombre;
-
-    /**
-     * @var string
-     */
     private $descripción;
 
     /**
      * @var string
      */
-    private $precio;
-
-    
+    private $imagen;
 
 
     /**
@@ -39,30 +31,6 @@ class Menu
     public function getIdmenu()
     {
         return $this->idmenu;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     *
-     * @return Menu
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
     }
 
     /**
@@ -90,6 +58,43 @@ class Menu
     }
 
     /**
+     * Set imagen
+     *
+     * @param string $imagen
+     *
+     * @return Menu
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function toArray(){
+      $array = array(
+        'Descripcion'=>$this->getDescripción(),
+        'Imagen'=>$this->getImagen()
+      );
+      return $array;
+    }
+    /**
+     * @var string
+     */
+    private $precio;
+
+
+    /**
      * Set precio
      *
      * @param string $precio
@@ -115,30 +120,30 @@ class Menu
     /**
      * @var string
      */
-    private $imagen;
+    private $nombre;
 
 
     /**
-     * Set imagen
+     * Set nombre
      *
-     * @param string $imagen
+     * @param string $nombre
      *
      * @return Menu
      */
-    public function setImagen($imagen)
+    public function setNombre($nombre)
     {
-        $this->imagen = $imagen;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get imagen
+     * Get nombre
      *
      * @return string
      */
-    public function getImagen()
+    public function getNombre()
     {
-        return $this->imagen;
+        return $this->nombre;
     }
 }
