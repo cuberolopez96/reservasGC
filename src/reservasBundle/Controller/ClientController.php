@@ -103,6 +103,28 @@ class ClientController extends Controller
         $pdf->Cell(40,10,utf8_decode('hosteleria@iesgrancapitan.org'));
         $pdf->ln();
 
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(25,10,utf8_decode('FaceBook: '));
+        $pdf->ln();
+        $pdf->SetFont('Arial','',16);
+        $pdf->Cell(40,10,utf8_decode('www.facebook.com/hosteleriayturismoiesgrancapitan'));
+        $pdf->ln();
+
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(25,10,utf8_decode('Web del Departamento de Hostelería y Turismo: '));
+        $pdf->ln();
+        $pdf->SetFont('Arial','',16);
+        $pdf->Cell(40,10,utf8_decode('http://hosteleria.iesgrancapitan.org'));
+        $pdf->ln();
+
+        $pdf->Image('bundles/reservas/img/facebook-logo-png-11.png',15,230,18,0,'','www.facebook.com/hosteleriayturismoiesgrancapitan');
+        $pdf->SetLeftMargin(45);
+        $pdf->SetFontSize(14);
+
+        $pdf->Image('bundles/reservas/img/image948-e1447362808491.png',40,230,15,0,'','http://hosteleria.iesgrancapitan.org');
+        $pdf->SetLeftMargin(45);
+        $pdf->SetFontSize(14);
+
 
         return new Response($pdf->Output(), 200, array(
             'Content-Type' => 'application/pdf'));
