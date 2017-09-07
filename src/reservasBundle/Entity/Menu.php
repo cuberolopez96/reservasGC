@@ -83,8 +83,10 @@ class Menu
 
     public function toArray(){
       $array = array(
-        'Descripcion'=>$this->getDescripción(),
-        'Imagen'=>$this->getImagen()
+        'id'=>$this->getIdmenu(),
+        'nombre'=>$this->getNombre(),
+        'precio'=>$this->getPrecio(),
+
       );
       return $array;
     }
@@ -136,7 +138,6 @@ class Menu
 
         return $this;
     }
-
     /**
      * Get nombre
      *
@@ -146,4 +147,5 @@ class Menu
     {
         return $this->nombre;
     }
+
 }
