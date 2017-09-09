@@ -114,6 +114,7 @@ class Servicios
         'id' => $this->getIdservicios(),
         'FechaServicio'=>$this->getFechaservicio()->format('Y/m/d h:i:s'),
         'Plazas'=>$this->getPlazas(),
+        'menu'=>$this->getMenumenu()->toArray()
       );
       return $array;
     }
