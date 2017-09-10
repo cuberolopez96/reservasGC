@@ -29,7 +29,7 @@ class AdminController extends Controller
 
   public function plusPlazasOcupadas( $reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-    
+
     $em = $this->getDoctrine()->getEntityManager();
     $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
     if ($idestado == 2) {
@@ -236,9 +236,9 @@ class AdminController extends Controller
       if ($request->isMethod('POST')) {
         if ($request->get('add')) {
             $correo = new Correos();
-            $correo->setNombre($request->get('nombre'));
-            $correo->setApellidos($request->get('apellidos'));
-            $correo->setEmail($request->get('correo'));
+            $correo->setNombre(trim($request->get('nombre')));
+            $correo->setApellidos(trim($request->get('apellidos')));
+            $correo->setEmail(trim($request->get('correo')));
             $em->persist($correo);
             $em->flush();
             return $this->redirect('/admin/correos');
@@ -298,8 +298,8 @@ class AdminController extends Controller
     if ($request->isMethod('POST')) {
       $plantilla = new Misplantillas();
       if ($request->get('add')) {
-          $plantilla->setAsunto($request->get('asunto'));
-          $plantilla->setTexto($request->get('texto'));
+          $plantilla->setAsunto(trim($request->get('asunto')));
+          $plantilla->setTexto(trim($request->get('texto')));
           $em->persist($plantilla);
           $em->flush();
           return $this->redirect('/admin/boletin');
@@ -356,11 +356,11 @@ class AdminController extends Controller
 
       if ($request->isMethod('POST')) {
           if($request->get('guardar')){
-            $reserva->setNombre($request->get('nombre'));
-            $reserva->setApellidos($request->get('apellidos'));
-            $reserva->setCorreo($request->get('correo'));
-            $reserva->setTelefono($request->get('telefono'));
-            $reserva->setObservaciones($request->get('observaciones'));
+            $reserva->setNombre(trim($request->get('nombre')));
+            $reserva->setApellidos(trim($request->get('apellidos')));
+            $reserva->setCorreo(trim($request->get('correo')));
+            $reserva->setTelefono(trim($request->get('telefono')));
+            $reserva->setObservaciones(trim($request->get('observaciones')));
             $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')
             ->findByIdestadoreserva($request->get("estado"))[0];
             self::deleteAlergenosByReserva($reserva);
@@ -443,9 +443,9 @@ class AdminController extends Controller
 
       if ($request->isMethod('POST')) {
         if ($request->get('guardar')) {
-          $menu->setNombre($request->get('nombre'));
-          $menu->setDescripción($request->get('descripcion'));
-          $menu->setPrecio($request->get('precio'));
+          $menu->setNombre(trim($request->get('nombre')));
+          $menu->setDescripción(trim($request->get('descripcion')));
+          $menu->setPrecio(trim($request->get('precio')));
           $em->persist($menu);
           $em->flush();
           if ($request->get('alergenos')) {
@@ -479,9 +479,9 @@ class AdminController extends Controller
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
-        $menu->setNombre($request->get('nombre'));
-        $menu->setDescripción($request->get('descripcion'));
-        $menu->setPrecio($request->get('precio'));
+        $menu->setNombre(trim($request->get('nombre')));
+        $menu->setDescripción(trim($request->get('descripcion')));
+        $menu->setPrecio(trim($request->get('precio')));
         $em->persist($menu);
         $em->flush();
         if ($request->get('alergenos')) {
@@ -552,7 +552,7 @@ class AdminController extends Controller
           $servicio->setMenumenu($menu);
           $fecha = $request->get('fecha').' '.$request->get('hora');
           $fecha = str_replace('/','-',$fecha);
-          $servicio->setNombre($request->get('nombre'));
+          $servicio->setNombre(trim($request->get('nombre')));
           $servicio->setFechaservicio(new \DateTime($fecha));
           $servicio->setPlazas($request->get('plazas'));
           $em->persist($servicio);
@@ -576,11 +576,11 @@ class AdminController extends Controller
             $fecha = $request->get('fecha').' '.$request->get('hora');
             $fecha = str_replace('/','-',$fecha);
             $menu = $em->getRepository('reservasBundle:Menu')
-            ->findByIdmenu($request->get('menu'))[0];
-            $servicio->setNombre($request->get('nombre'));
+            ->findByIdmenu(trim($request->get('menu')))[0];
+            $servicio->setNombre(trim($request->get('nombre')));
             $servicio->setMenumenu($menu);
             $servicio->setFechaservicio(new \DateTime($fecha));
-            $servicio->setPlazas($request->get('plazas'));
+            $servicio->setPlazas(trim($request->get('plazas')));
             $em->persist($servicio);
             $em->flush();
             $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
@@ -640,9 +640,8 @@ class AdminController extends Controller
     }
 
     public function manualAction(){
-      if (self::isAuthorized()==false) {
-          return $this->redirect('/admin/login');
-      }
+
+      $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
       return $this->render("reservasBundle:Admin:manual.html.twig");
     }
