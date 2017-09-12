@@ -13,11 +13,14 @@ class ClientController extends Controller
     }
     public function menuAction($id){
       $em = $this->getDoctrine()->getManager();
-      $menu = $em->getRepository('reservasBundle:Menu')->findOneByIdmenu($id);
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findOneByIdservicios($id);
+      $menu = $servicio->getMenumenu();
+
       $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
       return $this->render('reservasBundle:Client:menu.html.twig',array(
         'menu'=>$menu,
-        'alergenos'=>$alergenos
+        'alergenos'=>$alergenos,
+        'servicio'=>$servicio
     ));
     }
     public function pdfreservasAction($id){
