@@ -10,7 +10,9 @@ reservas_client_consultar:
 reservas_client_reservas_pdf:
     path: /pdf/{id}
     defaults: {_controller: reservasBundle:Client:pdfreservas}
-
+reservas_client_menu:
+    path: /menu/{id}
+    defaults: {_controller: reservasBundle:Client:menu}
 reservas_admin:
     path: /admin
     defaults: {_controller: reservasBundle:Admin:index }

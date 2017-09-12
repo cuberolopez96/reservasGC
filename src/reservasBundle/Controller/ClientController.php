@@ -11,6 +11,15 @@ class ClientController extends Controller
     {
         return $this->render('reservasBundle:Client:index.html.twig');
     }
+    public function menuAction($id){
+      $em = $this->getDoctrine()->getManager();
+      $menu = $em->getRepository('reservasBundle:Menu')->findOneByIdmenu($id);
+      $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+      return $this->render('reservasBundle:Client:menu.html.twig',array(
+        'menu'=>$menu,
+        'alergenos'=>$alergenos
+    ));
+    }
     public function pdfreservasAction($id){
       $em = $this->getDoctrine()->getEntityManager();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];

@@ -1,0 +1,47 @@
+{% extends 'reservasBundle::layout.html.twig' %}
+{% block content %}
+<main class="valign-wrapper center-align">
+  <div class="row">
+
+
+    <div class="col s12">
+      <div class="card sinPadding">
+      <div class="card-content sinPadding">
+        <card-title  class="row">
+            <h2 class="titularCard sinMargin conPadding col s12">
+              <span class="row">
+                <span class="col s10 left-align"> {{menu.nombre}} </span>
+
+              
+
+              </span>
+            </h2>
+        </card-title>
+        <div class="row conPadding ">
+            <div class="col s12 left-align marginBot">
+                <p><strong>Precio:</strong> {{menu.precio}} € </p>
+            </div>
+            <div class="col s12 left-align marginBot">
+                {{menu.descripción}}
+            </div>
+            <div class="col s12">
+              <p class="left-align"><strong>Alergenos:</strong>
+                  {% for alergeno in alergenos %}
+                      {% if loop.index < (alergenos|length) %}
+                          {{alergeno.alergenosalergenos.nombre}},
+                      {% else %}
+                          {{alergeno.alergenosalergenos.nombre}}
+                      {% endif %}
+                  {% endfor %}
+              </p>
+            </div>
+
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}

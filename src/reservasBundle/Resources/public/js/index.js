@@ -55,6 +55,7 @@
                 '<div class="card-content">'+
                 '<div class="card-title row">'+
                 '<span class="col s10">Reserva de '+ data.Nombre + ' ' + data.Apellidos +'</span>'+
+                '<a id="vermenu" class="col s2 waves-effect material-icons">menu</a>'+
                 '<a id="close" class="col s2 waves-effect material-icons">close</a>'+
                 '</div>'+
                 '<div class ="row">'+
@@ -83,6 +84,9 @@
                 $('#resultadoConsulta').fadeOut('slow');
 
               });
+              $('#vermenu').click(function(){
+                window.open(window.location.origin + '/menu/'+ data.Servicio.menu.id);
+              })
               $("#editarReserva").click(function(){
 
                 let checkbox = $('#check input'),
