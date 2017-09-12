@@ -55,7 +55,6 @@
                 '<div class="card-content">'+
                 '<div class="card-title row">'+
                 '<span class="col s10">Reserva de '+ data.Nombre + ' ' + data.Apellidos +'</span>'+
-                '<a id="vermenu" class="col s2 waves-effect material-icons">menu</a>'+
                 '<a id="close" class="col s2 waves-effect material-icons">close</a>'+
                 '</div>'+
                 '<div class ="row">'+
@@ -78,6 +77,7 @@
                 '<div class="card-action">'+
                 '<a id="anular" class="button especial2" href="#modal2">Cancelar</a>'+
                 '<a id="editarReserva" class="button especial" href="#">Editar</a>'+
+                '<a id="vermenu" class="button especial" href="#">Ver Menú</a>'+
                 '</div>'+
               '</div>').css('display','none').fadeIn("slow");
               $('#close').click(function(){

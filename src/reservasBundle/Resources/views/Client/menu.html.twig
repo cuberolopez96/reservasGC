@@ -2,8 +2,8 @@
 {% block content %}
 <main class="valign-wrapper center-align">
   <div class="row">
-    <h1>Menú</h1>
-
+    <h1 class="sombraTexto">Menú para {{servicio.nombre}}</h1>
+    <h2 class="sombraTexto">{{servicio.fechaservicio | date('d-m-Y H:i:s')}}</h2>
     <div class="col s12">
       <div class="card sinPadding">
       <div class="card-content sinPadding">
@@ -25,7 +25,7 @@
                 {{menu.descripción}}
             </div>
             <div class="col s12">
-              <p class="left-align"><strong>Alergenos:</strong>
+              <p class="left-align marginTop1"><strong>Alergenos:</strong>
                   {% for alergeno in alergenos %}
                       {% if loop.index < (alergenos|length) %}
                           {{alergeno.alergenosalergenos.nombre}},
