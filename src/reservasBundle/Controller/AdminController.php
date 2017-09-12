@@ -26,7 +26,13 @@ class AdminController extends Controller
   {
     // cierre de sesion
   }
+  public function deleteserviciosanterioresAction(){
+    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
+    $em = $this->getDoctrine()->getEntityManager();
+    $servicios = $em->getRepository('reservasBundle:Servicios')->findByBeforeToday();
+
+  }
   public function plusPlazasOcupadas( $reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 

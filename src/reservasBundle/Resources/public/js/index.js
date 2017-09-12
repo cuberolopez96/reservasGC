@@ -85,7 +85,7 @@
 
               });
               $('#vermenu').click(function(){
-                window.open(window.location.origin + '/menu/'+ data.Servicio.menu.id);
+                window.open(window.location.origin + '/menu/'+ data.Servicio.id);
               })
               $("#editarReserva").click(function(){
 
@@ -369,16 +369,16 @@
     },
     edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,horallegada,idservicio){
         Utils.postAjax('api/reservas/edit',{
-          id:trim(id),
-          nombre:trim(nombre),
-          apellidos:trim(apellidos),
-          correo:trim(correo),
-          telefono:trim(telefono),
-          alergenos:trim(alergenos),
-          observaciones:trim(observaciones),
-          npersonas:trim(npersonas),
-          horallegada:trim(horallegada),
-          idservicio:trim(idservicio)
+          id:id.trim(),
+          nombre:nombre.trim(),
+          apellidos:apellidos.trim(),
+          correo:correo.trim(),
+          telefono:telefono.trim(),
+          alergenos:alergenos.trim(),
+          observaciones:observaciones.trim(),
+          npersonas:npersonas.trim(),
+          horallegada:horallegada.trim(),
+          idservicio:idservicio.trim()
 
         },function(data){
 
@@ -387,7 +387,7 @@
     },
     getReservasByCodReservas(codigo,success=null){
       Utils.postAjax('api/reservas/codreserva',{
-        codigo:trim(codigo)
+        codigo:codigo.trim()
       },function(data){
         Reservas.consultaCache = data;
         success(data);
@@ -440,17 +440,17 @@
     // añade reservas
     add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,estado,npersonas,horallegada,suscrito,success = null){
       Utils.postAjax('api/reservas/add',{
-        nombre: trim(nombre),
-        apellidos: trim(apellidos),
-        telefono: trim(telefono),
-        correo: trim(correo),
-        observaciones: trim(observaciones),
-        servicio: trim(servicio),
-        estado: trim(estado),
-        alergenos: trim(alergenos),
-        npersonas: trim(npersonas),
-        suscrito: trim(suscrito),
-        horallegada: trim(horallegada),
+        nombre: nombre.trim(),
+        apellidos: apellidos.trim(),
+        telefono: telefono.trim(),
+        correo: correo.trim(),
+        observaciones: observaciones.trim(),
+        servicio: servicio.trim(),
+        estado: estado.trim(),
+        alergenos: alergenos.trim(),
+        npersonas: npersonas.trim(),
+        suscrito: suscrito.trim(),
+        horallegada: horallegada.trim(),
       },function(data){
           success(data);
           return data;
