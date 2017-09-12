@@ -2,10 +2,11 @@
 
 namespace reservasBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Usuarios
  */
-class Usuarios
+class Usuarios implements UserInterface
 {
     /**
      * @var int
@@ -66,7 +67,7 @@ class Usuarios
      */
     public function setPassword($password)
     {
-        $this->password = md5($password);
+        $this->password = $password;
 
         return $this;
     }
@@ -79,5 +80,20 @@ class Usuarios
     public function getPassword()
     {
         return $this->password;
+    }
+    public function getRoles()
+    {
+        return array('ROLE_ADMIN');
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

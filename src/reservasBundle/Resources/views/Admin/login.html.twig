@@ -18,20 +18,18 @@
       <form action="/admin/login" method="post">
         <div class="input-field">
           <label class="labelEst" for="usuario">Usuario</label>
-          <input id="usuario" class="inputEst sinPadding center-align" type="text"  name="username" value="" required>
+          <input id="usuario" class="inputEst sinPadding center-align" type="text"  name="_username" value="" required>
         </div>
 
         <div class="input-field">
           <label class="labelEst"for="password">Password</label>
-          <input class="inputEst sinPadding center-align"type="password" name="password" value="" required>
+          <input class="inputEst sinPadding center-align"type="password" name="_password" value="" required>
         </div>
 
         <input type="submit" class="button especial" name="login" value="Entrar">
       </form>
 
-      {% if errores %}
-        <span>{{errores}}</span>
-      {% endif %}
+
 
     </div>
   </div>

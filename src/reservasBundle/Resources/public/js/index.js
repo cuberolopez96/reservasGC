@@ -369,16 +369,16 @@
     },
     edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,horallegada,idservicio){
         Utils.postAjax('api/reservas/edit',{
-          id:id,
-          nombre:nombre,
-          apellidos:apellidos,
-          correo:correo,
-          telefono:telefono,
-          alergenos:alergenos,
-          observaciones:observaciones,
-          npersonas:npersonas,
-          horallegada:horallegada,
-          idservicio:idservicio
+          id:trim(id),
+          nombre:trim(nombre),
+          apellidos:trim(apellidos),
+          correo:trim(correo),
+          telefono:trim(telefono),
+          alergenos:trim(alergenos),
+          observaciones:trim(observaciones),
+          npersonas:trim(npersonas),
+          horallegada:trim(horallegada),
+          idservicio:trim(idservicio)
 
         },function(data){
 
