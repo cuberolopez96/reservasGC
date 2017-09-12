@@ -445,6 +445,11 @@ label.active{
     text-transform: capitalize !important;
 }
 
+#confirmacion h3{
+	color: salmon;
+	font-weight: bold;
+}
+
 
 
 /* RESPONSIVE */
