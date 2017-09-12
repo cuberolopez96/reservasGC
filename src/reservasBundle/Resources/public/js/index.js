@@ -387,7 +387,7 @@
     },
     getReservasByCodReservas(codigo,success=null){
       Utils.postAjax('api/reservas/codreserva',{
-        codigo:codigo
+        codigo:trim(codigo)
       },function(data){
         Reservas.consultaCache = data;
         success(data);
@@ -440,17 +440,17 @@
     // añade reservas
     add:function(nombre,apellidos,correo,telefono,observaciones,alergenos,servicio,estado,npersonas,horallegada,suscrito,success = null){
       Utils.postAjax('api/reservas/add',{
-        nombre: nombre,
-        apellidos: apellidos,
-        telefono: telefono,
-        correo: correo,
-        observaciones: observaciones,
-        servicio: servicio,
-        estado: estado,
-        alergenos: alergenos,
-        npersonas: npersonas,
-        suscrito: suscrito,
-        horallegada: horallegada,
+        nombre: trim(nombre),
+        apellidos: trim(apellidos),
+        telefono: trim(telefono),
+        correo: trim(correo),
+        observaciones: trim(observaciones),
+        servicio: trim(servicio),
+        estado: trim(estado),
+        alergenos: trim(alergenos),
+        npersonas: trim(npersonas),
+        suscrito: trim(suscrito),
+        horallegada: trim(horallegada),
       },function(data){
           success(data);
           return data;
