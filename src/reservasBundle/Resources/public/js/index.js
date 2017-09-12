@@ -75,7 +75,7 @@
                 '</div>'+
                 '</div>'+
                 '<div class="card-action">'+
-                '<a id="anular" class="button especial2" href="#modal2">Anular</a>'+
+                '<a id="anular" class="button especial2" href="#modal2">Cancelar</a>'+
                 '<a id="editarReserva" class="button especial" href="#">Editar</a>'+
                 '</div>'+
               '</div>').css('display','none').fadeIn("slow");
@@ -308,7 +308,8 @@
                 console.log(data.error);
                 if(data.error === undefined){
                   $('#descargar').click(function(){
-                    window.location.pathname = 'pdf/'+data.Id;
+                    //window.location.pathname = 'pdf/'+data.Id;
+                    window.open(window.location.origin+"/pdf/"+ data.Id);
                   });
                   $('#confirmacion').fadeOut("slow");
                   $('#parte2').removeClass('ubicacion');
