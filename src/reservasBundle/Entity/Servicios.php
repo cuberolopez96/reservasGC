@@ -27,6 +27,10 @@ class Servicios
      */
     private $menumenu;
 
+    public function setIdservicios($id){
+      $this->idservicios = $id;
+      return $this;
+    }
 
     /**
      * Get idservicios

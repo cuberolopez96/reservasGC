@@ -21,7 +21,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AdminController extends Controller
 {
 
+  public function arraytoentity($servicioarray){
 
+    $em =  $this->getDoctrine()->getManager();
+    $servicioEntity = $em->getRepository("reservasBundle:Servicios")->findOneByIdservicios($servicioarray["idservicios"]);
+    return $servicioEntity;
+  }
   public function logoutAction()
   {
     // cierre de sesion
@@ -32,6 +37,10 @@ class AdminController extends Controller
     $em = $this->getDoctrine()->getEntityManager();
     $servicios = $em->getRepository('reservasBundle:Servicios')->findByBeforeToday();
 
+    foreach ($servicios as $key => $servicio) {
+      self::removeServicio(self::arraytoentity($servicio));
+    }
+    return $this->redirectToRoute("reservas_admin_servicios_anteriores");
   }
   public function plusPlazasOcupadas( $reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');

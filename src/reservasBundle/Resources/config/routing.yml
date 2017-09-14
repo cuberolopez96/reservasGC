@@ -82,6 +82,9 @@ reservas_admin_servicios:
 reservas_admin_servicios_anteriores:
     path: /admin/servicios/anteriores
     defaults: {_controller: reservasBundle:Admin:serviciosanteriores }
+reservas_admin_servicios_anteriores_limpiar:
+    path: /admin/servicios/anteriores/limpiar
+    defaults: {_controller: reservasBundle:Admin:deleteserviciosanteriores }
 reservas_admin_servicios_reservas:
     path: /admin/servicios/{id}/reservas
     defaults: {_controller: reservasBundle:Admin:reservasservicios}
