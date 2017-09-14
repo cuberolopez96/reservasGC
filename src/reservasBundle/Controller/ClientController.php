@@ -150,6 +150,11 @@ class ClientController extends Controller
     {
         return $this->render('reservasBundle:Client:consultar.html.twig');
     }
+
+    public function privacidadAction()
+    {
+        return $this->render('reservasBundle:Client:privacidad.html.twig');
+    }
 }
 
  ?>
