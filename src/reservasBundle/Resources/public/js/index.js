@@ -374,7 +374,7 @@
           apellidos:apellidos.trim(),
           correo:correo.trim(),
           telefono:telefono.trim(),
-          alergenos:alergenos.trim(),
+          alergenos:alergenos,
           observaciones:observaciones.trim(),
           npersonas:npersonas.trim(),
           horallegada:horallegada.trim(),
@@ -447,9 +447,9 @@
         observaciones: observaciones.trim(),
         servicio: servicio.trim(),
         estado: estado.trim(),
-        alergenos: alergenos.trim(),
+        alergenos: alergenos,
         npersonas: npersonas.trim(),
-        suscrito: suscrito.trim(),
+        suscrito: suscrito,
         horallegada: horallegada.trim(),
       },function(data){
           success(data);
