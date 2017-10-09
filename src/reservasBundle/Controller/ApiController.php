@@ -141,6 +141,18 @@ class ApiController extends Controller
         if (count($valcodreservas)>0) {
           throw new Exception("Usted ya ha reservado  a este servicio");
         }
+        $listanegra = $em->getRepository('reservasBundle:Listanegra')->findOneByCorreo($request->get('correo'));
+        if (count($listanegra)>0) {
+          $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
+
+          $message = new \Swift_Message('un usuario de la lista negra ha reservado');
+          $message->setTo($config->getEmailAdministrador());
+          $message->setFrom('send@email.com');
+          $message->setBody('aaaaaaaa');
+          $this->get('mailer')->send($message);
+
+
+        }
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
 
