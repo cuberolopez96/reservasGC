@@ -374,7 +374,7 @@
           apellidos:apellidos.trim(),
           correo:correo.trim(),
           telefono:telefono.trim(),
-          alergenos: alergenos,
+          alergenos:alergenos,
           observaciones:observaciones.trim(),
           npersonas:npersonas.trim(),
           horallegada:horallegada.trim(),

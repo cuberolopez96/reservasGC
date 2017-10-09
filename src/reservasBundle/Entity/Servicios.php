@@ -113,12 +113,18 @@ class Servicios
     {
         return $this->menumenu;
     }
+    public function getArrayMenu(){
+      if ($this->getMenumenu()==null) {
+        return null;
+      }
+      return $this->getMenumenu()->toArray();
+    }
     public function toArray(){
       $array= array(
         'id' => $this->getIdservicios(),
         'FechaServicio'=>$this->getFechaservicio()->format('Y/m/d h:i:s'),
         'Plazas'=>$this->getPlazas(),
-        'menu'=>$this->getMenumenu()->toArray()
+        'menu'=>$this->getArrayMenu()
       );
       return $array;
     }

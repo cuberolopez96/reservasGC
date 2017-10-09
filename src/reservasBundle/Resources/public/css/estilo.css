@@ -496,6 +496,19 @@ label.active{
 
 }
 
+.justificado{
+  text-align: justify;
+}
+.espacio{
+  margin: 1em;
+}
+.espacio2{
+  margin: 2em;
+}
+.opacidad {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
 @media screen and (min-width:666px){
 	.button{
 		margin-bottom: 0;
