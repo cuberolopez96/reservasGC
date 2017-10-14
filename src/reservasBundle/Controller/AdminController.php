@@ -637,6 +637,7 @@ class AdminController extends Controller
           $config->setConfirmacion(trim($request->get('confirmacion')));
           $config->setRecordatorio(trim($request->get('recordatorio')));
           $config->setCancelacion(trim($request->get('cancelacion')));
+          $config->setListanegra(trim($request->get('listanegra')));
           $config->setEdicionservicio(trim($request->get('edicions')));
           $config->setEdicionreserva(trim($request->get('edicionr')));
           $config->setClistaespera(trim($request->get('clistaespera')));

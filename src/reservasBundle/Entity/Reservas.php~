@@ -300,6 +300,7 @@ class Reservas
     {
         return $this->alergenosalergenos;
     }
+  
     public function toArray(){
       $array=array(
         'Id'=>$this->getIdreservas(),
@@ -373,5 +374,5 @@ class Reservas
     {
         return $this->horallegada;
     }
-  
+
 }

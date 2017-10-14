@@ -148,7 +148,7 @@ class ApiController extends Controller
           $message = new \Swift_Message('un usuario de la lista negra ha reservado');
           $message->setTo($config->getEmailAdministrador());
           $message->setFrom('send@email.com');
-          $message->setBody('aaaaaaaa');
+          $message->setBody($config->getListanegra());
           $this->get('mailer')->send($message);
 
 

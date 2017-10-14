@@ -15,6 +15,8 @@ reservasBundle\Entity\Config:
             type: text
         clistaespera:
             type: text
+        listanegra:
+            type: text
         cancelacion:
             type: text
         edicionservicio:
