@@ -20,7 +20,23 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminController extends Controller
 {
+  public function sumarPlazas($reservas){
+    $plazas = 0;
+    foreach ($reservas as $key => $reserva) {
+      $plazas += $reserva->getNpersonas();
 
+    }
+    return $plazas;
+  }
+  public function getPorcentajeReservas($servicio){
+      $em = $this->getDoctrine()->getManager();
+      $reservas = $em->getRepository("reservasBundle:Reservas")->findByIdservicios($servicio);
+      $plazasOcupadas = self::sumarPlazas();
+      $plazas = $servicios ->getPlazas();
+      $porcentaje = ($plazasOcupadas / $plazas) * 100;
+      return $porcentaje;
+
+  }
   public function arraytoentity($servicioarray){
 
     $em =  $this->getDoctrine()->getManager();

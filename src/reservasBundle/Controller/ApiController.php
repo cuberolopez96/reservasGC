@@ -15,6 +15,37 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class ApiController extends Controller
 {
+    public function sumarPlazas($reservas){
+      $plazas = 0;
+      foreach ($reservas as $key => $reserva) {
+        $plazas += $reserva->getNpersonas();
+
+      }
+      return $plazas;
+    }
+    public function getPorcentajeReservas($servicio){
+        $em = $this->getDoctrine()->getManager();
+        $reservas = $em->getRepository("reservasBundle:Reservas")->findByIdservicios($servicio);
+        $plazasOcupadas = self::sumarPlazas();
+        $plazas = $servicios ->getPlazas();
+        $porcentaje = ($plazasOcupadas / $plazas) * 100;
+        return $porcentaje;
+
+    }
+    public function isAlmostComplete($servicio){
+      $em = $this->getDoctrine()->getManager();
+      $config = $em->getRepository("reservasBundle:Servicios")->findAll()[0];
+
+      if (self::getPorcentajeReservas($servicio) & $servicio->getAvisoenviado()==false) {
+        // enviar email de aviso del ochenta porciento
+        $message = new \Swift_Message("Servicio casi completo");
+        $message->setTo($config->getEmailAdministrador());
+        $message->setFrom("send@email.com");
+        $message->setBody("texto para el mensaje");
+        $this->get('mailer')->send($message);
+        $servicio->setAvisoenviado(false);
+      }
+    }
     public function indexAction()
     {
       $array = array();
@@ -153,9 +184,9 @@ class ApiController extends Controller
 
 
         }
+        $self::isAlmostComplete($servicio);
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
-
 
         if ($request->get('suscrito')== 1) {
           $correo = new Correos();

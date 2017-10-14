@@ -41,6 +41,8 @@ reservasBundle\Entity\Servicios:
             options:
                 unsigned: false
             column: PlazasOcupadas
+        avisoenviado:
+            type: boolean
     manyToOne:
         menumenu:
             targetEntity: Menu
