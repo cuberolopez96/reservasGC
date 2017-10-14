@@ -662,6 +662,11 @@ class AdminController extends Controller
       return $this->render("reservasBundle:Admin:manual.html.twig");
     }
 
+    public function correosplantillaAction(){
+      $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
+      return $this->render("reservasBundle:Admin:correosplantilla.html.twig");
+    }
 
 }
 

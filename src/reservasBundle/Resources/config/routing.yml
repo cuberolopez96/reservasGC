@@ -121,6 +121,9 @@ reservas_admin_reservas_delete:
 reservas_admin_reservas_edit:
     path: /admin/reservas/editar/{id}
     defaults: {_controller: reservasBundle:Admin:editreservas }
+reservas_admin_correosplantilla:
+    path: /admin/correosplantilla
+    defaults: {_controller: reservasBundle:Admin:correosplantilla }
 reservas_api:
     path: /api
     defaults: {_controller: reservasBundle:Api:index}
