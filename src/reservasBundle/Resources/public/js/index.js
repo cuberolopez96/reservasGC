@@ -282,9 +282,9 @@
           $('#datosparaconfirmar').empty().append('<p class="col s6 left-align"> <strong>Nombre:</strong> '+ Reservas.nombre +'</p>')
           .append('<p class="col s6 left-align"><strong>Apellidos:</strong> '+ Reservas.apellidos + '</p>')
           .append('<p class="col s6 left-align"><strong>Correo:</strong> '+ Reservas.correo + '</p>')
-          .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
+          .append('<p class="col s6 left-align"><strong>Teléfono:</strong> '+ Reservas.telefono + '</p>')
           .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
-          p = $('<p class="col s6 left-align"><strong> Alergenos: </strong> </p>');
+          p = $('<p class="col s6 left-align"><strong> Alérgenos: </strong> </p>');
           Reservas.alergenos.forEach(function(value,index,array){
             if (index < array.length - 1) {
               p.text(p.text() +  value + ',');
