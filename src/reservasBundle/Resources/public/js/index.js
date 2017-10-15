@@ -285,8 +285,13 @@
           .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
           .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
           p = $('<p class="col s6 left-align"><strong> Alergenos: </strong> </p>');
-          Reservas.alergenos.forEach(function(value){
-            p.text(p.text() +  value + ',');
+          Reservas.alergenos.forEach(function(value,index,array){
+            if (index < array.length - 1) {
+              p.text(p.text() +  value + ',');
+            }else {
+              p.text(p.text() +  value);
+
+            }
           });
           $('#datosparaconfirmar').append(p);
           console.log(Reservas + ' Confirmacion');
