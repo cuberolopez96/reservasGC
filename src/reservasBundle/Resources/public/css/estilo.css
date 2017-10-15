@@ -24,6 +24,10 @@ body{
 
 .bservicio{
   margin: 0.1em;
+  margin-top: 0.5em;
+  border-radius: 0.2em;
+  min-width: 12em;
+  right: 4em;
 }
 
 .bservicios{
@@ -466,6 +470,9 @@ label.active{
 /* RESPONSIVE */
 
 @media screen and (min-width:601px){
+  .bservicio{
+	  right: 2em;
+	}
 	.letraNav{
 		margin-left: 5em;
 		font-size: 1em;
@@ -516,6 +523,9 @@ label.active{
 }
 
 @media screen and (min-width:1201px){
+  .bservicio{
+	  right: 1.5em;
+	}
 	.logo{
 		width: 1.7em;
 	}
