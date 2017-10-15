@@ -31,7 +31,7 @@ class AdminController extends Controller
   public function getPorcentajeReservas($servicio){
       $em = $this->getDoctrine()->getManager();
       $reservas = $em->getRepository("reservasBundle:Reservas")->findByServiciosservicios($servicio);
-      $plazasOcupadas = self::sumarPlazas();
+      $plazasOcupadas = self::sumarPlazas($servicio);
       $plazas = $servicios ->getPlazas();
       $porcentaje = ($plazasOcupadas / $plazas) * 100;
       return $porcentaje;
