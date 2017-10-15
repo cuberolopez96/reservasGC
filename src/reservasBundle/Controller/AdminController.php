@@ -304,9 +304,7 @@ class AdminController extends Controller
   public function sendboletincompletedAction(){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    if (self::isAuthorized()==false) {
-      return $this->redirect('/admin/login');
-    }
+    
     return $this->render('reservasBundle:Admin:emailcompletado.html.twig');
   }
   public function editboletinAction(Request $request, $id){
