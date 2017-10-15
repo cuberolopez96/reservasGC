@@ -26,8 +26,8 @@ body{
   margin: 0.1em;
   margin-top: 0.5em;
   border-radius: 0.2em;
-  min-width: 12em;
-  right: 4em;
+  min-width: 15em;
+  right: 10em;
 }
 
 .bservicios{
@@ -268,7 +268,7 @@ main{
 }
 
 .marginBot{
-  margin-top: 1em !important;
+  margin-bottom: 1em !important;
 }
 
 .row.marginTop2, span.card-title.activator.grey-text.text-darken-4{
@@ -471,7 +471,7 @@ label.active{
 
 @media screen and (min-width:601px){
   .bservicio{
-	  right: 2em;
+	  right: 5.4em;
 	}
 	.letraNav{
 		margin-left: 5em;
@@ -524,7 +524,7 @@ label.active{
 
 @media screen and (min-width:1201px){
   .bservicio{
-	  right: 1.5em;
+	  right: 3.5em;
 	}
 	.logo{
 		width: 1.7em;

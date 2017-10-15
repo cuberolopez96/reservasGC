@@ -700,7 +700,7 @@
                     if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && Calendar.year === fecha.getFullYear()) {
                       console.log('he entrado y esto no tiene sentido alguno');
 
-                      bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'<strong id="horaCalendar">'+hora+'</strong>'+'</button>');
+                      bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+' (<strong id="horaCalendar">'+hora+'</strong>)'+'</button>');
                       divservicios.append(bservicios);
                       td.append(divservicios);
                       Calendar.colorearServicios(row, bservicios,value[i]);
@@ -726,7 +726,7 @@
                 hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
 
-                    bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'('+'<strong id="horaCalendar">'+hora+'</strong>'+')'+'</button>');
+                    bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+' ('+'<strong id="horaCalendar">'+hora+'</strong>'+')'+'</button>');
                     divservicios.append(bservicios);
                     Calendar.colorearServicios(row, bservicios);
 
