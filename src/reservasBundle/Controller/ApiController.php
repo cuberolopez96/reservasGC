@@ -25,9 +25,9 @@ class ApiController extends Controller
     }
     public function getPorcentajeReservas($servicio){
         $em = $this->getDoctrine()->getManager();
-        $reservas = $em->getRepository("reservasBundle:Reservas")->findByIdservicios($servicio);
-        $plazasOcupadas = self::sumarPlazas();
-        $plazas = $servicios ->getPlazas();
+        $reservas = $em->getRepository("reservasBundle:Reservas")->findByServiciosservicios($servicio);
+        $plazasOcupadas = self::sumarPlazas($reservas);
+        $plazas = $servicio->getPlazas();
         $porcentaje = ($plazasOcupadas / $plazas) * 100;
         return $porcentaje;
 
@@ -36,7 +36,7 @@ class ApiController extends Controller
       $em = $this->getDoctrine()->getManager();
       $config = $em->getRepository("reservasBundle:Servicios")->findAll()[0];
 
-      if (self::getPorcentajeReservas($servicio) & $servicio->getAvisoenviado()==false) {
+      if (self::getPorcentajeReservas($servicio)>=80 && $servicio->getAvisoenviado()==false) {
         // enviar email de aviso del ochenta porciento
         $message = new \Swift_Message("Servicio casi completo");
         $message->setTo($config->getEmailAdministrador());
@@ -184,10 +184,10 @@ class ApiController extends Controller
 
 
         }
-        $self::isAlmostComplete($servicio);
         $reservas->setCodreserva($codReserva);
         $em->persist($reservas);
 
+        self::isAlmostComplete($servicio);
         if ($request->get('suscrito')== 1) {
           $correo = new Correos();
           $correo->setNombre($reservas->getNombre());

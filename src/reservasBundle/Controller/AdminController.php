@@ -37,6 +37,11 @@ class AdminController extends Controller
       return $porcentaje;
 
   }
+  public function isAlmostComplete($servicio){
+    if (self::getPorcentajeReservas($servicio)<80) {
+      $servicio->setAvisoenviado(false);
+    }
+  }
   public function arraytoentity($servicioarray){
 
     $em =  $this->getDoctrine()->getManager();
@@ -586,6 +591,7 @@ class AdminController extends Controller
           $servicio->setNombre(trim($request->get('nombre')));
           $servicio->setFechaservicio(new \DateTime($fecha));
           $servicio->setPlazas($request->get('plazas'));
+          $servicio->setAvisoenviado(false);
           $em->persist($servicio);
           $em->flush();
           return $this->redirect('/admin/servicios');
@@ -612,6 +618,7 @@ class AdminController extends Controller
             $servicio->setMenumenu($menu);
             $servicio->setFechaservicio(new \DateTime($fecha));
             $servicio->setPlazas(trim($request->get('plazas')));
+            self::isAlmostComplete($servicio);
             $em->persist($servicio);
             $em->flush();
             $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
