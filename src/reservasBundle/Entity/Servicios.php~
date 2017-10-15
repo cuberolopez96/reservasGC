@@ -186,4 +186,33 @@ class Servicios
     {
         return $this->nombre;
     }
+    /**
+     * @var boolean
+     */
+    private $avisoenviado;
+
+
+    /**
+     * Set avisoenviado
+     *
+     * @param boolean $avisoenviado
+     *
+     * @return Servicios
+     */
+    public function setAvisoenviado($avisoenviado)
+    {
+        $this->avisoenviado = $avisoenviado;
+
+        return $this;
+    }
+
+    /**
+     * Get avisoenviado
+     *
+     * @return boolean
+     */
+    public function getAvisoenviado()
+    {
+        return $this->avisoenviado;
+    }
 }
