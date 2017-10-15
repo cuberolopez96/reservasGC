@@ -34,16 +34,16 @@ class ApiController extends Controller
     }
     public function isAlmostComplete($servicio){
       $em = $this->getDoctrine()->getManager();
-      $config = $em->getRepository("reservasBundle:Servicios")->findAll()[0];
+      $config = $em->getRepository("reservasBundle:Config")->findAll()[0];
 
-      if (self::getPorcentajeReservas($servicio)>=80 && $servicio->getAvisoenviado()==false) {
+      if (self::getPorcentajeReservas($servicio)>=80 && $servicio->getAvisoenviado()==0) {
         // enviar email de aviso del ochenta porciento
         $message = new \Swift_Message("Servicio casi completo");
         $message->setTo($config->getEmailAdministrador());
         $message->setFrom("send@email.com");
         $message->setBody("texto para el mensaje");
         $this->get('mailer')->send($message);
-        $servicio->setAvisoenviado(false);
+        $servicio->setAvisoenviado(1);
       }
     }
     public function indexAction()

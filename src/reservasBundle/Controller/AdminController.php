@@ -39,7 +39,7 @@ class AdminController extends Controller
   }
   public function isAlmostComplete($servicio){
     if (self::getPorcentajeReservas($servicio)<80) {
-      $servicio->setAvisoenviado(false);
+      $servicio->setAvisoenviado(0);
     }
   }
   public function arraytoentity($servicioarray){

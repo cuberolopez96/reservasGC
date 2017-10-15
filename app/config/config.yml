@@ -69,7 +69,8 @@ doctrine:
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
+    encryption: '%mailer_encryption%'
+    port: '%mailer_port%'
     username: '%mailer_user%'
-    port: 25
     password: '%mailer_password%'
     spool: { type: memory }
