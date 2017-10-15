@@ -700,7 +700,7 @@
                     if (value[i]=== fecha.getDate() && Calendar.mes=== fecha.getMonth() && Calendar.year === fecha.getFullYear()) {
                       console.log('he entrado y esto no tiene sentido alguno');
 
-                      bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+hora+'</button>');
+                      bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'<strong id="horaCalendar">'+hora+'</strong>'+'</button>');
                       divservicios.append(bservicios);
                       td.append(divservicios);
                       Calendar.colorearServicios(row, bservicios,value[i]);
@@ -726,7 +726,7 @@
                 hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
 
-                    bservicios = $('<button id="'+row.idservicios+'" plazas="'+row.plazas+'" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'</button>');
+                    bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'<strong id="horaCalendar">'+hora+'</strong>'+'</button>');
                     divservicios.append(bservicios);
                     Calendar.colorearServicios(row, bservicios);
 
@@ -743,7 +743,7 @@
           $('.bservicio').click(function(){
             Reservas.idServicio = $(this).attr('id');
             Reservas.EstadoReserva = $(this).attr('estado');
-            Reservas.HoraSugerida = $(this).text();
+            Reservas.HoraSugerida = $(this).children('#horaCalendar').text();
             Servicios.PlazasDisponibles = $(this).attr('disponibles');
             Servicios.Plazas = $(this).attr('plazas');
             console.log(Reservas.HoraSugerida);
