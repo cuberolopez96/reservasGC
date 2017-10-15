@@ -726,7 +726,7 @@
                 hora=Utils.timeStringFormat(fecha);
                   if (value[0]=== fecha.getDate() && Calendar.mes === fecha.getMonth() && fechaActual.getFullYear() === fecha.getFullYear()) {
 
-                    bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'<strong id="horaCalendar">'+hora+'</strong>'+'</button>');
+                    bservicios = $('<button id ="'+ row.idservicios +'" plazas="'+row.plazas+'"" disponibles="'+row.plazasdisponibles+'" class="bservicio btn-floating btn-tiny">'+row.nombre+'('+'<strong id="horaCalendar">'+hora+'</strong>'+')'+'</button>');
                     divservicios.append(bservicios);
                     Calendar.colorearServicios(row, bservicios);
 
