@@ -30,7 +30,7 @@ class AdminController extends Controller
   }
   public function getPorcentajeReservas($servicio){
       $em = $this->getDoctrine()->getManager();
-      $reservas = $em->getRepository("reservasBundle:Reservas")->findByIdservicios($servicio);
+      $reservas = $em->getRepository("reservasBundle:Reservas")->findByServiciosservicios($servicio);
       $plazasOcupadas = self::sumarPlazas();
       $plazas = $servicios ->getPlazas();
       $porcentaje = ($plazasOcupadas / $plazas) * 100;
@@ -304,7 +304,7 @@ class AdminController extends Controller
   public function sendboletincompletedAction(){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    
+
     return $this->render('reservasBundle:Admin:emailcompletado.html.twig');
   }
   public function editboletinAction(Request $request, $id){
