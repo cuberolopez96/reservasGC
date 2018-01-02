@@ -242,7 +242,7 @@ class AdminController extends Controller
           $mail = new \Swift_Message($plantilla->getAsunto());
           $mail->setTo($correo)
           ->setFrom('send@email.es')
-          ->setBody($this->render('reservasBundle:Admin:correosBoletines.html.twig',array('boletin'=>$plantilla)),'text/html');
+          ->setBody($this->renderView('reservasBundle:Admin:correosBoletines.html.twig',array('boletin'=>$plantilla)),'text/html');
           $this->get('mailer')->send($mail);
         }
         return $this->redirect('/admin/boletin/completado');
@@ -513,6 +513,17 @@ class AdminController extends Controller
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
+        $file = $request->files->get('imagen');
+        $status = array('status' => "success","fileUploaded" => false);
+
+        // If a file was uploaded
+
+           // generate a random name for the file but keep the extension
+           $filename = uniqid().".".$file->getClientOriginalExtension();
+           $path = "imagenes/";
+           $file->move($path,$filename); // move the file to a path
+           $status = array('status' => "success","fileUploaded" => true);
+
         $menu->setNombre(trim($request->get('nombre')));
         $menu->setDescripción(trim($request->get('descripcion')));
         $menu->setPrecio(trim($request->get('precio')));
