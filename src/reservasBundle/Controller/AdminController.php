@@ -242,7 +242,7 @@ class AdminController extends Controller
           $mail = new \Swift_Message($plantilla->getAsunto());
           $mail->setTo($correo)
           ->setFrom('send@email.es')
-          ->setBody($plantilla->getTexto());
+          ->setBody($this->render('reservasBundle:Admin:correosBoletines.html.twig',array('boletin'=>$plantilla)),'text/html');
           $this->get('mailer')->send($mail);
         }
         return $this->redirect('/admin/boletin/completado');
@@ -686,7 +686,7 @@ class AdminController extends Controller
     public function correosplantillaAction(){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      return $this->render("reservasBundle:Admin:correosplantilla.html.twig");
+      return $this->render("reservasBundle:Admin:correosReservas.html.twig");
     }
 
 }
