@@ -9,7 +9,7 @@
   <div class="col s12">
     <div class="card">
       <div class="card-content paddingTop1">
-          <form class="" action="/admin/menus/add" method="post">
+          <form class="" action="/admin/menus/add" enctype="multipart/form-data" method="post">
             <div class="row">
               <div class="col s12 m9">
                 <label class="comoH3">Nombre</label>
@@ -21,11 +21,17 @@
                 <input  class="inputEst sinPadding center-align" type="number" step="any" name="precio" min="0" value="">
               </div>
 
-              <div class="col s12 m9">
+              <div class="col s12 m6">
                 <label for="descripcion">Descripción</label>
                 <textarea id="descripcion" class="materialize-textarea textareaEst sinPadding" name="descripcion" rows="8" cols="80">
                   Texto por defecto
                 </textarea>
+              </div>
+              <div class="col s12 m6">
+              <label for="imagen">
+                  Imagen
+              </label>
+              <input type="file" name="imagen" accept=".jpg,.png" value="">
               </div>
 
             </div>
