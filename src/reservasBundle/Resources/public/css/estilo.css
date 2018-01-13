@@ -465,6 +465,12 @@ label.active{
   text-shadow: 1px 2px 4px #333333;
 }
 
+#partesBoletin a{
+	width: 100%;
+	display:inline-block;
+	padding:0 !important;
+}
+
 
 
 /* RESPONSIVE */
