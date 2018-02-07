@@ -24,7 +24,7 @@ class ClientController extends Controller
     ));
     }
     public function pdfreservasAction($id){
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
 
       $pdf = new \FPDF();
