@@ -33,9 +33,9 @@
               <p class="left-align"><strong>Alergenos:</strong>
                   {% for alergeno in alergenos %}
                       {% if loop.index < (alergenos|length) %}
-                          {{alergeno.alergenosalergenos.nombre}},
+                          {{alergeno.alergenosalergenos.nombre |replace('_', ' ')}},
                       {% else %}
-                          {{alergeno.alergenosalergenos.nombre}}
+                          {{alergeno.alergenosalergenos.nombre |replace('_', ' ')}}
                       {% endif %}
                   {% endfor %}
               </p>
