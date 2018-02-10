@@ -90,8 +90,7 @@ class ClientController extends Controller
         $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
         $str  = [];
         foreach($alergenos as $alergeno){
-          $str[] = $alergeno->getAlergenosalergenos()->getNombre();
-
+          $str[] = str_replace("_", " ", $alergeno->getAlergenosalergenos()->getNombre());
         }
         $str = join(', ', $str);
         $pdf->SetFont('Arial','',16);

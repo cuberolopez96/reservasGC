@@ -18,7 +18,7 @@ class ApiController extends Controller
 {
     public function sumarPlazas($reservas){
       $plazas = 0;
-      /**
+      /** 
        * @var  $key
        * @var  Reservas $reserva
        */
@@ -398,7 +398,7 @@ class ApiController extends Controller
     public function alergenosbyreservaAction(Request $request){
       $em  = $this->getDoctrine()->getManager();
       $reserva = $em->getRepository("reservasBundle:Reservas")->findOneBy(array('idreservas'=>$request->get("id")));//findByIdreservas($request->get("id"))[0];
-      $alergenos = $em->getRepository("reservasBundle:ReservasHasAlergenos")->findOneBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
+      $alergenos = $em->getRepository("reservasBundle:ReservasHasAlergenos")->findBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
       $auxAlergenos = array();
       /** @var Alergenos $alergeno */
         foreach($alergenos as $alergeno){
