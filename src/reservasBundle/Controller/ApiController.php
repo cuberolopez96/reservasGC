@@ -174,7 +174,7 @@ class ApiController extends Controller
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
       $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',
-      array('reserva'=>$reserva,'message'=>$config->getEdicionReserva(),"alergenos"=>ealergenos)),'text/html');//$message->setBody($config->getEdicionreserva());
+      array('reserva'=>$reserva,'message'=>$config->getEdicionReserva(),"alergenos"=>$ealergenos)),'text/html');//$message->setBody($config->getEdicionreserva());
       $this->get('mailer')->send($message);
       $response =  new JsonResponse(true);
       return $response;
