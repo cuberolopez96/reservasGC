@@ -268,6 +268,7 @@
           Reservas.correo = $('#email').val();
           Reservas.telefono = $('#tlfn').val();
           Reservas.observaciones = $('#observaciones').val();
+          Reservas.NPersonas = $('#plazas').val();
           if ($('#boletin')[0].checked) {
               Reservas.Suscrito = 1;
           }
@@ -282,7 +283,8 @@
           $('#datosparaconfirmar').empty().append('<p class="col s6 left-align"> <strong>Nombre:</strong> '+ Reservas.nombre +'</p>')
           .append('<p class="col s6 left-align"><strong>Apellidos:</strong> '+ Reservas.apellidos + '</p>')
           .append('<p class="col s6 left-align"><strong>Correo:</strong> '+ Reservas.correo + '</p>')
-          .append('<p class="col s6 left-align"><strong>Teléfono:</strong> '+ Reservas.telefono + '</p>')
+          .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
+          .append('<p class="col s6 left-align"><strong>Comensales:</strong> '+ Reservas.NPersonas + '</p>')
           .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
           p = $('<p class="col s6 left-align"><strong> Alérgenos: </strong> </p>');
           Reservas.alergenos.forEach(function(value,index,array){
