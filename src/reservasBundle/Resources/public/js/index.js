@@ -47,8 +47,8 @@
           let stralergenos = [];
           Reservas.getAlergenos(data.Id,function(alergenos){
               $.each(alergenos,function(index, row){
-                stralergenos.push(row.alergeno.Nombre);
-
+                var valueSpaced = row.alergeno.Nombre.replace("_", " ");                
+                stralergenos.push(valueSpaced);
               });
               stralergenos.join(',');
               $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
