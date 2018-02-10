@@ -72,6 +72,11 @@ class ClientController extends Controller
         $pdf->SetFont('Arial','',16);
         $pdf->Cell(40,10,$reserva->getTelefono());
         $pdf->ln();
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(30,10,utf8_decode('Comensales: '));
+        $pdf->SetFont('Arial','',16);
+        $pdf->Cell(40,10,$reserva->getNpersonas());
+        $pdf->ln();
 
         $pdf->SetFont('Arial','B',16);
         $pdf->Cell(30,10,utf8_decode('Alérgenos: '));
