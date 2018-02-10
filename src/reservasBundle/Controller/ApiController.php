@@ -157,11 +157,11 @@ class ApiController extends Controller
       $em->persist($reserva);
       $em->flush();
       $alergenos = [];
-      if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
+      if(array_key_exists("alergenos",$request)||!empty($request->get('alergenos'))){
         $alergenos = $request->get('alergenos');
       }
       foreach ($alergenos as $key => $ralergeno) {
-        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findBy(array('nombre'=>$ralergeno));//findByNombre($ralergeno);
+        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findOneBy(array('nombre'=>$ralergeno));//findByNombre($ralergeno);
 
         $reservashasalergenos = new ReservasHasAlergenos();
         $reservashasalergenos->setAlergenosalergenos($alergeno);
