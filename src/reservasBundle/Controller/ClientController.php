@@ -80,9 +80,9 @@ class ClientController extends Controller
         $pdf->Cell(40,10,$reserva->getTelefono());
         $pdf->ln();
         $pdf->SetFont('Arial','B',16);
-        $pdf->Cell(30,10,utf8_decode('Comensales: '));
+        $pdf->Cell(37,10,utf8_decode('Comensales: '));
         $pdf->SetFont('Arial','',16);
-        $pdf->Cell(40,10,$reserva->getNpersonas());
+        $pdf->Cell(48,10,$reserva->getNpersonas());
         $pdf->ln();
 
         $pdf->SetFont('Arial','B',16);
@@ -141,11 +141,11 @@ class ClientController extends Controller
         $pdf->Cell(40,10,utf8_decode('http://hosteleria.iesgrancapitan.org'));
         $pdf->ln();
 
-        $pdf->Image('bundles/reservas/img/facebook-logo-png-11.png',15,261,18,0,'','www.facebook.com/hosteleriayturismoiesgrancapitan');
+        $pdf->Image('bundles/reservas/img/facebook-logo-png-11.png',15,270,18,0,'','www.facebook.com/hosteleriayturismoiesgrancapitan');
         $pdf->SetLeftMargin(45);
         $pdf->SetFontSize(14);
 
-        $pdf->Image('bundles/reservas/img/image948-e1447362808491.png',40,261,15,0,'','http://hosteleria.iesgrancapitan.org');
+        $pdf->Image('bundles/reservas/img/image948-e1447362808491.png',40,270,15,0,'','http://hosteleria.iesgrancapitan.org');
         $pdf->SetLeftMargin(45);
         $pdf->SetFontSize(14);
 
