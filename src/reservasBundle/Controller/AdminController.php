@@ -161,7 +161,7 @@ class AdminController extends Controller
     $message = new \Swift_Message('Se ha eliminado su reserva');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
-    $message->setBody($config->getCancelacion());
+    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva',$reserva)),'text/html');
     $this->get('mailer')->send($message);
     $em->remove($reserva);
     $em->flush();
