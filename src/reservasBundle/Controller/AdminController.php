@@ -276,7 +276,7 @@ class AdminController extends Controller
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
       $em=$this->getDoctrine()->getManager();
-      $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findOneBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
+      $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
       foreach( $alergenos as $alergeno){
         $em->remove($alergeno);
         $em->flush();
