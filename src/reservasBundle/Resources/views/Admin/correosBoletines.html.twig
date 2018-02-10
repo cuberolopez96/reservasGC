@@ -3,25 +3,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style media="screen">
-      body { padding: 0.7em; }
-      .logo { width: 3em; }
-      .letraNav {
-        margin-left: 0.5em;
-        font-size: 1.5em;
-      }
-      .nav-wrapper {
-        background-color: grey;
-        padding: 1em;
-        border-radius: 0.2em;
-      }
-      p { text-align: justify; }
-      footer {
-        border-top: 2px solid grey;
-        margin-top: 2em;
-      }
 
-    </style>
+      <style media="screen">
+        body { padding: 0.7em; }
+        .logo { width: 3em; }
+        .letraNav {
+          margin-left: 0.5em;
+          font-size: 1.5em;
+        }
+        .nav-wrapper {
+          background-color: grey;
+          padding: 1em;
+          border-radius: 0.2em;
+        }
+        p { text-align: justify; }
+        footer {
+          border-top: 2px solid grey;
+          margin-top: 2em;
+        }
+
+      </style>
   </head>
   <body>
     <!-- NAV -->
@@ -34,9 +35,8 @@
      <!-- MAIN -->
    	<main class="valign-wrapper center-align">
    		<div class="row">
-        <div class="col s12">
-          <p><strong>Este correo es automático, por favor no envíe contestación (no-reply)</strong></p>
-        </div>
+        {{boletin.texto}}
+
       </div>
     </main>
 
