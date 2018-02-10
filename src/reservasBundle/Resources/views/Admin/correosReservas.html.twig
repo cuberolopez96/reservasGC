@@ -1,69 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <style media="screen">
-      body { padding: 0.7em; }
-      .logo { width: 3em; }
-      .letraNav {
-        margin-left: 0.5em;
-        font-size: 1.5em;
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Restaurante-Escuela IES Gran Capitán</title>
+</head>
+
+<body style="-moz-box-sizing: border-box; -ms-text-size-adjust: 100%; -webkit-box-sizing: border-box; -webkit-text-size-adjust: 100%; Margin: 0; background: #f3f3f3 !important; box-sizing: border-box; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; min-width: 100%; padding: 0; text-align: left; width: 100% !important;">
+  <style>
+    @media only screen {
+      html {
+        min-height: 100%;
+        background: #f3f3f3;
       }
-      .nav-wrapper {
-        background-color: grey;
-        padding: 1em;
-        border-radius: 0.2em;
+    }
+
+    @media only screen and (max-width: 596px) {
+      .small-float-center {
+        margin: 0 auto !important;
+        float: none !important;
+        text-align: center !important;
       }
-      p { text-align: justify; }
-      footer {
-        border-top: 2px solid grey;
-        margin-top: 2em;
+      .small-text-center {
+        text-align: center !important;
       }
+      .small-text-left {
+        text-align: left !important;
+      }
+      .small-text-right {
+        text-align: right !important;
+      }
+    }
 
-    </style>
-  </head>
-  <body>
-    <!-- NAV -->
-     <nav>
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo left"><img class="logo" src="{{asset('bundles/reservas/img/image948-e1447362808491.png')}}"></a>
-          <span class="letraNav">Reservas Restaurante-Escuela IES Gran Capitán</span>
-        </div>
-     </nav>
-     <!-- MAIN -->
-   	<main class="valign-wrapper center-align">
-   		<div class="row">
-          
-      </div>
-    </main>
+    @media only screen and (max-width: 596px) {
+      .hide-for-large {
+        display: block !important;
+        width: auto !important;
+        overflow: visible !important;
+        max-height: none !important;
+        font-size: inherit !important;
+        line-height: inherit !important;
+      }
+    }
 
-    <footer>
-      <div class="row">
-        <div class="col s12">
-          <h3>INFORMACION Y RESERVAS</h3>
-          <h4>Restaurante-Escuela IES Gran Capitán</h4>
-          <p>C/ Arcos de la Frontera s/n</p>
-          <p><strong>CP:</strong> 14014 Córdoba</p>
-          <p><strong>Tlfn:</strong> 697957465 / 957 379 710</p>
-          <p><strong>Email:</strong> <a href="mailto: restaurante-escuela@iesgrancapitan.org">restaurante-escuela@iesgrancapitan.org</a></p>
-          <p><strong>Web:</strong> <a href="www.iesgrancapitan.org/departamento/hosteleria">www.iesgrancapitan.org/departamento/hosteleria</a></p>
-        </div>
+    @media only screen and (max-width: 596px) {
+      table.body table.container .hide-for-large,
+      table.body table.container .row.hide-for-large {
+        display: table !important;
+        width: 100% !important;
+      }
+    }
 
-        <div class="col s12">
-          <p>El Medio Ambiente es cosa de todos. Antes de imprimir este correo piense si es realmente necesario hacerlo.</p>
-          <p>En cumplimiento de la Ley Orgánica 15/1999, de 13 de diciembre de protección de datos de carácter personal,
-            se pone en conocimiento del destinatario del presente correo electrónico, que los datos incluidos en este mensaje,
-            están dirigidos exclusivamente al citado destinatario cuyo nombre aparece en el encabezamiento, por lo que si usted
-            no es la persona interesada ruego comunique el error de envío y se abstenga de realizar copias del mensaje, de los
-            datos contenidos en el mismo, remitirlo o entregarlo a otra persona, procediendo a borrarlo de inmediato. Asimismo
-            informamos que sus datos de correo han quedado incluidos en nuestra base de datos a fin de dirigirle, comunicaciones
-            comerciales, profesionales e informativas relacionadas con nuestra actividad y que usted  dispone de los derechos de
-            acceso, rectificación, cancelación y especificación de los mismos, derechos  que podrá hacer efectivos dirigiéndose
-            a restaurante-escuela@iesgrancapitan.org</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
+    @media only screen and (max-width: 596px) {
+      table.body table.container .callout-inner.hide-for-large {
+        display: table-cell !important;
+        width: 100% !important;
+      }
+    }
+
+    @media only screen and (max-width: 596px) {
+      table.body table.container .show-for-large {
+        display: none !important;
+        width: 0;
+        mso-hide: all;
+        overflow: hidden;
+      }
+    }
+
+    @media only screen and (max-width: 596px) {
+      table.body img {
+        width: auto;
+        height: auto;
+      }
+      table.body center {
+        min-width: 0 !important;
+      }
+      table.body .container {
+        width: 95% !important;
+      }
+      table.body .columns,
+      table.body .column {
+        height: auto !important;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      table.body .columns .column,
+      table.body .columns .columns,
+      table.body .column .column,
+      table.body .column .columns {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      table.body .collapse .columns,
+      table.body .collapse .column {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      td.small-1,
+      th.small-1 {
+        display: inline-block !important;
+        width: 8.33333% !important;
+      }
+      td.small-2,
+      th.small-2 {
+        display: inline-block !important;
+        width: 16.66667% !important;
+      }
+      td.small-3,
+      th.small-3 {
+        display: inline-block !important;
+        width: 25% !important;
+      }
+      td.small-4,
+      th.small-4 {
+        display: inline-block !important;
+        width: 33.33333% !important;
+      }
+      td.small-5,
+      th.small-5 {
+        display: inline-block !important;
+        width: 41.66667% !important;
+      }
+      td.small-6,
+      th.small-6 {
+        display: inline-block !important;
+        width: 50% !important;
+      }
+      td.small-7,
+      th.small-7 {
+        display: inline-block !important;
+        width: 58.33333% !important;
+      }
+      td.small-8,
+      th.small-8 {
+        display: inline-block !important;
+        width: 66.66667% !important;
+      }
+      td.small-9,
+      th.small-9 {
+        display: inline-block !important;
+        width: 75% !important;
+      }
+      td.small-10,
+      th.small-10 {
+        display: inline-block !important;
+        width: 83.33333% !important;
+      }
+      td.small-11,
+      th.small-11 {
+        display: inline-block !important;
+        width: 91.66667% !important;
+      }
+      td.small-12,
+      th.small-12 {
+        display: inline-block !important;
+        width: 100% !important;
+      }
+      .columns td.small-12,
+      .column td.small-12,
+      .columns th.small-12,
+      .column th.small-12 {
+        display: block !important;
+        width: 100% !important;
+      }
+      table.body td.small-offset-1,
+      table.body th.small-offset-1 {
+        margin-left: 8.33333% !important;
+        Margin-left: 8.33333% !important;
+      }
+      table.body td.small-offset-2,
+      table.body th.small-offset-2 {
+        margin-left: 16.66667% !important;
+        Margin-left: 16.66667% !important;
+      }
+      table.body td.small-offset-3,
+      table.body th.small-offset-3 {
+        margin-left: 25% !important;
+        Margin-left: 25% !important;
+      }
+      table.body td.small-offset-4,
+      table.body th.small-offset-4 {
+        margin-left: 33.33333% !important;
+        Margin-left: 33.33333% !important;
+      }
+      table.body td.small-offset-5,
+      table.body th.small-offset-5 {
+        margin-left: 41.66667% !important;
+        Margin-left: 41.66667% !important;
+      }
+      table.body td.small-offset-6,
+      table.body th.small-offset-6 {
+        margin-left: 50% !important;
+        Margin-left: 50% !important;
+      }
+      table.body td.small-offset-7,
+      table.body th.small-offset-7 {
+        margin-left: 58.33333% !important;
+        Margin-left: 58.33333% !important;
+      }
+      table.body td.small-offset-8,
+      table.body th.small-offset-8 {
+        margin-left: 66.66667% !important;
+        Margin-left: 66.66667% !important;
+      }
+      table.body td.small-offset-9,
+      table.body th.small-offset-9 {
+        margin-left: 75% !important;
+        Margin-left: 75% !important;
+      }
+      table.body td.small-offset-10,
+      table.body th.small-offset-10 {
+        margin-left: 83.33333% !important;
+        Margin-left: 83.33333% !important;
+      }
+      table.body td.small-offset-11,
+      table.body th.small-offset-11 {
+        margin-left: 91.66667% !important;
+        Margin-left: 91.66667% !important;
+      }
+      table.body table.columns td.expander,
+      table.body table.columns th.expander {
+        display: none !important;
+      }
+      table.body .right-text-pad,
+      table.body .text-pad-right {
+        padding-left: 10px !important;
+      }
+      table.body .left-text-pad,
+      table.body .text-pad-left {
+        padding-right: 10px !important;
+      }
+      table.menu {
+        width: 100% !important;
+      }
+      table.menu td,
+      table.menu th {
+        width: auto !important;
+        display: inline-block !important;
+      }
+      table.menu.vertical td,
+      table.menu.vertical th,
+      table.menu.small-vertical td,
+      table.menu.small-vertical th {
+        display: block !important;
+      }
+      table.menu[align="center"] {
+        width: auto !important;
+      }
+      table.button.small-expand,
+      table.button.small-expanded {
+        width: 100% !important;
+      }
+      table.button.small-expand table,
+      table.button.small-expanded table {
+        width: 100%;
+      }
+      table.button.small-expand table a,
+      table.button.small-expanded table a {
+        text-align: center !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      table.button.small-expand center,
+      table.button.small-expanded center {
+        min-width: 0;
+      }
+    }
+  </style>
+  <!-- <style> -->
+  <table class="body" data-made-with-foundation="" style="Margin: 0; background: #f3f3f3 !important; border-collapse: collapse; border-spacing: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; height: 100%; line-height: 1.3; margin: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+    <tbody>
+      <tr style="padding: 0; text-align: left; vertical-align: top;">
+        <!-- Documento al medio -->
+        <td class="float-center" align="center" valign="top" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0 auto; border-collapse: collapse !important; color: #0a0a0a; float: none; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 1.3; margin: 0 auto; padding: 0; text-align: center; vertical-align: top; word-wrap: break-word;">
+          <center data-parsed="" style="min-width: 580px; width: 100%;">
+            <!-- espacio -->
+            <table class="spacer float-center" style="Margin: 0 auto; border-collapse: collapse; border-spacing: 0; float: none; margin: 0 auto; padding: 0; text-align: center; vertical-align: top; width: 100%;">
+              <tbody>
+                <tr style="padding: 0; text-align: left; vertical-align: top;">
+                  <td height="16px" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 16px; margin: 0; mso-line-height-rule: exactly; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- //espacio -->
+            <!-- contenedor centrado -->
+            <table align="center" class="container float-center" style="Margin: 0 auto; background: #fefefe; border-collapse: collapse; border-spacing: 0; float: none; margin: 0 auto; padding: 0; text-align: center; vertical-align: top; width: 580px;">
+              <tbody>
+                <tr style="padding: 0; text-align: left; vertical-align: top;">
+                  <td style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 1.3; margin: 0; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;">
+                    <table class="row" style="border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: left; vertical-align: top; width: 100%;">
+                      <tbody>
+                        <tr style="background-color: #D9D2C0; padding: 0; text-align: left; vertical-align: top;">
+                          <th class="small-12 large-3 columns first" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0 auto; padding: 0; padding-bottom: 16px; padding-left: 16px; padding-right: 8px; text-align: left; width: 129px;">
+                            <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                              <tbody>
+                                <tr style="padding: 2em; text-align: left; vertical-align: top;">
+                                  <th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left;">
+                                    <center style="min-width: 97px; padding-top: 1em; width: 100%;" data-parsed=""> <img src="http://ismerium.com/images/logoRestauranteEscuela.png" align="center" class="float-center" style="-ms-interpolation-mode: bicubic; Margin: 0 auto; clear: both; display: block; float: none; margin: 0 auto; max-width: 100%; outline: none; text-align: center; text-decoration: none; width: auto;">                                      </center>
+                                  </th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                          <th class="small-12 large-9 columns last" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0 auto; padding: 0; padding-bottom: 16px; padding-left: 8px; padding-right: 16px; text-align: left; width: 419px;">
+                            <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                              <tbody>
+                                <tr style="padding: 0; text-align: left; vertical-align: top;">
+                                  <th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left;">
+                                    <h1 style="Margin: 0; Margin-bottom: 10px; color: #624A4D; font-family: Helvetica, Arial, sans-serif; font-size: 2em; font-weight: bold; line-height: 1.3; margin: 0; margin-bottom: 10px; margin-top: 1.7em; padding: 0; text-align: center; word-wrap: normal;">Restaurante-Escuela <br> IES Gran Capitán</h1>
+                                  </th>
+                                  <th class="expander" style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0 !important; text-align: left; visibility: hidden; width: 0;"></th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- espacio -->
+                    <table class="spacer" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                      <tbody>
+                        <tr style="padding: 0; text-align: left; vertical-align: top;">
+                          <td height="16px" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 16px; margin: 0; mso-line-height-rule: exactly; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- //espacio -->
+                    <!-- espacio -->
+                    <table class="spacer" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                      <tbody>
+                        <tr style="padding: 0; text-align: left; vertical-align: top;">
+                          <td height="16px" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 16px; margin: 0; mso-line-height-rule: exactly; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- //espacio -->
+                    <table class="row" style="border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: left; vertical-align: top; width: 100%;">
+                      <tbody>
+                        <tr style="padding: 0; text-align: left; vertical-align: top;">
+                          <th class="small-12 large-12 columns first last" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0 auto; padding: 0; padding-bottom: 16px; padding-left: 16px; padding-right: 16px; text-align: left; width: 564px;">
+                            <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                              <tbody>
+                                <tr style="padding: 0; text-align: left; vertical-align: top;">
+                                  <th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left;">
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">
+                                        
+                                    </p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">losfsf sf sf ssfs sfsfsf sf sf asfsfsfs sfsfsf asfsfs asfsf asfsfsf asf saf sf sf fasfsfs asfsfsf asfsfsf asfsfs sfsfasf asfsfas sfasf</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">losfsf sf sf ssfs sfsfsf sf sf asfsfsfs sfsfsf asfsfs asfsf asfsfsf asf saf sf sf fasfsfs asfsfsf asfsfsf asfsfs sfsfasf asfsfas sfasf</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">{{reserva.nombre}} {{reserva.apellidos}}</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">Telefono: {{reserva.telefono}}  Correo: {{reserva.correo}}</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">Fecha Servicio: {{reserva.serviciosservicios.fechaservicio | date('d-m-Y')}} Hora de llegada: {{reserva.horallegada | date('H:i')}}</p>
+                                     <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">
+                                      Alergenos: 
+                                      {% set ralergenos = [] %}
+                                      {% for alergeno in alergenos %}
+                                      {% if alergeno.reservasreservas.idreservas == reserva.idreservas %}
+                                        {% set ralergenos = ralergenos|merge([alergeno.alergenosalergenos.nombre])%}
+                                      {% endif %}
+                                      {% endfor %}
+                                      {{ralergenos | join(',')}}
+                                    </p>
+                                    
+
+                                  </th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- espacio -->
+                    <table class="spacer float-center" style="Margin: 0 auto; border-collapse: collapse; border-spacing: 0; float: none; margin: 0 auto; padding: 0; text-align: center; vertical-align: top; width: 100%;">
+                      <tbody>
+                        <tr style="padding: 0; text-align: left; vertical-align: top;">
+                          <td height="16px" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 16px; margin: 0; mso-line-height-rule: exactly; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- //espacio -->
+                    <table style="background-color: #D9D2C0; border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: left; vertical-align: top; width: 100%;" class="row">
+                      <tbody>
+                        <tr style="padding: 0; text-align: left; vertical-align: top;">
+
+                          <th class="small-12 columns first last" style="Margin: 0 auto; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0 auto; padding: 0; padding-bottom: 16px; padding-left: 16px; padding-right: 16px; text-align: left;">
+                            <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                              <tbody>
+                                <tr style="padding: 0; text-align: left; vertical-align: top;">
+                                  <th style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left;">
+                                    <h2 style="Margin: 0; Margin-bottom: 10px; color: #624A4D; font-family: Helvetica, Arial, sans-serif; font-size: 1.5em; font-weight: bold; line-height: 1.3; margin: 0; margin-bottom: 10px; margin-top: 0.5em; padding: 0; text-align: center; word-wrap: normal;">INFORMACIÓN Y RESERVAS</h2>
+                                    <h3 style="Margin: 0; Margin-bottom: 10px; color: #624A4D; font-family: Helvetica, Arial, sans-serif; font-size: 28px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 1em; padding: 0; text-align: center; word-wrap: normal;">Restaurante-Escuela <br> IES Gran Capitán</h3>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">C/ Arcos de la Frontera s/n, 14014 Córdoba</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;"><a href="tel:697957465" style="Margin: 0; color: #2199e8; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;">697 957 465</a>                                      / <a href="tel:957379710" style="Margin: 0; color: #2199e8; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;">957 379 710</a></p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;"><a href="mailto:restaurante-escuela@iesgrancapitan.org" style="Margin: 0; color: #2199e8; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;"> restaurante-escuela@iesgrancapitan.org</a></p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;"><a href="www.iesgrancapitan.org/departamento/hosteleria" style="Margin: 0; color: #2199e8; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;">www.iesgrancapitan.org/departamento/hosteleria</a></p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">El Medio Ambiente es cosa de todos. Antes de imprimir este correo piense si es realmente necesario hacerlo.</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">En cumplimiento de la Ley Orgánica 15/1999, de 13 de diciembre de protección de datos de carácter personal, se pone en conocimiento del destinatario del presente correo electrónico, que los datos incluidos en este mensaje,
+                                      están dirigidos exclusivamente al citado destinatario cuyo nombre aparece en el encabezamiento, por lo que si usted no es la persona interesada ruego comunique el error de envío y se abstenga de realizar copias del
+                                      mensaje, de los datos contenidos en el mismo, remitirlo o entregarlo a otra persona, procediendo a borrarlo de inmediato. Asimismo informamos que sus datos de correo han quedado incluidos en nuestra base de datos
+                                      a fin de dirigirle, comunicaciones comerciales, profesionales e informativas relacionadas con nuestra actividad y que usted dispone de los derechos de acceso, rectificación, cancelación y especificación de los mismos,
+                                      derechos que podrá hacer efectivos dirigiéndose a <a href="mailto:restaurante-escuela@iesgrancapitan.org" style="Margin: 0; color: #2199e8; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;">restaurante-escuela@iesgrancapitan.org</a></p>
+                                    <center style="margin-bottom: 1em; margin-top: 1.5em; min-width: 580px; width: 100%;" data-parsed=""> <img src="http://ismerium.com/images/logoIESGC.jpg" align="center" class="float-center" style="-ms-interpolation-mode: bicubic; Margin: 0 auto; clear: both; display: block; float: none; margin: 0 auto; max-width: 100%; outline: none; text-align: center; text-decoration: none; width: auto;"></center>
+                                  </th>
+                                  <th class="expander" style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0 !important; text-align: left; visibility: hidden; width: 0;"></th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- //contenedor centrado -->
+          </center>
+        </td>
+        <!-- //documento al medio -->
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>

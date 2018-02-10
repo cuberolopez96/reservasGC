@@ -115,7 +115,7 @@ class ApiController extends Controller
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setFrom($this->render('reservasBundle:Admin:correosReservas.html.twig'));//$message->setBody($config->getCancelacion());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'body'=>$config->getCancelacion())),'text/html');//$message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
       //$em->persist($servicio);
       $em->remove($reserva);
@@ -143,6 +143,7 @@ class ApiController extends Controller
     }
     public function editreservasAction(Request $request){
       $em = $this->getDoctrine()->getManager();
+      $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$request->get('id')));//findByIdreservas($request->get('id'))[0];
       self::deleteAlergenosByReserva($reserva);
       $reserva->setNombre($request->get('nombre'));
@@ -172,7 +173,8 @@ class ApiController extends Controller
       $message = new \Swift_Message('Se ha editado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody($this->render('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'message'=>$config->getEdicionReserva())));//$message->setBody($config->getEdicionreserva());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',
+      array('reserva'=>$reserva,'message'=>$config->getEdicionReserva(),"alergenos"=>ealergenos)),'text/html');//$message->setBody($config->getEdicionreserva());
       $this->get('mailer')->send($message);
       $response =  new JsonResponse(true);
       return $response;
@@ -185,7 +187,7 @@ class ApiController extends Controller
     public function addreservasAction(Request $request){
       try {
         $em = $this->getDoctrine()->getManager();
-
+        $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
         $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findOneBy(array('idestadoreserva'=>$request->get('estado')));//findByIdestadoreserva($request->get('estado'))[0];
         $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=>$request->get('servicio')));//findByIdservicios($request->get('servicio'))[0];
         $reservas = new Reservas();
@@ -210,7 +212,8 @@ class ApiController extends Controller
           $message = new \Swift_Message('un usuario de la lista negra ha reservado');
           $message->setTo($config->getEmailAdministrador());
           $message->setFrom('send@email.com');
-          $message->setBody($config->getListanegra());
+          //lista negra cambiar
+          $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reservas,"alergenos"=>$ealergenos,"body"=>$config->getConfirmacion())),'text/html');//$message->setBody($config->getListanegra());
           $this->get('mailer')->send($message);
 
 
@@ -229,7 +232,7 @@ class ApiController extends Controller
         $em->flush();
         self::plusPlazasOcupadas($reservas);
         $alergenos = [];
-        if(array_key_exists("alergenos",$request->get('alergenos'))|count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
+        if(array_key_exists("alergenos",$request)||!empty($request->get('alergenos'))){
           $alergenos = $request->get('alergenos');
         }
         foreach ($alergenos as $key => $ralergeno) {
@@ -245,7 +248,7 @@ class ApiController extends Controller
         $message = new \Swift_Message('Se ha realizado su reserva');
         $message->setTo($reservas->getCorreo());
         $message->setFrom('send@email.com');
-        $message->setBody($config->getConfirmacion());
+        $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reservas,'body'=>$config->getConfirmacion())),'text/html');
         $this->get('mailer')->send($message);
         $response = new JsonResponse($reservas->toArray());
         return $response;
