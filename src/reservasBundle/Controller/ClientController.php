@@ -23,6 +23,13 @@ class ClientController extends Controller
         'servicio'=>$servicio
     ));
     }
+    public function bajaboletinAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $correo = $em->getRepository("reservasBundle:Correos")->findOneBy(array('idcorreos'=>$id));
+        $em->remove($correo);
+        $em->flush();
+        return $this->redirect('/');
+    }
     public function pdfreservasAction($id){
       $em = $this->getDoctrine()->getManager();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
