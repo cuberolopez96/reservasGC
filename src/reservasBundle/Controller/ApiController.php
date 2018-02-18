@@ -283,7 +283,7 @@ class ApiController extends Controller
     }
     public function serviciosbyidAction(Request $request){
       $em = $this->getDoctrine()->getManager();
-      $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('fechaservicio'=>new \DateTime($request->get('fecha'))));//findByFechaservicio(new \DateTime($request->get('fecha')))[0];
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=> $request->get('idServicio')));//findByFechaservicio(new \DateTime($request->get('fecha')))[0];
       $response = new JsonResponse($servicio->toArray());
       return $response;
     }
