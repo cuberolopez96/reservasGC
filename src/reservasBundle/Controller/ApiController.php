@@ -116,7 +116,7 @@ class ApiController extends Controller
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'alergenos'=>$ealergeno,'body'=>$config->getCancelacion())), 'text/html');//$message->setBody($config->getCancelacion());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'alergenos'=>$ealergenos,'body'=>$config->getCancelacion())), 'text/html');//$message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
       //$em->persist($servicio);
       $em->remove($reserva);
