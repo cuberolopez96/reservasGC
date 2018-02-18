@@ -47,8 +47,8 @@
           let stralergenos = [];
           Reservas.getAlergenos(data.Id,function(alergenos){
               $.each(alergenos,function(index, row){
-                stralergenos.push(row.alergeno.Nombre);
-
+                var valueSpaced = row.alergeno.Nombre.replace("_", " ");                
+                stralergenos.push(valueSpaced);
               });
               stralergenos.join(',');
               $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
@@ -288,11 +288,11 @@
           .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
           p = $('<p class="col s6 left-align"><strong> Alérgenos: </strong> </p>');
           Reservas.alergenos.forEach(function(value,index,array){
+            var valueSpaced = value.replace("_", " ");
             if (index < array.length - 1) {
-              p.text(p.text() +  value + ',');
+              p.text(p.text() +  valueSpaced + ', ');
             }else {
-              p.text(p.text() +  value);
-
+              p.text(p.text() +  valueSpaced);
             }
           });
           $('#datosparaconfirmar').append(p);
@@ -376,7 +376,7 @@
     },
     edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,horallegada,idservicio){
         Utils.postAjax('api/reservas/edit',{
-          id:id.trim(),
+          id:id,
           nombre:nombre.trim(),
           apellidos:apellidos.trim(),
           correo:correo.trim(),
@@ -385,7 +385,7 @@
           observaciones:observaciones.trim(),
           npersonas:npersonas.trim(),
           horallegada:horallegada.trim(),
-          idservicio:idservicio.trim()
+          idservicio:idservicio
 
         },function(data){
 

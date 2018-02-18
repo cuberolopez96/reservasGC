@@ -21,19 +21,9 @@
                 <input  class="inputEst sinPadding center-align" type="number" step="any" name="precio" min="0" value="">
               </div>
 
-              <div class="col s12 m6">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" class="materialize-textarea textareaEst sinPadding" name="descripcion" rows="8" cols="80">
-                  Texto por defecto
-                </textarea>
+              <div class="col s12">
+                <input id="arch" type="file" name="imagen" accept=".jpg,.png" value="">
               </div>
-              <div class="col s12 m6">
-              <label for="imagen">
-                  Imagen
-              </label>
-              <input type="file" name="imagen" accept=".jpg,.png" value="">
-              </div>
-
             </div>
 
               <div class="row">
@@ -41,7 +31,7 @@
                 {% for alergeno in alergenos %}
                   <div class="col s12 l2">
                       <input type="checkbox" id="{{alergeno.nombre}}" class="filled_in" name="alergenos[]" value="{{alergeno.nombre}}">
-                      <label for="{{alergeno.nombre}}">{{alergeno.nombre}}</label>
+                      <label for="{{alergeno.nombre}}">{{alergeno.nombre |replace('_', ' ')}}</label>
                   </div>
                 {% endfor %}
               </div>

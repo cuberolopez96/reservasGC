@@ -154,15 +154,16 @@ class AdminController extends Controller
      */
     public function removeReserva($reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-
-    self::deleteAlergenosByReserva($reserva);
+   
     $em= $this->getDoctrine()->getManager();
+    $alergenos = $this->getRepository('reservasBundle:Alergenos')->findAll();
     $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
     $message = new \Swift_Message('Se ha eliminado su reserva');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
-    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva',$reserva)),'text/html');
+    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reserva,"alergenos"=>alergenos)),'text/html');
     $this->get('mailer')->send($message);
+    self::deleteAlergenosByReserva($reserva);
     $em->remove($reserva);
     $em->flush();
     self::lessPlazasOcupadas($reserva);
@@ -449,7 +450,6 @@ class AdminController extends Controller
       $reserva = $em->getRepository("reservasBundle:Reservas")->findOneBy(array('idreservas'=>$id));//findByIdreservas($id)[0];
       $estadosreserva = $em->getRepository("reservasBundle:Estadoreserva")->findAll();
       $form= $this->createForm(ReservasType::class,$reserva);
-
       if ($request->isMethod('POST')) {
           if($request->get('guardar')){
             $reserva->setNombre(trim($request->get('nombre')));

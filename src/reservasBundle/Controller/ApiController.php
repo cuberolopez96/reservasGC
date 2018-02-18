@@ -18,7 +18,7 @@ class ApiController extends Controller
 {
     public function sumarPlazas($reservas){
       $plazas = 0;
-      /**
+      /** 
        * @var  $key
        * @var  Reservas $reserva
        */
@@ -115,7 +115,7 @@ class ApiController extends Controller
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setFrom($this->renderView('reservasBundle:Admin:correosReservas.html.twig'),'text/html');//$message->setBody($config->getCancelacion());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'body'=>$config->getCancelacion())),'text/html');//$message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
       //$em->persist($servicio);
       $em->remove($reserva);
@@ -143,6 +143,7 @@ class ApiController extends Controller
     }
     public function editreservasAction(Request $request){
       $em = $this->getDoctrine()->getManager();
+      $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$request->get('id')));//findByIdreservas($request->get('id'))[0];
       self::deleteAlergenosByReserva($reserva);
       $reserva->setNombre($request->get('nombre'));
@@ -156,11 +157,11 @@ class ApiController extends Controller
       $em->persist($reserva);
       $em->flush();
       $alergenos = [];
-      if(count($request->get('alergenos'))>0||!empty($request->get('alergenos'))){
+      if(array_key_exists("alergenos",$request)||!empty($request->get('alergenos'))){
         $alergenos = $request->get('alergenos');
       }
       foreach ($alergenos as $key => $ralergeno) {
-        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findBy(array('nombre'=>$ralergeno));//findByNombre($ralergeno);
+        $alergeno = $em->getRepository('reservasBundle:Alergenos')->findOneBy(array('nombre'=>$ralergeno));//findByNombre($ralergeno);
 
         $reservashasalergenos = new ReservasHasAlergenos();
         $reservashasalergenos->setAlergenosalergenos($alergeno);
@@ -172,7 +173,8 @@ class ApiController extends Controller
       $message = new \Swift_Message('Se ha editado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'message'=>$config->getEdicionReserva())),'text/html');//$message->setBody($config->getEdicionreserva());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',
+      array('reserva'=>$reserva,'message'=>$config->getEdicionReserva(),"alergenos"=>$ealergenos)),'text/html');//$message->setBody($config->getEdicionreserva());
       $this->get('mailer')->send($message);
       $response =  new JsonResponse(true);
       return $response;
@@ -185,7 +187,7 @@ class ApiController extends Controller
     public function addreservasAction(Request $request){
       try {
         $em = $this->getDoctrine()->getManager();
-
+        $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
         $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findOneBy(array('idestadoreserva'=>$request->get('estado')));//findByIdestadoreserva($request->get('estado'))[0];
         $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=>$request->get('servicio')));//findByIdservicios($request->get('servicio'))[0];
         $reservas = new Reservas();
@@ -211,7 +213,7 @@ class ApiController extends Controller
           $message->setTo($config->getEmailAdministrador());
           $message->setFrom('send@email.com');
           //lista negra cambiar
-          $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reservas)),'text/html');//$message->setBody($config->getListanegra());
+          $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reservas,"alergenos"=>$ealergenos,"body"=>$config->getConfirmacion())),'text/html');//$message->setBody($config->getListanegra());
           $this->get('mailer')->send($message);
 
 
@@ -399,7 +401,7 @@ class ApiController extends Controller
     public function alergenosbyreservaAction(Request $request){
       $em  = $this->getDoctrine()->getManager();
       $reserva = $em->getRepository("reservasBundle:Reservas")->findOneBy(array('idreservas'=>$request->get("id")));//findByIdreservas($request->get("id"))[0];
-      $alergenos = $em->getRepository("reservasBundle:ReservasHasAlergenos")->findOneBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
+      $alergenos = $em->getRepository("reservasBundle:ReservasHasAlergenos")->findBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
       $auxAlergenos = array();
       /** @var Alergenos $alergeno */
         foreach($alergenos as $alergeno){
