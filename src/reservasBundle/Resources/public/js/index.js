@@ -47,8 +47,8 @@
           let stralergenos = [];
           Reservas.getAlergenos(data.Id,function(alergenos){
               $.each(alergenos,function(index, row){
-                stralergenos.push(row.alergeno.Nombre);
-
+                var valueSpaced = row.alergeno.Nombre.replace("_", " ");                
+                stralergenos.push(valueSpaced);
               });
               stralergenos.join(',');
               $('#resultadoConsulta').empty().append('<div id="busqueda" class="card">'+
@@ -273,33 +273,37 @@
               Reservas.Suscrito = 1;
           }
           checkbox = [];
-          $.each($('#check input'),function(index,value){
-            if(value.checked  == true){
-              checkbox.push(value.id);
-            }
-          });
-          console.log(checkbox);
-          Reservas.alergenos = checkbox;
-          $('#datosparaconfirmar').empty().append('<p class="col s6 left-align"> <strong>Nombre:</strong> '+ Reservas.nombre +'</p>')
-          .append('<p class="col s6 left-align"><strong>Apellidos:</strong> '+ Reservas.apellidos + '</p>')
-          .append('<p class="col s6 left-align"><strong>Correo:</strong> '+ Reservas.correo + '</p>')
-          .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
-          .append('<p class="col s6 left-align"><strong>Comensales:</strong> '+ Reservas.NPersonas + '</p>')
-          .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>');
-          p = $('<p class="col s6 left-align"><strong> Alérgenos: </strong> </p>');
-          Reservas.alergenos.forEach(function(value,index,array){
-            if (index < array.length - 1) {
-              p.text(p.text() +  value + ',');
-            }else {
-              p.text(p.text() +  value);
-
-            }
-          });
-          $('#datosparaconfirmar').append(p);
-          console.log(Reservas + ' Confirmacion');
-          $('#parte2').addClass('ubicacion');
-          Utils.arriba();
-          Utils.mostrar($('#confirmacion'));
+          Servicios.GetById(Reservas.idServicio, function (data) { 
+            Reservas.servicio = data;
+            $.each($('#check input'),function(index,value){
+              if(value.checked  == true){
+                checkbox.push(value.id);
+              }
+            });
+            console.log(checkbox);
+            Reservas.alergenos = checkbox;
+            $('#datosparaconfirmar').empty().append('<p class="col s6 left-align"> <strong>Nombre:</strong> '+ Reservas.nombre +'</p>')
+            .append('<p class="col s6 left-align"><strong>Apellidos:</strong> '+ Reservas.apellidos + '</p>')
+            .append('<p class="col s6 left-align"><strong>Correo:</strong> '+ Reservas.correo + '</p>')
+            .append('<p class="col s6 left-align"><strong>Telefono:</strong> '+ Reservas.telefono + '</p>')
+            .append('<p class="col s6 left-align"><strong>Comensales:</strong> '+ Reservas.NPersonas + '</p>')
+            .append('<p class="col s6 left-align"><strong>Observaciones:</strong> '+ Reservas.observaciones + '</p>')
+            .append('<p class="col s6 left-align"><strong>Fecha Servicio:</strong> '+ Reservas.servicio.FechaServicio + '</p>');
+            p = $('<p class="col s6 left-align"><strong> Alérgenos: </strong> </p>');
+            Reservas.alergenos.forEach(function(value,index,array){
+              var valueSpaced = value.replace("_", " ");
+              if (index < array.length - 1) {
+                p.text(p.text() +  valueSpaced + ', ');
+              }else {
+                p.text(p.text() +  valueSpaced);
+              }
+            });
+            $('#datosparaconfirmar').append(p);
+            console.log(Reservas + ' Confirmacion');
+            $('#parte2').addClass('ubicacion');
+            Utils.arriba();
+            Utils.mostrar($('#confirmacion'));
+           });
         });
         $('#atras3').click(function(){
           $('#confirmacion').fadeOut("slow");
@@ -356,6 +360,7 @@
     ReservasCache: null,
     consultaCache:null,
     reservaCache: null,
+    servicio: null,
     Suscrito: 0,
     MaxValidate: function(value,max){
       if (max >= value) {
@@ -376,7 +381,7 @@
     },
     edit: function(id,nombre,apellidos,correo,telefono,observaciones,alergenos,npersonas,horallegada,idservicio){
         Utils.postAjax('api/reservas/edit',{
-          id:id.trim(),
+          id:id,
           nombre:nombre.trim(),
           apellidos:apellidos.trim(),
           correo:correo.trim(),
@@ -385,7 +390,7 @@
           observaciones:observaciones.trim(),
           npersonas:npersonas.trim(),
           horallegada:horallegada.trim(),
-          idservicio:idservicio.trim()
+          idservicio:idservicio
 
         },function(data){
 
@@ -487,6 +492,17 @@
          success();
        });
      },
+     //devuelve el servicio por el id del mismo
+     GetById: function(id, success){
+      Utils.postAjax('/api/servicios/id',{
+        idServicio:id
+      },function(data){
+        console.log("kbesa");
+        console.log(data);
+        success(data);
+        return data;
+      });
+    },
      //servicios segun una fecha
      GetByFecha: function(fecha){
        Utils.postAjax('/api/servicios/fecha',{
