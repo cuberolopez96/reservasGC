@@ -111,11 +111,12 @@ class ApiController extends Controller
     public function removeReserva($reserva){
       self::deleteAlergenosByReserva($reserva);
       $em = $this->getDoctrine()->getManager();
+      $ealergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos'); 
       $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
       $message = new \Swift_Message('Se ha Anulado su reserva');
       $message->setTo($reserva->getCorreo());
       $message->setFrom('send@email.com');
-      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'body'=>$config->getCancelacion())),'text/html');//$message->setBody($config->getCancelacion());
+      $message->setBody($this->renderView('reservasBundle:Admin:correosReservas.html.twig',array('reserva'=>$reserva,'alergenos'=>$ealergeno,'body'=>$config->getCancelacion())), 'text/html');//$message->setBody($config->getCancelacion());
       $this->get('mailer')->send($message);
       //$em->persist($servicio);
       $em->remove($reserva);
@@ -143,7 +144,7 @@ class ApiController extends Controller
     }
     public function editreservasAction(Request $request){
       $em = $this->getDoctrine()->getManager();
-      $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
+      $ealergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
       $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$request->get('id')));//findByIdreservas($request->get('id'))[0];
       self::deleteAlergenosByReserva($reserva);
       $reserva->setNombre($request->get('nombre'));
@@ -187,7 +188,7 @@ class ApiController extends Controller
     public function addreservasAction(Request $request){
       try {
         $em = $this->getDoctrine()->getManager();
-        $ealergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
+        
         $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')->findOneBy(array('idestadoreserva'=>$request->get('estado')));//findByIdestadoreserva($request->get('estado'))[0];
         $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=>$request->get('servicio')));//findByIdservicios($request->get('servicio'))[0];
         $reservas = new Reservas();
@@ -244,11 +245,12 @@ class ApiController extends Controller
           $em->persist($reservashasalergenos);
           $em->flush();
         }
+        $ealergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
         $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
         $message = new \Swift_Message('Se ha realizado su reserva');
         $message->setTo($reservas->getCorreo());
         $message->setFrom('send@email.com');
-        $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reservas,'body'=>$config->getConfirmacion())),'text/html');
+        $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reservas,'alergenos'=>$ealergenos,'body'=>$config->getConfirmacion())),'text/html');
         $this->get('mailer')->send($message);
         $response = new JsonResponse($reservas->toArray());
         return $response;
