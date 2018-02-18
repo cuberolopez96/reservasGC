@@ -31,7 +31,7 @@
                 {% for alergeno in alergenos %}
                   <div class="col s12 l2">
                       <input type="checkbox" id="{{alergeno.nombre}}" class="filled_in" name="alergenos[]" value="{{alergeno.nombre}}">
-                      <label for="{{alergeno.nombre}}">{{alergeno.nombre}}</label>
+                      <label for="{{alergeno.nombre}}">{{alergeno.nombre |replace('_', ' ')}}</label>
                   </div>
                 {% endfor %}
               </div>

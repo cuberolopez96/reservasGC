@@ -1,6 +1,7 @@
 <?php
 
 namespace reservasBundle\Controller;
+use reservasBundle\Entity\Reservas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use reservasBundle\Form\ConfigType;
@@ -20,24 +21,41 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminController extends Controller
 {
-  public function sumarPlazas($reservas){
+    /**
+     * @param Reservas $reservas
+     * @return int
+     */
+    public function sumarPlazas($reservas){
     $plazas = 0;
-    foreach ($reservas as $key => $reserva) {
+    /**
+     * @var  $key
+     * @var  Reservas $reserva
+     */
+        foreach ($reservas as $key => $reserva) {
       $plazas += $reserva->getNpersonas();
 
     }
     return $plazas;
   }
-  public function getPorcentajeReservas($servicio){
+
+    /**
+     * @param Servicios $servicio
+     * @return float|int
+     */
+    public function getPorcentajeReservas($servicio){
       $em = $this->getDoctrine()->getManager();
-      $reservas = $em->getRepository("reservasBundle:Reservas")->findByServiciosservicios($servicio);
+      $reservas = $em->getRepository("reservasBundle:Reservas")->findBy(array('serviciosservicios'=>$servicio));
       $plazasOcupadas = self::sumarPlazas($servicio);
       $plazas = $servicio->getPlazas();
       $porcentaje = ($plazasOcupadas / $plazas) * 100;
       return $porcentaje;
 
   }
-  public function isAlmostComplete($servicio){
+
+    /**
+     * @param Servicios $servicio
+     */
+    public function isAlmostComplete($servicio){
     if (self::getPorcentajeReservas($servicio)<80) {
       $servicio->setAvisoenviado(0);
     }
@@ -45,7 +63,7 @@ class AdminController extends Controller
   public function arraytoentity($servicioarray){
 
     $em =  $this->getDoctrine()->getManager();
-    $servicioEntity = $em->getRepository("reservasBundle:Servicios")->findOneByIdservicios($servicioarray["idservicios"]);
+    $servicioEntity = $em->getRepository("reservasBundle:Servicios")->findOneBy(array('idservicios'=>$servicioarray['idservicios']));//findOneByIdservicios($servicioarray["idservicios"]);
     return $servicioEntity;
   }
   public function logoutAction()
@@ -55,7 +73,7 @@ class AdminController extends Controller
   public function deleteserviciosanterioresAction(){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $servicios = $em->getRepository('reservasBundle:Servicios')->findByBeforeToday();
 
     foreach ($servicios as $key => $servicio) {
@@ -63,10 +81,14 @@ class AdminController extends Controller
     }
     return $this->redirectToRoute("reservas_admin_servicios_anteriores");
   }
-  public function plusPlazasOcupadas( $reserva){
+
+    /**
+     * @param Reservas $reserva
+     */
+    public function plusPlazasOcupadas($reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
     if ($idestado == 2) {
       $servicio = $reserva->getServiciosservicios();
@@ -75,10 +97,14 @@ class AdminController extends Controller
       $em->flush();
     }
   }
-  public function lessPlazasOcupadas( $reserva){
+
+    /**
+     * @param Reservas $reserva
+     */
+    public function lessPlazasOcupadas($reserva){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $idestado = $reserva->getEstadoreservaestadoreserva()->getIdestadoreserva();
     if ($idestado == 2) {
       $servicio = $reserva->getServiciosservicios();
@@ -87,46 +113,74 @@ class AdminController extends Controller
       $em->flush();
     }
   }
-  public function sendBoletinToOrders($reservas, \Swift_Message $message){
-    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    foreach ($reservas as $key => $reserva) {
+    /**
+     * @param Reservas $reservas
+     * @param \Swift_Message $message
+     */
+    public function sendBoletinToOrders($reservas, \Swift_Message $message){
+    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+/**
+ * @var  $key
+ * @var  Reservas $reserva
+ */
+        foreach ($reservas as $key => $reserva) {
       print_r($reserva->getCorreo());
       $message->setTo($reserva->getCorreo());
       $this->get('mailer')->send($message);
     }
   }
-  public function sendBoletinToConfirmedOrders($reservas, \Swift_Message $message){
-    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    foreach ($reservas as $key => $reserva) {
+    /**
+     * @param Reservas $reservas
+     * @param \Swift_Message $message
+     */
+    public function sendBoletinToConfirmedOrders($reservas, \Swift_Message $message){
+    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+/**
+ * @var  $key
+ * @var  Reservas $reserva
+ */
+        foreach ($reservas as $key => $reserva) {
       if ($reserva->getEstadoreservaestadoreserva()->getIdestadoreserva()==2) {
         $message->setTo($reserva->getCorreo());
         $this->get('mailer')->send($message);
       }
     }
   }
-  public function removeReserva($reserva){
-    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    self::deleteAlergenosByReserva($reserva);
-    $em= $this->getDoctrine()->getEntityManager();
+    /**
+     * @param Reservas $reserva
+     */
+    public function removeReserva($reserva){
+    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+   
+    $em= $this->getDoctrine()->getManager();
+    $alergenos = $this->getRepository('reservasBundle:Alergenos')->findAll();
     $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
     $message = new \Swift_Message('Se ha eliminado su reserva');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
-    $message->setBody($config->getCancelacion());
+    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reserva,"alergenos"=>alergenos)),'text/html');
     $this->get('mailer')->send($message);
+    self::deleteAlergenosByReserva($reserva);
     $em->remove($reserva);
     $em->flush();
     self::lessPlazasOcupadas($reserva);
   }
-  public function addlistanegrabyreservaAction($id){
-    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function addlistanegrabyreservaAction($id){
+    $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+    /** @var  $em */
+    $em = $this->getDoctrine()->getManager();
+    /** @var  Listanegra $listanegra */
     $listanegra = new Listanegra();
-    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+    /** @var  Reservas $reserva */
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findBy(array('idreservas'=>$id));//findByIdreservas($id)[0];
     $listanegra->setCorreo($reserva->getCorreo());
     $em->persist($listanegra);
     $em->flush();
@@ -136,9 +190,10 @@ class AdminController extends Controller
   public function confirmreservasAction($id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
-    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
-    $estadoreserva = $em->getRepository('reservasBundle:estadoreserva')->findByIdestadoreserva(2)[0];
+    $em = $this->getDoctrine()->getManager();
+    /** @var Reservas $reserva */
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$id));//findByIdreservas($id)[0];
+    $estadoreserva = $em->getRepository('reservasBundle:estadoreserva')->findOneBy(array('idestadoreserva'=>2));
     $reserva->setEstadoreservaestadoreserva($estadoreserva);
     $servicio = $reserva->getServiciosservicios();
     $em->persist($reserva);
@@ -149,9 +204,9 @@ class AdminController extends Controller
   public function resendreservasAction($id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
-    $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+    $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$id));
     $message = new \Swift_Message('Plazas Disponibles Restaurante');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
@@ -163,8 +218,8 @@ class AdminController extends Controller
   public function removeServicio($servicio){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em= $this->getDoctrine()->getEntityManager();
-    $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+    $em= $this->getDoctrine()->getManager();
+    $reservas = $em->getRepository('reservasBundle:Reservas')->findBy(array('serviciosservicios'=>$servicio));
     foreach ($reservas as $key => $reserva) {
       self::removeReserva($reserva);
     }
@@ -174,6 +229,7 @@ class AdminController extends Controller
   public function loginAction(Request $request){
       $authUtils = $this->get('security.authentication_utils');
     // get the login error if there is one
+      /** @var  $error */
       $error = $authUtils->getLastAuthenticationError();
 
       // last username entered by the user
@@ -183,9 +239,9 @@ class AdminController extends Controller
   public function deletelistanegraAction($id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $listanegra = $em->getRepository('reservasBundle:Listanegra')
-    ->findByIdlistanegra($id)[0];
+    ->findOneBy(array('idlistanegra'=>$id));//findByIdlistanegra($id)[0];
     $em->remove($listanegra);
     $em->flush();
     return $this->redirect('/admin/listados');
@@ -193,7 +249,7 @@ class AdminController extends Controller
   public function addlistanegraAction(Request $request){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     if ($request->isMethod('POST')) {
       if ($request->get('add')) {
         $listanegra = new Listanegra();
@@ -209,7 +265,7 @@ class AdminController extends Controller
   public function listadosAction(){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
       return $this->render('reservasBundle:Admin:listados.html.twig', array(
       'listanegra'=>$listanegra,
@@ -220,8 +276,8 @@ class AdminController extends Controller
   public function deleteAlergenosByReserva($reserva){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em=$this->getDoctrine()->getEntityManager();
-      $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
+      $em=$this->getDoctrine()->getManager();
+      $alergenos  = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
       foreach( $alergenos as $alergeno){
         $em->remove($alergeno);
         $em->flush();
@@ -232,9 +288,10 @@ class AdminController extends Controller
 
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
+    /** @var Misplantillas $plantilla */
     $plantilla = $em->getRepository('reservasBundle:Misplantillas')
-    ->findByIdmisplantillas($id)[0];
+    ->findOneBy(array('idmisplantillas'=>$id));//findByIdmisplantillas($id)[0];
     $correos = $em->getRepository('reservasBundle:Correos')->findAll();
     if ($request->isMethod('POST')) {
       if ($request->get('send') && $request->get('correos')) {
@@ -256,9 +313,9 @@ class AdminController extends Controller
   public function deletecorreosAction($id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $correo = $em->getRepository('reservasBundle:Correos')
-    ->findByIdcorreos($id)[0];
+    ->findOneBy(array('idcorreos'=>$id));
     $em->remove($correo);
     $em->flush();
     return $this->redirect('/admin/correos');
@@ -268,7 +325,7 @@ class AdminController extends Controller
   public function addcorreosAction(Request $request){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       if ($request->isMethod('POST')) {
         if ($request->get('add')) {
             $correo = new Correos();
@@ -285,7 +342,7 @@ class AdminController extends Controller
   public function correosAction(){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $correos = $em->getRepository('reservasBundle:Correos')->findAll();
     return $this->render('reservasBundle:Admin:correos.html.twig',array(
       'correos'=>$correos
@@ -294,9 +351,9 @@ class AdminController extends Controller
   public function deleteboletinAction($id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     $plantilla = $em->getRepository('reservasBundle:Misplantillas')
-    ->findByIdmisplantillas($id)[0];
+    ->findOneBy(array('idmisplantillas'=>$id));//findByIdmisplantillas($id)[0];
     $em->remove($plantilla);
     $em->flush();
     return $this->redirect('/admin/boletin');
@@ -307,11 +364,17 @@ class AdminController extends Controller
 
     return $this->render('reservasBundle:Admin:emailcompletado.html.twig');
   }
-  public function editboletinAction(Request $request, $id){
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editboletinAction(Request $request, $id){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
-    $plantilla = $em->getRepository('reservasBundle:Misplantillas')->findByIdmisplantillas($id)[0];
+    $em = $this->getDoctrine()->getManager();
+    $plantilla = $em->getRepository('reservasBundle:Misplantillas')->findOneBy(array('idmisplantillas'=>$id));//findByIdmisplantillas($id)[0];
     if ($request->isMethod('POST')) {
       if ($request->get('edit')) {
           $plantilla->setAsunto($request->get('asunto'));
@@ -328,7 +391,7 @@ class AdminController extends Controller
   public function addboletinAction(Request $request){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
     if ($request->isMethod('POST')) {
       $plantilla = new Misplantillas();
       if ($request->get('add')) {
@@ -345,7 +408,7 @@ class AdminController extends Controller
   public function boletinAction(Request $request){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $plantillas = $em->getRepository('reservasBundle:Misplantillas')->findAll();
       $plantillas = array_reverse($plantillas);
       return $this->render('reservasBundle:Admin:boletin.html.twig',array(
@@ -355,8 +418,8 @@ class AdminController extends Controller
   public function deleteAlergenosByMenu($menu){
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-    $em=$this->getDoctrine()->getEntityManager();
-    $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+    $em=$this->getDoctrine()->getManager();
+    $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findBy(array('menumenu'=>$menu));//findByMenumenu($menu);
     foreach ($alergenos as $key => $alergeno) {
       $em->remove($alergeno);
       $em->flush();
@@ -366,9 +429,9 @@ class AdminController extends Controller
     public function launchrecordserviceAction($id){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
-      $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
-      $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+      $em = $this->getDoctrine()->getManager();
+      $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=>$id));//findByIdservicios($id)[0];
+      $reservas = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('serviciosservicios'=>$servicio));//findByServiciosservicios($servicio);
       $message = new \Swift_Message('Recordatorio de Reserva');
       $message->setFrom('send@email.com');
       $message->setBody('Queda menos de un dia para hacer efectiva su reserva');
@@ -383,11 +446,10 @@ class AdminController extends Controller
     public function editreservasAction($id, Request $request){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
-      $reserva = $em->getRepository("reservasBundle:Reservas")->findByIdreservas($id)[0];
+      $em = $this->getDoctrine()->getManager();
+      $reserva = $em->getRepository("reservasBundle:Reservas")->findOneBy(array('idreservas'=>$id));//findByIdreservas($id)[0];
       $estadosreserva = $em->getRepository("reservasBundle:Estadoreserva")->findAll();
       $form= $this->createForm(ReservasType::class,$reserva);
-
       if ($request->isMethod('POST')) {
           if($request->get('guardar')){
             $reserva->setNombre(trim($request->get('nombre')));
@@ -396,12 +458,12 @@ class AdminController extends Controller
             $reserva->setTelefono(trim($request->get('telefono')));
             $reserva->setObservaciones(trim($request->get('observaciones')));
             $estadoreserva = $em->getRepository('reservasBundle:Estadoreserva')
-            ->findByIdestadoreserva($request->get("estado"))[0];
+            ->findOneBy(array('idestadoreserva'=>$request->get('estado')));//findByIdestadoreserva($request->get("estado"))[0];
             self::deleteAlergenosByReserva($reserva);
             if($request->get('alergenos')){
               foreach ($request->get('alergenos') as $key => $alergeno){
                 $alergeno = $em->getRepository('reservasBundle:Alergenos')
-                ->findByNombre($alergeno)[0];
+                ->findOneBy(array('nombre'=>$alergeno));//findByNombre($alergeno)[0];
                 $ralergeno = new ReservasHasAlergenos();
                 $ralergeno->setAlergenosalergenos($alergeno);
                 $ralergeno->setReservasreservas($reserva);
@@ -416,7 +478,7 @@ class AdminController extends Controller
           }
       }
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
-      $myalergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findByReservasreservas($reserva);
+      $myalergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findBy(array('reservasreservas'=>$reserva));//findByReservasreservas($reserva);
       return $this->render('reservasBundle:Admin:editreserva.html.twig',array(
         'reserva'=>$reserva,
         'estadosreserva'=>$estadosreserva,
@@ -427,8 +489,8 @@ class AdminController extends Controller
     public function deletereservasAction($id){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
-      $reserva = $em->getRepository('reservasBundle:Reservas')->findByIdreservas($id)[0];
+      $em = $this->getDoctrine()->getManager();
+      $reserva = $em->getRepository('reservasBundle:Reservas')->findOneBy(array('idreservas'=>$id));//findByIdreservas($id)[0];
       self::removeReserva($reserva);
       return $this->redirect('/admin/servicios');
 
@@ -436,7 +498,7 @@ class AdminController extends Controller
     public function serviciosanterioresAction(){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $servicios = $em->getRepository('reservasBundle:Servicios')->findByBeforeToday();
       $reservas = $em->getRepository('reservasBundle:Reservas')->findAll();
       return $this->render('reservasBundle:Admin:servicios.html.twig',array(
@@ -447,19 +509,19 @@ class AdminController extends Controller
     public function deleteserviciosAction($id){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
 
       $servicio = $em->getRepository("reservasBundle:Servicios")
-      ->findByIdservicios($id)[0];
+      ->findOneBy(array('idservicios'=>$id));//findByIdservicios($id)[0];
       self::removeServicio($servicio);
       return $this->redirect('/admin/servicios');
     }
     public function deletemenuAction(Request $request, $id){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
-      $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
-      $servicios = $em->getRepository('reservasBundle:Servicios')->findByMenumenu($menu);
+      $em = $this->getDoctrine()->getManager();
+      $menu = $em->getRepository('reservasBundle:Menu')->findOneBy(array('idmenu'=>$id));//findByIdmenu($id)[0];
+      $servicios = $em->getRepository('reservasBundle:Servicios')->findBy(array('menumenu'=>$menu));//findByMenumenu($menu);
       foreach ($servicios as $key => $servicio) {
         $servicio->setMenumenu(null);
       }
@@ -471,8 +533,8 @@ class AdminController extends Controller
     public function editmenuAction(Request $request, $id){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
-      $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
+      $em = $this->getDoctrine()->getManager();
+      $menu = $em->getRepository('reservasBundle:Menu')->findOneBy(array('idmenu'=>$id));//findByIdmenu($id)[0];
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
 
       if ($request->isMethod('POST')) {
@@ -488,7 +550,8 @@ class AdminController extends Controller
               $filename = uniqid().".".$file->getClientOriginalExtension();
               $path = "imagenes/";
               $file->move($path,$filename); // move the file to a path
-              $status = array('status' => "success","fileUploaded" => true);
+                /** @var  $status */
+                $status = array('status' => "success","fileUploaded" => true);
               $menu->setImagen($path.$filename);
             }
 
@@ -502,7 +565,7 @@ class AdminController extends Controller
             self::deleteAlergenosByMenu($menu);
             foreach ($request->get('alergenos') as $key => $nalergeno) {
               $alergeno = $em->getRepository('reservasBundle:Alergenos')
-              ->findByNombre($nalergeno)[0];
+              ->findOneBy(array('nombre'=>$nalergeno));//findByNombre($nalergeno)[0];
               $malergeno = new MenuHasAlergenos();
               $malergeno->setAlergenosalergenos($alergeno);
               $malergeno->setMenumenu($menu);
@@ -515,7 +578,7 @@ class AdminController extends Controller
 
         }
       }
-      $myalergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+      $myalergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findBy(array('menumenu'=>$menu));//findByMenumenu($menu);
       return $this->render('reservasBundle:Admin:editmenu.html.twig',array(
         'menu'=>$menu,
         'alergenos'=>$alergenos,
@@ -526,7 +589,7 @@ class AdminController extends Controller
     public function addmenuAction(Request $request){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $menu = new Menu();
       $alergenos = $em->getRepository('reservasBundle:Alergenos')->findAll();
       if ($request->isMethod('POST')) {
@@ -553,7 +616,7 @@ class AdminController extends Controller
         $em->flush();
         if ($request->get('alergenos')) {
           foreach ($request->get('alergenos') as $key => $nalergeno) {
-            $alergeno = $em->getRepository('reservasBundle:Alergenos')->findByNombre($nalergeno)[0];
+            $alergeno = $em->getRepository('reservasBundle:Alergenos')->findOneBy(array('nombre'=>$nalergeno));//findByNombre($nalergeno)[0];
             $malergeno = new MenuHasAlergenos();
             $malergeno->setAlergenosalergenos($alergeno);
             $malergeno->setMenumenu($menu);
@@ -570,7 +633,7 @@ class AdminController extends Controller
     public  function menusAction(){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
       return $this->render('reservasBundle:Admin:menus.html.twig',array(
         'menus' => $menus
@@ -579,9 +642,9 @@ class AdminController extends Controller
     public function profilemenuAction($id){
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $menu = $em->getRepository('reservasBundle:Menu')->findByIdmenu($id)[0];
-        $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findByMenumenu($menu);
+        $em = $this->getDoctrine()->getManager();
+        $menu = $em->getRepository('reservasBundle:Menu')->findOneBy(array('idmenu'=>$id));//findByIdmenu($id)[0];
+        $alergenos = $em->getRepository('reservasBundle:MenuHasAlergenos')->findBy(array('menu'=>$menu));//findByMenumenu($menu);
         return $this->render('reservasBundle:Admin:menu.html.twig',array(
           'menu'=>$menu,
           'alergenos'=>$alergenos
@@ -591,9 +654,9 @@ class AdminController extends Controller
     public function reservasserviciosAction($id){
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $servicio = $em->getRepository('reservasBundle:Servicios')->findByIdservicios($id)[0];
-        $reservas= $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+        $em = $this->getDoctrine()->getManager();
+        $servicio = $em->getRepository('reservasBundle:Servicios')->findOneBy(array('idservicios'=>$id));//findByIdservicios($id)[0];
+        $reservas= $em->getRepository('reservasBundle:Reservas')->findBy(array('serviciosservicios'=>$servicio));//findByServiciosservicios($servicio);
         $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
         $listanegra = $em->getRepository('reservasBundle:Listanegra')->findAll();
         return $this->render('reservasBundle:Admin:reservas.html.twig',array(
@@ -605,13 +668,13 @@ class AdminController extends Controller
     }
     public function addserviciosAction(Request $request){
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
           if ($request->get('menu') != "null") {
             $menu = $em->getRepository('reservasBundle:Menu')
-            ->findByIdmenu($request->get('menu'))[0];
+            ->findOneBy(array('idmenu'=>$request->get('menu')));//findByIdmenu($request->get('menu'))[0];
           }else{
             $menu = null;
           }
@@ -634,17 +697,18 @@ class AdminController extends Controller
     }
     public function editserviciosAction($id, Request $request ){
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $servicio = $em->getRepository("reservasBundle:Servicios")
-      ->findByIdservicios($id)[0];
+      ->findOneBy(array('idservicios'=>$id));//findByIdservicios($id)[0];
       $menus = $em->getRepository('reservasBundle:Menu')->findAll();
-      $reservas = $em->getRepository('reservasBundle:Reservas')->findByServiciosservicios($servicio);
+      /** @var Reservas $reservas */
+      $reservas = $em->getRepository('reservasBundle:Reservas')->findBy(array('serviciosservicios'=>$servicio));//findByServiciosservicios($servicio);
       if ($request->isMethod('POST')) {
         if($request->get('guardar')){
             $fecha = $request->get('fecha').' '.$request->get('hora');
             $fecha = str_replace('/','-',$fecha);
             $menu = $em->getRepository('reservasBundle:Menu')
-            ->findByIdmenu(trim($request->get('menu')))[0];
+            ->findOneBy(array('idmenu'=>$request->get('menu')));//findByIdmenu(trim($request->get('menu')))[0];
             $servicio->setNombre(trim($request->get('nombre')));
             $servicio->setMenumenu($menu);
             $servicio->setFechaservicio(new \DateTime($fecha));
@@ -671,7 +735,7 @@ class AdminController extends Controller
     public function serviciosAction(){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em = $this->getDoctrine()->getEntityManager();
+      $em = $this->getDoctrine()->getManager();
       $servicios = $em->getRepository("reservasBundle:Servicios")->findByToday();
       $reservas =  $em->getRepository("reservasBundle:Reservas")->findAll();
       return $this->render("reservasBundle:Admin:servicios.html.twig",array(
@@ -682,7 +746,7 @@ class AdminController extends Controller
     public function configAction(Request $request){
       $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
-      $em=$this->getDoctrine()->getEntityManager();
+      $em=$this->getDoctrine()->getManager();
       $configs = $em->getRepository('reservasBundle:Config')->findAll();
       $config = $configs[0];
       if ($request->isMethod('POST')) {
