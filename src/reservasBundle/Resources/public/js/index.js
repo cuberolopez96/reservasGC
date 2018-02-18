@@ -80,6 +80,14 @@
                 '<a id="vermenu" class="button especial" href="#">Ver Menú</a>'+
                 '</div>'+
               '</div>').css('display','none').fadeIn("slow");
+              console.log(data.Servicio.FechaServicio);
+              console.log(Utils.converToDate(data.Servicio.FechaServicio));
+              console.log(Utils.converToDate(data.Servicio.FechaServicio) <= new Date());
+              if(new Date()>= Utils.converToDate(data.Servicio.FechaServicio)){
+                
+                $('#editarReserva').remove();
+                $('#anular').remove();
+              }
               $('#close').click(function(){
                 $('#resultadoConsulta').fadeOut('slow');
 
