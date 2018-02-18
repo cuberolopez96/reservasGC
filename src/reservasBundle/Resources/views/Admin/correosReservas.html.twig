@@ -356,6 +356,11 @@
                                     <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">{{reserva.nombre}} {{reserva.apellidos}}</p>
                                     <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">Telefono: {{reserva.telefono}}  Correo: {{reserva.correo}}</p>
                                     <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">Fecha Servicio: {{reserva.serviciosservicios.fechaservicio | date('d-m-Y')}} Hora de llegada: {{reserva.horallegada | date('H:i')}}</p>
+                                    <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">
+                                     {% set domain = app.request.getSchemeAndHttpHost() %}
+                                     {% set route = path("reservas_client_reservas_pdf",{id:reserva.idreservas}) %}
+                                      Url: {{domain ~ route}}
+                                    </p>
                                      <p style="Margin: 0; Margin-bottom: 10px; color: #333; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; margin-bottom: 10px; padding: 0; text-align: justify;">
                                       Alergenos: 
                                       {% set ralergenos = [] %}

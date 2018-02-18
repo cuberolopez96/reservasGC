@@ -156,12 +156,12 @@ class AdminController extends Controller
     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
    
     $em= $this->getDoctrine()->getManager();
-    $alergenos = $this->getRepository('reservasBundle:Alergenos')->findAll();
+    $alergenos = $em->getRepository('reservasBundle:ReservasHasAlergenos')->findAll();
     $config = $em->getRepository('reservasBundle:Config')->findAll()[0];
     $message = new \Swift_Message('Se ha eliminado su reserva');
     $message->setTo($reserva->getCorreo());
     $message->setFrom('send@email.com');
-    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reserva,"alergenos"=>alergenos)),'text/html');
+    $message->setBody($this->renderView("reservasBundle:Admin:correosReservas.html.twig",array('reserva'=>$reserva,"alergenos"=>$alergenos)),'text/html');
     $this->get('mailer')->send($message);
     self::deleteAlergenosByReserva($reserva);
     $em->remove($reserva);
