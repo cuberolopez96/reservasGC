@@ -130,6 +130,18 @@ ul#mobile-demo {
   font-size: 0.5em;
 }
 
+#arch{
+  border: 3px solid #26a69a;
+  background-color: #26a69a3b;
+  border-radius: 0.2em;
+  font-size: 1.1em !important;
+  padding: 1em;
+}
+
+td a img{
+  max-width: 7em;
+}
+
 
 @media screen and (min-width:602px){
   .correoEst td{
@@ -158,5 +170,4 @@ ul#mobile-demo {
   #navTitulo{
     display: inline-block;
   }
-
 }
