@@ -12,8 +12,8 @@
         <table class="bordered centered  highlight">
           <thead id="titularTabla">
               <tr>
+                <th>Imagen</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Precio</th>
                 <th></th>
                 <th></th>
@@ -22,8 +22,8 @@
           <tbody>
             {% for menu in menus %}
                 <tr>
+                  <td><a target="_blank" href="../{{menu.imagen}}"><img src="{{ asset(menu.imagen) }}"></a></td>
                   <td>{{menu.nombre}}</td>
-                  <td>{{menu.descripción}}</td>
                   <td>{{menu.precio}}</td>
                   <td><a href="/admin/menus/editar/{{menu.idmenu}}" class="material-icons">edit</a></td>
                   <td><a href="/admin/menus/delete/{{menu.idmenu}}" class="material-icons">delete</a></td>
