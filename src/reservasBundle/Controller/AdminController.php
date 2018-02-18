@@ -296,10 +296,12 @@ class AdminController extends Controller
     if ($request->isMethod('POST')) {
       if ($request->get('send') && $request->get('correos')) {
         foreach ($request->get('correos') as $key => $correo) {
+          $id = explode("-",$correo)[1];
+          $correo = explode("-",$correo)[0];
           $mail = new \Swift_Message($plantilla->getAsunto());
           $mail->setTo($correo)
           ->setFrom('send@email.es')
-          ->setBody($this->renderView('reservasBundle:Admin:correosBoletines.html.twig',array('boletin'=>$plantilla)),'text/html');
+          ->setBody($this->renderView('reservasBundle:Admin:correosBoletines.html.twig',array('boletin'=>$plantilla,'correo'=>$correo,'id'=>$id)),'text/html');
           $this->get('mailer')->send($mail);
         }
         return $this->redirect('/admin/boletin/completado');
